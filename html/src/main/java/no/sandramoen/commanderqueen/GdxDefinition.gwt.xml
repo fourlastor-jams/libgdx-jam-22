@@ -7,6 +7,7 @@
 	<inherits name='com.badlogic.gdx.ai' />
 	<inherits name="regexodus" />
 	<inherits name="textratypist" />
+	<inherits name='com.badlogic.ashley_gwt' />
 
 	<inherits name='MyGdxGame' />
 	<entry-point class='no.sandramoen.commanderqueen.client.HtmlLauncher' />

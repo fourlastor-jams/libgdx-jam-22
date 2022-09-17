@@ -11,7 +11,7 @@ public class DesktopLauncher {
         config.setForegroundFPS(60);
         config.setTitle("Terfenstein 3D");
         setWindowedMode(.8f, config);
-        new Lwjgl3Application(new MyGdxGame(), config);
+        new Lwjgl3Application(MyGdxGame.createGame(), config);
     }
 
     private static void setWindowedMode(float percentOfScreenSize, Lwjgl3ApplicationConfiguration config) {

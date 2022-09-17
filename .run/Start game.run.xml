@@ -4,7 +4,7 @@
     <module name="libgdx-java-base.desktop.main" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="no.sandramoen.commanderqueen.*" />
+        <option name="PATTERN" value="no.sandramoen.commanderqueen.di.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

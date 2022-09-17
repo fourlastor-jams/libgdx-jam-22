@@ -1,4 +1,4 @@
-package no.sandramoen.commanderqueen.utils;
+package no.sandramoen.commanderqueen.utils.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;

@@ -1,4 +1,4 @@
-package no.sandramoen.commanderqueen.actors.utils.baseActors;
+package no.sandramoen.commanderqueen.actors.utils.baseActors.baseActors;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Intersector;
