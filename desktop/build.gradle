@@ -1,6 +1,7 @@
 plugins {
     id "java"
     id "java-library"
+    id "com.diffplug.spotless" version "6.10.0"
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -10,6 +11,13 @@ sourceSets.main.resources.srcDirs = ["../assets"]
 
 project.ext.mainClassName = "no.sandramoen.commanderqueen.DesktopLauncher"
 project.ext.assetsDir = new File("../assets")
+
+spotless {
+    enforceCheck = false
+    java {
+        palantirJavaFormat()
+    }
+}
 
 task dist(type: Jar) {
     dependsOn classes
