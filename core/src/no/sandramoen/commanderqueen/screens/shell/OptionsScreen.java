@@ -2,15 +2,12 @@ package no.sandramoen.commanderqueen.screens.shell;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.github.tommyettinger.textra.TypingLabel;
-
 import no.sandramoen.commanderqueen.ui.BaseCheckbox;
 import no.sandramoen.commanderqueen.ui.BaseSlider;
 import no.sandramoen.commanderqueen.utils.BaseGame;
@@ -21,14 +18,11 @@ public class OptionsScreen extends BaseScreen {
 
     @Override
     public void initialize() {
-        TypingLabel label = new TypingLabel("Options", new Label.LabelStyle(BaseGame.mySkin.get("arcade64", BitmapFont.class), null));
-        uiTable.add(label)
-                .growY()
-                .row();
+        TypingLabel label = new TypingLabel(
+                "Options", new Label.LabelStyle(BaseGame.mySkin.get("arcade64", BitmapFont.class), null));
+        uiTable.add(label).growY().row();
 
-        uiTable.add(optionsTable())
-                .growY()
-                .row();
+        uiTable.add(optionsTable()).growY().row();
 
         uiTable.add(initializeBackButton())
                 .expandY()
@@ -39,14 +33,11 @@ public class OptionsScreen extends BaseScreen {
     }
 
     @Override
-    public void update(float delta) {
-
-    }
+    public void update(float delta) {}
 
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.Q)
-            BaseGame.setActiveScreen(new MenuScreen());
+        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.Q) BaseGame.setActiveScreen(new MenuScreen());
         return super.keyDown(keycode);
     }
 
@@ -73,13 +64,10 @@ public class OptionsScreen extends BaseScreen {
 
     private TextButton initializeBackButton() {
         TextButton backButton = new TextButton("Back", BaseGame.mySkin);
-        backButton.addListener(
-                (Event event) -> {
-                    if (GameUtils.isTouchDownEvent(event))
-                        BaseGame.setActiveScreen(new MenuScreen());
-                    return false;
-                }
-        );
+        backButton.addListener((Event event) -> {
+            if (GameUtils.isTouchDownEvent(event)) BaseGame.setActiveScreen(new MenuScreen());
+            return false;
+        });
         return backButton;
     }
 }

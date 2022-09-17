@@ -8,11 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.github.tommyettinger.textra.TypingLabel;
-
 import no.sandramoen.commanderqueen.utils.BaseGame;
 import no.sandramoen.commanderqueen.utils.GameUtils;
 
@@ -21,7 +19,8 @@ public class BaseSlider extends Table {
     private Slider slider;
 
     public BaseSlider(String labelText, float min, float max, float stepSize) {
-        label = new TypingLabel(labelText, new Label.LabelStyle(BaseGame.mySkin.get("arcade26", BitmapFont.class), null));
+        label = new TypingLabel(
+                labelText, new Label.LabelStyle(BaseGame.mySkin.get("arcade26", BitmapFont.class), null));
         GameUtils.setWidgetHoverColor(label);
         add(label).growX().left().padRight(Gdx.graphics.getWidth() * .05f);
 
@@ -41,16 +40,11 @@ public class BaseSlider extends Table {
     }
 
     private void setValue(Slider slider, String value) {
-        if (value.equalsIgnoreCase("sound"))
-            slider.setValue(BaseGame.soundVolume);
-        else if (value.equalsIgnoreCase("music"))
-            slider.setValue(BaseGame.musicVolume);
-        else if (value.equalsIgnoreCase("voice"))
-            slider.setValue(BaseGame.voiceVolume);
-        else if (value.equalsIgnoreCase("mouse sensitivity"))
-            slider.setValue(BaseGame.mouseMovementSensitivity);
-        else
-            Gdx.app.error(getClass().getSimpleName(), "Error: setValue(" + value + ") failed!");
+        if (value.equalsIgnoreCase("sound")) slider.setValue(BaseGame.soundVolume);
+        else if (value.equalsIgnoreCase("music")) slider.setValue(BaseGame.musicVolume);
+        else if (value.equalsIgnoreCase("voice")) slider.setValue(BaseGame.voiceVolume);
+        else if (value.equalsIgnoreCase("mouse sensitivity")) slider.setValue(BaseGame.mouseMovementSensitivity);
+        else Gdx.app.error(getClass().getSimpleName(), "Error: setValue(" + value + ") failed!");
     }
 
     private void addListener(Slider slider, String value, float min, float max) {
@@ -58,14 +52,11 @@ public class BaseSlider extends Table {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 BaseGame.click1Sound.play(GameUtils.normalizeValue(slider.getValue(), min, max));
-                if (value.equalsIgnoreCase("sound"))
-                    BaseGame.soundVolume = slider.getValue();
+                if (value.equalsIgnoreCase("sound")) BaseGame.soundVolume = slider.getValue();
                 else if (value.equalsIgnoreCase("music")) {
                     BaseGame.musicVolume = slider.getValue();
                     BaseGame.menuMusic.setVolume(BaseGame.musicVolume);
-                }
-                else if (value.equalsIgnoreCase("voice"))
-                    BaseGame.voiceVolume = slider.getValue();
+                } else if (value.equalsIgnoreCase("voice")) BaseGame.voiceVolume = slider.getValue();
                 else if (value.equalsIgnoreCase("mouse sensitivity"))
                     BaseGame.mouseMovementSensitivity = slider.getValue();
                 GameUtils.saveGameState();

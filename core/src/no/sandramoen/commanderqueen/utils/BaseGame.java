@@ -15,7 +15,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-
 import no.sandramoen.commanderqueen.screens.gameplay.LevelScreen;
 
 public abstract class BaseGame extends Game implements AssetErrorListener {
@@ -229,7 +228,6 @@ public abstract class BaseGame extends Game implements AssetErrorListener {
 
         assetManager.finishLoading();
 
-
         // shaders
         defaultShader = assetManager.get("shaders/default.vs", Text.class).getString();
         shockwaveShader = assetManager.get("shaders/shockwave.fs", Text.class).getString();
@@ -276,12 +274,14 @@ public abstract class BaseGame extends Game implements AssetErrorListener {
         secretWallSound = assetManager.get("audio/sound/243699__ertfelda__hidden-wall-opening.wav", Sound.class);
         holyBallSpawnSound = assetManager.get("audio/sound/557194__pip__lightsaber-ignition.wav", Sound.class);
         holyBallExplosionSound = assetManager.get("audio/sound/Laser_Shoot24.wav", Sound.class);
-        caseDroppingSound = assetManager.get("audio/sound/414436__inspectorj__dropping-metal-pin-on-wood-b.wav", Sound.class);
+        caseDroppingSound =
+                assetManager.get("audio/sound/414436__inspectorj__dropping-metal-pin-on-wood-b.wav", Sound.class);
         chaingunPowerDownSound = assetManager.get("audio/sound/395378__skylar1146__machinepoweroff.wav", Sound.class);
         keySound = assetManager.get("audio/sound/563519__gdog1622__keys-metalretrieve-trimmed-01.wav", Sound.class);
         doorUnlockedSound = assetManager.get("audio/sound/131438__skydran__keys-on-door-and-open.wav", Sound.class);
         doorLockedSound = assetManager.get("audio/sound/391724__jpolito__jp-circuitbox-locked01.wav", Sound.class);
-        weaponPickupSound = assetManager.get("audio/sound/433563__burghrecords__cinematic-impact-intro-01.wav", Sound.class);
+        weaponPickupSound =
+                assetManager.get("audio/sound/433563__burghrecords__cinematic-impact-intro-01.wav", Sound.class);
         rocketLaunchSound = assetManager.get("audio/sound/480870__c3sabertooth__launch-futuristic.wav", Sound.class);
 
         // tiled maps
@@ -294,6 +294,6 @@ public abstract class BaseGame extends Game implements AssetErrorListener {
         level6Map = assetManager.get("maps/level 6.tmx", TiledMap.class);
 
         textureAtlas = assetManager.get("images/included/packed/images.pack.atlas");
-        GameUtils.printLoadingTime(getClass().getSimpleName(),"Assetmanager", startTime);
+        GameUtils.printLoadingTime(getClass().getSimpleName(), "Assetmanager", startTime);
     }
 }

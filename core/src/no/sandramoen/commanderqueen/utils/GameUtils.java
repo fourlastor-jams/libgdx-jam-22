@@ -15,11 +15,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
-
 import java.util.ArrayList;
-
 import no.sandramoen.commanderqueen.actors.Tile;
-import no.sandramoen.commanderqueen.actors.characters.enemy.Enemy;
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor3D;
 import no.sandramoen.commanderqueen.screens.gameplay.level.TileShade;
 
@@ -69,13 +66,12 @@ public class GameUtils {
     }
 
     public static float getAngleTowardsBaseActor3D(BaseActor3D actorA, BaseActor3D actorB) {
-        float angle = MathUtils.atan(
-                Math.abs(actorA.position.z - actorB.position.z) /
-                        Math.abs(actorA.position.y - actorB.position.y)
-        ) * MathUtils.radiansToDegrees - 90;
+        float angle = MathUtils.atan(Math.abs(actorA.position.z - actorB.position.z)
+                                / Math.abs(actorA.position.y - actorB.position.y))
+                        * MathUtils.radiansToDegrees
+                - 90;
 
-        if (actorA.position.y - actorB.position.y > 0)
-            angle *= -1;
+        if (actorA.position.y - actorB.position.y > 0) angle *= -1;
 
         if (actorA.position.z - actorB.position.z > 0) {
             angle *= -1;
@@ -123,7 +119,8 @@ public class GameUtils {
         ShaderProgram.pedantic = false;
         ShaderProgram shaderProgram = new ShaderProgram(vertexShader, fragmentShader);
         if (!shaderProgram.isCompiled())
-            Gdx.app.error(GameUtils.class.getSimpleName(), "Error: Couldn't compile shader => " + shaderProgram.getLog());
+            Gdx.app.error(
+                    GameUtils.class.getSimpleName(), "Error: Couldn't compile shader => " + shaderProgram.getLog());
         return shaderProgram;
     }
 
@@ -135,7 +132,7 @@ public class GameUtils {
         return sound.play(BaseGame.soundVolume / GameUtils.normalizeValue(distance, 0f, vocalRange), pitch, 0);
     }
 
-    public static void printLoadingTime(String tag, String string,  long startTime) {
+    public static void printLoadingTime(String tag, String string, long startTime) {
         long endTime = System.currentTimeMillis();
         Gdx.app.log(tag, string + " took " + (endTime - startTime) + " ms to load.");
     }
@@ -145,7 +142,8 @@ public class GameUtils {
         return getClosestListIndex(ray, list);
     }
 
-    public static int getRayPickedListIndex(int screenX, int screenY, Array<BaseActor3D> list, PerspectiveCamera camera) {
+    public static int getRayPickedListIndex(
+            int screenX, int screenY, Array<BaseActor3D> list, PerspectiveCamera camera) {
         Ray ray = camera.getPickRay(screenX, screenY);
         return getClosestListIndex(ray, list);
     }

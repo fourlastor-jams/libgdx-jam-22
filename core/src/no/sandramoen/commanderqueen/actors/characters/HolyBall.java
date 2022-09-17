@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.environment.PointLight;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
-
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor3D;
 import no.sandramoen.commanderqueen.utils.BaseGame;
 import no.sandramoen.commanderqueen.utils.GameUtils;
@@ -41,17 +40,16 @@ public class HolyBall extends BaseActor3D {
         light.setIntensity(12);
         stage3D.environment.add(light);
         movementAngle = GameUtils.getAngleTowardsBaseActor3D(this, player);
-        GameUtils.playSoundRelativeToDistance(BaseGame.holyBallSpawnSound, distanceBetween(player), VOCAL_RANGE, MathUtils.random(.9f, 1.1f));
+        GameUtils.playSoundRelativeToDistance(
+                BaseGame.holyBallSpawnSound, distanceBetween(player), VOCAL_RANGE, MathUtils.random(.9f, 1.1f));
     }
 
     @Override
     public void act(float dt) {
         super.act(dt);
         time += dt;
-        if (time > TIME_TO_DIE - EXPLODE_DURATION && !isExploding)
-            startExplosionAnimation();
-        else if (time > TIME_TO_DIE)
-            isRemovable = true;
+        if (time > TIME_TO_DIE - EXPLODE_DURATION && !isExploding) startExplosionAnimation();
+        else if (time > TIME_TO_DIE) isRemovable = true;
 
         if (!isExploding) {
             setTurnAngle(movementAngle);
@@ -64,13 +62,13 @@ public class HolyBall extends BaseActor3D {
     @Override
     public void remove() {
         super.remove();
-        GameUtils.playSoundRelativeToDistance(BaseGame.holyBallExplosionSound, distanceBetween(player), VOCAL_RANGE, MathUtils.random(.9f, 1.1f));
+        GameUtils.playSoundRelativeToDistance(
+                BaseGame.holyBallExplosionSound, distanceBetween(player), VOCAL_RANGE, MathUtils.random(.9f, 1.1f));
         stage3D.environment.remove(light);
     }
 
     @Override
-    public void setColor(Color c) {
-    }
+    public void setColor(Color c) {}
 
     public int getDamage() {
         return MathUtils.random(minDamage, maxDamage);

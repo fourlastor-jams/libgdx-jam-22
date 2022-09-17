@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.actors.pickups.Key;
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor;
 import no.sandramoen.commanderqueen.utils.BaseGame;
@@ -79,8 +78,7 @@ public class Keys extends Table {
                 Actions.rotateTo(-amount, 2 * delay),
                 Actions.rotateTo(amount, delay),
                 Actions.rotateTo(-amount, 2 * delay),
-                Actions.rotateTo(0, delay)
-        );
+                Actions.rotateTo(0, delay));
     }
 
     private BaseActor initializeKey(Color color, float width, float height) {

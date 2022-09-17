@@ -1,7 +1,6 @@
 package no.sandramoen.commanderqueen.actors;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
-
 import no.sandramoen.commanderqueen.actors.characters.Player;
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor3D;
 import no.sandramoen.commanderqueen.utils.Stage3D;

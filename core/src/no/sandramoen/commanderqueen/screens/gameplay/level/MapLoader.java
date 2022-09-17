@@ -9,7 +9,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.actors.Barrel;
 import no.sandramoen.commanderqueen.actors.Door;
 import no.sandramoen.commanderqueen.actors.Elevator;
@@ -19,9 +18,10 @@ import no.sandramoen.commanderqueen.actors.characters.Menig;
 import no.sandramoen.commanderqueen.actors.characters.Player;
 import no.sandramoen.commanderqueen.actors.characters.Prest;
 import no.sandramoen.commanderqueen.actors.characters.Sersjant;
+import no.sandramoen.commanderqueen.actors.characters.enemy.Enemy;
 import no.sandramoen.commanderqueen.actors.hud.HUD;
-import no.sandramoen.commanderqueen.actors.pickups.Bullets;
 import no.sandramoen.commanderqueen.actors.pickups.Armor;
+import no.sandramoen.commanderqueen.actors.pickups.Bullets;
 import no.sandramoen.commanderqueen.actors.pickups.Chaingun;
 import no.sandramoen.commanderqueen.actors.pickups.Health;
 import no.sandramoen.commanderqueen.actors.pickups.Key;
@@ -31,9 +31,8 @@ import no.sandramoen.commanderqueen.actors.pickups.RocketLauncher;
 import no.sandramoen.commanderqueen.actors.pickups.Shells;
 import no.sandramoen.commanderqueen.actors.pickups.Shotgun;
 import no.sandramoen.commanderqueen.actors.props.Prop;
-import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor3D;
-import no.sandramoen.commanderqueen.actors.characters.enemy.Enemy;
 import no.sandramoen.commanderqueen.actors.utils.TilemapActor;
+import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor3D;
 import no.sandramoen.commanderqueen.screens.gameplay.LevelScreen;
 import no.sandramoen.commanderqueen.utils.BaseGame;
 import no.sandramoen.commanderqueen.utils.GameUtils;
@@ -62,10 +61,20 @@ public class MapLoader {
 
     private Array<Array<Tile>> patrols = new Array();
 
-    public MapLoader(TilemapActor tilemap, Array<Tile> tiles, Stage3D stage3D, Player player, Array<BaseActor3D> shootable,
-                     Array<Pickup> pickups, Array<Enemy> enemies, Stage stage, HUD hud, DecalBatch decalBatch,
-                     Array<Door> doors, Array<BaseActor3D> projectiles, Array<TileShade> tileShades
-    ) {
+    public MapLoader(
+            TilemapActor tilemap,
+            Array<Tile> tiles,
+            Stage3D stage3D,
+            Player player,
+            Array<BaseActor3D> shootable,
+            Array<Pickup> pickups,
+            Array<Enemy> enemies,
+            Stage stage,
+            HUD hud,
+            DecalBatch decalBatch,
+            Array<Door> doors,
+            Array<BaseActor3D> projectiles,
+            Array<TileShade> tileShades) {
         this.tilemap = tilemap;
         this.tiles = tiles;
         this.stage3D = stage3D;
@@ -126,20 +135,29 @@ public class MapLoader {
                     float depth = props.get("depth", Float.class);
                     String secretMovementDirection = (String) props.get("secret");
                     int secretLength = props.get("secret length", Integer.class);
-                    if (!secretMovementDirection.isEmpty())
-                        LevelScreen.numSecrets++;
+                    if (!secretMovementDirection.isEmpty()) LevelScreen.numSecrets++;
                     boolean isAIpath = true;
-                    if (props.get("isAIpath", Boolean.class) != null)
-                        isAIpath = props.get("isAIpath", Boolean.class);
+                    if (props.get("isAIpath", Boolean.class) != null) isAIpath = props.get("isAIpath", Boolean.class);
 
-                    Tile tile = new Tile(y, z, width, depth, height, type, texture, stage3D, rotation, secretMovementDirection, secretLength, isAIpath);
+                    Tile tile = new Tile(
+                            y,
+                            z,
+                            width,
+                            depth,
+                            height,
+                            type,
+                            texture,
+                            stage3D,
+                            rotation,
+                            secretMovementDirection,
+                            secretLength,
+                            isAIpath);
                     tiles.add(tile);
                     shootable.add(tile);
 
                     String patrol = props.get("patrol", String.class);
                     if (patrol != null && patrol.length() > 0 && patrol.equalsIgnoreCase("a")) {
-                        if (patrols.size == 0)
-                            patrols.add(new Array());
+                        if (patrols.size == 0) patrols.add(new Array());
                         patrols.get(0).add(tile);
                     }
                 }
@@ -269,9 +287,11 @@ public class MapLoader {
             if (type.equalsIgnoreCase("menig"))
                 enemies.add(new Menig(x, y, stage3D, player, rotation, tileGraph, floorTiles, stage, hud, decalBatch));
             if (type.equalsIgnoreCase("sersjant"))
-                enemies.add(new Sersjant(x, y, stage3D, player, rotation, tileGraph, floorTiles, stage, hud, decalBatch));
+                enemies.add(
+                        new Sersjant(x, y, stage3D, player, rotation, tileGraph, floorTiles, stage, hud, decalBatch));
             if (type.equalsIgnoreCase("prest"))
-                enemies.add(new Prest(x, y, stage3D, player, rotation, tileGraph, floorTiles, stage, hud, decalBatch, projectiles));
+                enemies.add(new Prest(
+                        x, y, stage3D, player, rotation, tileGraph, floorTiles, stage, hud, decalBatch, projectiles));
             shootable.add(enemies.get(enemies.size - 1));
 
             String patrol = props.get("patrol", String.class);
@@ -279,11 +299,9 @@ public class MapLoader {
                 enemies.get(enemies.size - 1).setPatrol(patrols.get(0));
         }
 
-        for (Enemy enemy : enemies)
-            enemy.setShootableList(shootable);
+        for (Enemy enemy : enemies) enemy.setShootableList(shootable);
 
-        for (int i = 0; i < enemies.size; i++)
-            enemies.get(i).setEnemiesList(enemies);
+        for (int i = 0; i < enemies.size; i++) enemies.get(i).setEnemiesList(enemies);
     }
 
     private void initializeBarrels() {
@@ -318,26 +336,18 @@ public class MapLoader {
 
             if (type.equalsIgnoreCase("health small") || type.equalsIgnoreCase("health medium"))
                 pickups.add(new Health(x, y, stage3D, amount, player));
-
-            else if (type.equalsIgnoreCase("bullets"))
-                pickups.add(new Bullets(x, y, stage3D, amount, player));
-            else if (type.equalsIgnoreCase("shells"))
-                pickups.add(new Shells(x, y, stage3D, amount, player));
-            else if (type.equalsIgnoreCase("rocket"))
-                pickups.add(new Rocket(x, y, stage3D, amount, player));
-
+            else if (type.equalsIgnoreCase("bullets")) pickups.add(new Bullets(x, y, stage3D, amount, player));
+            else if (type.equalsIgnoreCase("shells")) pickups.add(new Shells(x, y, stage3D, amount, player));
+            else if (type.equalsIgnoreCase("rocket")) pickups.add(new Rocket(x, y, stage3D, amount, player));
             else if (type.equalsIgnoreCase("key"))
                 pickups.add(new Key(x, y, stage3D, props.get("color", String.class), player));
-
-            else if (type.equalsIgnoreCase("shotgun"))
-                pickups.add(new Shotgun(x, y, stage3D, amount, player));
-            else if (type.equalsIgnoreCase("chaingun"))
-                pickups.add(new Chaingun(x, y, stage3D, amount, player));
+            else if (type.equalsIgnoreCase("shotgun")) pickups.add(new Shotgun(x, y, stage3D, amount, player));
+            else if (type.equalsIgnoreCase("chaingun")) pickups.add(new Chaingun(x, y, stage3D, amount, player));
             else if (type.equalsIgnoreCase("rocketLauncher"))
                 pickups.add(new RocketLauncher(x, y, stage3D, amount, player));
-
-            else if (type.equalsIgnoreCase("armor small") || type.equalsIgnoreCase("armor medium") || type.equalsIgnoreCase("armor big"))
-                pickups.add(new Armor(x, y, stage3D, amount, player));
+            else if (type.equalsIgnoreCase("armor small")
+                    || type.equalsIgnoreCase("armor medium")
+                    || type.equalsIgnoreCase("armor big")) pickups.add(new Armor(x, y, stage3D, amount, player));
         }
     }
 
@@ -357,8 +367,7 @@ public class MapLoader {
 
     private float getRotation(MapProperties props) {
         float rotation = 0;
-        if (props.get("rotation", Float.class) != null)
-            rotation = props.get("rotation", Float.class);
+        if (props.get("rotation", Float.class) != null) rotation = props.get("rotation", Float.class);
         return rotation % 360;
     }
 }

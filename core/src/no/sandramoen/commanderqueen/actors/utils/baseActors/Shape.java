@@ -18,7 +18,7 @@ public interface Shape {
 }
 
 abstract class BaseShape implements Shape {
-    protected final static Vector3 position = new Vector3();
+    protected static final Vector3 position = new Vector3();
     public final Vector3 center = new Vector3();
     public final Vector3 dimensions = new Vector3();
 
@@ -28,7 +28,7 @@ abstract class BaseShape implements Shape {
     }
 }
 
- class Box extends BaseShape {
+class Box extends BaseShape {
     public Box(BoundingBox bounds) {
         super(bounds);
     }
@@ -41,8 +41,7 @@ abstract class BaseShape implements Shape {
     @Override
     public float intersects(Matrix4 transform, Ray ray) {
         transform.getTranslation(position).add(center);
-        if (Intersector.intersectRayBoundsFast(ray, position, dimensions))
-            return ray.origin.dst2(position);
+        if (Intersector.intersectRayBoundsFast(ray, position, dimensions)) return ray.origin.dst2(position);
         return -1f;
     }
 }

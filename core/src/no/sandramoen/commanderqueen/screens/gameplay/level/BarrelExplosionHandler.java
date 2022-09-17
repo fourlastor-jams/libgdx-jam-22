@@ -1,16 +1,16 @@
 package no.sandramoen.commanderqueen.screens.gameplay.level;
 
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.actors.Barrel;
 import no.sandramoen.commanderqueen.actors.characters.Player;
-import no.sandramoen.commanderqueen.actors.hud.HUD;
 import no.sandramoen.commanderqueen.actors.characters.enemy.Enemy;
+import no.sandramoen.commanderqueen.actors.hud.HUD;
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor3D;
 
 public class BarrelExplosionHandler {
 
-    public static void checkExplosionRange(HUD hud, Player player, Array<Enemy> enemies, Array<BaseActor3D> shootable, BaseActor3D source) {
+    public static void checkExplosionRange(
+            HUD hud, Player player, Array<Enemy> enemies, Array<BaseActor3D> shootable, BaseActor3D source) {
         checkPlayerExplosionDamage(hud, player, source);
         checkEnemiesExplosionDamage(enemies, source, player);
         checkBarrelsExplosionDamage(shootable, source, player);
@@ -21,10 +21,8 @@ public class BarrelExplosionHandler {
             Barrel barrel = (Barrel) source;
             hud.decrementHealth(barrel.getBlastDamage(source.distanceBetween(player)), source);
 
-            if (player.isWithinDistance(barrel.BLAST_RANGE, source))
-                player.forceMoveAwayFrom(source);
-            else
-                hud.setKillFace();
+            if (player.isWithinDistance(barrel.BLAST_RANGE, source)) player.forceMoveAwayFrom(source);
+            else hud.setKillFace();
         }
     }
 
@@ -34,15 +32,12 @@ public class BarrelExplosionHandler {
 
             for (Enemy enemy : enemies) {
                 enemy.decrementHealth(barrel.getBlastDamage(source.distanceBetween(enemy)));
-                if (enemy.isWithinDistance(barrel.BLAST_RANGE, source))
-                    enemy.forceMoveAwayFrom(source);
+                if (enemy.isWithinDistance(barrel.BLAST_RANGE, source)) enemy.forceMoveAwayFrom(source);
             }
 
             player.shakeyCam(1, .2f);
         }
     }
-
-
 
     private static void checkBarrelsExplosionDamage(Array<BaseActor3D> shootable, BaseActor3D source, Player player) {
         if (source instanceof Barrel) {

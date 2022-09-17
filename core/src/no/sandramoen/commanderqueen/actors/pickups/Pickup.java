@@ -26,9 +26,7 @@ public class Pickup extends BaseActor3D {
         setTurnAngle(GameUtils.getAngleTowardsBaseActor3D(this, player));
     }
 
-    public void playSound() {
-
-    }
+    public void playSound() {}
 
     private void initializeModel(float y, float z) {
         buildModel(2, .5f, 2, true);

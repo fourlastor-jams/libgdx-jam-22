@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.actors.characters.Player;
 import no.sandramoen.commanderqueen.actors.hud.HUD;
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor;
@@ -69,8 +68,7 @@ public class WeaponHandler extends BaseActor {
         totalTime += dt;
 
         checkIfReadyToShoot(dt);
-        if (hud.getHealth() > 0)
-            sway(player.isMoving);
+        if (hud.getHealth() > 0) sway(player.isMoving);
 
         setCrosshairColor(shootable, stage3D.camera);
     }
@@ -96,17 +94,20 @@ public class WeaponHandler extends BaseActor {
             currentWeapon = weapons.get(i);
             if (currentWeapon instanceof Chaingun || currentWeapon instanceof RocketLauncher)
                 setWidth(originalWidth * 2f);
-            else
-                setWidth(originalWidth);
+            else setWidth(originalWidth);
 
             isReadyCounter = -.25f;
             setPosition();
             moveUp();
             return true;
         } else if (i >= 0 && i < weapons.size && !weapons.get(i).isAvailable) {
-            Gdx.app.error(getClass().getSimpleName(), "Error: " + weapons.get(i).getClass().getSimpleName() + " is not available");
+            Gdx.app.error(
+                    getClass().getSimpleName(),
+                    "Error: " + weapons.get(i).getClass().getSimpleName() + " is not available");
         } else {
-            Gdx.app.error(getClass().getSimpleName(), "Error: Weapon change to out of bounds => i: " + i + ", weapons size: " + weapons.size);
+            Gdx.app.error(
+                    getClass().getSimpleName(),
+                    "Error: Weapon change to out of bounds => i: " + i + ", weapons size: " + weapons.size);
         }
         return false;
     }
@@ -116,25 +117,21 @@ public class WeaponHandler extends BaseActor {
             if (currentWeapon.inventoryIndex + 1 < weapons.size) {
                 int j = 0;
                 while (currentWeapon.inventoryIndex + 1 + j < weapons.size) {
-                    if (setWeapon(currentWeapon.inventoryIndex + 1 + j))
-                        return;
+                    if (setWeapon(currentWeapon.inventoryIndex + 1 + j)) return;
                     j++;
                 }
                 setWeapon(0);
-            } else
-                setWeapon(0);
+            } else setWeapon(0);
         } else if (i >= 0) { // down
             int j = 0;
             while (currentWeapon.inventoryIndex - 1 - j >= 0) {
-                if (setWeapon(currentWeapon.inventoryIndex - 1 - j))
-                    return;
+                if (setWeapon(currentWeapon.inventoryIndex - 1 - j)) return;
                 j++;
             }
 
             j = 0;
             while (weapons.size - 1 - j > 0) {
-                if (setWeapon(weapons.size - 1 - j))
-                    return;
+                if (setWeapon(weapons.size - 1 - j)) return;
                 j++;
             }
         }
@@ -164,10 +161,8 @@ public class WeaponHandler extends BaseActor {
             isReadyCounter = 0;
             totalTime = 0f;
 
-            if (isHit)
-                currentWeapon.attackSound();
-            else
-                currentWeapon.emptySound();
+            if (isHit) currentWeapon.attackSound();
+            else currentWeapon.emptySound();
         }
     }
 
@@ -191,28 +186,18 @@ public class WeaponHandler extends BaseActor {
     }
 
     public void makeAvailable(String weapon) {
-        if (weapon.equalsIgnoreCase("boot"))
-            weapons.get(0).isAvailable = true;
-        else if (weapon.equalsIgnoreCase("pistol"))
-            weapons.get(1).isAvailable = true;
-        else if (weapon.equalsIgnoreCase("shotgun"))
-            weapons.get(2).isAvailable = true;
-        else if (weapon.equalsIgnoreCase("chaingun"))
-            weapons.get(3).isAvailable = true;
-        else if (weapon.equalsIgnoreCase("rocketLauncher"))
-            weapons.get(4).isAvailable = true;
+        if (weapon.equalsIgnoreCase("boot")) weapons.get(0).isAvailable = true;
+        else if (weapon.equalsIgnoreCase("pistol")) weapons.get(1).isAvailable = true;
+        else if (weapon.equalsIgnoreCase("shotgun")) weapons.get(2).isAvailable = true;
+        else if (weapon.equalsIgnoreCase("chaingun")) weapons.get(3).isAvailable = true;
+        else if (weapon.equalsIgnoreCase("rocketLauncher")) weapons.get(4).isAvailable = true;
     }
 
     private void setCrosshairColor(Array<BaseActor3D> shootable, PerspectiveCamera camera) {
         crosshair.setColorIfShootable(
                 shootable,
                 GameUtils.getRayPickedListIndex(
-                        Gdx.graphics.getWidth() / 2,
-                        Gdx.graphics.getHeight() / 2,
-                        shootable,
-                        camera
-                )
-        );
+                        Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, shootable, camera));
     }
 
     private void checkIfReadyToShoot(float dt) {
@@ -235,10 +220,14 @@ public class WeaponHandler extends BaseActor {
 
     private RepeatAction sway() {
         return Actions.forever(Actions.sequence(
-                Actions.moveBy(Gdx.graphics.getWidth() * swayAmount, Gdx.graphics.getHeight() * swayAmount, swayFrequency),
-                Actions.moveBy(-Gdx.graphics.getWidth() * 2 * swayAmount, -Gdx.graphics.getHeight() * 2 * swayAmount, 2 * swayFrequency),
-                Actions.moveBy(Gdx.graphics.getWidth() * swayAmount, Gdx.graphics.getHeight() * swayAmount, swayFrequency)
-        ));
+                Actions.moveBy(
+                        Gdx.graphics.getWidth() * swayAmount, Gdx.graphics.getHeight() * swayAmount, swayFrequency),
+                Actions.moveBy(
+                        -Gdx.graphics.getWidth() * 2 * swayAmount,
+                        -Gdx.graphics.getHeight() * 2 * swayAmount,
+                        2 * swayFrequency),
+                Actions.moveBy(
+                        Gdx.graphics.getWidth() * swayAmount, Gdx.graphics.getHeight() * swayAmount, swayFrequency)));
     }
 
     private void moveUp() {
@@ -247,16 +236,14 @@ public class WeaponHandler extends BaseActor {
     }
 
     private void setPosition() {
-        restPosition = new Vector2(Gdx.graphics.getWidth() * 4 / 5 - getWidth() / 2, -Gdx.graphics.getHeight() * swayAmount);
+        restPosition =
+                new Vector2(Gdx.graphics.getWidth() * 4 / 5 - getWidth() / 2, -Gdx.graphics.getHeight() * swayAmount);
         setPosition(restPosition.x, -getHeight());
     }
 
     private void shakyCam() {
-        if (currentWeapon instanceof Pistol)
-            player.shakeyCam(.1f, .05f);
-        else if (currentWeapon instanceof Shotgun)
-            player.shakeyCam(.1f, .3f);
-        else if (currentWeapon instanceof Chaingun)
-            player.shakeyCam(.1f, .2f);
+        if (currentWeapon instanceof Pistol) player.shakeyCam(.1f, .05f);
+        else if (currentWeapon instanceof Shotgun) player.shakeyCam(.1f, .3f);
+        else if (currentWeapon instanceof Chaingun) player.shakeyCam(.1f, .2f);
     }
 }

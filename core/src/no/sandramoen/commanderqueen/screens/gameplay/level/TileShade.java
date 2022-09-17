@@ -2,8 +2,6 @@ package no.sandramoen.commanderqueen.screens.gameplay.level;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-
-import no.sandramoen.commanderqueen.actors.characters.enemy.Enemy;
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor3D;
 import no.sandramoen.commanderqueen.utils.GameUtils;
 import no.sandramoen.commanderqueen.utils.Stage3D;
@@ -16,7 +14,16 @@ public class TileShade extends BaseActor3D {
     private float flickerFrequency;
     private float flickerCounter;
 
-    public TileShade(long id, float y, float z, float width, float height, Color color0, Color color1, float flickerFrequency, Stage3D stage3D) {
+    public TileShade(
+            long id,
+            float y,
+            float z,
+            float width,
+            float height,
+            Color color0,
+            Color color1,
+            float flickerFrequency,
+            Stage3D stage3D) {
         super(0, y, z, stage3D);
         this.color0 = color0;
         this.color1 = color1;
@@ -42,15 +49,12 @@ public class TileShade extends BaseActor3D {
     }
 
     @Override
-    public void setColor(Color color) {
-    }
+    public void setColor(Color color) {}
 
     public void setActorColor(BaseActor3D baseActor3D) {
         if (baseActor3D.boundingPolygon != null && overlaps(baseActor3D)) {
-            if (isColor0)
-                baseActor3D.setColor(color0);
-            else
-                baseActor3D.setColor(color1);
+            if (isColor0) baseActor3D.setColor(color0);
+            else baseActor3D.setColor(color1);
         }
     }
 

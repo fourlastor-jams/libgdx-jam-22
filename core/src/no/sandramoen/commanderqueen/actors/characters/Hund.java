@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g3d.decals.DecalBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.actors.Tile;
 import no.sandramoen.commanderqueen.actors.characters.enemy.Enemy;
 import no.sandramoen.commanderqueen.actors.hud.HUD;
@@ -17,7 +16,17 @@ import no.sandramoen.commanderqueen.utils.pathFinding.TileGraph;
 
 public class Hund extends Enemy {
 
-    public Hund(float y, float z, Stage3D s, Player player, Float rotation, TileGraph tileGraph, Array<Tile> floorTiles, Stage stage, HUD hud, DecalBatch batch) {
+    public Hund(
+            float y,
+            float z,
+            Stage3D s,
+            Player player,
+            Float rotation,
+            TileGraph tileGraph,
+            Array<Tile> floorTiles,
+            Stage stage,
+            HUD hud,
+            DecalBatch batch) {
         super(y, z, s, player, rotation, tileGraph, floorTiles, stage, hud, batch);
         movementSpeed = Player.movementSpeed / 50f;
         setHealth(12);
@@ -33,7 +42,8 @@ public class Hund extends Enemy {
 
     @Override
     public void die() {
-        GameUtils.playSoundRelativeToDistance(BaseGame.hundDieSound, distanceBetween(player), VOCAL_RANGE, MathUtils.random(.8f, 1.2f));
+        GameUtils.playSoundRelativeToDistance(
+                BaseGame.hundDieSound, distanceBetween(player), VOCAL_RANGE, MathUtils.random(.8f, 1.2f));
         super.die();
     }
 
@@ -129,15 +139,13 @@ public class Hund extends Enemy {
 
     private void initializeGibAnimation() {
         Array<TextureAtlas.AtlasRegion> animationImages = new Array();
-        for (int i = 0; i < 6; i++)
-            animationImages.add(BaseGame.textureAtlas.findRegion("enemies/hund/gib " + i));
+        for (int i = 0; i < 6; i++) animationImages.add(BaseGame.textureAtlas.findRegion("enemies/hund/gib " + i));
         gibAnimation = new Animation(.15f, animationImages, Animation.PlayMode.NORMAL);
     }
 
     private void initializeDeathAnimation() {
         Array<TextureAtlas.AtlasRegion> animationImages = new Array();
-        for (int i = 0; i < 4; i++)
-            animationImages.add(BaseGame.textureAtlas.findRegion("enemies/hund/die " + i));
+        for (int i = 0; i < 4; i++) animationImages.add(BaseGame.textureAtlas.findRegion("enemies/hund/die " + i));
         dieAnimation = new Animation(.3f, animationImages, Animation.PlayMode.NORMAL);
     }
 }

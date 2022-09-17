@@ -3,11 +3,10 @@ package no.sandramoen.commanderqueen.screens.gameplay.level;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.actors.characters.Player;
 import no.sandramoen.commanderqueen.actors.hud.HUD;
-import no.sandramoen.commanderqueen.actors.pickups.Bullets;
 import no.sandramoen.commanderqueen.actors.pickups.Armor;
+import no.sandramoen.commanderqueen.actors.pickups.Bullets;
 import no.sandramoen.commanderqueen.actors.pickups.Chaingun;
 import no.sandramoen.commanderqueen.actors.pickups.Health;
 import no.sandramoen.commanderqueen.actors.pickups.Key;
@@ -24,19 +23,21 @@ import no.sandramoen.commanderqueen.utils.Stage3D;
 public class PickupHandler {
 
     public static void update(
-            Array<Pickup> pickups, Player player, HUD hud, WeaponHandler weaponHandler,
-            Table uiTable, UIHandler uiHandler, Stage3D stage3D
-    ) {
+            Array<Pickup> pickups,
+            Player player,
+            HUD hud,
+            WeaponHandler weaponHandler,
+            Table uiTable,
+            UIHandler uiHandler,
+            Stage3D stage3D) {
         for (Pickup pickup : pickups) {
             if (player.overlaps(pickup)) {
                 if (pickup instanceof Bullets || pickup instanceof Shells || pickup instanceof Rocket) {
                     hud.incrementAmmunition(pickup, weaponHandler.currentWeapon);
-                    if (pickup instanceof Bullets)
-                        setPickupLabel(uiHandler, hud, "You picked up some bullets!", false);
+                    if (pickup instanceof Bullets) setPickupLabel(uiHandler, hud, "You picked up some bullets!", false);
                     if (pickup instanceof Shells)
                         setPickupLabel(uiHandler, hud, "You picked up some shotgun shells!", false);
-                    if (pickup instanceof Rocket)
-                        setPickupLabel(uiHandler, hud, "You picked up a rocket!", false);
+                    if (pickup instanceof Rocket) setPickupLabel(uiHandler, hud, "You picked up a rocket!", false);
                     removePickup(pickups, pickup);
                 } else if (pickup instanceof Armor) {
                     if (hud.incrementArmor(pickup.amount, false)) {
@@ -52,13 +53,16 @@ public class PickupHandler {
                     hud.addKey((Key) pickup);
                     removePickup(pickups, pickup);
                     String color = "";
-                    if (((Key) pickup).color.equalsIgnoreCase("red"))
-                        color = "{COLOR=" + BaseGame.redColor + "}";
+                    if (((Key) pickup).color.equalsIgnoreCase("red")) color = "{COLOR=" + BaseGame.redColor + "}";
                     else if (((Key) pickup).color.equalsIgnoreCase("green"))
                         color = "{COLOR=" + BaseGame.greenColor + "}";
                     else if (((Key) pickup).color.equalsIgnoreCase("blue"))
                         color = "{COLOR=" + BaseGame.blueColor + "}";
-                    setPickupLabel(uiHandler, hud, "You picked up a " + color + ((Key) pickup).color + " key{CLEARCOLOR}!", true);
+                    setPickupLabel(
+                            uiHandler,
+                            hud,
+                            "You picked up a " + color + ((Key) pickup).color + " key{CLEARCOLOR}!",
+                            true);
                 } else if (pickup instanceof Shotgun) {
                     weaponHandler.makeAvailable("shotgun");
                     Shells shells = new Shells(0, 0, stage3D, 8, player);
@@ -94,7 +98,13 @@ public class PickupHandler {
         pickup.remove();
     }
 
-    private static void pickUpWeapon(HUD hud, Array<Pickup> pickups, Pickup pickup, WeaponHandler weaponHandler, Table uiTable, UIHandler uiHandler) {
+    private static void pickUpWeapon(
+            HUD hud,
+            Array<Pickup> pickups,
+            Pickup pickup,
+            WeaponHandler weaponHandler,
+            Table uiTable,
+            UIHandler uiHandler) {
         hud.setEvilFace();
         BaseGame.weaponPickupSound.play(BaseGame.soundVolume);
         removePickup(pickups, pickup);
@@ -105,11 +115,8 @@ public class PickupHandler {
     }
 
     public static void setPickupLabel(UIHandler uiHandler, BaseActor baseActor, String message, boolean important) {
-        baseActor.addAction(Actions.sequence(
-                Actions.delay(.1f),
-                Actions.run(() -> {
-                    uiHandler.setPickupLabel(message, important);
-                })
-        ));
+        baseActor.addAction(Actions.sequence(Actions.delay(.1f), Actions.run(() -> {
+            uiHandler.setPickupLabel(message, important);
+        })));
     }
 }

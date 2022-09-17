@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g3d.decals.DecalBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.actors.Tile;
 import no.sandramoen.commanderqueen.actors.characters.enemy.Enemy;
 import no.sandramoen.commanderqueen.actors.hud.HUD;
@@ -19,7 +18,17 @@ public class Menig extends Enemy {
     private Sound shootSound = BaseGame.pistolShotSound;
     private long shootSoundID;
 
-    public Menig(float y, float z, Stage3D s, Player player, Float rotation, TileGraph tileGraph, Array<Tile> floorTiles, Stage stage, HUD hud, DecalBatch batch) {
+    public Menig(
+            float y,
+            float z,
+            Stage3D s,
+            Player player,
+            Float rotation,
+            TileGraph tileGraph,
+            Array<Tile> floorTiles,
+            Stage stage,
+            HUD hud,
+            DecalBatch batch) {
         super(y, z, s, player, rotation, tileGraph, floorTiles, stage, hud, batch);
         movementSpeed = Player.movementSpeed / 150f;
         setHealth(20);
@@ -173,8 +182,7 @@ public class Menig extends Enemy {
 
     private void initializeGibAnimation() {
         Array<TextureAtlas.AtlasRegion> animationImages = new Array();
-        for (int i = 0; i < 7; i++)
-            animationImages.add(BaseGame.textureAtlas.findRegion("enemies/menig/gib " + i));
+        for (int i = 0; i < 7; i++) animationImages.add(BaseGame.textureAtlas.findRegion("enemies/menig/gib " + i));
         gibAnimation = new Animation(.15f, animationImages, Animation.PlayMode.NORMAL);
     }
 
@@ -186,8 +194,7 @@ public class Menig extends Enemy {
 
     private void initializeDeathAnimation() {
         Array<TextureAtlas.AtlasRegion> animationImages = new Array();
-        for (int i = 0; i < 5; i++)
-            animationImages.add(BaseGame.textureAtlas.findRegion("enemies/menig/die " + i));
+        for (int i = 0; i < 5; i++) animationImages.add(BaseGame.textureAtlas.findRegion("enemies/menig/die " + i));
         dieAnimation = new Animation(.25f, animationImages, Animation.PlayMode.NORMAL);
     }
 }

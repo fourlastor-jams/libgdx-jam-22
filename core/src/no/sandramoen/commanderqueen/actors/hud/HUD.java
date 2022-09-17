@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.actors.characters.Player;
 import no.sandramoen.commanderqueen.actors.pickups.Bullets;
 import no.sandramoen.commanderqueen.actors.pickups.Key;
@@ -99,8 +98,7 @@ public class HUD extends BaseActor {
         Table table = new Table();
         table.defaults().grow().width(Gdx.graphics.getWidth() * .05f).height(Gdx.graphics.getHeight() * .05f);
         for (int i = 0; i < weaponImages.size; i++)
-            if (weaponHandler.weapons.get(i).isAvailable)
-                table.add(weaponImages.get(i));
+            if (weaponHandler.weapons.get(i).isAvailable) table.add(weaponImages.get(i));
         /*table.setDebug(true);*/
 
         weaponsTable = table;
@@ -124,14 +122,12 @@ public class HUD extends BaseActor {
         return table;
     }
 
-
     public int getHealth() {
         return health;
     }
 
     public boolean incrementHealth(int amount) {
-        if (isStatIgnore(amount, health))
-            return false;
+        if (isStatIgnore(amount, health)) return false;
         health = setStat(amount, health);
         healthLabel.setText(health + "%");
         face.setSTAnimation(getFaceHealthIndex());
@@ -143,10 +139,8 @@ public class HUD extends BaseActor {
         if (isInvulnerable) return;
 
         amount = decrementArmor(amount);
-        if (health - amount <= 0)
-            health = 0;
-        else
-            health -= amount;
+        if (health - amount <= 0) health = 0;
+        else health -= amount;
 
         float angle = getAngleToSource(source);
         setHurtFace(amount, angle);
@@ -155,23 +149,16 @@ public class HUD extends BaseActor {
         player.shakeyCam(.1f, .1f);
     }
 
-
     public void incrementAmmunition(Pickup pickup, Weapon currentWeapon) {
-        if (pickup instanceof Bullets)
-            bullets += pickup.amount;
-        else if (pickup instanceof Shells)
-            shells += pickup.amount;
-        else if (pickup instanceof Rocket)
-            rockets += pickup.amount;
+        if (pickup instanceof Bullets) bullets += pickup.amount;
+        else if (pickup instanceof Shells) shells += pickup.amount;
+        else if (pickup instanceof Rocket) rockets += pickup.amount;
 
         overlayIndicator.flash(BaseGame.yellowColor, .1f);
 
-        if (currentWeapon instanceof Pistol || currentWeapon instanceof Chaingun)
-            ammoLabel.setText(bullets + "");
-        else if (currentWeapon instanceof Shotgun)
-            ammoLabel.setText(shells + "");
-        else if (currentWeapon instanceof RocketLauncher)
-            ammoLabel.setText(rockets + "");
+        if (currentWeapon instanceof Pistol || currentWeapon instanceof Chaingun) ammoLabel.setText(bullets + "");
+        else if (currentWeapon instanceof Shotgun) ammoLabel.setText(shells + "");
+        else if (currentWeapon instanceof RocketLauncher) ammoLabel.setText(rockets + "");
     }
 
     public void decrementAmmo(Weapon currentWeapon) {
@@ -188,34 +175,30 @@ public class HUD extends BaseActor {
     }
 
     public int getAmmo(Weapon currentWeapon) {
-        if (currentWeapon instanceof Pistol || currentWeapon instanceof Chaingun)
-            return bullets;
-        else if (currentWeapon instanceof Shotgun)
-            return shells;
-        else if (currentWeapon instanceof RocketLauncher)
-            return rockets;
-        Gdx.app.error(getClass().getSimpleName(), "Error: couldn't get ammo, current weapon is unknown => " + currentWeapon.getClass().getSimpleName());
+        if (currentWeapon instanceof Pistol || currentWeapon instanceof Chaingun) return bullets;
+        else if (currentWeapon instanceof Shotgun) return shells;
+        else if (currentWeapon instanceof RocketLauncher) return rockets;
+        Gdx.app.error(
+                getClass().getSimpleName(),
+                "Error: couldn't get ammo, current weapon is unknown => "
+                        + currentWeapon.getClass().getSimpleName());
         return -1;
     }
 
     public void setAmmo(Weapon currentWeapon) {
-        if (currentWeapon instanceof Boot)
-            ammoLabel.setText("");
-        else if (currentWeapon instanceof Pistol || currentWeapon instanceof Chaingun)
-            ammoLabel.setText(bullets + "");
-        else if (currentWeapon instanceof Shotgun)
-            ammoLabel.setText(shells + "");
-        else if (currentWeapon instanceof RocketLauncher)
-            ammoLabel.setText(rockets + "");
+        if (currentWeapon instanceof Boot) ammoLabel.setText("");
+        else if (currentWeapon instanceof Pistol || currentWeapon instanceof Chaingun) ammoLabel.setText(bullets + "");
+        else if (currentWeapon instanceof Shotgun) ammoLabel.setText(shells + "");
+        else if (currentWeapon instanceof RocketLauncher) ammoLabel.setText(rockets + "");
         else
-            Gdx.app.error(getClass().getSimpleName(), "Error could not set ammo label, unrecognized weapon => " + currentWeapon);
+            Gdx.app.error(
+                    getClass().getSimpleName(),
+                    "Error could not set ammo label, unrecognized weapon => " + currentWeapon);
         fadeWeaponsTableInAndOut(currentWeapon);
     }
 
-
     public boolean incrementArmor(int amount, boolean improved) {
-        if (isStatIgnore(amount, armor))
-            return false;
+        if (isStatIgnore(amount, armor)) return false;
         setArmorProtectionValue(improved);
         armor = setStat(amount, armor);
         armorLabel.setText(armor + "%");
@@ -226,10 +209,8 @@ public class HUD extends BaseActor {
     public void incrementScore(float amount, Boolean isPickup) {
         score += amount;
         scoreLabel.setText(score + "");
-        if (isPickup)
-            overlayIndicator.flash(BaseGame.yellowColor, .1f);
+        if (isPickup) overlayIndicator.flash(BaseGame.yellowColor, .1f);
     }
-
 
     public void setKillFace() {
         face.setKillFace(getFaceHealthIndex());
@@ -258,50 +239,35 @@ public class HUD extends BaseActor {
     }
 
     private void fadeWeaponsTableInAndOut(Weapon currentWeapon) {
-        weaponsTable.addAction(Actions.sequence(
-                Actions.fadeIn(.75f),
-                Actions.fadeOut(.75f)
-        ));
+        weaponsTable.addAction(Actions.sequence(Actions.fadeIn(.75f), Actions.fadeOut(.75f)));
 
-        for (Image image : weaponImages)
-            image.setColor(Color.DARK_GRAY);
+        for (Image image : weaponImages) image.setColor(Color.DARK_GRAY);
 
-        if (currentWeapon instanceof Boot)
-            weaponImages.get(0).setColor(Color.WHITE);
-        else if (currentWeapon instanceof Pistol)
-            weaponImages.get(1).setColor(Color.WHITE);
-        else if (currentWeapon instanceof Shotgun)
-            weaponImages.get(2).setColor(Color.WHITE);
-        else if (currentWeapon instanceof Chaingun)
-            weaponImages.get(3).setColor(Color.WHITE);
-        else if (currentWeapon instanceof RocketLauncher)
-            weaponImages.get(4).setColor(Color.WHITE);
+        if (currentWeapon instanceof Boot) weaponImages.get(0).setColor(Color.WHITE);
+        else if (currentWeapon instanceof Pistol) weaponImages.get(1).setColor(Color.WHITE);
+        else if (currentWeapon instanceof Shotgun) weaponImages.get(2).setColor(Color.WHITE);
+        else if (currentWeapon instanceof Chaingun) weaponImages.get(3).setColor(Color.WHITE);
+        else if (currentWeapon instanceof RocketLauncher) weaponImages.get(4).setColor(Color.WHITE);
     }
-
 
     private float getAngleToSource(BaseActor3D source) {
         float angleToSource = 0;
         if (source != null)
             angleToSource = GameUtils.getAngleTowardsBaseActor3D(player, source) - player.getTurnAngle();
-        while (angleToSource < 0)
-            angleToSource += 360;
+        while (angleToSource < 0) angleToSource += 360;
         return angleToSource;
     }
 
     private void checkInvulnerability(float delta) {
         if (isInvulnerable) {
             invulnerableCounter += delta;
-            if (invulnerableCounter > INVULNERABLE_MAX_COUNT)
-                setVulnerable();
+            if (invulnerableCounter > INVULNERABLE_MAX_COUNT) setVulnerable();
         }
     }
 
-
     private int setStat(int amount, int stat) {
-        if (amount == 1 && amount + stat <= 200)
-            stat++;
-        else if (amount == 100 || amount == 200)
-            stat = amount;
+        if (amount == 1 && amount + stat <= 200) stat++;
+        else if (amount == 100 || amount == 200) stat = amount;
         return stat;
     }
 
@@ -324,33 +290,23 @@ public class HUD extends BaseActor {
     }
 
     private void setArmorProtectionValue(boolean improved) {
-        if (improved)
-            armorProtectionValue = 1 / 2f;
-        if (!improved && armor == 0)
-            armorProtectionValue = 1 / 3f;
+        if (improved) armorProtectionValue = 1 / 2f;
+        if (!improved && armor == 0) armorProtectionValue = 1 / 3f;
     }
 
-
     private void setOverlayAngle(int amount, float angle) {
-        if (angle < 130)
-            overlayIndicator.flashRight(BaseGame.redColor, .5f * amount / 12);
-        else if (angle > 230)
-            overlayIndicator.flashLeft(BaseGame.redColor, .5f * amount / 12);
-        else
-            overlayIndicator.flash(BaseGame.redColor, .5f * amount / 12);
+        if (angle < 130) overlayIndicator.flashRight(BaseGame.redColor, .5f * amount / 12);
+        else if (angle > 230) overlayIndicator.flashLeft(BaseGame.redColor, .5f * amount / 12);
+        else overlayIndicator.flash(BaseGame.redColor, .5f * amount / 12);
     }
 
     private void setHurtFace(int amount, float angle) {
         if (health > 0) {
-            if (amount >= 20)
-                face.setOuch(getFaceHealthIndex());
+            if (amount >= 20) face.setOuch(getFaceHealthIndex());
             else {
-                if (angle < 130)
-                    face.setTurnRight(getFaceHealthIndex());
-                else if (angle > 230)
-                    face.setTurnLeft(getFaceHealthIndex());
-                else
-                    face.setPain(getFaceHealthIndex());
+                if (angle < 130) face.setTurnRight(getFaceHealthIndex());
+                else if (angle > 230) face.setTurnLeft(getFaceHealthIndex());
+                else face.setPain(getFaceHealthIndex());
             }
         } else {
             face.setDead();
@@ -362,14 +318,13 @@ public class HUD extends BaseActor {
         final int numIncrements = 5;
         int i = numIncrements;
         for (int j = 0; j <= 100; j += 100 / numIncrements) {
-            if (health <= j)
-                return i;
+            if (health <= j) return i;
             i--;
         }
-        Gdx.app.error(getClass().getSimpleName(), "Error: getFaceHealth could not determine face integer, integer is: " + i);
+        Gdx.app.error(
+                getClass().getSimpleName(), "Error: getFaceHealth could not determine face integer, integer is: " + i);
         return -1;
     }
-
 
     private Label initializeLabel(String text) {
         Label label = new Label(text, new Label.LabelStyle(BaseGame.mySkin.get("arcade26", BitmapFont.class), null));

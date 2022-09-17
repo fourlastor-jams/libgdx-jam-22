@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g3d.environment.PointLight;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor3D;
 import no.sandramoen.commanderqueen.utils.BaseGame;
 import no.sandramoen.commanderqueen.utils.GameUtils;
@@ -63,9 +62,7 @@ public class Rocket extends BaseActor3D {
         if (time > TIME_TO_DIE - EXPLODE_DURATION && !isExploding) {
             isExploding = true;
             setScale(10, 10, 10);
-        }
-        else if (time > TIME_TO_DIE)
-            isRemovable = true;
+        } else if (time > TIME_TO_DIE) isRemovable = true;
 
         if (!isExploding) {
             setTurnAngle(angle - 180);
@@ -79,13 +76,11 @@ public class Rocket extends BaseActor3D {
     @Override
     public void draw(ModelBatch batch, Environment env) {
         super.draw(batch, env);
-        if (isExploding)
-            loadImage(explodeAnimation.getKeyFrame(totalTime).toString());
+        if (isExploding) loadImage(explodeAnimation.getKeyFrame(totalTime).toString());
     }
 
     @Override
-    public void setColor(Color c) {
-    }
+    public void setColor(Color c) {}
 
     public int getDamage() {
         return MathUtils.random(minDamage, maxDamage);
@@ -101,8 +96,7 @@ public class Rocket extends BaseActor3D {
 
     private void initializeExplosionAnimation() {
         Array<TextureAtlas.AtlasRegion> animationImages = new Array();
-        for (int i = 1; i <= 7; i++)
-            animationImages.add(BaseGame.textureAtlas.findRegion("explosion0/explosion" + i));
+        for (int i = 1; i <= 7; i++) animationImages.add(BaseGame.textureAtlas.findRegion("explosion0/explosion" + i));
         explodeAnimation = new Animation(.2f, animationImages, Animation.PlayMode.NORMAL);
         animationImages.clear();
     }

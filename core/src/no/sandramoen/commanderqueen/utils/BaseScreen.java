@@ -9,7 +9,6 @@ import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public abstract class BaseScreen implements Screen, InputProcessor, ControllerListener {
@@ -115,16 +114,13 @@ public abstract class BaseScreen implements Screen, InputProcessor, ControllerLi
     }
 
     @Override
-    public void pause() {
-    }
+    public void pause() {}
 
     @Override
-    public void resume() {
-    }
+    public void resume() {}
 
     @Override
-    public void dispose() {
-    }
+    public void dispose() {}
 
     @Override
     public boolean buttonDown(Controller controller, int buttonCode) {
@@ -142,10 +138,8 @@ public abstract class BaseScreen implements Screen, InputProcessor, ControllerLi
     }
 
     @Override
-    public void connected(Controller controller) {
-    }
+    public void connected(Controller controller) {}
 
     @Override
-    public void disconnected(Controller controller) {
-    }
+    public void disconnected(Controller controller) {}
 }

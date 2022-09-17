@@ -4,10 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor3D;
 import no.sandramoen.commanderqueen.utils.BaseGame;
 import no.sandramoen.commanderqueen.utils.Stage3D;
@@ -58,29 +56,22 @@ public class Player extends BaseActor3D {
     @Override
     public void act(float dt) {
         super.act(dt);
-        if (isPause)
-            return;
+        if (isPause) return;
 
-        if (isForcedToMove)
-            forceMove(dt);
-        else
-            keyboardPolling(dt);
+        if (isForcedToMove) forceMove(dt);
+        else keyboardPolling(dt);
         mousePolling();
         stage3D.rollCamera(rollAngle);
 
         stage3D.camera.position.y = position.y;
         stage3D.camera.position.z = position.z;
 
-        if (isShaking && !isForcedToMove)
-            shake();
-        else
-            headBobbing(dt);
+        if (isShaking && !isForcedToMove) shake();
+        else headBobbing(dt);
 
         checkIfMoving();
-        if (isMoving)
-            BaseGame.metalWalkingMusic.setVolume(BaseGame.soundVolume);
-        else
-            BaseGame.metalWalkingMusic.setVolume(0);
+        if (isMoving) BaseGame.metalWalkingMusic.setVolume(BaseGame.soundVolume);
+        else BaseGame.metalWalkingMusic.setVolume(0);
     }
 
     public void muzzleLight() {
@@ -97,25 +88,19 @@ public class Player extends BaseActor3D {
     public void shakeyCam(float duration, float amount) {
         isShaking = true;
         shakeAmount = amount;
-        stage.addAction(Actions.sequence(
-                Actions.delay(duration),
-                Actions.run(() -> isShaking = false)
-        ));
+        stage.addAction(Actions.sequence(Actions.delay(duration), Actions.run(() -> isShaking = false)));
     }
 
     private void shake() {
         stage3D.camera.position.set(
                 position.x + MathUtils.random(0f, shakeAmount),
                 position.y + MathUtils.random(0f, shakeAmount),
-                position.z + MathUtils.random(0f, shakeAmount)
-        );
+                position.z + MathUtils.random(0f, shakeAmount));
     }
 
     private void forceMove(float dt) {
-        if (totalTime <= forceTime)
-            moveBy(0f, forceMoveY * dt, forceMoveZ * dt);
-        else
-            isForcedToMove = false;
+        if (totalTime <= forceTime) moveBy(0f, forceMoveY * dt, forceMoveZ * dt);
+        else isForcedToMove = false;
     }
 
     private void headBobbing(float dt) {
@@ -123,12 +108,9 @@ public class Player extends BaseActor3D {
 
         if (BaseGame.isHeadBobbing) {
             bobCounter += bobFrequency * dt;
-            if ((int) bobCounter % 2 == 0 && isMoving)
-                stage3D.moveCameraUp(bobAmount);
-            else if (isMoving)
-                stage3D.moveCameraUp(-bobAmount);
-            else
-                resetXPosition();
+            if ((int) bobCounter % 2 == 0 && isMoving) stage3D.moveCameraUp(bobAmount);
+            else if (isMoving) stage3D.moveCameraUp(-bobAmount);
+            else resetXPosition();
         } else {
             resetXPosition();
         }
@@ -158,15 +140,12 @@ public class Player extends BaseActor3D {
             rollAngle = MathUtils.clamp(rollAngle += ROLL_INCREMENT, -ROLL_ANGLE_MAX, ROLL_ANGLE_MAX);
         }
 
-        if (!Gdx.input.isKeyPressed(Keys.A) && !Gdx.input.isKeyPressed(Keys.D))
-            resetRoll();
+        if (!Gdx.input.isKeyPressed(Keys.A) && !Gdx.input.isKeyPressed(Keys.D)) resetRoll();
     }
 
     private void resetRoll() {
-        if (rollAngle > 0)
-            rollAngle -= ROLL_INCREMENT;
-        else if (rollAngle < 0)
-            rollAngle += ROLL_INCREMENT;
+        if (rollAngle > 0) rollAngle -= ROLL_INCREMENT;
+        else if (rollAngle < 0) rollAngle += ROLL_INCREMENT;
     }
 
     private void turnPlayer(float angle) {
@@ -176,16 +155,14 @@ public class Player extends BaseActor3D {
     }
 
     private void mousePolling() {
-        if (totalTime < .15f)
-            return;
+        if (totalTime < .15f) return;
 
         if (Gdx.input.getDeltaX() < 300)
             turnPlayer(rotateSpeed * Gdx.input.getDeltaX() * BaseGame.mouseMovementSensitivity);
     }
 
     private void checkIfMoving() {
-        if (position.y != lastPosition.x || position.z != lastPosition.y)
-            isMoving = true;
+        if (position.y != lastPosition.x || position.z != lastPosition.y) isMoving = true;
         else isMoving = false;
 
         lastPosition.x = getPosition().y;

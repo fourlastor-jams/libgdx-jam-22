@@ -15,12 +15,9 @@ public class Armor extends Pickup {
         setPosition(GameUtils.getPositionRelativeToFloor(1.2f), y, z);
         setBaseRectangle();
 
-        if (amount == 1)
-            loadImage("pickups/armor small");
-        else if (amount == 100)
-            loadImage("pickups/armor medium");
-        else if (amount == 200)
-            loadImage("pickups/armor big");
+        if (amount == 1) loadImage("pickups/armor small");
+        else if (amount == 100) loadImage("pickups/armor medium");
+        else if (amount == 200) loadImage("pickups/armor big");
     }
 
     @Override

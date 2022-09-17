@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.github.tommyettinger.textra.TypingLabel;
-
 import no.sandramoen.commanderqueen.screens.gameplay.LevelScreen;
 import no.sandramoen.commanderqueen.ui.MadeByLabel;
 import no.sandramoen.commanderqueen.utils.BaseGame;
@@ -22,10 +21,9 @@ import no.sandramoen.commanderqueen.utils.GameUtils;
 public class MenuScreen extends BaseScreen {
     @Override
     public void initialize() {
-        TypingLabel titleLabel = new TypingLabel("Terfenstein 3D", new Label.LabelStyle(BaseGame.mySkin.get("arcade64", BitmapFont.class), null));
-        uiTable.add(titleLabel)
-                .padBottom(Gdx.graphics.getHeight() * .09f)
-                .row();
+        TypingLabel titleLabel = new TypingLabel(
+                "Terfenstein 3D", new Label.LabelStyle(BaseGame.mySkin.get("arcade64", BitmapFont.class), null));
+        uiTable.add(titleLabel).padBottom(Gdx.graphics.getHeight() * .09f).row();
 
         addTextButtons();
 
@@ -33,8 +31,7 @@ public class MenuScreen extends BaseScreen {
 
         /*uiTable.setDebug(true);*/
 
-        if (Gdx.input.isCursorCatched())
-            Gdx.input.setCursorCatched(false);
+        if (Gdx.input.isCursorCatched()) Gdx.input.setCursorCatched(false);
 
         BaseGame.levelFinishMusic.stop();
         BaseGame.menuMusic.setVolume(BaseGame.musicVolume);
@@ -42,15 +39,12 @@ public class MenuScreen extends BaseScreen {
     }
 
     @Override
-    public void update(float delta) {
-    }
+    public void update(float delta) {}
 
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Keys.ESCAPE || keycode == Keys.Q)
-            uiStage.addAction(exitGameWithSoundAndDelay());
-        else if (keycode == Keys.ENTER || keycode == Keys.NUMPAD_ENTER || keycode == Keys.SPACE)
-            startLevel1();
+        if (keycode == Keys.ESCAPE || keycode == Keys.Q) uiStage.addAction(exitGameWithSoundAndDelay());
+        else if (keycode == Keys.ENTER || keycode == Keys.NUMPAD_ENTER || keycode == Keys.SPACE) startLevel1();
         return super.keyDown(keycode);
     }
 
@@ -60,8 +54,7 @@ public class MenuScreen extends BaseScreen {
                 .height(Gdx.graphics.getHeight() * .075f)
                 .spaceTop(Gdx.graphics.getHeight() * .01f);
 
-        if (BaseGame.levelScreen != null)
-            uiTable.add(resumeButton()).row();
+        if (BaseGame.levelScreen != null) uiTable.add(resumeButton()).row();
         uiTable.add(startButton()).row();
         uiTable.add(optionsButton()).row();
         uiTable.add(exitButton()).row();
@@ -70,62 +63,47 @@ public class MenuScreen extends BaseScreen {
     private TextButton resumeButton() {
         TextButton button = new TextButton("Resume", BaseGame.mySkin);
         button.setColor(BaseGame.blueColor);
-        button.addListener(
-                (Event event) -> {
-                    if (GameUtils.isTouchDownEvent(event))
-                        BaseGame.setActiveScreen(BaseGame.levelScreen);
-                    return false;
-                }
-        );
+        button.addListener((Event event) -> {
+            if (GameUtils.isTouchDownEvent(event)) BaseGame.setActiveScreen(BaseGame.levelScreen);
+            return false;
+        });
         return button;
     }
 
     private TextButton startButton() {
         TextButton button = new TextButton("Start", BaseGame.mySkin);
-        button.addListener(
-                (Event event) -> {
-                    if (GameUtils.isTouchDownEvent(event))
-                        startLevel1();
-                    return false;
-                }
-        );
+        button.addListener((Event event) -> {
+            if (GameUtils.isTouchDownEvent(event)) startLevel1();
+            return false;
+        });
         return button;
     }
 
     private TextButton optionsButton() {
         TextButton button = new TextButton("Options", BaseGame.mySkin);
-        button.addListener(
-                (Event event) -> {
-                    if (GameUtils.isTouchDownEvent(event))
-                        BaseGame.setActiveScreen(new OptionsScreen());
-                    return false;
-                }
-        );
+        button.addListener((Event event) -> {
+            if (GameUtils.isTouchDownEvent(event)) BaseGame.setActiveScreen(new OptionsScreen());
+            return false;
+        });
         return button;
     }
 
     private TextButton exitButton() {
         TextButton button = new TextButton("Exit", BaseGame.mySkin);
-        button.addListener(
-                (Event event) -> {
-                    if (GameUtils.isTouchDownEvent(event))
-                        button.addAction(exitGameWithSoundAndDelay());
-                    return false;
-                }
-        );
+        button.addListener((Event event) -> {
+            if (GameUtils.isTouchDownEvent(event)) button.addAction(exitGameWithSoundAndDelay());
+            return false;
+        });
         return button;
     }
 
     private void startLevel1() {
-        BaseGame.setActiveScreen(new LevelScreen(20, BaseGame.level1Map, "level 1", 100, 0, 10, 0, 0,null));
+        BaseGame.setActiveScreen(new LevelScreen(20, BaseGame.level1Map, "level 1", 100, 0, 10, 0, 0, null));
     }
 
     private SequenceAction exitGameWithSoundAndDelay() {
         return Actions.sequence(
-                Actions.run(() -> playRandomSound()),
-                Actions.delay(1),
-                Actions.run(() -> Gdx.app.exit())
-        );
+                Actions.run(() -> playRandomSound()), Actions.delay(1), Actions.run(() -> Gdx.app.exit()));
     }
 
     private void playRandomSound() {

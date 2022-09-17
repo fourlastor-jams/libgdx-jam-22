@@ -1,18 +1,16 @@
 package no.sandramoen.commanderqueen.utils;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.g3d.Environment;
+import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
 import com.badlogic.gdx.graphics.g3d.utils.ShaderProvider;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.graphics.PerspectiveCamera;
-import com.badlogic.gdx.graphics.g3d.Environment;
-import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-
 import java.util.ArrayList;
-
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor3D;
 import no.sandramoen.commanderqueen.screens.gameplay.level.LightManager;
 
@@ -57,8 +55,7 @@ public class Stage3D {
     public void act(float dt) {
         camera.update();
         lightManager.update(dt);
-        for (BaseActor3D ba : actorList3D)
-            ba.act(dt);
+        for (BaseActor3D ba : actorList3D) ba.act(dt);
         setIntervalFlag(dt);
     }
 

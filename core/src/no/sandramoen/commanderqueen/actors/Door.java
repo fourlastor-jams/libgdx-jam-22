@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.actors.characters.Player;
 import no.sandramoen.commanderqueen.actors.pickups.Key;
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor;
@@ -28,7 +27,15 @@ public class Door extends BaseActor3D {
 
     private BaseActor3D temp;
 
-    public Door(float y, float z, Stage3D stage3D, Stage stage, float rotation, Player player, String keyColor, Array<BaseActor3D> shootable) {
+    public Door(
+            float y,
+            float z,
+            Stage3D stage3D,
+            Stage stage,
+            float rotation,
+            Player player,
+            String keyColor,
+            Array<BaseActor3D> shootable) {
         super(0, y, z, stage3D);
         this.player = player;
         this.keyColor = keyColor;
@@ -36,14 +43,10 @@ public class Door extends BaseActor3D {
         buildModel(4, 4, 1, false);
         setBaseRectangle();
 
-        if (keyColor.equalsIgnoreCase("red"))
-            loadImage("doors/doorRed");
-        else if (keyColor.equalsIgnoreCase("green"))
-            loadImage("doors/doorGreen");
-        else if (keyColor.equalsIgnoreCase("blue"))
-            loadImage("doors/doorBlue");
-        else
-            loadImage("doors/door0");
+        if (keyColor.equalsIgnoreCase("red")) loadImage("doors/doorRed");
+        else if (keyColor.equalsIgnoreCase("green")) loadImage("doors/doorGreen");
+        else if (keyColor.equalsIgnoreCase("blue")) loadImage("doors/doorBlue");
+        else loadImage("doors/door0");
 
         turnBy(-180 + rotation);
 
@@ -70,27 +73,24 @@ public class Door extends BaseActor3D {
     public void open() {
         if (isLocked) return;
         if (!isOpening)
-            GameUtils.playSoundRelativeToDistance(BaseGame.door0OpeningSound, distanceBetween(player), 16f, MathUtils.random(.8f, 1.2f));
+            GameUtils.playSoundRelativeToDistance(
+                    BaseGame.door0OpeningSound, distanceBetween(player), 16f, MathUtils.random(.8f, 1.2f));
         isOpening = true;
 
-        if (isClosing)
-            BaseGame.door0ClosingSound.stop();
+        if (isClosing) BaseGame.door0ClosingSound.stop();
         isClosing = false;
 
         openActor.clearActions();
-        openActor.addAction(Actions.sequence(
-                Actions.delay(.7f),
-                Actions.run(() -> isPreventOverlapEnabled = false)
-        ));
+        openActor.addAction(Actions.sequence(Actions.delay(.7f), Actions.run(() -> isPreventOverlapEnabled = false)));
     }
 
     public void close() {
         if (!isClosing)
-            GameUtils.playSoundRelativeToDistance(BaseGame.door0ClosingSound, distanceBetween(player), 16f, MathUtils.random(.8f, 1.2f));
+            GameUtils.playSoundRelativeToDistance(
+                    BaseGame.door0ClosingSound, distanceBetween(player), 16f, MathUtils.random(.8f, 1.2f));
         isClosing = true;
 
-        if (isOpening)
-            BaseGame.door0OpeningSound.stop();
+        if (isOpening) BaseGame.door0OpeningSound.stop();
         isOpening = false;
 
         isPreventOverlapEnabled = true;
@@ -116,12 +116,9 @@ public class Door extends BaseActor3D {
                 }
         BaseGame.doorLockedSound.play(BaseGame.soundVolume);
         String color = "";
-        if (keyColor.equalsIgnoreCase("red"))
-            color = "{COLOR=" + BaseGame.redColor + "}";
-        else if (keyColor.equalsIgnoreCase("green"))
-            color = "{COLOR=" + BaseGame.greenColor + "}";
-        else if (keyColor.equalsIgnoreCase("blue"))
-            color = "{COLOR=" + BaseGame.blueColor + "}";
+        if (keyColor.equalsIgnoreCase("red")) color = "{COLOR=" + BaseGame.redColor + "}";
+        else if (keyColor.equalsIgnoreCase("green")) color = "{COLOR=" + BaseGame.greenColor + "}";
+        else if (keyColor.equalsIgnoreCase("blue")) color = "{COLOR=" + BaseGame.blueColor + "}";
         return "Find the " + color + keyColor + " key {CLEARCOLOR}to open this door...";
     }
 
@@ -129,23 +126,17 @@ public class Door extends BaseActor3D {
         if (isLocked || getPosition().x >= openHeight) return;
         open();
         closeActor.clearActions();
-        closeActor.addAction(Actions.sequence(
-                Actions.delay(7.5f),
-                Actions.run(() -> close())
-        ));
+        closeActor.addAction(Actions.sequence(Actions.delay(7.5f), Actions.run(() -> close())));
     }
 
     private void checkIfShouldOpenDoor() {
         if (isOpening && getPosition().x < openHeight)
             setPosition(getPosition().x + speed, getPosition().y, getPosition().z);
-        else
-            isOpening = false;
+        else isOpening = false;
     }
 
     private void checkIfShouldCloseDoor() {
-        if (isClosing && getPosition().x > 0)
-            setPosition(getPosition().x - speed, getPosition().y, getPosition().z);
-        else
-            isClosing = false;
+        if (isClosing && getPosition().x > 0) setPosition(getPosition().x - speed, getPosition().y, getPosition().z);
+        else isClosing = false;
     }
 }

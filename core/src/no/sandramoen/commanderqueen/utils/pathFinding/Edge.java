@@ -2,7 +2,6 @@ package no.sandramoen.commanderqueen.utils.pathFinding;
 
 import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.math.Vector3;
-
 import no.sandramoen.commanderqueen.actors.Tile;
 
 public class Edge implements Connection<Tile> {
@@ -19,8 +18,7 @@ public class Edge implements Connection<Tile> {
                 fromTile.position.z,
                 toTile.position.x,
                 toTile.position.y,
-                toTile.position.z
-        );
+                toTile.position.z);
     }
 
     @Override

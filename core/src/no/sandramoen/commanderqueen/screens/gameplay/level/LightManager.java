@@ -26,9 +26,12 @@ public class LightManager {
         updatePointLights(dt);
     }
 
-    public void addTemporaryPointLight(Vector3 position, float r, float g, float b, float intensity, float duration, float brightnessFalloff) {
+    public void addTemporaryPointLight(
+            Vector3 position, float r, float g, float b, float intensity, float duration, float brightnessFalloff) {
         if (duration <= brightnessFalloff)
-            Gdx.app.error(getClass().getSimpleName(), "Warning: a light was added where duration is less than or equal to the brightness falloff!");
+            Gdx.app.error(
+                    getClass().getSimpleName(),
+                    "Warning: a light was added where duration is less than or equal to the brightness falloff!");
         MyPointLight pointLight = new MyPointLight();
         pointLight.set(new Color(r, g, b, 1f), position, 0);
         pointLight.duration = duration;

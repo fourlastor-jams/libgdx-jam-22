@@ -20,11 +20,9 @@ public abstract class Weapon {
     protected int minDamage = 0;
     protected int maxDamage = 0;
 
-    public void attackSound() {
-    }
+    public void attackSound() {}
 
-    public void emptySound() {
-    }
+    public void emptySound() {}
 
     public float getRateOfFire() {
         return RATE_OF_FIRE;

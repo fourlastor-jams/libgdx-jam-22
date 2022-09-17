@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.utils.BaseGame;
 
 public class Shotgun extends Weapon {
@@ -33,16 +32,16 @@ public class Shotgun extends Weapon {
 
     private void initializeAnimations() {
         Array<TextureAtlas.AtlasRegion> animationImages = new Array();
-            animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 1"));
-            animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 1"));
-            animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 2"));
-            animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 2"));
-            animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 3"));
-            animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 3"));
-            animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 4"));
-            animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 4"));
-            animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 3"));
-            animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 3"));
+        animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 1"));
+        animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 1"));
+        animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 2"));
+        animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 2"));
+        animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 3"));
+        animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 3"));
+        animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 4"));
+        animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 4"));
+        animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 3"));
+        animationImages.add(BaseGame.textureAtlas.findRegion("weapons/shotgun/shooting 3"));
         shootAnimation = new Animation(RATE_OF_FIRE / animationImages.size, animationImages, Animation.PlayMode.NORMAL);
 
         animationImages.clear();

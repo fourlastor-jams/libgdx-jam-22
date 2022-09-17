@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor;
 import no.sandramoen.commanderqueen.utils.BaseGame;
 import no.sandramoen.commanderqueen.utils.GameUtils;
@@ -27,16 +26,14 @@ public class ShockwaveBackground extends BaseActor {
         setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         shaderProgram = GameUtils.initShaderProgram(BaseGame.defaultShader, BaseGame.shockwaveShader);
 
-        addListener(
-                (Event event) -> {
-                    if (GameUtils.isTouchDownEvent(event)) {
-                        float xNormalized = Gdx.input.getX() / (float) Gdx.graphics.getWidth();
-                        float yNormalized = Gdx.input.getY() / (float) Gdx.graphics.getHeight();
-                        start(xNormalized, yNormalized);
-                    }
-                    return false;
-                }
-        );
+        addListener((Event event) -> {
+            if (GameUtils.isTouchDownEvent(event)) {
+                float xNormalized = Gdx.input.getX() / (float) Gdx.graphics.getWidth();
+                float yNormalized = Gdx.input.getY() / (float) Gdx.graphics.getHeight();
+                start(xNormalized, yNormalized);
+            }
+            return false;
+        });
     }
 
     @Override

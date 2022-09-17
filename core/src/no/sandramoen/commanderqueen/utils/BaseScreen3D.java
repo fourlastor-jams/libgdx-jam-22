@@ -1,13 +1,13 @@
 package no.sandramoen.commanderqueen.utils;
 
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g3d.decals.CameraGroupStrategy;
 import com.badlogic.gdx.graphics.g3d.decals.DecalBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public abstract class BaseScreen3D implements Screen, InputProcessor {
@@ -52,11 +52,9 @@ public abstract class BaseScreen3D implements Screen, InputProcessor {
         uiStage.getViewport().update(width, height, true);
     }
 
-    public void pause() {
-    }
+    public void pause() {}
 
-    public void resume() {
-    }
+    public void resume() {}
 
     public void show() {
         InputMultiplexer im = (InputMultiplexer) Gdx.input.getInputProcessor();

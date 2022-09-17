@@ -9,8 +9,7 @@ public class BloodDecals extends DecalsManager {
         super(camera, batch);
 
         Array<String> temp = new Array();
-        for (int i = 1; i < 5; i++)
-            temp.add("decals/blood decal " + i);
+        for (int i = 1; i < 5; i++) temp.add("decals/blood decal " + i);
         imagePaths = temp;
         minAnimationSpeed = .1f;
         maxAnimationSpeed = .1f;

@@ -2,16 +2,15 @@ package no.sandramoen.commanderqueen.actors.utils.baseActors;
 
 import static java.lang.Math.abs;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.utils.BaseGame;
 
 public class BaseActor extends Group {
@@ -43,11 +42,9 @@ public class BaseActor extends Group {
 
     @Override
     public void act(float delta) {
-        if (!pause)
-            super.act(delta);
+        if (!pause) super.act(delta);
 
-        if (!animationPaused)
-            animationTime += delta;
+        if (!animationPaused) animationTime += delta;
     }
 
     @Override
@@ -67,8 +64,7 @@ public class BaseActor extends Group {
                         animationHeight,
                         getScaleX(),
                         getScaleY(),
-                        getRotation()
-                );
+                        getRotation());
             else
                 batch.draw(
                         animation.getKeyFrame(animationTime),
@@ -80,8 +76,7 @@ public class BaseActor extends Group {
                         getHeight(),
                         getScaleX(),
                         getScaleY(),
-                        getRotation()
-                );
+                        getRotation());
         }
         super.draw(batch, parentAlpha);
     }
@@ -111,7 +106,8 @@ public class BaseActor extends Group {
         return loadAnimationFromFiles(fileNames, 1f, true);
     }
 
-    private Animation<TextureRegion> loadAnimationFromFiles(Array<String> fileNames, Float frameDuration, Boolean loop) {
+    private Animation<TextureRegion> loadAnimationFromFiles(
+            Array<String> fileNames, Float frameDuration, Boolean loop) {
         Array<TextureRegion> textureArray = new Array();
 
         for (int i = 0; i < fileNames.size; i++) {
@@ -122,13 +118,10 @@ public class BaseActor extends Group {
 
         Animation<TextureRegion> anim = new Animation(frameDuration, textureArray);
 
-        if (loop)
-            anim.setPlayMode(Animation.PlayMode.LOOP);
-        else
-            anim.setPlayMode(Animation.PlayMode.NORMAL);
+        if (loop) anim.setPlayMode(Animation.PlayMode.LOOP);
+        else anim.setPlayMode(Animation.PlayMode.NORMAL);
 
-        if (animation == null)
-            setAnimation(anim);
+        if (animation == null) setAnimation(anim);
 
         return anim;
     }
@@ -145,7 +138,8 @@ public class BaseActor extends Group {
     public void loadImage(String name) {
         TextureRegion region = BaseGame.textureAtlas.findRegion(name);
         if (region == null)
-            Gdx.app.error(getClass().getSimpleName(), "Error: region is null. Are you sure the image '" + name + "' exists?");
+            Gdx.app.error(
+                    getClass().getSimpleName(), "Error: region is null. Are you sure the image '" + name + "' exists?");
         setAnimation(new Animation(1f, region));
     }
 

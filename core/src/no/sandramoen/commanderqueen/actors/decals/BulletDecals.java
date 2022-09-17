@@ -9,8 +9,7 @@ public class BulletDecals extends DecalsManager {
         super(camera, batch);
 
         Array<String> temp = new Array();
-        for (int i = 1; i < 5; i++)
-            temp.add("decals/bullet puff " + i);
+        for (int i = 1; i < 5; i++) temp.add("decals/bullet puff " + i);
         imagePaths = temp;
         minAnimationSpeed = .1f;
         maxAnimationSpeed = .3f;

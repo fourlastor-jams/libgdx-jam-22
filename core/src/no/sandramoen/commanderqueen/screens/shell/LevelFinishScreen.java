@@ -1,7 +1,6 @@
 package no.sandramoen.commanderqueen.screens.shell;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -9,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 import com.github.tommyettinger.textra.TypingLabel;
-
 import no.sandramoen.commanderqueen.actors.weapon.weapons.Weapon;
 import no.sandramoen.commanderqueen.screens.gameplay.LevelScreen;
 import no.sandramoen.commanderqueen.utils.BaseGame;
@@ -66,7 +64,15 @@ public class LevelFinishScreen extends BaseScreen {
     private String numLevel;
     private String levelName;
 
-    public LevelFinishScreen(Array args, String numLevel, int health, int armor, int bullets, int shells, int rockets, Array<Weapon> weapons) {
+    public LevelFinishScreen(
+            Array args,
+            String numLevel,
+            int health,
+            int armor,
+            int bullets,
+            int shells,
+            int rockets,
+            Array<Weapon> weapons) {
         this.numLevel = numLevel;
         this.health = health;
         this.armor = armor;
@@ -85,8 +91,7 @@ public class LevelFinishScreen extends BaseScreen {
     }
 
     @Override
-    public void initialize() {
-    }
+    public void initialize() {}
 
     @Override
     public void update(float dt) {
@@ -111,16 +116,11 @@ public class LevelFinishScreen extends BaseScreen {
     }
 
     private void countUpAllLabelsInOrder(float dt) {
-        if (killCount < kills)
-            killCount = countUp(killCount, kills, killCountLabel, dt);
-        else if (itemCount < items)
-            itemCount = countUp(itemCount, items, itemsCountLabel, dt);
-        else if (secretCount < secrets)
-            secretCount = countUp(secretCount, secrets, secretsCountLabel, dt);
-        else if (timeCount < time)
-            timeCount = countUp(timeCount, time, "Time", timeLabel, dt);
-        else if (parCount < par)
-            parCount = countUp(parCount, par, "Par", parLabel, dt);
+        if (killCount < kills) killCount = countUp(killCount, kills, killCountLabel, dt);
+        else if (itemCount < items) itemCount = countUp(itemCount, items, itemsCountLabel, dt);
+        else if (secretCount < secrets) secretCount = countUp(secretCount, secrets, secretsCountLabel, dt);
+        else if (timeCount < time) timeCount = countUp(timeCount, time, "Time", timeLabel, dt);
+        else if (parCount < par) parCount = countUp(parCount, par, "Par", parLabel, dt);
     }
 
     private int countUp(int counter, int goal, Label label, float dt) {
@@ -163,7 +163,8 @@ public class LevelFinishScreen extends BaseScreen {
     }
 
     private TypingLabel initializeTypingLabel(String string) {
-        TypingLabel label = new TypingLabel(string, new Label.LabelStyle(BaseGame.mySkin.get("arcade64", BitmapFont.class), null));
+        TypingLabel label =
+                new TypingLabel(string, new Label.LabelStyle(BaseGame.mySkin.get("arcade64", BitmapFont.class), null));
         label.setColor(BaseGame.redColor);
         label.getFont().scaleTo(Gdx.graphics.getWidth() * .027f, Gdx.graphics.getHeight() * .027f);
         return label;
@@ -209,11 +210,8 @@ public class LevelFinishScreen extends BaseScreen {
         timeLabel.setText("");
         parLabel.setText("");
 
-        youAreHereImage.addAction(Actions.forever(Actions.sequence(
-                Actions.alpha(.8f, .5f),
-                Actions.alpha(1, .5f)
+        youAreHereImage.addAction(Actions.forever(Actions.sequence(Actions.alpha(.8f, .5f), Actions.alpha(1, .5f))));
 
-        )));
         setMapMarkings();
         pistolSoundID = BaseGame.pistolShotSound.play(BaseGame.soundVolume, .5f, 0);
     }
@@ -270,17 +268,23 @@ public class LevelFinishScreen extends BaseScreen {
         BaseGame.pistolShotSound.play(BaseGame.soundVolume, .5f, 0);
 
         if (numLevel.equalsIgnoreCase("test"))
-            BaseGame.setActiveScreen(new LevelScreen(65, BaseGame.testMap, "test", health, armor, bullets, shells, rockets, weapons));
+            BaseGame.setActiveScreen(
+                    new LevelScreen(65, BaseGame.testMap, "test", health, armor, bullets, shells, rockets, weapons));
         else if (numLevel.equalsIgnoreCase("level 1"))
-            BaseGame.setActiveScreen(new LevelScreen(32, BaseGame.level2Map, "level 2", health, armor, bullets, shells, rockets, weapons));
+            BaseGame.setActiveScreen(new LevelScreen(
+                    32, BaseGame.level2Map, "level 2", health, armor, bullets, shells, rockets, weapons));
         else if (numLevel.equalsIgnoreCase("level 2"))
-            BaseGame.setActiveScreen(new LevelScreen(32, BaseGame.level3Map, "level 3", health, armor, bullets, shells, rockets, weapons));
+            BaseGame.setActiveScreen(new LevelScreen(
+                    32, BaseGame.level3Map, "level 3", health, armor, bullets, shells, rockets, weapons));
         else if (numLevel.equalsIgnoreCase("level 3"))
-            BaseGame.setActiveScreen(new LevelScreen(38, BaseGame.level4Map, "level 4", health, armor, bullets, shells, rockets, weapons));
+            BaseGame.setActiveScreen(new LevelScreen(
+                    38, BaseGame.level4Map, "level 4", health, armor, bullets, shells, rockets, weapons));
         else if (numLevel.equalsIgnoreCase("level 4"))
-            BaseGame.setActiveScreen(new LevelScreen(57, BaseGame.level5Map, "level 5", health, armor, bullets, shells, rockets, weapons));
+            BaseGame.setActiveScreen(new LevelScreen(
+                    57, BaseGame.level5Map, "level 5", health, armor, bullets, shells, rockets, weapons));
         else if (numLevel.equalsIgnoreCase("level 5"))
-            BaseGame.setActiveScreen(new LevelScreen(83, BaseGame.level6Map, "level 6", health, armor, bullets, shells, rockets, weapons));
+            BaseGame.setActiveScreen(new LevelScreen(
+                    83, BaseGame.level6Map, "level 6", health, armor, bullets, shells, rockets, weapons));
     }
 
     private String formatTime(float time) {
@@ -294,20 +298,14 @@ public class LevelFinishScreen extends BaseScreen {
         String temp1 = String.valueOf(minutes);
         String temp2 = String.valueOf(seconds);
 
-        if (hours <= 9)
-            temp0 = "0" + hours;
-        else if (hours > 99 || hours < 0)
-            temp0 = "99";
+        if (hours <= 9) temp0 = "0" + hours;
+        else if (hours > 99 || hours < 0) temp0 = "99";
 
-        if (minutes <= 9 && minutes >= 0)
-            temp1 = "0" + minutes;
-        else if (minutes > 99 || minutes < 0)
-            temp1 = "99";
+        if (minutes <= 9 && minutes >= 0) temp1 = "0" + minutes;
+        else if (minutes > 99 || minutes < 0) temp1 = "99";
 
-        if (seconds <= 9 && seconds >= 0)
-            temp2 = "0" + seconds;
-        else if (seconds > 99 || seconds < 0)
-            temp2 = "99";
+        if (seconds <= 9 && seconds >= 0) temp2 = "0" + seconds;
+        else if (seconds > 99 || seconds < 0) temp2 = "99";
 
         return temp0 + ":" + temp1 + ":" + temp2;
     }
@@ -336,7 +334,12 @@ public class LevelFinishScreen extends BaseScreen {
         par = (float) args.get(5);
 
         uiTable.add(nameLabel).colspan(2).center().row();
-        uiTable.add(statusLabel).colspan(2).center().spaceTop(Gdx.graphics.getHeight() * .025f).padBottom(Gdx.graphics.getHeight() * .05f).row();
+        uiTable.add(statusLabel)
+                .colspan(2)
+                .center()
+                .spaceTop(Gdx.graphics.getHeight() * .025f)
+                .padBottom(Gdx.graphics.getHeight() * .05f)
+                .row();
         uiTable.defaults().spaceTop(Gdx.graphics.getHeight() * .1f).expandX();
         uiTable.add(killNameLabel).left();
         uiTable.add(killCountLabel).right().row();

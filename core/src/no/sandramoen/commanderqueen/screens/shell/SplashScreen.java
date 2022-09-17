@@ -5,10 +5,8 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-
 import no.sandramoen.commanderqueen.actors.ShockwaveBackground;
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor;
-import no.sandramoen.commanderqueen.screens.gameplay.LevelScreen;
 import no.sandramoen.commanderqueen.utils.BaseGame;
 import no.sandramoen.commanderqueen.utils.BaseScreen;
 
@@ -22,9 +20,7 @@ public class SplashScreen extends BaseScreen {
     }
 
     @Override
-    public void update(float delta) {
-
-    }
+    public void update(float delta) {}
 
     @Override
     public void dispose() {
@@ -38,13 +34,10 @@ public class SplashScreen extends BaseScreen {
         if (keycode == Keys.BACK || keycode == Keys.ESCAPE || keycode == Keys.BACKSPACE || keycode == Keys.Q) {
             BaseGame.pistolShotSound.play(BaseGame.soundVolume);
             blackOverlay.clearActions();
-            blackOverlay.addAction(Actions.sequence(
-                    Actions.fadeIn(.2f),
-                    Actions.delay(.05f),
-                    Actions.run(() -> {
-                        super.dispose();
-                        Gdx.app.exit();
-                    })));
+            blackOverlay.addAction(Actions.sequence(Actions.fadeIn(.2f), Actions.delay(.05f), Actions.run(() -> {
+                super.dispose();
+                Gdx.app.exit();
+            })));
         }
         return super.keyDown(keycode);
     }
@@ -65,14 +58,11 @@ public class SplashScreen extends BaseScreen {
 
     private void blackOverlayFadeInAndOut() {
         float totalDurationInSeconds = 4;
-        blackOverlay.addAction(
-                Actions.sequence(
-                        Actions.fadeOut(totalDurationInSeconds / 3),
-                        /*Actions.run { googlePlayServicesSignIn() },*/
-                        Actions.delay(totalDurationInSeconds / 3),
-                        Actions.fadeIn(totalDurationInSeconds / 3)
-                )
-        );
+        blackOverlay.addAction(Actions.sequence(
+                Actions.fadeOut(totalDurationInSeconds / 3),
+                /*Actions.run { googlePlayServicesSignIn() },*/
+                Actions.delay(totalDurationInSeconds / 3),
+                Actions.fadeIn(totalDurationInSeconds / 3)));
     }
 
     /*private void googlePlayServicesSignIn() {

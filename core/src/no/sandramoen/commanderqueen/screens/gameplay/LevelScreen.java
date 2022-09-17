@@ -11,40 +11,39 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.actors.Barrel;
 import no.sandramoen.commanderqueen.actors.Door;
 import no.sandramoen.commanderqueen.actors.Elevator;
+import no.sandramoen.commanderqueen.actors.Tile;
 import no.sandramoen.commanderqueen.actors.characters.Menig;
+import no.sandramoen.commanderqueen.actors.characters.Player;
 import no.sandramoen.commanderqueen.actors.characters.Rocket;
 import no.sandramoen.commanderqueen.actors.characters.Sersjant;
+import no.sandramoen.commanderqueen.actors.characters.enemy.Enemy;
 import no.sandramoen.commanderqueen.actors.decals.BloodDecals;
 import no.sandramoen.commanderqueen.actors.decals.BulletDecals;
 import no.sandramoen.commanderqueen.actors.hud.HUD;
-import no.sandramoen.commanderqueen.actors.characters.Player;
-import no.sandramoen.commanderqueen.actors.Tile;
-import no.sandramoen.commanderqueen.actors.pickups.Shells;
-import no.sandramoen.commanderqueen.actors.weapon.WeaponHandler;
 import no.sandramoen.commanderqueen.actors.pickups.Bullets;
 import no.sandramoen.commanderqueen.actors.pickups.Pickup;
+import no.sandramoen.commanderqueen.actors.pickups.Shells;
+import no.sandramoen.commanderqueen.actors.utils.TilemapActor;
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor;
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor3D;
-import no.sandramoen.commanderqueen.actors.characters.enemy.Enemy;
+import no.sandramoen.commanderqueen.actors.weapon.WeaponHandler;
 import no.sandramoen.commanderqueen.actors.weapon.weapons.Chaingun;
 import no.sandramoen.commanderqueen.actors.weapon.weapons.Weapon;
 import no.sandramoen.commanderqueen.screens.gameplay.level.BarrelExplosionHandler;
 import no.sandramoen.commanderqueen.screens.gameplay.level.EnemyHandler;
 import no.sandramoen.commanderqueen.screens.gameplay.level.MapLoader;
-import no.sandramoen.commanderqueen.actors.utils.TilemapActor;
+import no.sandramoen.commanderqueen.screens.gameplay.level.PickupHandler;
+import no.sandramoen.commanderqueen.screens.gameplay.level.TileHandler;
 import no.sandramoen.commanderqueen.screens.gameplay.level.TileShade;
+import no.sandramoen.commanderqueen.screens.gameplay.level.UIHandler;
 import no.sandramoen.commanderqueen.screens.shell.LevelFinishScreen;
 import no.sandramoen.commanderqueen.screens.shell.MenuScreen;
 import no.sandramoen.commanderqueen.utils.BaseGame;
 import no.sandramoen.commanderqueen.utils.BaseScreen3D;
 import no.sandramoen.commanderqueen.utils.GameUtils;
-import no.sandramoen.commanderqueen.screens.gameplay.level.PickupHandler;
-import no.sandramoen.commanderqueen.screens.gameplay.level.TileHandler;
-import no.sandramoen.commanderqueen.screens.gameplay.level.UIHandler;
 
 public class LevelScreen extends BaseScreen3D {
     private HUD hud;
@@ -88,7 +87,16 @@ public class LevelScreen extends BaseScreen3D {
     private int startingRockets;
     private Array<Weapon> startingWeapons;
 
-    public LevelScreen(float parTime, TiledMap map, String numLevel, int health, int armor, int bullets, int shells, int rockets, Array<Weapon> weapons) {
+    public LevelScreen(
+            float parTime,
+            TiledMap map,
+            String numLevel,
+            int health,
+            int armor,
+            int bullets,
+            int shells,
+            int rockets,
+            Array<Weapon> weapons) {
         long startTime = System.currentTimeMillis();
         this.numLevel = numLevel;
         numSecrets = 0;
@@ -96,7 +104,6 @@ public class LevelScreen extends BaseScreen3D {
 
         PAR_TIME = parTime;
         tiledMap = map;
-
 
         playLevelMusic();
         GameUtils.playLoopingMusic(BaseGame.ambientFanMusic);
@@ -111,8 +118,7 @@ public class LevelScreen extends BaseScreen3D {
         bulletDecals = new BulletDecals(mainStage3D.camera, decalBatch);
         bloodDecals = new BloodDecals(mainStage3D.camera, decalBatch);
 
-        if (!Gdx.input.isCursorCatched())
-            Gdx.input.setCursorCatched(true);
+        if (!Gdx.input.isCursorCatched()) Gdx.input.setCursorCatched(true);
 
         numEnemies = enemies.size;
         numPickups = originalPickups.size;
@@ -128,8 +134,7 @@ public class LevelScreen extends BaseScreen3D {
     }
 
     @Override
-    public void initialize() {
-    }
+    public void initialize() {}
 
     @Override
     public void update(float dt) {
@@ -141,18 +146,15 @@ public class LevelScreen extends BaseScreen3D {
 
         shadeHandler();
 
-        for (int i = 0; i < enemies.size; i++)
-            if (enemies.get(i).isDead) removeEnemy(enemies.get(i));
+        for (int i = 0; i < enemies.size; i++) if (enemies.get(i).isDead) removeEnemy(enemies.get(i));
 
         updateBarrels();
         PickupHandler.update(originalPickups, player, hud, weaponHandler, uiTable, uiHandler, mainStage3D);
         PickupHandler.update(newPickups, player, hud, weaponHandler, uiTable, uiHandler, mainStage3D);
 
         updateUI();
-        for (Door door : doors)
-            player.preventOverlap(door);
-        for (Elevator elevator : mapLoader.elevators)
-            player.preventOverlap(elevator);
+        for (Door door : doors) player.preventOverlap(door);
+        for (Elevator elevator : mapLoader.elevators) player.preventOverlap(elevator);
 
         mouseButtonPolling();
 
@@ -168,16 +170,13 @@ public class LevelScreen extends BaseScreen3D {
             BaseGame.setActiveScreen(new MenuScreen());
         } else if (keycode == Keys.R)
             BaseGame.setActiveScreen(new LevelScreen(PAR_TIME, BaseGame.testMap, "test", 100, 0, 50, 50, 50, null));
-        else if (isGameOver && totalTime > 2)
-            restartLevel();
+        else if (isGameOver && totalTime > 2) restartLevel();
         else if (keycode == Keys.F) {
             player.isCollisionEnabled = !player.isCollisionEnabled;
             Gdx.app.log(getClass().getSimpleName(), "player.isCollisionEnabled: " + player.isCollisionEnabled);
-        } else if (keycode == Keys.V)
-            hud.setInvulnerable();
+        } else if (keycode == Keys.V) hud.setInvulnerable();
         else if (keycode == Keys.G) {
-            for (Tile tile : tiles)
-                tile.isVisible = !tile.isVisible;
+            for (Tile tile : tiles) tile.isVisible = !tile.isVisible;
         } else if (keycode == Keys.NUMPAD_ADD) {
             Player.movementSpeed += 1;
         } else if (keycode == Keys.NUMPAD_SUBTRACT) {
@@ -203,12 +202,10 @@ public class LevelScreen extends BaseScreen3D {
             for (Door door : doors)
                 if (player.isWithinDistance(Tile.height * .8f, door)) {
                     String message = door.tryToOpenDoor(hud.keys.getKeys());
-                    if (!message.isEmpty())
-                        uiHandler.setPickupLabel(message, true);
+                    if (!message.isEmpty()) uiHandler.setPickupLabel(message, true);
                 }
             for (Elevator elevator : mapLoader.elevators)
-                if (player.isWithinDistance(Tile.height * 1.1f, elevator))
-                    levelFinished();
+                if (player.isWithinDistance(Tile.height * 1.1f, elevator)) levelFinished();
         }
 
         return super.keyDown(keycode);
@@ -221,8 +218,7 @@ public class LevelScreen extends BaseScreen3D {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (isGameOver && totalTime > 2)
-            restartLevel();
+        if (isGameOver && totalTime > 2) restartLevel();
         return super.touchDown(screenX, screenY, pointer, button);
     }
 
@@ -244,8 +240,7 @@ public class LevelScreen extends BaseScreen3D {
     @Override
     public void show() {
         super.show();
-        if (!Gdx.input.isCursorCatched())
-            Gdx.input.setCursorCatched(true);
+        if (!Gdx.input.isCursorCatched()) Gdx.input.setCursorCatched(true);
         totalTime = 0;
         playLevelMusic();
     }
@@ -254,24 +249,21 @@ public class LevelScreen extends BaseScreen3D {
         BaseGame.menuMusic.stop();
         BaseGame.levelFinishMusic.stop();
 
-        if (numLevel.equalsIgnoreCase("level 1"))
-            GameUtils.playLoopingMusic(BaseGame.level1Music);
-        else if (numLevel.equalsIgnoreCase("level 2"))
-            GameUtils.playLoopingMusic(BaseGame.level2Music);
-        else if (numLevel.equalsIgnoreCase("level 3"))
-            GameUtils.playLoopingMusic(BaseGame.level3Music);
+        if (numLevel.equalsIgnoreCase("level 1")) GameUtils.playLoopingMusic(BaseGame.level1Music);
+        else if (numLevel.equalsIgnoreCase("level 2")) GameUtils.playLoopingMusic(BaseGame.level2Music);
+        else if (numLevel.equalsIgnoreCase("level 3")) GameUtils.playLoopingMusic(BaseGame.level3Music);
         else if (numLevel.equalsIgnoreCase("level 4"))
             GameUtils.playLoopingMusic(BaseGame.level4Music, BaseGame.musicVolume * 1.5f);
         else if (numLevel.equalsIgnoreCase("level 5"))
             GameUtils.playLoopingMusic(BaseGame.level5Music, BaseGame.musicVolume * .7f);
         else if (numLevel.equalsIgnoreCase("level 6"))
-            GameUtils.playLoopingMusic(BaseGame.level6Music, BaseGame.musicVolume * .5f); // TODO: find music for level 6
+            GameUtils.playLoopingMusic(
+                    BaseGame.level6Music, BaseGame.musicVolume * .5f); // TODO: find music for level 6
     }
 
     private void mouseButtonPolling() {
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && !isGameOver && totalTime > 1) {
-            if (weaponHandler.isReadyToShoot)
-                shoot();
+            if (weaponHandler.isReadyToShoot) shoot();
             holdingDown = true;
         }
     }
@@ -283,8 +275,7 @@ public class LevelScreen extends BaseScreen3D {
                 player.muzzleLight();
                 hud.decrementAmmo(weaponHandler.currentWeapon);
                 EnemyHandler.activateEnemies(enemies, Enemy.activationRange, player);
-                for (int i = 0; i < weaponHandler.currentWeapon.numShotsFired; i++)
-                    rayPickTarget();
+                for (int i = 0; i < weaponHandler.currentWeapon.numShotsFired; i++) rayPickTarget();
             }
         } else if (weaponHandler.currentWeapon.isProjectile) {
             if (weaponHandler.shoot(hud.getAmmo(weaponHandler.currentWeapon))) {
@@ -318,13 +309,19 @@ public class LevelScreen extends BaseScreen3D {
                     enemy.decrementHealth(weaponHandler.getDamage());
                     if (enemy.isDead) removeEnemy(enemy);
 
-                    Vector3 temp = new Vector3().set(ray.direction).scl(player.distanceBetween(enemy) - .2f).add(ray.origin);
+                    Vector3 temp = new Vector3()
+                            .set(ray.direction)
+                            .scl(player.distanceBetween(enemy) - .2f)
+                            .add(ray.origin);
                     bloodDecals.addDecal(temp.x, temp.y, temp.z);
                 } else if (shootable.get(i) instanceof Barrel) {
                     Barrel barrel = (Barrel) shootable.get(i);
                     barrel.decrementHealth(weaponHandler.getDamage(), player.distanceBetween(barrel));
                 } else if (!weaponHandler.currentWeapon.isMelee) {
-                    Vector3 temp = new Vector3().set(ray.direction).scl(player.distanceBetween(shootable.get(i)) - (Tile.diagonalLength / 2)).add(ray.origin);
+                    Vector3 temp = new Vector3()
+                            .set(ray.direction)
+                            .scl(player.distanceBetween(shootable.get(i)) - (Tile.diagonalLength / 2))
+                            .add(ray.origin);
                     bulletDecals.addDecal(temp.x, temp.y, temp.z);
                 }
                 return true;
@@ -336,9 +333,19 @@ public class LevelScreen extends BaseScreen3D {
     private void removeEnemy(Enemy enemy) {
         enemy.die();
         if (enemy instanceof Menig)
-            newPickups.add(new Bullets(enemy.position.y + MathUtils.random(-1, 1), enemy.position.z + MathUtils.random(-1, 1), mainStage3D, 4, player));
+            newPickups.add(new Bullets(
+                    enemy.position.y + MathUtils.random(-1, 1),
+                    enemy.position.z + MathUtils.random(-1, 1),
+                    mainStage3D,
+                    4,
+                    player));
         if (enemy instanceof Sersjant)
-            newPickups.add(new Shells(enemy.position.y + MathUtils.random(-1, 1), enemy.position.z + MathUtils.random(-1, 1), mainStage3D, 4, player));
+            newPickups.add(new Shells(
+                    enemy.position.y + MathUtils.random(-1, 1),
+                    enemy.position.z + MathUtils.random(-1, 1),
+                    mainStage3D,
+                    4,
+                    player));
         deadEnemies.add(enemy);
         enemies.removeValue(enemy, false);
         shootable.removeValue(enemy, false);
@@ -349,10 +356,8 @@ public class LevelScreen extends BaseScreen3D {
         uiHandler.statusLabel.setText("enemies left: " + enemies.size);
     }
 
-
     private void checkGameOverCondition() {
-        if (hud.getHealth() == 0)
-            setGameOver();
+        if (hud.getHealth() == 0) setGameOver();
     }
 
     private void setGameOver() {
@@ -361,15 +366,10 @@ public class LevelScreen extends BaseScreen3D {
             player.isPause = true;
             hud.setDeadFace();
             weaponHandler.playerDied();
-            new BaseActor(0, 0, uiStage).addAction(Actions.sequence(
-                    Actions.delay(5),
-                    Actions.run(() -> {
-                        for (Enemy enemy : enemies)
-                            enemy.isPause = true;
-                    })
-            ));
-            for (Enemy enemy : enemies)
-                enemy.isRanged = false;
+            new BaseActor(0, 0, uiStage).addAction(Actions.sequence(Actions.delay(5), Actions.run(() -> {
+                for (Enemy enemy : enemies) enemy.isPause = true;
+            })));
+            for (Enemy enemy : enemies) enemy.isRanged = false;
             BaseGame.metalWalkingMusic.stop();
             uiHandler.gameLabel.setText("G A M E   O V E R !");
             mainStage3D.camera.position.x = -Tile.height * .48f;
@@ -379,28 +379,89 @@ public class LevelScreen extends BaseScreen3D {
 
     private void restartLevel() {
         if (numLevel.equalsIgnoreCase("test"))
-            BaseGame.setActiveScreen(new LevelScreen(65, BaseGame.testMap, "test", startingHealth, startingArmor, startingBullets, startingShells, startingRockets, startingWeapons));
+            BaseGame.setActiveScreen(new LevelScreen(
+                    65,
+                    BaseGame.testMap,
+                    "test",
+                    startingHealth,
+                    startingArmor,
+                    startingBullets,
+                    startingShells,
+                    startingRockets,
+                    startingWeapons));
         else if (numLevel.equalsIgnoreCase("level 1"))
-            BaseGame.setActiveScreen(new LevelScreen(95, BaseGame.level1Map, "level 1", startingHealth, startingArmor, startingBullets, startingShells, startingRockets, startingWeapons));
+            BaseGame.setActiveScreen(new LevelScreen(
+                    95,
+                    BaseGame.level1Map,
+                    "level 1",
+                    startingHealth,
+                    startingArmor,
+                    startingBullets,
+                    startingShells,
+                    startingRockets,
+                    startingWeapons));
         else if (numLevel.equalsIgnoreCase("level 2"))
-            BaseGame.setActiveScreen(new LevelScreen(95, BaseGame.level2Map, "level 2", startingHealth, startingArmor, startingBullets, startingShells, startingRockets, startingWeapons));
+            BaseGame.setActiveScreen(new LevelScreen(
+                    95,
+                    BaseGame.level2Map,
+                    "level 2",
+                    startingHealth,
+                    startingArmor,
+                    startingBullets,
+                    startingShells,
+                    startingRockets,
+                    startingWeapons));
         else if (numLevel.equalsIgnoreCase("level 3"))
-            BaseGame.setActiveScreen(new LevelScreen(95, BaseGame.level3Map, "level 3", startingHealth, startingArmor, startingBullets, startingShells, startingRockets, startingWeapons));
+            BaseGame.setActiveScreen(new LevelScreen(
+                    95,
+                    BaseGame.level3Map,
+                    "level 3",
+                    startingHealth,
+                    startingArmor,
+                    startingBullets,
+                    startingShells,
+                    startingRockets,
+                    startingWeapons));
         else if (numLevel.equalsIgnoreCase("level 4"))
-            BaseGame.setActiveScreen(new LevelScreen(38, BaseGame.level4Map, "level 4", startingHealth, startingArmor, startingBullets, startingShells, startingRockets, startingWeapons));
+            BaseGame.setActiveScreen(new LevelScreen(
+                    38,
+                    BaseGame.level4Map,
+                    "level 4",
+                    startingHealth,
+                    startingArmor,
+                    startingBullets,
+                    startingShells,
+                    startingRockets,
+                    startingWeapons));
         else if (numLevel.equalsIgnoreCase("level 5"))
-            BaseGame.setActiveScreen(new LevelScreen(38, BaseGame.level5Map, "level 5", startingHealth, startingArmor, startingBullets, startingShells, startingRockets, startingWeapons));
+            BaseGame.setActiveScreen(new LevelScreen(
+                    38,
+                    BaseGame.level5Map,
+                    "level 5",
+                    startingHealth,
+                    startingArmor,
+                    startingBullets,
+                    startingShells,
+                    startingRockets,
+                    startingWeapons));
         else if (numLevel.equalsIgnoreCase("level 6"))
-            BaseGame.setActiveScreen(new LevelScreen(38, BaseGame.level6Map, "level 6", startingHealth, startingArmor, startingBullets, startingShells, startingRockets, startingWeapons));
+            BaseGame.setActiveScreen(new LevelScreen(
+                    38,
+                    BaseGame.level6Map,
+                    "level 6",
+                    startingHealth,
+                    startingArmor,
+                    startingBullets,
+                    startingShells,
+                    startingRockets,
+                    startingWeapons));
     }
-
 
     private void updateBarrels() {
         for (BaseActor3D baseActor3D : shootable) {
             if (baseActor3D instanceof Barrel) {
                 Barrel barrel = (Barrel) baseActor3D;
-                if (barrel.health <= 0)
-                    explodeBarrelWithDelay(barrel);
+                if (barrel.health <= 0) explodeBarrelWithDelay(barrel);
             }
         }
     }
@@ -410,14 +471,14 @@ public class LevelScreen extends BaseScreen3D {
             uiHandler.reset();
             uiHandler.isReset = false;
         }
-        uiHandler.debugLabel.setText("FPS: " + Gdx.graphics.getFramesPerSecond() + "\nVisible: " + mainStage3D.visibleCount);
+        uiHandler.debugLabel.setText(
+                "FPS: " + Gdx.graphics.getFramesPerSecond() + "\nVisible: " + mainStage3D.visibleCount);
     }
 
     private void explodeBarrelWithDelay(final Barrel barrel) {
-        new BaseActor(0, 0, uiStage).addAction(Actions.sequence(
-                Actions.delay(MathUtils.random(0, .4f)),
-                Actions.run(() -> explodeBarrel(barrel))
-        ));
+        new BaseActor(0, 0, uiStage)
+                .addAction(Actions.sequence(
+                        Actions.delay(MathUtils.random(0, .4f)), Actions.run(() -> explodeBarrel(barrel))));
     }
 
     private void explodeBarrel(Barrel barrel) {
@@ -427,7 +488,6 @@ public class LevelScreen extends BaseScreen3D {
         BarrelExplosionHandler.checkExplosionRange(hud, player, enemies, shootable, barrel);
         barrel.explode();
     }
-
 
     private void initializeMap(int health, int armor, int bullets, int shells, int rockets) {
         tilemap = new TilemapActor(tiledMap, mainStage3D);
@@ -441,7 +501,20 @@ public class LevelScreen extends BaseScreen3D {
         projectiles = new Array();
         tileShades = new Array();
         hud = new HUD(uiStage, health, armor, bullets, shells, rockets);
-        mapLoader = new MapLoader(tilemap, tiles, mainStage3D, player, shootable, originalPickups, enemies, uiStage, hud, decalBatch, doors, projectiles, tileShades);
+        mapLoader = new MapLoader(
+                tilemap,
+                tiles,
+                mainStage3D,
+                player,
+                shootable,
+                originalPickups,
+                enemies,
+                uiStage,
+                hud,
+                decalBatch,
+                doors,
+                projectiles,
+                tileShades);
     }
 
     private void initializePlayer(Array<Weapon> weapons) {
@@ -469,20 +542,13 @@ public class LevelScreen extends BaseScreen3D {
 
     private Array getLevelData() {
         Array levelData = new Array();
-        if (numLevel.equalsIgnoreCase("level 1"))
-            levelData.add("Hangar");
-        else if (numLevel.equalsIgnoreCase("level 2"))
-            levelData.add("Loading Bay");
-        else if (numLevel.equalsIgnoreCase("level 3"))
-            levelData.add("Complex");
-        else if (numLevel.equalsIgnoreCase("level 4"))
-            levelData.add("Great Hall");
-        else if (numLevel.equalsIgnoreCase("level 5"))
-            levelData.add("Bunkers");
-        else if (numLevel.equalsIgnoreCase("level 6"))
-            levelData.add("Factory");
-        else
-            levelData.add("Test");
+        if (numLevel.equalsIgnoreCase("level 1")) levelData.add("Hangar");
+        else if (numLevel.equalsIgnoreCase("level 2")) levelData.add("Loading Bay");
+        else if (numLevel.equalsIgnoreCase("level 3")) levelData.add("Complex");
+        else if (numLevel.equalsIgnoreCase("level 4")) levelData.add("Great Hall");
+        else if (numLevel.equalsIgnoreCase("level 5")) levelData.add("Bunkers");
+        else if (numLevel.equalsIgnoreCase("level 6")) levelData.add("Factory");
+        else levelData.add("Test");
         levelData.add((int) ((1 - (enemies.size / (float) numEnemies)) * 100));
         levelData.add((int) ((1 - (originalPickups.size / (float) numPickups)) * 100));
         levelData.add((int) ((foundSecrets / (float) numSecrets) * 100));
@@ -493,25 +559,27 @@ public class LevelScreen extends BaseScreen3D {
     }
 
     private String getNextLevelName() {
-        if (numLevel.equalsIgnoreCase("level 1"))
-            return "Loading Bay";
-        else if (numLevel.equalsIgnoreCase("level 2"))
-            return "Complex";
-        else if (numLevel.equalsIgnoreCase("level 3"))
-            return "Great Hall";
-        else if (numLevel.equalsIgnoreCase("level 4"))
-            return "Bunkers";
-        else if (numLevel.equalsIgnoreCase("level 6"))
-            return "Factory";
-        else
-            return "Test";
+        if (numLevel.equalsIgnoreCase("level 1")) return "Loading Bay";
+        else if (numLevel.equalsIgnoreCase("level 2")) return "Complex";
+        else if (numLevel.equalsIgnoreCase("level 3")) return "Great Hall";
+        else if (numLevel.equalsIgnoreCase("level 4")) return "Bunkers";
+        else if (numLevel.equalsIgnoreCase("level 6")) return "Factory";
+        else return "Test";
     }
 
     private void levelFinished() {
         BaseGame.elevatorSound.play(BaseGame.soundVolume);
         stopLevel();
         Array levelData = getLevelData();
-        BaseGame.setActiveScreen(new LevelFinishScreen(levelData, numLevel, hud.health, hud.armor, hud.bullets, hud.shells, hud.rockets, weaponHandler.weapons));
+        BaseGame.setActiveScreen(new LevelFinishScreen(
+                levelData,
+                numLevel,
+                hud.health,
+                hud.armor,
+                hud.bullets,
+                hud.shells,
+                hud.rockets,
+                weaponHandler.weapons));
     }
 
     private void shadeHandler() {

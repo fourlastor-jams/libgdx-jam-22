@@ -3,7 +3,6 @@ package no.sandramoen.commanderqueen.actors.weapon.weapons;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.utils.BaseGame;
 
 public class Boot extends Weapon {
@@ -28,7 +27,6 @@ public class Boot extends Weapon {
     public void emptySound() {
         BaseGame.bootMissSound.play(BaseGame.soundVolume);
     }
-
 
     private void initializeAnimations() {
         Array<TextureAtlas.AtlasRegion> animationImages = new Array();

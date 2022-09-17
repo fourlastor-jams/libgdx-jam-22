@@ -15,10 +15,8 @@ public class Health extends Pickup {
         setPosition(GameUtils.getPositionRelativeToFloor(1.2f), y, z);
         setBaseRectangle();
 
-        if (amount == 1)
-            loadImage("pickups/health small");
-        else if (amount == 100)
-            loadImage("pickups/health medium");
+        if (amount == 1) loadImage("pickups/health small");
+        else if (amount == 100) loadImage("pickups/health medium");
     }
 
     @Override

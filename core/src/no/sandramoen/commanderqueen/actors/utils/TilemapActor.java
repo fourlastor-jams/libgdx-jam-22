@@ -1,6 +1,5 @@
 package no.sandramoen.commanderqueen.actors.utils;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapLayer;
@@ -11,10 +10,9 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
-
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import no.sandramoen.commanderqueen.utils.BaseGame;
 import no.sandramoen.commanderqueen.utils.Stage3D;
 
@@ -34,13 +32,11 @@ public class TilemapActor extends Actor {
 
         for (MapLayer layer : tiledMap.getLayers()) {
             for (MapObject obj : layer.getObjects()) {
-                if (!(obj instanceof RectangleMapObject))
-                    continue;
+                if (!(obj instanceof RectangleMapObject)) continue;
 
                 MapProperties props = obj.getProperties();
 
-                if (props.containsKey("name") && props.get("name").equals(propertyName))
-                    list.add(obj);
+                if (props.containsKey("name") && props.get("name").equals(propertyName)) list.add(obj);
             }
         }
         return list;
@@ -52,8 +48,7 @@ public class TilemapActor extends Actor {
         for (MapLayer layer : tiledMap.getLayers()) {
             if (layer.getName().equalsIgnoreCase(layerName))
                 for (MapObject obj : layer.getObjects()) {
-                    if (!(obj instanceof TiledMapTileMapObject))
-                        continue;
+                    if (!(obj instanceof TiledMapTileMapObject)) continue;
 
                     MapProperties props = obj.getProperties();
 
@@ -64,8 +59,8 @@ public class TilemapActor extends Actor {
                     TiledMapTile t = tmtmo.getTile();
                     MapProperties defaultProps = t.getProperties();
 
-                    if (defaultProps.containsKey("name") && defaultProps.get("name").equals(propertyName))
-                        list.add(obj);
+                    if (defaultProps.containsKey("name")
+                            && defaultProps.get("name").equals(propertyName)) list.add(obj);
 
                     // get list of default property keys
                     Iterator<String> propertyKeys = defaultProps.getKeys();
@@ -75,8 +70,7 @@ public class TilemapActor extends Actor {
                         String key = propertyKeys.next();
 
                         // check if value already exists; if not, create property with default value
-                        if (props.containsKey(key))
-                            continue;
+                        if (props.containsKey(key)) continue;
                         else {
                             Object value = defaultProps.get(key);
                             props.put(key, value);

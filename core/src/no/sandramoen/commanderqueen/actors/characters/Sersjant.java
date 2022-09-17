@@ -6,10 +6,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g3d.decals.DecalBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.actors.Tile;
 import no.sandramoen.commanderqueen.actors.characters.enemy.Enemy;
-import no.sandramoen.commanderqueen.actors.characters.enemy.Sprite;
 import no.sandramoen.commanderqueen.actors.hud.HUD;
 import no.sandramoen.commanderqueen.utils.BaseGame;
 import no.sandramoen.commanderqueen.utils.GameUtils;
@@ -20,7 +18,17 @@ public class Sersjant extends Enemy {
     private Sound shootSound = BaseGame.shotgunSound;
     private long shootSoundID;
 
-    public Sersjant(float y, float z, Stage3D s, Player player, Float rotation, TileGraph tileGraph, Array<Tile> floorTiles, Stage stage, HUD hud, DecalBatch batch) {
+    public Sersjant(
+            float y,
+            float z,
+            Stage3D s,
+            Player player,
+            Float rotation,
+            TileGraph tileGraph,
+            Array<Tile> floorTiles,
+            Stage stage,
+            HUD hud,
+            DecalBatch batch) {
         super(y, z, s, player, rotation, tileGraph, floorTiles, stage, hud, batch);
         movementSpeed = Player.movementSpeed / 140f;
         setHealth(30);
@@ -175,8 +183,7 @@ public class Sersjant extends Enemy {
 
     private void initializeGibAnimation() {
         Array<TextureAtlas.AtlasRegion> animationImages = new Array();
-        for (int i = 0; i < 7; i++)
-            animationImages.add(BaseGame.textureAtlas.findRegion("enemies/sersjant/gib " + i));
+        for (int i = 0; i < 7; i++) animationImages.add(BaseGame.textureAtlas.findRegion("enemies/sersjant/gib " + i));
         gibAnimation = new Animation(.15f, animationImages, Animation.PlayMode.NORMAL);
     }
 
@@ -188,8 +195,7 @@ public class Sersjant extends Enemy {
 
     private void initializeDeathAnimation() {
         Array<TextureAtlas.AtlasRegion> animationImages = new Array();
-        for (int i = 0; i < 5; i++)
-            animationImages.add(BaseGame.textureAtlas.findRegion("enemies/sersjant/die " + i));
+        for (int i = 0; i < 5; i++) animationImages.add(BaseGame.textureAtlas.findRegion("enemies/sersjant/die " + i));
         dieAnimation = new Animation(.25f, animationImages, Animation.PlayMode.NORMAL);
     }
 }

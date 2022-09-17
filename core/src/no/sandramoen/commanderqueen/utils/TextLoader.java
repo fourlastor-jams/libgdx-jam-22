@@ -13,7 +13,6 @@ public class TextLoader extends AsynchronousAssetLoader<Text, TextLoader.TextPar
     public TextLoader(FileHandleResolver resolver) {
 
         super(resolver);
-
     }
 
     Text text;
@@ -23,7 +22,6 @@ public class TextLoader extends AsynchronousAssetLoader<Text, TextLoader.TextPar
 
         this.text = null;
         this.text = new Text(file);
-
     }
 
     @Override
@@ -33,7 +31,6 @@ public class TextLoader extends AsynchronousAssetLoader<Text, TextLoader.TextPar
         this.text = null;
 
         return text;
-
     }
 
     @SuppressWarnings("rawtypes")
@@ -41,11 +38,7 @@ public class TextLoader extends AsynchronousAssetLoader<Text, TextLoader.TextPar
     public Array<AssetDescriptor> getDependencies(String fileName, FileHandle file, TextParameter parameter) {
 
         return null;
-
     }
 
-    public static class TextParameter extends AssetLoaderParameters<Text> {
-
-    }
-
+    public static class TextParameter extends AssetLoaderParameters<Text> {}
 }

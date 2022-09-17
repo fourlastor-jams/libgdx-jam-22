@@ -1,13 +1,11 @@
 package no.sandramoen.commanderqueen.actors.characters;
 
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g3d.decals.DecalBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.actors.Tile;
 import no.sandramoen.commanderqueen.actors.characters.enemy.Enemy;
 import no.sandramoen.commanderqueen.actors.hud.HUD;
@@ -21,7 +19,18 @@ public class Prest extends Enemy {
     private Sound shootSound = BaseGame.shotgunSound;
     private Array<BaseActor3D> projectiles;
 
-    public Prest(float y, float z, Stage3D stage3D, Player player, float rotation, TileGraph tileGraph, Array<Tile> floorTiles, Stage stage, HUD hud, DecalBatch batch, Array<BaseActor3D> projectiles) {
+    public Prest(
+            float y,
+            float z,
+            Stage3D stage3D,
+            Player player,
+            float rotation,
+            TileGraph tileGraph,
+            Array<Tile> floorTiles,
+            Stage stage,
+            HUD hud,
+            DecalBatch batch,
+            Array<BaseActor3D> projectiles) {
         super(y, z, stage3D, player, rotation, tileGraph, floorTiles, stage, hud, batch);
         this.projectiles = projectiles;
         movementSpeed = Player.movementSpeed / 140f;
@@ -182,8 +191,7 @@ public class Prest extends Enemy {
 
     private void initializeGibAnimation() {
         Array<TextureAtlas.AtlasRegion> animationImages = new Array();
-        for (int i = 0; i < 6; i++)
-            animationImages.add(BaseGame.textureAtlas.findRegion("enemies/prest/gib " + i));
+        for (int i = 0; i < 6; i++) animationImages.add(BaseGame.textureAtlas.findRegion("enemies/prest/gib " + i));
         gibAnimation = new Animation(.15f, animationImages, Animation.PlayMode.NORMAL);
     }
 
@@ -195,8 +203,7 @@ public class Prest extends Enemy {
 
     private void initializeDeathAnimation() {
         Array<TextureAtlas.AtlasRegion> animationImages = new Array();
-        for (int i = 0; i < 5; i++)
-            animationImages.add(BaseGame.textureAtlas.findRegion("enemies/prest/die " + i));
+        for (int i = 0; i < 5; i++) animationImages.add(BaseGame.textureAtlas.findRegion("enemies/prest/die " + i));
         dieAnimation = new Animation(.25f, animationImages, Animation.PlayMode.NORMAL);
     }
 }

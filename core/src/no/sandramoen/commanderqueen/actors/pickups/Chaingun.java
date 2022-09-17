@@ -1,7 +1,6 @@
 package no.sandramoen.commanderqueen.actors.pickups;
 
 import com.badlogic.gdx.math.MathUtils;
-
 import no.sandramoen.commanderqueen.actors.characters.Player;
 import no.sandramoen.commanderqueen.utils.BaseGame;
 import no.sandramoen.commanderqueen.utils.GameUtils;
@@ -29,8 +28,7 @@ public class Chaingun extends Pickup {
         setScale(
                 scale.x * MathUtils.cos(2 * totalTime) * .1f + 1,
                 scale.y * MathUtils.sin(2 * totalTime) * .1f + 1,
-                .001f
-        );
+                .001f);
     }
 
     @Override

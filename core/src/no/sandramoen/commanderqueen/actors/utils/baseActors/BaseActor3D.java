@@ -1,26 +1,25 @@
 package no.sandramoen.commanderqueen.actors.utils.baseActors;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.Environment;
+import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
-import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.collision.BoundingBox;
-import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Intersector.MinimumTranslationVector;
-
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Quaternion;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import no.sandramoen.commanderqueen.utils.BaseGame;
 import no.sandramoen.commanderqueen.utils.Stage3D;
 
@@ -62,8 +61,7 @@ public class BaseActor3D {
     }
 
     public void act(float dt) {
-        if (!isPause)
-            modelData.transform.set(calculateTransform());
+        if (!isPause) modelData.transform.set(calculateTransform());
     }
 
     public void draw(ModelBatch batch, Environment env) {
@@ -71,16 +69,15 @@ public class BaseActor3D {
     }
 
     public void setColor(Color c) {
-        for (Material m : modelData.materials)
-            m.set(ColorAttribute.createDiffuse(c));
+        for (Material m : modelData.materials) m.set(ColorAttribute.createDiffuse(c));
     }
 
     public void loadImage(String name) {
         TextureRegion region = BaseGame.textureAtlas.findRegion(name);
         if (region == null)
-            Gdx.app.error(getClass().getSimpleName(), "Error: region is null. Are you sure the image '" + name + "' exists?");
-        for (Material material : modelData.materials)
-            material.set(TextureAttribute.createDiffuse(region));
+            Gdx.app.error(
+                    getClass().getSimpleName(), "Error: region is null. Are you sure the image '" + name + "' exists?");
+        for (Material material : modelData.materials) material.set(TextureAttribute.createDiffuse(region));
     }
 
     public Vector3 getPosition() {
@@ -137,8 +134,7 @@ public class BaseActor3D {
         Vector3 max = modelBounds.max;
         Vector3 min = modelBounds.min;
 
-        float[] vertices =
-                {max.y, max.z, min.y, max.z, min.y, min.z, max.y, min.z};
+        float[] vertices = {max.y, max.z, min.y, max.z, min.y, min.z, max.y, min.z};
 
         boundingPolygon = new Polygon(vertices);
         boundingPolygon.setOrigin(0, 0);
@@ -156,8 +152,7 @@ public class BaseActor3D {
         Polygon poly1 = this.getBoundaryPolygon();
         Polygon poly2 = other.getBoundaryPolygon();
 
-        if (!poly1.getBoundingRectangle().overlaps(poly2.getBoundingRectangle()))
-            return false;
+        if (!poly1.getBoundingRectangle().overlaps(poly2.getBoundingRectangle())) return false;
 
         MinimumTranslationVector mtv = new MinimumTranslationVector();
 
@@ -165,20 +160,17 @@ public class BaseActor3D {
     }
 
     public void preventOverlap(BaseActor3D other) {
-        if (!isPreventOverlapEnabled || !other.isPreventOverlapEnabled)
-            return;
+        if (!isPreventOverlapEnabled || !other.isPreventOverlapEnabled) return;
         Polygon poly1 = this.getBoundaryPolygon();
         Polygon poly2 = other.getBoundaryPolygon();
 
         // initial test to improve performance
-        if (!poly1.getBoundingRectangle().overlaps(poly2.getBoundingRectangle()))
-            return;
+        if (!poly1.getBoundingRectangle().overlaps(poly2.getBoundingRectangle())) return;
 
         MinimumTranslationVector mtv = new MinimumTranslationVector();
         boolean polygonOverlap = Intersector.overlapConvexPolygons(poly1, poly2, mtv);
 
-        if (polygonOverlap)
-            this.moveBy(0, mtv.normal.x * mtv.depth, mtv.normal.y * mtv.depth);
+        if (polygonOverlap) this.moveBy(0, mtv.normal.x * mtv.depth, mtv.normal.y * mtv.depth);
     }
 
     public boolean isWithinDistance(Float distance, BaseActor3D other) {
@@ -186,12 +178,12 @@ public class BaseActor3D {
     }
 
     public boolean isOnCenter(BaseActor3D other) {
-        return (int) position.y == (int) other.position.y &&
-                (int) position.z == (int) other.position.z;
+        return (int) position.y == (int) other.position.y && (int) position.z == (int) other.position.z;
     }
 
     public float distanceBetween(BaseActor3D other) {
-        return (float) Math.sqrt(Math.pow(Math.abs(other.position.y - position.y), 2) + Math.pow(Math.abs(other.position.z - position.z), 2));
+        return (float) Math.sqrt(Math.pow(Math.abs(other.position.y - position.y), 2)
+                + Math.pow(Math.abs(other.position.z - position.z), 2));
     }
 
     public void remove() {
@@ -202,9 +194,11 @@ public class BaseActor3D {
         ModelBuilder modelBuilder = new ModelBuilder();
         Material boxMaterial = new Material();
 
-        if (blending)
-            boxMaterial.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
-        int usageCode = VertexAttributes.Usage.Position + VertexAttributes.Usage.ColorPacked + VertexAttributes.Usage.Normal + VertexAttributes.Usage.TextureCoordinates;
+        if (blending) boxMaterial.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
+        int usageCode = VertexAttributes.Usage.Position
+                + VertexAttributes.Usage.ColorPacked
+                + VertexAttributes.Usage.Normal
+                + VertexAttributes.Usage.TextureCoordinates;
 
         this.width = width;
         this.height = height;

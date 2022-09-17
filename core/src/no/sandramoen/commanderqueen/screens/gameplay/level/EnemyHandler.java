@@ -1,7 +1,6 @@
 package no.sandramoen.commanderqueen.screens.gameplay.level;
 
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.actors.Barrel;
 import no.sandramoen.commanderqueen.actors.Door;
 import no.sandramoen.commanderqueen.actors.Tile;
@@ -9,19 +8,22 @@ import no.sandramoen.commanderqueen.actors.characters.HolyBall;
 import no.sandramoen.commanderqueen.actors.characters.Hund;
 import no.sandramoen.commanderqueen.actors.characters.Player;
 import no.sandramoen.commanderqueen.actors.characters.Rocket;
-import no.sandramoen.commanderqueen.actors.characters.Sersjant;
 import no.sandramoen.commanderqueen.actors.characters.enemy.Enemy;
 import no.sandramoen.commanderqueen.actors.hud.HUD;
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor3D;
-import no.sandramoen.commanderqueen.utils.GameUtils;
 import no.sandramoen.commanderqueen.utils.Stage3D;
 
 public class EnemyHandler {
 
     public static void update(
-            Array<Enemy> enemies, Array<Tile> tiles, Array<Door> doors, Array<BaseActor3D> projectiles, Player player,
-            Array<BaseActor3D> shootable, HUD hud, Stage3D stage3D
-    ) {
+            Array<Enemy> enemies,
+            Array<Tile> tiles,
+            Array<Door> doors,
+            Array<BaseActor3D> projectiles,
+            Player player,
+            Array<BaseActor3D> shootable,
+            HUD hud,
+            Stage3D stage3D) {
 
         for (int i = 0; i < enemies.size; i++) {
             preventOverlapWithOtherEnemies(enemies, i);
@@ -33,19 +35,16 @@ public class EnemyHandler {
     }
 
     public static void updateEnemiesShootableList(Array<Enemy> enemies, Array<BaseActor3D> shootable) {
-        for (int i = 0; i < enemies.size; i++)
-            enemies.get(i).setShootableList(shootable);
+        for (int i = 0; i < enemies.size; i++) enemies.get(i).setShootableList(shootable);
     }
 
     public static void updateEnemiesEnemiesList(Array<Enemy> enemies) {
-        for (int i = 0; i < enemies.size; i++)
-            enemies.get(i).setEnemiesList(enemies);
+        for (int i = 0; i < enemies.size; i++) enemies.get(i).setEnemiesList(enemies);
     }
 
     public static void activateEnemies(Array<Enemy> enemies, float range, BaseActor3D source) {
         for (Enemy enemy : enemies) {
-            if (enemy.isWithinDistance(range, source))
-                enemy.activate(source);
+            if (enemy.isWithinDistance(range, source)) enemy.activate(source);
         }
     }
 
@@ -76,12 +75,14 @@ public class EnemyHandler {
         }
     }
 
-    private static void handleProjectiles(Array<BaseActor3D> projetiles, Player player, Array<BaseActor3D> shootable, HUD hud, Stage3D stage3D) {
+    private static void handleProjectiles(
+            Array<BaseActor3D> projetiles, Player player, Array<BaseActor3D> shootable, HUD hud, Stage3D stage3D) {
         checkProjectilesCollision(projetiles, player, shootable, hud, stage3D);
         removeProjectiles(projetiles);
     }
 
-    private static void checkProjectilesCollision(Array<BaseActor3D> projectiles, Player player, Array<BaseActor3D> shootables, HUD hud, Stage3D stage3D) {
+    private static void checkProjectilesCollision(
+            Array<BaseActor3D> projectiles, Player player, Array<BaseActor3D> shootables, HUD hud, Stage3D stage3D) {
         for (BaseActor3D projectile : projectiles) {
             for (BaseActor3D shootable : shootables) {
                 if (shootable instanceof Barrel && projectile.overlaps(shootable)) {
@@ -93,28 +94,32 @@ public class EnemyHandler {
                         Rocket Rocket = (Rocket) projectile;
                         ((Barrel) shootable).decrementHealth(Rocket.getDamage(), projectile.distanceBetween(player));
                         Rocket.explode();
-                        createBarrelExplosion(projectile.getPosition().y, projectile.getPosition().z, stage3D, player, shootables);
+                        createBarrelExplosion(
+                                projectile.getPosition().y, projectile.getPosition().z, stage3D, player, shootables);
                     }
-                } else if (shootable instanceof Tile && ((Tile) shootable).type.equalsIgnoreCase("1st floor") && projectile.overlaps(shootable)) {
-                    if (projectile instanceof HolyBall)
-                        ((HolyBall) projectile).explode();
+                } else if (shootable instanceof Tile
+                        && ((Tile) shootable).type.equalsIgnoreCase("1st floor")
+                        && projectile.overlaps(shootable)) {
+                    if (projectile instanceof HolyBall) ((HolyBall) projectile).explode();
                     else if (projectile instanceof Rocket) {
                         ((Rocket) projectile).explode();
-                        createBarrelExplosion(projectile.getPosition().y, projectile.getPosition().z, stage3D, player, shootables);
+                        createBarrelExplosion(
+                                projectile.getPosition().y, projectile.getPosition().z, stage3D, player, shootables);
                     }
                 } else if (shootable instanceof Door && projectile.overlaps(shootable)) {
-                    if (projectile instanceof HolyBall)
-                        ((HolyBall) projectile).explode();
+                    if (projectile instanceof HolyBall) ((HolyBall) projectile).explode();
                     else if (projectile instanceof Rocket) {
                         ((Rocket) projectile).explode();
-                        createBarrelExplosion(projectile.getPosition().y, projectile.getPosition().z, stage3D, player, shootables);
+                        createBarrelExplosion(
+                                projectile.getPosition().y, projectile.getPosition().z, stage3D, player, shootables);
                     }
                 } else if (shootable instanceof Enemy && projectile.overlaps(shootable)) {
                     if (projectile instanceof Rocket) {
                         ((Rocket) projectile).explode();
 
                         ((Enemy) shootable).decrementHealth(((Rocket) projectile).getDamage());
-                        createBarrelExplosion(projectile.getPosition().y, projectile.getPosition().z, stage3D, player, shootables);
+                        createBarrelExplosion(
+                                projectile.getPosition().y, projectile.getPosition().z, stage3D, player, shootables);
                     }
                 }
             }
@@ -145,7 +150,8 @@ public class EnemyHandler {
         }
     }
 
-    private static void createBarrelExplosion(float x, float y, Stage3D stage3D, Player player, Array<BaseActor3D> shootables) {
+    private static void createBarrelExplosion(
+            float x, float y, Stage3D stage3D, Player player, Array<BaseActor3D> shootables) {
         Barrel barrel = new Barrel(x, y, stage3D, player);
         barrel.isVisible = false;
         barrel.health = 0;

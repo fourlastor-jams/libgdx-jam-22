@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.utils.BaseGame;
 
 public class Pistol extends Weapon {
@@ -44,4 +43,3 @@ public class Pistol extends Weapon {
         idleAnimation = new Animation(.1f, animationImages, Animation.PlayMode.NORMAL);
     }
 }
-

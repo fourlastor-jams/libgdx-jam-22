@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.github.tommyettinger.textra.TypingLabel;
-
 import no.sandramoen.commanderqueen.utils.BaseGame;
 import no.sandramoen.commanderqueen.utils.GameUtils;
 
@@ -41,10 +40,8 @@ public class BaseCheckbox extends Table {
                 super.clicked(event, x, y);
                 isJustClicked = true;
                 label.setColor(BaseGame.redColor);
-                if (checkBox.isChecked())
-                    BaseGame.isHeadBobbing = true;
-                else if (!checkBox.isChecked())
-                    BaseGame.isHeadBobbing = false;
+                if (checkBox.isChecked()) BaseGame.isHeadBobbing = true;
+                else if (!checkBox.isChecked()) BaseGame.isHeadBobbing = false;
                 GameUtils.saveGameState();
                 return;
             }
@@ -59,10 +56,8 @@ public class BaseCheckbox extends Table {
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
                 super.exit(event, x, y, pointer, toActor);
-                if (isJustClicked)
-                    label.setColor(BaseGame.redColor);
-                else
-                    label.setColor(BaseGame.whiteColor);
+                if (isJustClicked) label.setColor(BaseGame.redColor);
+                else label.setColor(BaseGame.whiteColor);
                 isJustClicked = false;
             }
         });

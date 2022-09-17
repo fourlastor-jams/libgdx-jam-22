@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.actors.characters.Player;
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor3D;
 import no.sandramoen.commanderqueen.utils.BaseGame;
@@ -49,8 +48,7 @@ public class Barrel extends BaseActor3D {
     @Override
     public void draw(ModelBatch batch, Environment env) {
         super.draw(batch, env);
-        if (isExploding)
-            loadImage(explodeAnimation.getKeyFrame(totalTime).toString());
+        if (isExploding) loadImage(explodeAnimation.getKeyFrame(totalTime).toString());
     }
 
     public void explode() {
@@ -73,12 +71,10 @@ public class Barrel extends BaseActor3D {
     }
 
     public int getBlastDamage(float range) {
-        if (isExploding)
-            return 0;
+        if (isExploding) return 0;
 
         float damage = BLAST_RANGE - range;
-        if (damage < 0)
-            damage = 0;
+        if (damage < 0) damage = 0;
 
         return (int) (damage * BLAST_DAMAGE_MODIFIER);
     }

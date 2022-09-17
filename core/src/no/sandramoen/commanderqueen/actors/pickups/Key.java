@@ -1,9 +1,7 @@
 package no.sandramoen.commanderqueen.actors.pickups;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
-
 import no.sandramoen.commanderqueen.actors.characters.Player;
 import no.sandramoen.commanderqueen.utils.BaseGame;
 import no.sandramoen.commanderqueen.utils.GameUtils;
@@ -21,14 +19,10 @@ public class Key extends Pickup {
         setPosition(GameUtils.getPositionRelativeToFloor(4), y, z);
         setBaseRectangle();
 
-        if (color.equalsIgnoreCase("red"))
-            loadImage("pickups/redKey");
-        else if (color.equalsIgnoreCase("green"))
-            loadImage("pickups/greenKey");
-        else if (color.equalsIgnoreCase("blue"))
-            loadImage("pickups/blueKey");
-        else
-            Gdx.app.error(getClass().getSimpleName(), "Error: unknown color for key => " + color);
+        if (color.equalsIgnoreCase("red")) loadImage("pickups/redKey");
+        else if (color.equalsIgnoreCase("green")) loadImage("pickups/greenKey");
+        else if (color.equalsIgnoreCase("blue")) loadImage("pickups/blueKey");
+        else Gdx.app.error(getClass().getSimpleName(), "Error: unknown color for key => " + color);
     }
 
     @Override
@@ -39,8 +33,7 @@ public class Key extends Pickup {
         setScale(
                 scale.x * MathUtils.cos(2 * totalTime) * .1f + 1,
                 scale.y * MathUtils.sin(2 * totalTime) * .1f + 1,
-                .001f
-        );
+                .001f);
     }
 
     @Override

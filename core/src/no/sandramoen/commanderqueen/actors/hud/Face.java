@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor;
 import no.sandramoen.commanderqueen.utils.BaseGame;
 
@@ -24,8 +23,7 @@ public class Face extends BaseActor {
     }
 
     public void setSTAnimation(int faceHealthIndex) {
-        if (isLocked)
-            return;
+        if (isLocked) return;
         healthIndex = faceHealthIndex;
         setAnimation(stAnimations.get(faceHealthIndex));
         setDimensions();
@@ -71,11 +69,12 @@ public class Face extends BaseActor {
     }
 
     private void setTemporaryFace(int faceHealthIndex, String face) {
-        if (isLocked)
-            return;
+        if (isLocked) return;
 
         if (faceHealthIndex < 0 || faceHealthIndex > 4) {
-            Gdx.app.error(getClass().getSimpleName(), "Error: tried to create a face out of range [0, 4], i is: " + faceHealthIndex);
+            Gdx.app.error(
+                    getClass().getSimpleName(),
+                    "Error: tried to create a face out of range [0, 4], i is: " + faceHealthIndex);
             return;
         }
 
@@ -87,10 +86,7 @@ public class Face extends BaseActor {
     }
 
     private void setDelayedStAnimation() {
-        addAction(Actions.sequence(
-                Actions.delay(2f),
-                Actions.run(() -> setSTAnimation(healthIndex))
-        ));
+        addAction(Actions.sequence(Actions.delay(2f), Actions.run(() -> setSTAnimation(healthIndex))));
     }
 
     private void setDimensions() {
@@ -103,8 +99,7 @@ public class Face extends BaseActor {
         Array<TextureAtlas.AtlasRegion> animationImages = new Array();
         for (int i = 0; i <= 4; i++) {
             animationImages.add(BaseGame.textureAtlas.findRegion("hud/ST" + i + " 0"));
-            for (int j = 0; j < 6; j++)
-                animationImages.add(BaseGame.textureAtlas.findRegion("hud/ST" + i + " 1"));
+            for (int j = 0; j < 6; j++) animationImages.add(BaseGame.textureAtlas.findRegion("hud/ST" + i + " 1"));
             animationImages.add(BaseGame.textureAtlas.findRegion("hud/ST" + i + " 2"));
             stAnimations.add(new Animation(.5f, animationImages, Animation.PlayMode.LOOP_RANDOM));
             animationImages.clear();

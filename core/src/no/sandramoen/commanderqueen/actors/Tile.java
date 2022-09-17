@@ -2,7 +2,6 @@ package no.sandramoen.commanderqueen.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
-
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor3D;
 import no.sandramoen.commanderqueen.utils.BaseGame;
 import no.sandramoen.commanderqueen.utils.Stage3D;
@@ -22,29 +21,35 @@ public class Tile extends BaseActor3D {
     private Vector3 originalPosition;
     private int secretLength;
 
-    public Tile(float y, float z, float width, float height, float depth, String type, String texture, Stage3D stage3D, float rotation, String secretMovementDirection, int secretLength, boolean isAIpath) {
+    public Tile(
+            float y,
+            float z,
+            float width,
+            float height,
+            float depth,
+            String type,
+            String texture,
+            Stage3D stage3D,
+            float rotation,
+            String secretMovementDirection,
+            int secretLength,
+            boolean isAIpath) {
         super(0, y, z, stage3D);
         this.type = type;
         this.secretMovementDirection = secretMovementDirection;
         this.secretLength = secretLength;
         this.isAIpath = isAIpath;
 
-        if (texture.equalsIgnoreCase("blank"))
-            buildModel(width, height, depth, true);
-        else
-            buildModel(width, height, depth, false);
+        if (texture.equalsIgnoreCase("blank")) buildModel(width, height, depth, true);
+        else buildModel(width, height, depth, false);
         setBaseRectangle();
         loadImage("tiles/" + texture);
         turnBy(-180 + rotation);
 
-        if (type == "4th floor")
-            position.x = Tile.height * 3;
-        else if (type == "3rd floor")
-            position.x = Tile.height * 2;
-        else if (type == "2nd floor")
-            position.x = Tile.height;
-        else if (type == "U1")
-            position.x = -Tile.height;
+        if (type == "4th floor") position.x = Tile.height * 3;
+        else if (type == "3rd floor") position.x = Tile.height * 2;
+        else if (type == "2nd floor") position.x = Tile.height;
+        else if (type == "U1") position.x = -Tile.height;
 
         originalPosition = getPosition().cpy();
         // checkSecretMovementDirection();
@@ -54,31 +59,23 @@ public class Tile extends BaseActor3D {
     public void act(float dt) {
         super.act(dt);
 
-        if (isOpeningSecret)
-            openSecret();
+        if (isOpeningSecret) openSecret();
     }
 
     public boolean isSecretTriggered() {
-        if (isOpeningSecret)
-            return true;
+        if (isOpeningSecret) return true;
         isOpeningSecret = true;
         secretSoundID = BaseGame.secretWallSound.play(BaseGame.soundVolume * 1.5f);
         return false;
     }
 
     private void openSecret() {
-        if (secretMovementDirection.equalsIgnoreCase("up"))
-            openSecretThatGoesUp();
-        else if (secretMovementDirection.equalsIgnoreCase("down"))
-            openSecretThatGoesDown();
-        else if (secretMovementDirection.equalsIgnoreCase("north"))
-            openSecretThatGoesNorth();
-        else if (secretMovementDirection.equalsIgnoreCase("east"))
-            openSecretThatGoesEast();
-        else if (secretMovementDirection.equalsIgnoreCase("south"))
-            openSecretThatGoesSouth();
-        else if (secretMovementDirection.equalsIgnoreCase("west"))
-            openSecretThatGoesWest();
+        if (secretMovementDirection.equalsIgnoreCase("up")) openSecretThatGoesUp();
+        else if (secretMovementDirection.equalsIgnoreCase("down")) openSecretThatGoesDown();
+        else if (secretMovementDirection.equalsIgnoreCase("north")) openSecretThatGoesNorth();
+        else if (secretMovementDirection.equalsIgnoreCase("east")) openSecretThatGoesEast();
+        else if (secretMovementDirection.equalsIgnoreCase("south")) openSecretThatGoesSouth();
+        else if (secretMovementDirection.equalsIgnoreCase("west")) openSecretThatGoesWest();
     }
 
     private void openSecretThatGoesUp() {
@@ -142,12 +139,14 @@ public class Tile extends BaseActor3D {
     }
 
     private void checkSecretMovementDirection() { // TODO: this is not working as intended, gives error for all tiles...
-        if (!secretMovementDirection.equalsIgnoreCase("up") ||
-                !secretMovementDirection.equalsIgnoreCase("down") ||
-                !secretMovementDirection.equalsIgnoreCase("north") ||
-                !secretMovementDirection.equalsIgnoreCase("east") ||
-                !secretMovementDirection.equalsIgnoreCase("south") ||
-                !secretMovementDirection.equalsIgnoreCase("west"))
-            Gdx.app.error(getClass().getSimpleName(), "Error: Door's secret movement direction is invalid " + secretMovementDirection + ".");
+        if (!secretMovementDirection.equalsIgnoreCase("up")
+                || !secretMovementDirection.equalsIgnoreCase("down")
+                || !secretMovementDirection.equalsIgnoreCase("north")
+                || !secretMovementDirection.equalsIgnoreCase("east")
+                || !secretMovementDirection.equalsIgnoreCase("south")
+                || !secretMovementDirection.equalsIgnoreCase("west"))
+            Gdx.app.error(
+                    getClass().getSimpleName(),
+                    "Error: Door's secret movement direction is invalid " + secretMovementDirection + ".");
     }
 }

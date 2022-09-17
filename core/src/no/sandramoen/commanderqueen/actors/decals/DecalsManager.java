@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g3d.decals.Decal;
 import com.badlogic.gdx.graphics.g3d.decals.DecalBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
-
 import no.sandramoen.commanderqueen.utils.BaseGame;
 import no.sandramoen.commanderqueen.utils.GameUtils;
 
@@ -62,13 +61,13 @@ public class DecalsManager {
         }
 
         private void initializeAnimation() {
-            if (imagePaths.size == 0)
-                Gdx.app.error(getClass().getSimpleName(), "Image path array was empty");
+            if (imagePaths.size == 0) Gdx.app.error(getClass().getSimpleName(), "Image path array was empty");
 
             Array<TextureAtlas.AtlasRegion> animationImages = new Array();
             for (int i = 0; i < imagePaths.size; i++)
                 animationImages.add(BaseGame.textureAtlas.findRegion(imagePaths.get(i)));
-            animation = new Animation(MathUtils.random(minAnimationSpeed, maxAnimationSpeed), animationImages, Animation.PlayMode.NORMAL);
+            animation = new Animation(
+                    MathUtils.random(minAnimationSpeed, maxAnimationSpeed), animationImages, Animation.PlayMode.NORMAL);
         }
     }
 }

@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
-
 import no.sandramoen.commanderqueen.actors.utils.baseActors.BaseActor;
 
 public class OverlayIndicator extends BaseActor {
@@ -64,7 +63,6 @@ public class OverlayIndicator extends BaseActor {
                 Actions.alpha(0),
                 Actions.alpha(maxAlpha, FADE_IN_AND_OUT_DURATION / 2),
                 Actions.alpha(0f, FADE_IN_AND_OUT_DURATION / 2),
-                Actions.run(() -> setImage("whitePixel"))
-        );
+                Actions.run(() -> setImage("whitePixel")));
     }
 }
