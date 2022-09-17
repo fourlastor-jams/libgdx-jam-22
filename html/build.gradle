@@ -15,8 +15,8 @@ gwt {
 
     src = files(file("src/main/java")) // Needs to be in front of "modules" below.
     src += files(new File(project(":core").projectDir, "build/generated/sources/annotationProcessor/java/main"))
-    modules 'no.sandramoen.commanderqueen.GdxDefinition'
-    devModules 'no.sandramoen.commanderqueen.GdxDefinitionSuperdev'
+    modules 'io.github.fourlastor.game.client.GdxDefinition'
+    devModules 'io.github.fourlastor.game.client.GdxDefinitionSuperdev'
     project.webAppDirName = 'webapp'
 
     compiler {

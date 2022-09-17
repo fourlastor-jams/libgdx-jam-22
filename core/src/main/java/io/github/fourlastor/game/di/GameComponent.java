@@ -2,11 +2,16 @@ package io.github.fourlastor.game.di;
 
 import dagger.Component;
 import io.github.fourlastor.game.MyGdxGame;
+import io.github.fourlastor.game.di.modules.EcsModule;
 import io.github.fourlastor.game.di.modules.GameModule;
 import javax.inject.Singleton;
 
 @Singleton
-@Component(modules = GameModule.class)
+@Component(
+        modules = {
+            GameModule.class,
+            EcsModule.class,
+        })
 public interface GameComponent {
     MyGdxGame game();
 
