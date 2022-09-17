@@ -6,7 +6,7 @@
 	<inherits name='com.badlogic.gdx.controllers.controllers-gwt' />
 	<inherits name='com.badlogic.gdx.ai' />
 
-    <inherits name='no.sandramoen.commanderqueen.GdxDefinition' />
+    <inherits name='io.github.fourlastor.game.client.GdxDefinition' />
     
     <collapse-all-properties />
     

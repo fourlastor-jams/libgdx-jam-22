@@ -1,4 +1,4 @@
-package no.sandramoen.commanderqueen.screens.gameplay.gameplay;
+package io.github.fourlastor.game.gameplay;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.ScreenAdapter;

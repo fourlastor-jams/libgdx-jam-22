@@ -1,4 +1,4 @@
-package no.sandramoen.commanderqueen.di.di.modules;
+package io.github.fourlastor.game.di.modules;
 
 import com.badlogic.ashley.core.Engine;
 import dagger.Module;

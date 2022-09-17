@@ -1,9 +1,9 @@
-package no.sandramoen.commanderqueen.client;
+package io.github.fourlastor.game.client;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import no.sandramoen.commanderqueen.MyGdxGame;
+import io.github.fourlastor.game.MyGdxGame;
 
 public class HtmlLauncher extends GwtApplication {
 

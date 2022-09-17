@@ -2,5 +2,5 @@
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit trunk//EN" "http://www.gwtproject.org/doctype/2.8.0/gwt-module.dtd">
 <module>
 	<inherits name="dagger.Dagger" />
-	<source path="no/sandramoen/commanderqueen" />
+	<source path="io/github/fourlastor/game" />
 </module>

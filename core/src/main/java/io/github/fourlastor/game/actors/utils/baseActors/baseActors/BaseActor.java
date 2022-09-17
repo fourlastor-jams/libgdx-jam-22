@@ -1,4 +1,4 @@
-package no.sandramoen.commanderqueen.actors.utils.baseActors.baseActors;
+package io.github.fourlastor.game.actors.utils.baseActors.baseActors;
 
 import static java.lang.Math.abs;
 

@@ -1,9 +1,9 @@
-package no.sandramoen.commanderqueen;
+package io.github.fourlastor.game;
 
 import com.badlogic.gdx.Game;
+import io.github.fourlastor.game.di.GameComponent;
+import io.github.fourlastor.game.gameplay.LevelScreen;
 import javax.inject.Inject;
-import no.sandramoen.commanderqueen.di.di.DaggerGameComponent;
-import no.sandramoen.commanderqueen.screens.gameplay.gameplay.LevelScreen;
 
 public class MyGdxGame extends Game {
 
@@ -20,6 +20,6 @@ public class MyGdxGame extends Game {
     }
 
     public static MyGdxGame createGame() {
-        return DaggerGameComponent.create().game();
+        return GameComponent.component().game();
     }
 }

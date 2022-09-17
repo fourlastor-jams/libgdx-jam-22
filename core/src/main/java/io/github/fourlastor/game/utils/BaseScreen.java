@@ -1,4 +1,4 @@
-package no.sandramoen.commanderqueen.utils.utils;
+package io.github.fourlastor.game.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
