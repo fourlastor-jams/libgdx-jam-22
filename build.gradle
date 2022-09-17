@@ -10,18 +10,11 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'org.wisepersist:gwt-gradle-plugin:1.1.16'
-        classpath 'org.gretty:gretty:3.0.7'
-        classpath 'com.android.tools.build:gradle:7.0.4'
         classpath "com.badlogicgames.gdx:gdx-tools:1.11.0"
-
-
     }
 }
 
 allprojects {
-    apply plugin: "eclipse"
-
     version = '1.0'
     ext {
         appName = "Commander Queen"
@@ -43,72 +36,4 @@ allprojects {
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
         maven { url "https://jitpack.io" }
     }
-}
-
-project(":desktop") {
-    apply plugin: "java-library"
-
-    apply plugin: "java"
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-
-    dependencies {
-        implementation project(":core")
-        api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
-        api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-        api "com.badlogicgames.gdx-controllers:gdx-controllers-desktop:$gdxControllersVersion"
-        api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-        
-    }
-}
-
-project(":html") {
-    apply plugin: "java-library"
-    apply plugin: "gwt"
-    apply plugin: "war"
-    apply plugin: "org.gretty"
-
-    apply plugin: "java"
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-
-    dependencies {
-        implementation project(":core")
-        api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
-        api "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
-        api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
-        api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion:sources"
-        api "com.badlogicgames.gdx-controllers:gdx-controllers-gwt:$gdxControllersVersion"
-        api "com.badlogicgames.gdx-controllers:gdx-controllers-gwt:$gdxControllersVersion:sources"
-        api "com.badlogicgames.gdx:gdx-ai:$aiVersion:sources"
-        implementation "com.github.tommyettinger:textratypist:0.6.3:sources"
-        implementation "com.github.tommyettinger:regexodus:0.1.13:sources"
-        
-    }
-}
-
-project(":core") {
-    apply plugin: "java-library"
-
-
-    dependencies {
-        api "com.badlogicgames.gdx:gdx:$gdxVersion"
-        api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion"
-        api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-        implementation "com.github.tommyettinger:textratypist:0.6.3"
-        
-    }
-
-    task packTextures {
-        def inputDir = "$rootDir/assets/images/included"
-        def outputDir = "$rootDir/assets/images/included/packed"
-        inputs.dir inputDir
-        outputs.dir outputDir
-        doLast {
-            delete(outputDir)
-            TexturePacker.process(inputDir, outputDir, "images.pack")
-        }
-    }
-
-    project.tasks.compileJava.dependsOn packTextures
 }

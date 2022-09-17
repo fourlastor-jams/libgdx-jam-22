@@ -1,6 +1,31 @@
+plugins {
+    id "java-library"
+}
+
+import com.badlogic.gdx.tools.texturepacker.TexturePacker
+
 sourceCompatibility = 1.8
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 sourceSets.main.java.srcDirs = [ "src/" ]
 
-eclipse.project.name = appName + "-core"
+task packTextures {
+    def inputDir = "$rootDir/assets/images/included"
+    def outputDir = "$rootDir/assets/images/included/packed"
+    inputs.dir inputDir
+    outputs.dir outputDir
+    doLast {
+        delete(outputDir)
+        TexturePacker.process(inputDir, outputDir, "images.pack")
+    }
+}
+
+project.tasks.compileJava.dependsOn packTextures
+
+dependencies {
+    api "com.badlogicgames.gdx:gdx:$gdxVersion"
+    api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion"
+    api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+    implementation "com.github.tommyettinger:textratypist:0.6.3"
+
+}

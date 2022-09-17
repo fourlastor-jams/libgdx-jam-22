@@ -1,3 +1,13 @@
+plugins {
+    id "java"
+    id "java-library"
+    id "org.wisepersist.gwt" version "1.1.16"
+    id "war"
+    id "org.gretty" version "3.0.7"
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 gwt {
     gwtVersion='2.8.2' // Should match the gwt version used for building the gwt backend
     maxHeapSize="1G" // Default 256m is not enough for gwt compiler. GWT is HUNGRY
@@ -89,4 +99,16 @@ checkGwt.war = file("war")
 sourceCompatibility = 1.8
 sourceSets.main.java.srcDirs = [ "src/" ]
 
-eclipse.project.name = appName + "-html"
+dependencies {
+    implementation project(":core")
+    api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
+    api "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
+    api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
+    api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion:sources"
+    api "com.badlogicgames.gdx-controllers:gdx-controllers-gwt:$gdxControllersVersion"
+    api "com.badlogicgames.gdx-controllers:gdx-controllers-gwt:$gdxControllersVersion:sources"
+    api "com.badlogicgames.gdx:gdx-ai:$aiVersion:sources"
+    implementation "com.github.tommyettinger:textratypist:0.6.3:sources"
+    implementation "com.github.tommyettinger:regexodus:0.1.13:sources"
+
+}
