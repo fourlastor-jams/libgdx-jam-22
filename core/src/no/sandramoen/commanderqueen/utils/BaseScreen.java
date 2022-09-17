@@ -16,8 +16,6 @@ public abstract class BaseScreen implements Screen, InputProcessor, ControllerLi
     protected Stage uiStage;
     protected Table uiTable;
 
-    private boolean isDebug = false;
-
     public BaseScreen() {
         mainStage = new Stage();
         mainStage.setViewport(new ScreenViewport());
