@@ -34,6 +34,7 @@ dependencies {
     api "com.badlogicgames.gdx:gdx:$gdxVersion"
     api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion"
     api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+    api "com.badlogicgames.ashley:ashley:1.7.4"
     implementation "com.github.tommyettinger:textratypist:0.7.2"
 
 }
