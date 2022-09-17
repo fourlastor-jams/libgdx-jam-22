@@ -165,7 +165,7 @@ public class LevelFinishScreen extends BaseScreen {
     private TypingLabel initializeTypingLabel(String string) {
         TypingLabel label = new TypingLabel(string, new Label.LabelStyle(BaseGame.mySkin.get("arcade64", BitmapFont.class), null));
         label.setColor(BaseGame.redColor);
-        label.font.scaleTo(Gdx.graphics.getWidth() * .027f, Gdx.graphics.getHeight() * .027f);
+        label.getFont().scaleTo(Gdx.graphics.getWidth() * .027f, Gdx.graphics.getHeight() * .027f);
         return label;
     }
 
