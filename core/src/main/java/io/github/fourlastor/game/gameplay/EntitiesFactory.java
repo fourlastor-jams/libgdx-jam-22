@@ -27,7 +27,7 @@ public class EntitiesFactory {
         entity.add(new ActorComponent(new Image(atlas.findRegion("whitePixel"))));
         entity.add(new BodyBuilderComponent(world -> {
             BodyDef bodyDef = new BodyDef();
-            bodyDef.type = BodyDef.BodyType.KinematicBody;
+            bodyDef.type = BodyDef.BodyType.DynamicBody;
             bodyDef.position.set(new Vector2(4.5f, 2f));
             Body body = world.createBody(bodyDef);
             CircleShape shape = new CircleShape();
@@ -48,7 +48,7 @@ public class EntitiesFactory {
             Body body = world.createBody(bodyDef);
             PolygonShape shape = new PolygonShape();
             shape.setAsBox(6, 1);
-            body.createFixture(shape, 0.0f);
+            body.createFixture(shape, 0.0f).setUserData("foot");
             shape.dispose();
             return body;
         }));
