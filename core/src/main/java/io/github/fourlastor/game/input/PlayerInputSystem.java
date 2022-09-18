@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import io.github.fourlastor.game.component.BodyComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
+import io.github.fourlastor.game.component.PlayerRequestComponent;
 import io.github.fourlastor.game.input.state.Falling;
 import io.github.fourlastor.game.input.state.OnGround;
 import io.github.fourlastor.game.utils.ComponentMappers;
@@ -25,6 +26,8 @@ import javax.inject.Provider;
 
 public class PlayerInputSystem extends IteratingSystem implements EntityListener {
 
+    private static final Family FAMILY_REQUEST =
+            Family.all(PlayerRequestComponent.class, BodyComponent.class).get();
     private static final Family FAMILY =
             Family.all(PlayerComponent.class, BodyComponent.class).get();
 
@@ -64,7 +67,7 @@ public class PlayerInputSystem extends IteratingSystem implements EntityListener
     public void addedToEngine(Engine engine) {
         super.addedToEngine(engine);
         inputMultiplexer.addProcessor(inputProcessor);
-        engine.addEntityListener(FAMILY, this);
+        engine.addEntityListener(FAMILY_REQUEST, this);
         world.setContactListener(contactListener);
     }
 
@@ -78,13 +81,14 @@ public class PlayerInputSystem extends IteratingSystem implements EntityListener
 
     @Override
     public void entityAdded(Entity entity) {
-        PlayerComponent player = players.get(entity);
-        player.onGround = onGroundProvider.get();
-        player.falling = fallingProvider.get();
-        player.stateMachine = stateMachineFactory.create(entity, player.falling);
-        player.stateMachine.getCurrentState().enter(entity);
+        entity.remove(PlayerRequestComponent.class);
+        Falling falling = fallingProvider.get();
+        InputStateMachine stateMachine = stateMachineFactory.create(entity, falling);
+        OnGround onGround = onGroundProvider.get();
+        entity.add(new PlayerComponent(stateMachine, onGround, falling));
+        stateMachine.getCurrentState().enter(entity);
         for (Message value : Message.values()) {
-            messageManager.addListener(player.stateMachine, value.ordinal());
+            messageManager.addListener(stateMachine, value.ordinal());
         }
     }
 
