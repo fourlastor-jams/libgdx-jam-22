@@ -13,6 +13,7 @@ import io.github.fourlastor.game.di.ScreenScoped;
 import io.github.fourlastor.game.input.PlayerInputSystem;
 import io.github.fourlastor.game.physics.PhysicsDebugSystem;
 import io.github.fourlastor.game.physics.PhysicsSystem;
+import io.github.fourlastor.game.system.ActorFollowBodySystem;
 import io.github.fourlastor.game.system.StageSystem;
 
 @Module
@@ -21,13 +22,15 @@ public class LevelModule {
     @Provides
     @ScreenScoped
     public Engine engine(
+            PlayerInputSystem playerInputSystem,
             PhysicsSystem physicsSystem,
+            ActorFollowBodySystem actorFollowBodySystem,
             StageSystem stageSystem,
-            PhysicsDebugSystem physicsDebugSystem,
-            PlayerInputSystem playerInputSystem) {
+            PhysicsDebugSystem physicsDebugSystem) {
         Engine engine = new Engine();
         engine.addSystem(playerInputSystem);
         engine.addSystem(physicsSystem);
+        engine.addSystem(actorFollowBodySystem);
         engine.addSystem(stageSystem);
         engine.addSystem(physicsDebugSystem);
         return engine;
