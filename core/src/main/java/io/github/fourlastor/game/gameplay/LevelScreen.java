@@ -24,7 +24,7 @@ public class LevelScreen extends ScreenAdapter {
         engine.addSystem(new StageSystem(new Stage(new ScreenViewport()), componentMappers));
         Entity entity = new Entity();
         TextureAtlas atlas = assetManager.get("images/included/packed/images.pack.atlas", TextureAtlas.class);
-        entity.add(new ActorComponent(new Image(atlas.findRegion("props/computer 0"))));
+        entity.add(new ActorComponent(new Image(atlas.findRegion("whitePixel"))));
         engine.addEntity(entity);
     }
 
