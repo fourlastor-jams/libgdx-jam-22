@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import io.github.fourlastor.game.component.BodyComponent;
 import io.github.fourlastor.game.utils.ComponentMappers;
+import javax.inject.Inject;
 
 public class PhysicsSystem extends IntervalSystem implements EntityListener {
 
@@ -22,6 +23,7 @@ public class PhysicsSystem extends IntervalSystem implements EntityListener {
     private final World world;
     private final ComponentMapper<BodyComponent> bodies;
 
+    @Inject
     public PhysicsSystem(World world, ComponentMappers componentMappers) {
         super(STEP);
         this.world = world;

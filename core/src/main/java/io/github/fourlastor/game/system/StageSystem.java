@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import io.github.fourlastor.game.component.ActorComponent;
 import io.github.fourlastor.game.utils.ComponentMappers;
+import javax.inject.Inject;
 
 public class StageSystem extends EntitySystem implements EntityListener {
 
@@ -19,6 +20,7 @@ public class StageSystem extends EntitySystem implements EntityListener {
     private final Stage stage;
     private final ComponentMapper<ActorComponent> actors;
 
+    @Inject
     public StageSystem(Stage stage, ComponentMappers componentMappers) {
         this.stage = stage;
         actors = componentMappers.get(ActorComponent.class);

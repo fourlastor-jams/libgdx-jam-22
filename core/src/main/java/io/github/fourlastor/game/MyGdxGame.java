@@ -6,14 +6,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import dagger.Lazy;
 import io.github.fourlastor.game.di.GameComponent;
 import io.github.fourlastor.game.gameplay.LevelScreen;
-import javax.inject.Inject;
 
 public class MyGdxGame extends Game {
 
     private final AssetManager assetManager;
     private final Lazy<LevelScreen> screen;
 
-    @Inject
     public MyGdxGame(AssetManager assetManager, Lazy<LevelScreen> screen) {
         this.assetManager = assetManager;
         this.screen = screen;

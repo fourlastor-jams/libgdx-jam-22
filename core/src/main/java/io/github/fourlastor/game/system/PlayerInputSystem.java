@@ -10,12 +10,14 @@ import io.github.fourlastor.game.component.PlayerComponent;
 import io.github.fourlastor.game.input.InputState;
 import io.github.fourlastor.game.input.InputStateMachine;
 import io.github.fourlastor.game.utils.ComponentMappers;
+import javax.inject.Inject;
 
 public class PlayerInputSystem extends IteratingSystem implements EntityListener {
 
     private static final Family FAMILY = Family.all(PlayerComponent.class).get();
     private final ComponentMapper<PlayerComponent> players;
 
+    @Inject
     public PlayerInputSystem(ComponentMappers componentMappers) {
         super(FAMILY);
         players = componentMappers.get(PlayerComponent.class);
