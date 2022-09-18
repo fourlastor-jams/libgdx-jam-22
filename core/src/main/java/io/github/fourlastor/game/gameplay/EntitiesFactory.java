@@ -13,6 +13,7 @@ import io.github.fourlastor.game.component.BodyBuilderComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
 import javax.inject.Inject;
 
+/** Factory to create various entities: player, buildings, enemies.. */
 public class EntitiesFactory {
 
     private final TextureAtlas atlas;

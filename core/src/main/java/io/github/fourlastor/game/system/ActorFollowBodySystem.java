@@ -11,6 +11,10 @@ import io.github.fourlastor.game.component.BodyComponent;
 import io.github.fourlastor.game.utils.ComponentMappers;
 import javax.inject.Inject;
 
+/**
+ * Coordinates the movement between each pair of scene2d actor and box2d body.
+ * Actors follow the bodies.
+ */
 public class ActorFollowBodySystem extends IteratingSystem {
 
     private static final Family FAMILY =

@@ -6,6 +6,7 @@ import io.github.fourlastor.game.input.state.Falling;
 import io.github.fourlastor.game.input.state.Jumping;
 import io.github.fourlastor.game.input.state.OnGround;
 
+/** Bag containing the player state machine, and the possible states it can get into. */
 public class PlayerComponent implements Component {
     public final InputStateMachine stateMachine;
     public final OnGround onGround;

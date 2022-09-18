@@ -74,6 +74,10 @@ public class PlayerInputSystem extends IteratingSystem {
         super.removedFromEngine(engine);
     }
 
+    /**
+     * Creates a player component whenever a request to set up a player is made.
+     * Takes care of instantiating the state machine and the possible player states.
+     */
     public static class PlayerSetup implements EntityListener {
 
         private final Provider<OnGround> onGroundProvider;
@@ -114,6 +118,7 @@ public class PlayerInputSystem extends IteratingSystem {
         public void entityRemoved(Entity entity) {}
     }
 
+    /** Forwards the input to the current state. */
     private final InputProcessor inputProcessor = new InputAdapter() {
         @Override
         public boolean keyDown(int keycode) {
@@ -126,6 +131,7 @@ public class PlayerInputSystem extends IteratingSystem {
         }
     };
 
+    /** Dispatches a message every time the player goes on/off the ground. */
     private final ContactListener contactListener = new ContactListener() {
         @Override
         public void beginContact(Contact contact) {
