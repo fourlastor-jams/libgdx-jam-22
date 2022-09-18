@@ -17,15 +17,22 @@ import javax.inject.Inject;
 public class LevelScreen extends ScreenAdapter {
 
     private final Engine engine;
+    private final FitViewport viewport;
 
     @Inject
     public LevelScreen(ComponentMappers componentMappers, @LevelEngine Engine engine, AssetManager assetManager) {
         this.engine = engine;
-        engine.addSystem(new StageSystem(new Stage(new FitViewport(9f, 16f)), componentMappers));
+        viewport = new FitViewport(9f, 16f);
+        engine.addSystem(new StageSystem(new Stage(viewport), componentMappers));
         Entity entity = new Entity();
         TextureAtlas atlas = assetManager.get("images/included/packed/images.pack.atlas", TextureAtlas.class);
         entity.add(new ActorComponent(new Image(atlas.findRegion("whitePixel"))));
         engine.addEntity(entity);
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        viewport.update(width, height);
     }
 
     @Override
