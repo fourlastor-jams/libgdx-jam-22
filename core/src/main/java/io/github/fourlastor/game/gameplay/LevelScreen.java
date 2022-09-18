@@ -7,7 +7,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import io.github.fourlastor.game.component.ActorComponent;
 import io.github.fourlastor.game.di.LevelEngine;
 import io.github.fourlastor.game.system.StageSystem;
@@ -21,7 +21,7 @@ public class LevelScreen extends ScreenAdapter {
     @Inject
     public LevelScreen(ComponentMappers componentMappers, @LevelEngine Engine engine, AssetManager assetManager) {
         this.engine = engine;
-        engine.addSystem(new StageSystem(new Stage(new ScreenViewport()), componentMappers));
+        engine.addSystem(new StageSystem(new Stage(new FitViewport(9f, 16f)), componentMappers));
         Entity entity = new Entity();
         TextureAtlas atlas = assetManager.get("images/included/packed/images.pack.atlas", TextureAtlas.class);
         entity.add(new ActorComponent(new Image(atlas.findRegion("whitePixel"))));
