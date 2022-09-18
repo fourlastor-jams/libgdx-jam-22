@@ -1,4 +1,4 @@
-package io.github.fourlastor.game.system;
+package io.github.fourlastor.game.input;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
@@ -7,8 +7,6 @@ import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import io.github.fourlastor.game.component.PlayerComponent;
-import io.github.fourlastor.game.input.InputState;
-import io.github.fourlastor.game.input.InputStateMachine;
 import io.github.fourlastor.game.utils.ComponentMappers;
 import javax.inject.Inject;
 import javax.inject.Provider;

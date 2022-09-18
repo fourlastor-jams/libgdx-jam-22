@@ -10,9 +10,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import dagger.Module;
 import dagger.Provides;
 import io.github.fourlastor.game.di.ScreenScoped;
-import io.github.fourlastor.game.system.PhysicsDebugSystem;
-import io.github.fourlastor.game.system.PhysicsSystem;
-import io.github.fourlastor.game.system.PlayerInputSystem;
+import io.github.fourlastor.game.input.PlayerInputSystem;
+import io.github.fourlastor.game.physics.PhysicsDebugSystem;
+import io.github.fourlastor.game.physics.PhysicsSystem;
 import io.github.fourlastor.game.system.StageSystem;
 
 @Module

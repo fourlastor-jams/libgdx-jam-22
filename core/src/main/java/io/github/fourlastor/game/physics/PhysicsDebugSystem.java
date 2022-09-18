@@ -1,4 +1,4 @@
-package io.github.fourlastor.game.system;
+package io.github.fourlastor.game.physics;
 
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.graphics.Camera;
