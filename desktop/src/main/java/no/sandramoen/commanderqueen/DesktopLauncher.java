@@ -7,20 +7,22 @@ import java.awt.Dimension;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
+    private static final float PERCENT_OF_SCREEN_SIZE = 0.8f;
+
     public static void main(String[] arg) {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setForegroundFPS(60);
-        config.setTitle("Terfenstein 3D");
-        setWindowedMode(.8f, config);
+        config.setTitle("Post Apocalyptic");
+        setWindowedMode(config);
         new Lwjgl3Application(MyGdxGame.createGame(), config);
     }
 
-    private static void setWindowedMode(float percentOfScreenSize, Lwjgl3ApplicationConfiguration config) {
+    private static void setWindowedMode(Lwjgl3ApplicationConfiguration config) {
         Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        int width = (int) (dimension.width * percentOfScreenSize);
+        int height = (int) (dimension.height * PERCENT_OF_SCREEN_SIZE);
 
-        float aspectRatio = 16 / 9f;
-        int height = (int) (width / aspectRatio);
+        float aspectRatio = 16f / 9f;
+        int width = (int) (height / aspectRatio);
 
         System.out.println("Window dimensions => width: " + width + ", height: " + height);
         config.setWindowedMode(width, height);

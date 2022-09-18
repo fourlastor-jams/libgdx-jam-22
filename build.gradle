@@ -25,6 +25,7 @@ allprojects {
         aiVersion = '1.8.2'
         gdxControllersVersion = '2.2.2'
         aiVersion = '1.8.2'
+        daggerVersion = '2.40'
     }
 
     repositories {

@@ -106,6 +106,8 @@ dependencies {
     api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
     api "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
     api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
+    api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion:sources"
+    api "com.badlogicgames.gdx:gdx-box2d-gwt:$gdxVersion:sources"
     api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion:sources"
     api "com.badlogicgames.gdx-controllers:gdx-controllers-gwt:$gdxControllersVersion"
     api "com.badlogicgames.gdx-controllers:gdx-controllers-gwt:$gdxControllersVersion:sources"

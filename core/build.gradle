@@ -30,11 +30,12 @@ project.tasks.compileJava.dependsOn packTextures
 
 dependencies {
     api "com.badlogicgames.gdx:gdx:$gdxVersion"
+    api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
     api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion"
     api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
     api "com.badlogicgames.ashley:ashley:1.7.4"
     implementation "com.github.tommyettinger:textratypist:0.7.2"
-    implementation "com.google.dagger:dagger:2.43.2"
-    api "com.google.dagger:dagger-gwt:2.43.2"
-    annotationProcessor "com.google.dagger:dagger-compiler:2.43.2"
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    api "com.google.dagger:dagger-gwt:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
 }
