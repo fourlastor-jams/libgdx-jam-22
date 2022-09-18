@@ -13,8 +13,6 @@ public interface LevelComponent {
 
     @Subcomponent.Builder
     interface Builder {
-        Builder levelModule(LevelModule module);
-
         LevelComponent build();
     }
 }
