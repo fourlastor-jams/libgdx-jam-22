@@ -29,8 +29,8 @@ public class OnGround extends InputState {
     @Override
     public boolean keyDown(Entity entity, int keycode) {
         if (keycode == Input.Keys.SPACE) {
-            // TODO move to jumping/charging state
-            bodies.get(entity).body.setLinearVelocity(0f, 3f);
+            PlayerComponent player = players.get(entity);
+            player.stateMachine.changeState(player.jumping);
             return true;
         }
         return super.keyDown(entity, keycode);

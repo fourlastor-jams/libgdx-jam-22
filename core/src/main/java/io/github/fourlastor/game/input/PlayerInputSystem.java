@@ -19,6 +19,7 @@ import io.github.fourlastor.game.component.BodyComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
 import io.github.fourlastor.game.input.state.Falling;
+import io.github.fourlastor.game.input.state.Jumping;
 import io.github.fourlastor.game.input.state.OnGround;
 import io.github.fourlastor.game.utils.ComponentMappers;
 import javax.inject.Inject;
@@ -35,6 +36,7 @@ public class PlayerInputSystem extends IteratingSystem implements EntityListener
     private final ComponentMapper<PlayerComponent> players;
     private final Provider<OnGround> onGroundProvider;
     private final Provider<Falling> fallingProvider;
+    private final Provider<Jumping> jumpingProvider;
     private final InputStateMachine.Factory stateMachineFactory;
     private final World world;
     private final MessageManager messageManager;
@@ -45,6 +47,7 @@ public class PlayerInputSystem extends IteratingSystem implements EntityListener
             ComponentMappers componentMappers,
             Provider<OnGround> onGroundProvider,
             Provider<Falling> fallingProvider,
+            Provider<Jumping> jumpingProvider,
             InputStateMachine.Factory stateMachineFactory,
             World world,
             MessageManager messageManager) {
@@ -53,6 +56,7 @@ public class PlayerInputSystem extends IteratingSystem implements EntityListener
         players = componentMappers.get(PlayerComponent.class);
         this.onGroundProvider = onGroundProvider;
         this.fallingProvider = fallingProvider;
+        this.jumpingProvider = jumpingProvider;
         this.stateMachineFactory = stateMachineFactory;
         this.world = world;
         this.messageManager = messageManager;
@@ -85,7 +89,8 @@ public class PlayerInputSystem extends IteratingSystem implements EntityListener
         Falling falling = fallingProvider.get();
         InputStateMachine stateMachine = stateMachineFactory.create(entity, falling);
         OnGround onGround = onGroundProvider.get();
-        entity.add(new PlayerComponent(stateMachine, onGround, falling));
+        Jumping jumping = jumpingProvider.get();
+        entity.add(new PlayerComponent(stateMachine, onGround, falling, jumping));
         stateMachine.getCurrentState().enter(entity);
         for (Message value : Message.values()) {
             messageManager.addListener(stateMachine, value.ordinal());
