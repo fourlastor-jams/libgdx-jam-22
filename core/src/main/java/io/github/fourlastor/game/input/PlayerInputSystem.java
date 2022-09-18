@@ -25,7 +25,7 @@ import io.github.fourlastor.game.utils.ComponentMappers;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-public class PlayerInputSystem extends IteratingSystem implements EntityListener {
+public class PlayerInputSystem extends IteratingSystem {
 
     private static final Family FAMILY_REQUEST =
             Family.all(PlayerRequestComponent.class, BodyComponent.class).get();
@@ -33,31 +33,22 @@ public class PlayerInputSystem extends IteratingSystem implements EntityListener
             Family.all(PlayerComponent.class, BodyComponent.class).get();
 
     private final InputMultiplexer inputMultiplexer;
+    private final PlayerSetup playerSetup;
     private final ComponentMapper<PlayerComponent> players;
-    private final Provider<OnGround> onGroundProvider;
-    private final Provider<Falling> fallingProvider;
-    private final Provider<Jumping> jumpingProvider;
-    private final InputStateMachine.Factory stateMachineFactory;
     private final World world;
     private final MessageManager messageManager;
 
     @Inject
     public PlayerInputSystem(
             InputMultiplexer inputMultiplexer,
+            PlayerSetup playerSetup,
             ComponentMappers componentMappers,
-            Provider<OnGround> onGroundProvider,
-            Provider<Falling> fallingProvider,
-            Provider<Jumping> jumpingProvider,
-            InputStateMachine.Factory stateMachineFactory,
             World world,
             MessageManager messageManager) {
         super(FAMILY);
         this.inputMultiplexer = inputMultiplexer;
+        this.playerSetup = playerSetup;
         players = componentMappers.get(PlayerComponent.class);
-        this.onGroundProvider = onGroundProvider;
-        this.fallingProvider = fallingProvider;
-        this.jumpingProvider = jumpingProvider;
-        this.stateMachineFactory = stateMachineFactory;
         this.world = world;
         this.messageManager = messageManager;
     }
@@ -71,34 +62,57 @@ public class PlayerInputSystem extends IteratingSystem implements EntityListener
     public void addedToEngine(Engine engine) {
         super.addedToEngine(engine);
         inputMultiplexer.addProcessor(inputProcessor);
-        engine.addEntityListener(FAMILY_REQUEST, this);
+        engine.addEntityListener(FAMILY_REQUEST, playerSetup);
         world.setContactListener(contactListener);
     }
 
     @Override
     public void removedFromEngine(Engine engine) {
         world.setContactListener(null);
-        engine.removeEntityListener(this);
+        engine.removeEntityListener(playerSetup);
         inputMultiplexer.removeProcessor(inputProcessor);
         super.removedFromEngine(engine);
     }
 
-    @Override
-    public void entityAdded(Entity entity) {
-        entity.remove(PlayerRequestComponent.class);
-        Falling falling = fallingProvider.get();
-        InputStateMachine stateMachine = stateMachineFactory.create(entity, falling);
-        OnGround onGround = onGroundProvider.get();
-        Jumping jumping = jumpingProvider.get();
-        entity.add(new PlayerComponent(stateMachine, onGround, falling, jumping));
-        stateMachine.getCurrentState().enter(entity);
-        for (Message value : Message.values()) {
-            messageManager.addListener(stateMachine, value.ordinal());
-        }
-    }
+    public static class PlayerSetup implements EntityListener {
 
-    @Override
-    public void entityRemoved(Entity entity) {}
+        private final Provider<OnGround> onGroundProvider;
+        private final Provider<Falling> fallingProvider;
+        private final Provider<Jumping> jumpingProvider;
+        private final InputStateMachine.Factory stateMachineFactory;
+        private final MessageManager messageManager;
+
+        @Inject
+        public PlayerSetup(
+                Provider<OnGround> onGroundProvider,
+                Provider<Falling> fallingProvider,
+                Provider<Jumping> jumpingProvider,
+                InputStateMachine.Factory stateMachineFactory,
+                MessageManager messageManager) {
+            this.onGroundProvider = onGroundProvider;
+            this.fallingProvider = fallingProvider;
+            this.jumpingProvider = jumpingProvider;
+            this.stateMachineFactory = stateMachineFactory;
+            this.messageManager = messageManager;
+        }
+
+        @Override
+        public void entityAdded(Entity entity) {
+            entity.remove(PlayerRequestComponent.class);
+            Falling falling = fallingProvider.get();
+            InputStateMachine stateMachine = stateMachineFactory.create(entity, falling);
+            OnGround onGround = onGroundProvider.get();
+            Jumping jumping = jumpingProvider.get();
+            entity.add(new PlayerComponent(stateMachine, onGround, falling, jumping));
+            stateMachine.getCurrentState().enter(entity);
+            for (Message value : Message.values()) {
+                messageManager.addListener(stateMachine, value.ordinal());
+            }
+        }
+
+        @Override
+        public void entityRemoved(Entity entity) {}
+    }
 
     private final InputProcessor inputProcessor = new InputAdapter() {
         @Override
