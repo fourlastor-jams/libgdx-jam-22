@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import io.github.fourlastor.game.component.ActorComponent;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
+import io.github.fourlastor.game.component.MovingPlatformComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
 import javax.inject.Inject;
 
@@ -29,7 +30,7 @@ public class EntitiesFactory {
         entity.add(new BodyBuilderComponent(world -> {
             BodyDef bodyDef = new BodyDef();
             bodyDef.type = BodyDef.BodyType.DynamicBody;
-            bodyDef.position.set(new Vector2(4.5f, 2f));
+            bodyDef.position.set(new Vector2(4.5f, 6f));
             Body body = world.createBody(bodyDef);
             CircleShape shape = new CircleShape();
             shape.setRadius(0.5f);
@@ -41,18 +42,19 @@ public class EntitiesFactory {
         return entity;
     }
 
-    public Entity ground() {
+    public Entity ground(float x, float y) {
         Entity entity = new Entity();
         entity.add(new BodyBuilderComponent(world -> {
             BodyDef bodyDef = new BodyDef();
-            bodyDef.position.set(new Vector2(5.5f, 0f));
+            bodyDef.position.set(new Vector2(x, y));
             Body body = world.createBody(bodyDef);
             PolygonShape shape = new PolygonShape();
-            shape.setAsBox(6, 1);
+            shape.setAsBox(6, 0.2f);
             body.createFixture(shape, 0.0f).setUserData("foot");
             shape.dispose();
             return body;
         }));
+        entity.add(new MovingPlatformComponent());
 
         return entity;
     }
