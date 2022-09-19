@@ -17,11 +17,9 @@ public class LevelScreen extends ScreenAdapter {
         this.engine = engine;
         this.viewport = viewport;
         engine.addEntity(entitiesFactory.player());
-        engine.addEntity(entitiesFactory.ground(5.5f, 3f));
-        engine.addEntity(entitiesFactory.ground(5.5f, 7f));
-        engine.addEntity(entitiesFactory.ground(5.5f, 10f));
-        engine.addEntity(entitiesFactory.ground(5.5f, 13f));
-        engine.addEntity(entitiesFactory.ground(5.5f, 16f));
+        for (int i = 0; i < 6; i++) {
+            engine.addEntity(entitiesFactory.ground(5.5f, 4f * i));
+        }
     }
 
     @Override

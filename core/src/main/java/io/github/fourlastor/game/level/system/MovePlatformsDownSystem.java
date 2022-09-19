@@ -1,31 +1,35 @@
 package io.github.fourlastor.game.level.system;
 
-import com.badlogic.ashley.core.EntitySystem;
+import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.math.Vector2;
+import io.github.fourlastor.game.component.BodyComponent;
+import io.github.fourlastor.game.component.PlayerComponent;
 import javax.inject.Inject;
 
 /**
  * Moves platforms down when the player goes up
  */
-public class MovePlatformsDownSystem extends EntitySystem {
+public class MovePlatformsDownSystem extends IteratingSystem {
 
+    private static final Family FAMILY_PLAYER =
+            Family.all(PlayerComponent.class, BodyComponent.class).get();
     private final Camera camera;
+    private final ComponentMapper<BodyComponent> bodies;
 
     @Inject
-    public MovePlatformsDownSystem(Camera camera) {
+    public MovePlatformsDownSystem(Camera camera, ComponentMapper<BodyComponent> bodies) {
+        super(FAMILY_PLAYER);
         this.camera = camera;
+        this.bodies = bodies;
     }
 
-    float timePassed = 0;
-
     @Override
-    public void update(float deltaTime) {
-        super.update(deltaTime);
-        timePassed += deltaTime;
-        if (timePassed < 5) {
-            return;
-        }
-
-        camera.position.add(0f, deltaTime, 0f);
+    protected void processEntity(Entity entity, float deltaTime) {
+        Vector2 bodyPosition = bodies.get(entity).body.getPosition();
+        camera.position.y = Math.max(camera.position.y, bodyPosition.y);
     }
 }
