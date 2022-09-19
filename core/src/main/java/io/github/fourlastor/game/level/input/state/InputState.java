@@ -6,16 +6,15 @@ import com.badlogic.gdx.ai.fsm.State;
 import com.badlogic.gdx.ai.msg.Telegram;
 import io.github.fourlastor.game.component.BodyComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
-import io.github.fourlastor.game.utils.ComponentMappers;
 
 public abstract class InputState implements State<Entity> {
 
     protected final ComponentMapper<PlayerComponent> players;
     protected final ComponentMapper<BodyComponent> bodies;
 
-    protected InputState(ComponentMappers componentMappers) {
-        players = componentMappers.get(PlayerComponent.class);
-        bodies = componentMappers.get(BodyComponent.class);
+    public InputState(ComponentMapper<PlayerComponent> players, ComponentMapper<BodyComponent> bodies) {
+        this.players = players;
+        this.bodies = bodies;
     }
 
     @Override

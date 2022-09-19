@@ -14,7 +14,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import io.github.fourlastor.game.component.BodyComponent;
 import io.github.fourlastor.game.component.MovingPlatformComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
-import io.github.fourlastor.game.utils.ComponentMappers;
 import javax.inject.Inject;
 
 public class OneWayPlatformSystem extends EntitySystem {
@@ -30,9 +29,9 @@ public class OneWayPlatformSystem extends EntitySystem {
     private ImmutableArray<Entity> players;
 
     @Inject
-    public OneWayPlatformSystem(World world, ComponentMappers componentMappers) {
+    public OneWayPlatformSystem(World world, ComponentMapper<BodyComponent> bodies) {
         this.world = world;
-        bodies = componentMappers.get(BodyComponent.class);
+        this.bodies = bodies;
     }
 
     @Override

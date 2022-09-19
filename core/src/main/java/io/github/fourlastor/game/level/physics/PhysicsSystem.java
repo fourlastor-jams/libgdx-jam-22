@@ -10,7 +10,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
 import io.github.fourlastor.game.component.BodyComponent;
-import io.github.fourlastor.game.utils.ComponentMappers;
 import javax.inject.Inject;
 
 public class PhysicsSystem extends IntervalSystem {
@@ -27,11 +26,12 @@ public class PhysicsSystem extends IntervalSystem {
     private final Cleaner cleaner;
 
     @Inject
-    public PhysicsSystem(World world, ComponentMappers componentMappers) {
+    public PhysicsSystem(
+            World world, ComponentMapper<BodyBuilderComponent> bodyBuilders, ComponentMapper<BodyComponent> bodies) {
         super(STEP);
         this.world = world;
-        bodyBuilders = componentMappers.get(BodyBuilderComponent.class);
-        bodies = componentMappers.get(BodyComponent.class);
+        this.bodyBuilders = bodyBuilders;
+        this.bodies = bodies;
         factory = new Factory();
         cleaner = new Cleaner();
     }

@@ -21,7 +21,6 @@ import io.github.fourlastor.game.component.PlayerRequestComponent;
 import io.github.fourlastor.game.level.input.state.Falling;
 import io.github.fourlastor.game.level.input.state.Jumping;
 import io.github.fourlastor.game.level.input.state.OnGround;
-import io.github.fourlastor.game.utils.ComponentMappers;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
@@ -42,13 +41,13 @@ public class PlayerInputSystem extends IteratingSystem {
     public PlayerInputSystem(
             InputMultiplexer inputMultiplexer,
             PlayerSetup playerSetup,
-            ComponentMappers componentMappers,
+            ComponentMapper<PlayerComponent> players,
             World world,
             MessageManager messageManager) {
         super(FAMILY);
         this.inputMultiplexer = inputMultiplexer;
         this.playerSetup = playerSetup;
-        players = componentMappers.get(PlayerComponent.class);
+        this.players = players;
         this.world = world;
         this.messageManager = messageManager;
     }
