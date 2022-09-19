@@ -9,7 +9,6 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import io.github.fourlastor.game.component.ActorComponent;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
-import io.github.fourlastor.game.component.MovingPlatformComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
 import javax.inject.Inject;
 
@@ -53,7 +52,6 @@ public class EntitiesFactory {
             shape.dispose();
             return body;
         }));
-        entity.add(new MovingPlatformComponent());
 
         return entity;
     }
