@@ -57,6 +57,6 @@ public class LevelModule {
     @Provides
     @ScreenScoped
     public World world() {
-        return new World(new Vector2(0f, -1f), true);
+        return new World(new Vector2(0f, -10f), true);
     }
 }

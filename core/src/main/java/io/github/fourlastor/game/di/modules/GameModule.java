@@ -1,5 +1,7 @@
 package io.github.fourlastor.game.di.modules;
 
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import dagger.Module;
@@ -24,13 +26,25 @@ public class GameModule {
 
     @Provides
     @Singleton
+    public InputMultiplexer inputMultiplexer() {
+        return new InputMultiplexer();
+    }
+
+    @Provides
+    @Singleton
     public TextureAtlas textureAtlas(AssetManager assetManager) {
         return assetManager.get(PATH_TEXTURE_ATLAS, TextureAtlas.class);
     }
 
     @Provides
     @Singleton
-    public MyGdxGame game(LevelComponent.Builder builder) {
-        return new MyGdxGame(builder.build().levelScreen());
+    public MessageManager messageManager() {
+        return MessageManager.getInstance();
+    }
+
+    @Provides
+    @Singleton
+    public MyGdxGame game(InputMultiplexer multiplexer, LevelComponent.Builder builder) {
+        return new MyGdxGame(multiplexer, builder.build().levelScreen());
     }
 }

@@ -10,9 +10,10 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import io.github.fourlastor.game.component.ActorComponent;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
-import io.github.fourlastor.game.component.PlayerComponent;
+import io.github.fourlastor.game.component.PlayerRequestComponent;
 import javax.inject.Inject;
 
+/** Factory to create various entities: player, buildings, enemies.. */
 public class EntitiesFactory {
 
     private final TextureAtlas atlas;
@@ -27,7 +28,7 @@ public class EntitiesFactory {
         entity.add(new ActorComponent(new Image(atlas.findRegion("whitePixel"))));
         entity.add(new BodyBuilderComponent(world -> {
             BodyDef bodyDef = new BodyDef();
-            bodyDef.type = BodyDef.BodyType.KinematicBody;
+            bodyDef.type = BodyDef.BodyType.DynamicBody;
             bodyDef.position.set(new Vector2(4.5f, 2f));
             Body body = world.createBody(bodyDef);
             CircleShape shape = new CircleShape();
@@ -36,7 +37,7 @@ public class EntitiesFactory {
             shape.dispose();
             return body;
         }));
-        entity.add(new PlayerComponent());
+        entity.add(new PlayerRequestComponent());
         return entity;
     }
 
@@ -48,7 +49,7 @@ public class EntitiesFactory {
             Body body = world.createBody(bodyDef);
             PolygonShape shape = new PolygonShape();
             shape.setAsBox(6, 1);
-            body.createFixture(shape, 0.0f);
+            body.createFixture(shape, 0.0f).setUserData("foot");
             shape.dispose();
             return body;
         }));

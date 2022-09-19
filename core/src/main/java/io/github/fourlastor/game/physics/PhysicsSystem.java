@@ -53,6 +53,7 @@ public class PhysicsSystem extends IntervalSystem {
         engine.removeEntityListener(cleaner);
     }
 
+    /** Creates a body in the world every time a body builder is added. */
     public class Factory implements EntityListener {
 
         @Override
@@ -69,6 +70,7 @@ public class PhysicsSystem extends IntervalSystem {
         }
     }
 
+    /** Cleans up a body which has been removed from the engine. */
     public class Cleaner implements EntityListener {
 
         @Override
