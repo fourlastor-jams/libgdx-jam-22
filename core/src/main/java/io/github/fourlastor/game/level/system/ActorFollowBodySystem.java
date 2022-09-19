@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import io.github.fourlastor.game.component.ActorComponent;
 import io.github.fourlastor.game.component.BodyComponent;
-import io.github.fourlastor.game.utils.ComponentMappers;
 import javax.inject.Inject;
 
 /**
@@ -23,10 +22,10 @@ public class ActorFollowBodySystem extends IteratingSystem {
     private final ComponentMapper<ActorComponent> actors;
 
     @Inject
-    public ActorFollowBodySystem(ComponentMappers componentMappers) {
+    public ActorFollowBodySystem(ComponentMapper<BodyComponent> bodies, ComponentMapper<ActorComponent> actors) {
         super(FAMILY);
-        bodies = componentMappers.get(BodyComponent.class);
-        actors = componentMappers.get(ActorComponent.class);
+        this.bodies = bodies;
+        this.actors = actors;
     }
 
     @Override

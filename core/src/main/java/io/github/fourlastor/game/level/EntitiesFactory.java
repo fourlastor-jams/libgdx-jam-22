@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import io.github.fourlastor.game.component.ActorComponent;
@@ -29,11 +28,11 @@ public class EntitiesFactory {
         entity.add(new BodyBuilderComponent(world -> {
             BodyDef bodyDef = new BodyDef();
             bodyDef.type = BodyDef.BodyType.DynamicBody;
-            bodyDef.position.set(new Vector2(4.5f, 2f));
+            bodyDef.position.set(new Vector2(4.5f, 1f));
             Body body = world.createBody(bodyDef);
-            CircleShape shape = new CircleShape();
-            shape.setRadius(0.5f);
-            body.createFixture(shape, 0.0f);
+            PolygonShape shape = new PolygonShape();
+            shape.setAsBox(0.5f, 0.5f);
+            body.createFixture(shape, 0.0f).setUserData(UserData.PLAYER);
             shape.dispose();
             return body;
         }));
@@ -41,15 +40,15 @@ public class EntitiesFactory {
         return entity;
     }
 
-    public Entity ground() {
+    public Entity ground(float x, float y) {
         Entity entity = new Entity();
         entity.add(new BodyBuilderComponent(world -> {
             BodyDef bodyDef = new BodyDef();
-            bodyDef.position.set(new Vector2(5.5f, 0f));
+            bodyDef.position.set(new Vector2(x, y));
             Body body = world.createBody(bodyDef);
             PolygonShape shape = new PolygonShape();
-            shape.setAsBox(6, 1);
-            body.createFixture(shape, 0.0f).setUserData("foot");
+            shape.setAsBox(6, 0.2f);
+            body.createFixture(shape, 0.0f).setUserData(UserData.PLATFORM);
             shape.dispose();
             return body;
         }));

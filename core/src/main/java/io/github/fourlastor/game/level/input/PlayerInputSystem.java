@@ -10,18 +10,12 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ai.msg.MessageManager;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Manifold;
-import com.badlogic.gdx.physics.box2d.World;
 import io.github.fourlastor.game.component.BodyComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
 import io.github.fourlastor.game.level.input.state.Falling;
 import io.github.fourlastor.game.level.input.state.Jumping;
 import io.github.fourlastor.game.level.input.state.OnGround;
-import io.github.fourlastor.game.utils.ComponentMappers;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
@@ -35,22 +29,14 @@ public class PlayerInputSystem extends IteratingSystem {
     private final InputMultiplexer inputMultiplexer;
     private final PlayerSetup playerSetup;
     private final ComponentMapper<PlayerComponent> players;
-    private final World world;
-    private final MessageManager messageManager;
 
     @Inject
     public PlayerInputSystem(
-            InputMultiplexer inputMultiplexer,
-            PlayerSetup playerSetup,
-            ComponentMappers componentMappers,
-            World world,
-            MessageManager messageManager) {
+            InputMultiplexer inputMultiplexer, PlayerSetup playerSetup, ComponentMapper<PlayerComponent> players) {
         super(FAMILY);
         this.inputMultiplexer = inputMultiplexer;
         this.playerSetup = playerSetup;
-        players = componentMappers.get(PlayerComponent.class);
-        this.world = world;
-        this.messageManager = messageManager;
+        this.players = players;
     }
 
     @Override
@@ -63,12 +49,10 @@ public class PlayerInputSystem extends IteratingSystem {
         super.addedToEngine(engine);
         inputMultiplexer.addProcessor(inputProcessor);
         engine.addEntityListener(FAMILY_REQUEST, playerSetup);
-        world.setContactListener(contactListener);
     }
 
     @Override
     public void removedFromEngine(Engine engine) {
-        world.setContactListener(null);
         engine.removeEntityListener(playerSetup);
         inputMultiplexer.removeProcessor(inputProcessor);
         super.removedFromEngine(engine);
@@ -129,30 +113,5 @@ public class PlayerInputSystem extends IteratingSystem {
             }
             return false;
         }
-    };
-
-    /** Dispatches a message every time the player goes on/off the ground. */
-    private final ContactListener contactListener = new ContactListener() {
-        @Override
-        public void beginContact(Contact contact) {
-            if ("foot".equals(contact.getFixtureA().getUserData())
-                    || "foot".equals(contact.getFixtureB().getUserData())) {
-                messageManager.dispatchMessage(Message.PLAYER_ON_GROUND.ordinal());
-            }
-        }
-
-        @Override
-        public void endContact(Contact contact) {
-            if ("foot".equals(contact.getFixtureA().getUserData())
-                    || "foot".equals(contact.getFixtureB().getUserData())) {
-                messageManager.dispatchMessage(Message.PLAYER_OFF_GROUND.ordinal());
-            }
-        }
-
-        @Override
-        public void preSolve(Contact contact, Manifold oldManifold) {}
-
-        @Override
-        public void postSolve(Contact contact, ContactImpulse impulse) {}
     };
 }

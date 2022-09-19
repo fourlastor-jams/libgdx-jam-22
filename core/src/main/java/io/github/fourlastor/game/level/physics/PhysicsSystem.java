@@ -6,11 +6,18 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalSystem;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
 import io.github.fourlastor.game.component.BodyComponent;
-import io.github.fourlastor.game.utils.ComponentMappers;
+import io.github.fourlastor.game.level.UserData;
+import io.github.fourlastor.game.level.input.Message;
 import javax.inject.Inject;
 
 public class PhysicsSystem extends IntervalSystem {
@@ -23,15 +30,21 @@ public class PhysicsSystem extends IntervalSystem {
     private final World world;
     private final ComponentMapper<BodyBuilderComponent> bodyBuilders;
     private final ComponentMapper<BodyComponent> bodies;
+    private final MessageManager messageManager;
     private final Factory factory;
     private final Cleaner cleaner;
 
     @Inject
-    public PhysicsSystem(World world, ComponentMappers componentMappers) {
+    public PhysicsSystem(
+            World world,
+            ComponentMapper<BodyBuilderComponent> bodyBuilders,
+            ComponentMapper<BodyComponent> bodies,
+            MessageManager messageManager) {
         super(STEP);
         this.world = world;
-        bodyBuilders = componentMappers.get(BodyBuilderComponent.class);
-        bodies = componentMappers.get(BodyComponent.class);
+        this.bodyBuilders = bodyBuilders;
+        this.bodies = bodies;
+        this.messageManager = messageManager;
         factory = new Factory();
         cleaner = new Cleaner();
     }
@@ -43,6 +56,7 @@ public class PhysicsSystem extends IntervalSystem {
 
     @Override
     public void addedToEngine(Engine engine) {
+        world.setContactListener(contactListener);
         engine.addEntityListener(FAMILY_BUILDER, factory);
         engine.addEntityListener(FAMILY_BODY, cleaner);
     }
@@ -51,6 +65,7 @@ public class PhysicsSystem extends IntervalSystem {
     public void removedFromEngine(Engine engine) {
         engine.removeEntityListener(factory);
         engine.removeEntityListener(cleaner);
+        world.setContactListener(null);
     }
 
     /** Creates a body in the world every time a body builder is added. */
@@ -87,4 +102,42 @@ public class PhysicsSystem extends IntervalSystem {
             }
         }
     }
+
+    private final ContactListener contactListener = new ContactListener() {
+
+        @Override
+        public void beginContact(Contact contact) {}
+
+        private void checkCollision(Contact contact, Fixture playerFixture, Fixture platformFixture) {
+            Body playerBody = playerFixture.getBody();
+            Body platformBody = platformFixture.getBody();
+            float playerBottom = playerBody.getPosition().y - 0.5f;
+            double platformTop = platformBody.getPosition().y + 0.2;
+            boolean shouldNotCollide = playerBottom < platformTop || playerBody.getLinearVelocity().y > 0;
+            if (shouldNotCollide) {
+                contact.setEnabled(false);
+            } else {
+                messageManager.dispatchMessage(Message.PLAYER_ON_GROUND.ordinal());
+            }
+        }
+
+        @Override
+        public void endContact(Contact contact) {
+            contact.setEnabled(true);
+        }
+
+        @Override
+        public void preSolve(Contact contact, Manifold oldManifold) {
+            Fixture fixtureA = contact.getFixtureA();
+            Fixture fixtureB = contact.getFixtureB();
+            if (UserData.PLAYER == fixtureA.getUserData() && UserData.PLATFORM == fixtureB.getUserData()) {
+                checkCollision(contact, fixtureA, fixtureB);
+            } else if (UserData.PLATFORM == fixtureA.getUserData() && UserData.PLAYER == fixtureB.getUserData()) {
+                checkCollision(contact, fixtureB, fixtureA);
+            }
+        }
+
+        @Override
+        public void postSolve(Contact contact, ContactImpulse impulse) {}
+    };
 }
