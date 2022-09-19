@@ -1,15 +1,16 @@
 package io.github.fourlastor.game.level;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import io.github.fourlastor.game.component.ActorComponent;
+import io.github.fourlastor.game.component.AnimatedImageComponent;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
+import io.github.fourlastor.game.ui.AnimatedImage;
 import javax.inject.Inject;
 
 /** Factory to create various entities: player, buildings, enemies.. */
@@ -24,7 +25,10 @@ public class EntitiesFactory {
 
     public Entity player() {
         Entity entity = new Entity();
-        entity.add(new ActorComponent(new Image(atlas.findRegion("whitePixel"))));
+        AnimatedImage image = new AnimatedImage(
+                new Animation<>(0.2f, atlas.findRegions("player/Falling/Falling"), Animation.PlayMode.LOOP));
+        image.setScale(1f / 20f);
+        entity.add(new AnimatedImageComponent(image));
         entity.add(new BodyBuilderComponent(world -> {
             BodyDef bodyDef = new BodyDef();
             bodyDef.type = BodyDef.BodyType.DynamicBody;

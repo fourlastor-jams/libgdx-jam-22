@@ -10,6 +10,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ai.msg.MessageManager;
+import io.github.fourlastor.game.component.AnimatedImageComponent;
 import io.github.fourlastor.game.component.BodyComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
@@ -23,8 +24,9 @@ public class PlayerInputSystem extends IteratingSystem {
 
     private static final Family FAMILY_REQUEST =
             Family.all(PlayerRequestComponent.class, BodyComponent.class).get();
-    private static final Family FAMILY =
-            Family.all(PlayerComponent.class, BodyComponent.class).get();
+    private static final Family FAMILY = Family.all(
+                    PlayerComponent.class, BodyComponent.class, AnimatedImageComponent.class)
+            .get();
 
     private final InputMultiplexer inputMultiplexer;
     private final PlayerSetup playerSetup;
