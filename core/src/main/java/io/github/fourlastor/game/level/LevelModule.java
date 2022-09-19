@@ -1,4 +1,4 @@
-package io.github.fourlastor.game.gameplay;
+package io.github.fourlastor.game.level;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.graphics.Camera;
@@ -10,11 +10,11 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import dagger.Module;
 import dagger.Provides;
 import io.github.fourlastor.game.di.ScreenScoped;
-import io.github.fourlastor.game.input.PlayerInputSystem;
-import io.github.fourlastor.game.physics.PhysicsDebugSystem;
-import io.github.fourlastor.game.physics.PhysicsSystem;
-import io.github.fourlastor.game.system.ActorFollowBodySystem;
-import io.github.fourlastor.game.system.StageSystem;
+import io.github.fourlastor.game.level.input.PlayerInputSystem;
+import io.github.fourlastor.game.level.physics.PhysicsDebugSystem;
+import io.github.fourlastor.game.level.physics.PhysicsSystem;
+import io.github.fourlastor.game.level.system.ActorFollowBodySystem;
+import io.github.fourlastor.game.level.system.StageSystem;
 
 @Module
 public class LevelModule {

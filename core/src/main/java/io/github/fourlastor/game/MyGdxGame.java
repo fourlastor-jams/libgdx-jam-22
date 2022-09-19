@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import io.github.fourlastor.game.di.GameComponent;
-import io.github.fourlastor.game.gameplay.LevelScreen;
+import io.github.fourlastor.game.level.LevelScreen;
 import javax.inject.Provider;
 
 public class MyGdxGame extends Game {

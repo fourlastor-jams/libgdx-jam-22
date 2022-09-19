@@ -1,4 +1,4 @@
-package io.github.fourlastor.game.gameplay;
+package io.github.fourlastor.game.level;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;

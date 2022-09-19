@@ -1,4 +1,4 @@
-package io.github.fourlastor.game.system;
+package io.github.fourlastor.game.level.system;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;

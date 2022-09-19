@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import dagger.Module;
 import dagger.Provides;
 import io.github.fourlastor.game.MyGdxGame;
-import io.github.fourlastor.game.gameplay.LevelComponent;
+import io.github.fourlastor.game.level.LevelComponent;
 import javax.inject.Singleton;
 
 @Module(subcomponents = LevelComponent.class)

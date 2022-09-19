@@ -1,4 +1,4 @@
-package io.github.fourlastor.game.gameplay;
+package io.github.fourlastor.game.level;
 
 import dagger.Subcomponent;
 import io.github.fourlastor.game.di.ScreenScoped;

@@ -1,4 +1,4 @@
-package io.github.fourlastor.game.physics;
+package io.github.fourlastor.game.level.physics;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;

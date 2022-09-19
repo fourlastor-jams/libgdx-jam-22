@@ -1,4 +1,4 @@
-package io.github.fourlastor.game.input;
+package io.github.fourlastor.game.level.input;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
@@ -18,9 +18,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import io.github.fourlastor.game.component.BodyComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
-import io.github.fourlastor.game.input.state.Falling;
-import io.github.fourlastor.game.input.state.Jumping;
-import io.github.fourlastor.game.input.state.OnGround;
+import io.github.fourlastor.game.level.input.state.Falling;
+import io.github.fourlastor.game.level.input.state.Jumping;
+import io.github.fourlastor.game.level.input.state.OnGround;
 import io.github.fourlastor.game.utils.ComponentMappers;
 import javax.inject.Inject;
 import javax.inject.Provider;
