@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Start game" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="no.sandramoen.commanderqueen.DesktopLauncher" />
-    <module name="libgdx-java-base.desktop.main" />
+    <module name="libgdx-jam-22.desktop.main" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="no.sandramoen.commanderqueen.di.*" />
