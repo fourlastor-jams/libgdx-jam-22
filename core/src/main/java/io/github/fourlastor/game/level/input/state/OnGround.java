@@ -14,11 +14,6 @@ public class OnGround extends InputState {
     }
 
     @Override
-    public void enter(Entity entity) {
-        System.out.println("OnGround");
-    }
-
-    @Override
     public void update(Entity entity) {
         if (bodies.get(entity).body.getLinearVelocity().y < 0) {
             PlayerComponent player = players.get(entity);

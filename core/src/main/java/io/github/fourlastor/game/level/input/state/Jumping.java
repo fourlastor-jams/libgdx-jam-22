@@ -17,7 +17,6 @@ public class Jumping extends InputState {
 
     @Override
     public void enter(Entity entity) {
-        System.out.println("Jumping");
         Body body = bodies.get(entity).body;
         body.setLinearVelocity(body.getLinearVelocity().x, 10f);
     }

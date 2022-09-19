@@ -15,11 +15,6 @@ public class Falling extends InputState {
     }
 
     @Override
-    public void enter(Entity entity) {
-        System.out.println("Falling");
-    }
-
-    @Override
     public boolean onMessage(Entity entity, Telegram telegram) {
         if (telegram.message == Message.PLAYER_ON_GROUND.ordinal()) {
             PlayerComponent player = players.get(entity);
