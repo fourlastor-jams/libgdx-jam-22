@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Start game" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="no.sandramoen.commanderqueen.DesktopLauncher" />
+    <option name="MAIN_CLASS_NAME" value="io.github.fourlastor.game.DesktopLauncher" />
     <module name="libgdx-jam-22.desktop.main" />
     <extension name="coverage">
       <pattern>
