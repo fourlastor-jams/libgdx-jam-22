@@ -113,7 +113,7 @@ public class PhysicsSystem extends IntervalSystem {
             Body platformBody = platformFixture.getBody();
             float playerBottom = playerBody.getPosition().y - 0.5f;
             double platformTop = platformBody.getPosition().y + 0.2;
-            boolean shouldNotCollide = playerBottom < platformTop || playerBody.getLinearVelocity().y > 0;
+            boolean shouldNotCollide = playerBottom < platformTop;
             if (shouldNotCollide) {
                 contact.setEnabled(false);
             } else {
