@@ -21,10 +21,10 @@ public class GameModule {
     public AssetManager assetManager() {
         AssetManager assetManager = new AssetManager();
         assetManager.load(PATH_TEXTURE_ATLAS, TextureAtlas.class);
-        assetManager.load("images/included/background/background_layer 0.png", Texture.class);
-        assetManager.load("images/included/background/background_layer 1.png", Texture.class);
-        assetManager.load("images/included/background/background_layer 2.png", Texture.class);
-        assetManager.load("images/included/background/background_layer 3.png", Texture.class);
+        assetManager.load("images/included/background/background_layer_0.png", Texture.class);
+        assetManager.load("images/included/background/background_layer_1.png", Texture.class);
+        assetManager.load("images/included/background/background_layer_2.png", Texture.class);
+        assetManager.load("images/included/background/background_layer_3.png", Texture.class);
         assetManager.finishLoading();
         return assetManager;
     }

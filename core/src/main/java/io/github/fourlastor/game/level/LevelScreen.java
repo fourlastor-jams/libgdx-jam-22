@@ -19,13 +19,13 @@ public class LevelScreen extends ScreenAdapter {
         this.engine = engine;
         this.viewport = viewport;
         engine.addEntity(entitiesFactory.parallaxBackground(
-                assetManager.get("images/included/background/background_layer 0.png", Texture.class), 0.125f));
+                assetManager.get("images/included/background/background_layer_0.png", Texture.class), 0.125f));
         engine.addEntity(entitiesFactory.parallaxBackground(
-                assetManager.get("images/included/background/background_layer 1.png", Texture.class), 0.25f));
+                assetManager.get("images/included/background/background_layer_1.png", Texture.class), 0.25f));
         engine.addEntity(entitiesFactory.parallaxBackground(
-                assetManager.get("images/included/background/background_layer 2.png", Texture.class), 0.5f));
+                assetManager.get("images/included/background/background_layer_2.png", Texture.class), 0.5f));
         engine.addEntity(entitiesFactory.parallaxBackground(
-                assetManager.get("images/included/background/background_layer 3.png", Texture.class), 1f));
+                assetManager.get("images/included/background/background_layer_3.png", Texture.class), 1f));
         engine.addEntity(entitiesFactory.player());
         engine.addEntity(entitiesFactory.player());
         for (int i = 0; i < 6; i++) {
