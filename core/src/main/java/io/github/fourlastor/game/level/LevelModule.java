@@ -37,8 +37,8 @@ public class LevelModule {
         engine.addSystem(movePlatformsDownSystem);
         engine.addSystem(actorFollowBodySystem);
         engine.addSystem(clearScreenSystem);
-        engine.addSystem(physicsDebugSystem);
         engine.addSystem(stageSystem);
+        engine.addSystem(physicsDebugSystem);
         return engine;
     }
 
