@@ -40,4 +40,8 @@ public abstract class InputState implements State<Entity> {
     public boolean keyDown(Entity entity, int keycode) {
         return false;
     }
+
+    public boolean keyUp(Entity entity, int keycode) {
+        return false;
+    }
 }

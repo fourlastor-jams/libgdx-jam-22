@@ -14,6 +14,7 @@ public class PlayerAnimationsFactory {
     public static final String ANIMATION_STANDING = "player/OnGround/OnGround";
     public static final String ANIMATION_FALLING = "player/Falling/Falling";
     public static final String ANIMATION_JUMPING = "player/Jumping/Jumping";
+    public static final String ANIMATION_CHARGE_JUMP = "player/ChargeJump/ChargeJump";
 
     @Provides
     @ScreenScoped
@@ -34,5 +35,12 @@ public class PlayerAnimationsFactory {
     @Named(ANIMATION_JUMPING)
     public Animation<TextureRegion> jumping(TextureAtlas textureAtlas) {
         return new Animation<>(0.4f, textureAtlas.findRegions(ANIMATION_JUMPING), Animation.PlayMode.NORMAL);
+    }
+
+    @Provides
+    @ScreenScoped
+    @Named(ANIMATION_CHARGE_JUMP)
+    public Animation<TextureRegion> chargeJump(TextureAtlas textureAtlas) {
+        return new Animation<>(0.4f, textureAtlas.findRegions(ANIMATION_CHARGE_JUMP), Animation.PlayMode.NORMAL);
     }
 }

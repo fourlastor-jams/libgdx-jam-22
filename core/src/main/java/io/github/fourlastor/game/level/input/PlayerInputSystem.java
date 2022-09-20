@@ -14,6 +14,7 @@ import io.github.fourlastor.game.component.AnimatedImageComponent;
 import io.github.fourlastor.game.component.BodyComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
+import io.github.fourlastor.game.level.input.state.ChargeJump;
 import io.github.fourlastor.game.level.input.state.Falling;
 import io.github.fourlastor.game.level.input.state.Jumping;
 import io.github.fourlastor.game.level.input.state.OnGround;
@@ -69,6 +70,7 @@ public class PlayerInputSystem extends IteratingSystem {
         private final Provider<OnGround> onGroundProvider;
         private final Provider<Falling> fallingProvider;
         private final Provider<Jumping> jumpingProvider;
+        private final Provider<ChargeJump> chargeJumpProvider;
         private final InputStateMachine.Factory stateMachineFactory;
         private final MessageManager messageManager;
 
@@ -77,11 +79,13 @@ public class PlayerInputSystem extends IteratingSystem {
                 Provider<OnGround> onGroundProvider,
                 Provider<Falling> fallingProvider,
                 Provider<Jumping> jumpingProvider,
+                Provider<ChargeJump> chargeJumpProvider,
                 InputStateMachine.Factory stateMachineFactory,
                 MessageManager messageManager) {
             this.onGroundProvider = onGroundProvider;
             this.fallingProvider = fallingProvider;
             this.jumpingProvider = jumpingProvider;
+            this.chargeJumpProvider = chargeJumpProvider;
             this.stateMachineFactory = stateMachineFactory;
             this.messageManager = messageManager;
         }
@@ -93,7 +97,9 @@ public class PlayerInputSystem extends IteratingSystem {
             InputStateMachine stateMachine = stateMachineFactory.create(entity, falling);
             OnGround onGround = onGroundProvider.get();
             Jumping jumping = jumpingProvider.get();
-            entity.add(new PlayerComponent(stateMachine, onGround, falling, jumping));
+            ChargeJump chargeJump = chargeJumpProvider.get();
+
+            entity.add(new PlayerComponent(stateMachine, onGround, falling, jumping, chargeJump));
             stateMachine.getCurrentState().enter(entity);
             for (Message value : Message.values()) {
                 messageManager.addListener(stateMachine, value.ordinal());
@@ -110,6 +116,16 @@ public class PlayerInputSystem extends IteratingSystem {
         public boolean keyDown(int keycode) {
             for (Entity entity : getEntities()) {
                 if (players.get(entity).stateMachine.keyDown(entity, keycode)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public boolean keyUp(int keycode) {
+            for (Entity entity : getEntities()) {
+                if (players.get(entity).stateMachine.keyUp(entity, keycode)) {
                     return true;
                 }
             }

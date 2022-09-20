@@ -25,6 +25,17 @@ public class InputStateMachine extends DefaultStateMachine<Entity, InputState> {
         return result;
     }
 
+    public boolean keyUp(Entity entity, int keycode) {
+        boolean result = false;
+        if (currentState != null) {
+            result = currentState.keyUp(entity, keycode);
+        }
+        if (globalState != null && !result) {
+            result = globalState.keyUp(entity, keycode);
+        }
+        return result;
+    }
+
     @AssistedFactory
     public interface Factory {
         InputStateMachine create(Entity entity, InputState initialState);
