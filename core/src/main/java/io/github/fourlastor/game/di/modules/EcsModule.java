@@ -3,9 +3,10 @@ package io.github.fourlastor.game.di.modules;
 import com.badlogic.ashley.core.ComponentMapper;
 import dagger.Module;
 import dagger.Provides;
-import io.github.fourlastor.game.component.ActorComponent;
+import io.github.fourlastor.game.component.AnimatedImageComponent;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
 import io.github.fourlastor.game.component.BodyComponent;
+import io.github.fourlastor.game.component.ImageComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
 import javax.inject.Singleton;
 
@@ -14,8 +15,14 @@ public class EcsModule {
 
     @Provides
     @Singleton
-    public ComponentMapper<ActorComponent> actorComponent() {
-        return ComponentMapper.getFor(ActorComponent.class);
+    public ComponentMapper<AnimatedImageComponent> animatedImageComponent() {
+        return ComponentMapper.getFor(AnimatedImageComponent.class);
+    }
+
+    @Provides
+    @Singleton
+    public ComponentMapper<ImageComponent> imageComponent() {
+        return ComponentMapper.getFor(ImageComponent.class);
     }
 
     @Provides

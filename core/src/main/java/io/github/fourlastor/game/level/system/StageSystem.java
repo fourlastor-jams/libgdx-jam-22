@@ -6,29 +6,32 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import io.github.fourlastor.game.component.ActorComponent;
+import io.github.fourlastor.game.component.AnimatedImageComponent;
+import io.github.fourlastor.game.component.ImageComponent;
 import javax.inject.Inject;
 
 public class StageSystem extends EntitySystem implements EntityListener {
 
-    private static final Family FAMILY = Family.all(ActorComponent.class).get();
+    private static final Family FAMILY =
+            Family.one(AnimatedImageComponent.class, ImageComponent.class).get();
     private final Stage stage;
-    private final ComponentMapper<ActorComponent> actors;
+    private final ComponentMapper<AnimatedImageComponent> animatedImages;
+    private final ComponentMapper<ImageComponent> images;
 
     @Inject
-    public StageSystem(Stage stage, ComponentMapper<ActorComponent> actors) {
+    public StageSystem(
+            Stage stage,
+            ComponentMapper<AnimatedImageComponent> animatedImages,
+            ComponentMapper<ImageComponent> images) {
         this.stage = stage;
-        this.actors = actors;
+        this.animatedImages = animatedImages;
+        this.images = images;
     }
 
     @Override
     public void update(float deltaTime) {
-        Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         stage.act(deltaTime);
         stage.draw();
     }
@@ -45,12 +48,23 @@ public class StageSystem extends EntitySystem implements EntityListener {
 
     @Override
     public void entityAdded(Entity entity) {
-        Actor actor = actors.get(entity).actor;
-        stage.addActor(actor);
+        if (animatedImages.has(entity)) {
+            Actor actor = animatedImages.get(entity).image;
+            stage.addActor(actor);
+        }
+        if (images.has(entity)) {
+            Actor actor = images.get(entity).image;
+            stage.addActor(actor);
+        }
     }
 
     @Override
     public void entityRemoved(Entity entity) {
-        actors.get(entity).actor.remove();
+        if (animatedImages.has(entity)) {
+            animatedImages.get(entity).image.remove();
+        }
+        if (images.has(entity)) {
+            images.get(entity).image.remove();
+        }
     }
 }

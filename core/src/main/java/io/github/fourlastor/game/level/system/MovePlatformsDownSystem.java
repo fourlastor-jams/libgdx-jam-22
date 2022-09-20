@@ -31,5 +31,8 @@ public class MovePlatformsDownSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         Vector2 bodyPosition = bodies.get(entity).body.getPosition();
         camera.position.y = Math.max(camera.position.y, bodyPosition.y);
+        //        uncomment for debug
+        //        camera.position.y += deltaTime * 2f;
+        //        camera.position.y %= 105;
     }
 }
