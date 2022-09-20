@@ -28,9 +28,8 @@ public class Falling extends InputState {
     }
 
     @Override
-    public void enter(Entity entity) {
-        super.enter(entity);
-        images.get(entity).image.setAnimation(animation);
+    protected Animation<TextureRegion> animation() {
+        return animation;
     }
 
     @Override

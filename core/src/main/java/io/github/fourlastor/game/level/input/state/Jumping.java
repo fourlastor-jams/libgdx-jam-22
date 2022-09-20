@@ -27,10 +27,14 @@ public class Jumping extends InputState {
     }
 
     @Override
+    protected Animation<TextureRegion> animation() {
+        return animation;
+    }
+
+    @Override
     public void enter(Entity entity) {
         Body body = bodies.get(entity).body;
         body.setLinearVelocity(body.getLinearVelocity().x, 10f);
-        images.get(entity).image.setAnimation(animation);
     }
 
     @Override

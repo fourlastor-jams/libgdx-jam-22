@@ -39,5 +39,6 @@ public class AnimatedImage extends Image {
     public void setAnimation(Animation<TextureRegion> animation) {
         this.animation = animation;
         this.frameCache = new IntMap<>(animation.getKeyFrames().length);
+        this.playTime = 0f;
     }
 }

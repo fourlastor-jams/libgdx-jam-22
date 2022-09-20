@@ -27,8 +27,8 @@ public class ChargeJump extends InputState {
     }
 
     @Override
-    public void enter(Entity entity) {
-        images.get(entity).image.setAnimation(animation);
+    protected Animation<TextureRegion> animation() {
+        return animation;
     }
 
     @Override

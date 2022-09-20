@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.fsm.State;
 import com.badlogic.gdx.ai.msg.Telegram;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import io.github.fourlastor.game.component.AnimatedImageComponent;
 import io.github.fourlastor.game.component.BodyComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
@@ -23,8 +25,12 @@ public abstract class InputState implements State<Entity> {
         this.images = images;
     }
 
+    protected abstract Animation<TextureRegion> animation();
+
     @Override
-    public void enter(Entity entity) {}
+    public void enter(Entity entity) {
+        images.get(entity).image.setAnimation(animation());
+    }
 
     @Override
     public void update(Entity entity) {}
