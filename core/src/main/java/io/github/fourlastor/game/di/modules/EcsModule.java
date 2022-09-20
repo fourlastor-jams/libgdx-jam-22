@@ -6,6 +6,7 @@ import dagger.Provides;
 import io.github.fourlastor.game.component.AnimatedImageComponent;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
 import io.github.fourlastor.game.component.BodyComponent;
+import io.github.fourlastor.game.component.ImageComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
 import javax.inject.Singleton;
 
@@ -14,8 +15,14 @@ public class EcsModule {
 
     @Provides
     @Singleton
-    public ComponentMapper<AnimatedImageComponent> actorComponent() {
+    public ComponentMapper<AnimatedImageComponent> animatedImageComponent() {
         return ComponentMapper.getFor(AnimatedImageComponent.class);
+    }
+
+    @Provides
+    @Singleton
+    public ComponentMapper<ImageComponent> imageComponent() {
+        return ComponentMapper.getFor(ImageComponent.class);
     }
 
     @Provides
