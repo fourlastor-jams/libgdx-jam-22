@@ -3,6 +3,7 @@ package io.github.fourlastor.game.di.modules;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import dagger.Module;
 import dagger.Provides;
@@ -20,6 +21,10 @@ public class GameModule {
     public AssetManager assetManager() {
         AssetManager assetManager = new AssetManager();
         assetManager.load(PATH_TEXTURE_ATLAS, TextureAtlas.class);
+        assetManager.load("images/included/background/background_layer 0.png", Texture.class);
+        assetManager.load("images/included/background/background_layer 1.png", Texture.class);
+        assetManager.load("images/included/background/background_layer 2.png", Texture.class);
+        assetManager.load("images/included/background/background_layer 3.png", Texture.class);
         assetManager.finishLoading();
         return assetManager;
     }
