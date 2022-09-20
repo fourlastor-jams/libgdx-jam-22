@@ -27,7 +27,6 @@ public class LevelScreen extends ScreenAdapter {
         engine.addEntity(entitiesFactory.parallaxBackground(
                 assetManager.get("images/included/background/background_layer_3.png", Texture.class), 1f));
         engine.addEntity(entitiesFactory.player());
-        engine.addEntity(entitiesFactory.player());
         for (int i = 0; i < 6; i++) {
             engine.addEntity(entitiesFactory.ground(5.5f, 4f * i));
         }
