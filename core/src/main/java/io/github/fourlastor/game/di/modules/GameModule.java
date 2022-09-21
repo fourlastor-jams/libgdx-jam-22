@@ -23,6 +23,8 @@ public class GameModule {
         AssetManager assetManager = new AssetManager();
         assetManager.load(PATH_TEXTURE_ATLAS, TextureAtlas.class);
 
+        assetManager.load("images/included/whitePixel.png", Texture.class);
+
         assetManager.load("images/included/background/background_layer_0.png", Texture.class);
         assetManager.load("images/included/background/background_layer_1.png", Texture.class);
         assetManager.load("images/included/background/background_layer_2.png", Texture.class);
@@ -39,6 +41,8 @@ public class GameModule {
         assetManager.load("images/included/intro/sky_dragon.png", Texture.class);
         assetManager.load("images/included/intro/space.png", Texture.class);
         assetManager.load("images/included/intro/zebra_king.png", Texture.class);
+        assetManager.load("images/included/intro/lyze.png", Texture.class);
+        assetManager.load("images/included/intro/black_screen.png", Texture.class);
 
         //        assetManager.load("audio/music/398937__mypantsfelldown__metal-footsteps.wav", Music.class);
         assetManager.finishLoading();
