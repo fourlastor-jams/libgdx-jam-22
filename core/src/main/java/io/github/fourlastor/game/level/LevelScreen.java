@@ -36,7 +36,17 @@ public class LevelScreen extends ScreenAdapter {
                 1f,
                 Layer.FG_PARALLAX));
         for (int i = 0; i < 6; i++) {
-            engine.addEntity(entitiesFactory.ground(4.5f, 4f * i));
+            PlatformWidth width;
+            PlatformType type = PlatformType.LARGE_GRID;
+            if (i > 4) {
+                width = PlatformWidth.NINE;
+            } else if (i > 2) {
+                width = PlatformWidth.FOUR;
+            } else {
+                type = PlatformType.SMALL_GRID;
+                width = PlatformWidth.ONE;
+            }
+            engine.addEntity(entitiesFactory.ground(4.5f, 4f * i, type, width));
         }
         engine.addEntity(entitiesFactory.player());
     }

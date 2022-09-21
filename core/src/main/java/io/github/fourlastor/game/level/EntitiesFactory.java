@@ -61,19 +61,20 @@ public class EntitiesFactory {
         return entity;
     }
 
-    public Entity ground(float x, float y) {
+    public Entity ground(float x, float y, PlatformType platformType, PlatformWidth platformWidth) {
         Entity entity = new Entity();
         entity.add(new BodyBuilderComponent(world -> {
             BodyDef bodyDef = new BodyDef();
             bodyDef.position.set(new Vector2(x, y));
             Body body = world.createBody(bodyDef);
             PolygonShape shape = new PolygonShape();
-            shape.setAsBox(4.5f, 0.25f);
+            shape.setAsBox(platformWidth.width / 2f, 0.25f);
             body.createFixture(shape, 0.0f).setUserData(UserData.PLATFORM);
             shape.dispose();
             return body;
         }));
-        Image image = new Image(textureAtlas.findRegion("platforms/platform_1_w9"));
+        Image image = new Image(
+                textureAtlas.findRegion("platforms/platform_" + platformType.tileName + "_w" + platformWidth.width));
         image.setScale(SCALE_XY);
         entity.add(new ActorComponent(image, ActorComponent.Layer.PLATFORM));
 
