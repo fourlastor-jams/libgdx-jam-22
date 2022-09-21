@@ -90,7 +90,7 @@ public class EntitiesFactory {
             platformType = platformType();
         }
         PlatformSpeed platformSpeed = platformSpeed();
-        float x = random.nextFloat(2f, 6f);
+        float x = random.nextFloat() * 4f + 2f;
         float y = 4f * count;
         return makeGround(platformWidth, platformType, platformSpeed, x, y);
     }
