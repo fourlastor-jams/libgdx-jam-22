@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import io.github.fourlastor.game.component.ActorComponent.Layer;
 import io.github.fourlastor.game.di.ScreenScoped;
+import io.github.fourlastor.game.level.platform.PlatformType;
+import io.github.fourlastor.game.level.platform.PlatformWidth;
 import javax.inject.Inject;
 
 @ScreenScoped
@@ -46,7 +48,7 @@ public class LevelScreen extends ScreenAdapter {
             } else {
                 width = PlatformWidth.NINE;
             }
-            engine.addEntity(entitiesFactory.ground(4.5f, 4f * i, type, width));
+            engine.addEntity(entitiesFactory.ground(4.5f, 4f * i));
         }
         engine.addEntity(entitiesFactory.player());
     }

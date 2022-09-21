@@ -13,10 +13,10 @@ import io.github.fourlastor.game.di.ScreenScoped;
 import io.github.fourlastor.game.level.input.PlayerInputSystem;
 import io.github.fourlastor.game.level.physics.PhysicsDebugSystem;
 import io.github.fourlastor.game.level.physics.PhysicsSystem;
+import io.github.fourlastor.game.level.platform.PlatformSystem;
 import io.github.fourlastor.game.level.system.ActorFollowBodySystem;
 import io.github.fourlastor.game.level.system.CameraMovementSystem;
 import io.github.fourlastor.game.level.system.ClearScreenSystem;
-import io.github.fourlastor.game.level.system.PlatformSystem;
 import io.github.fourlastor.game.level.system.StageSystem;
 
 @Module

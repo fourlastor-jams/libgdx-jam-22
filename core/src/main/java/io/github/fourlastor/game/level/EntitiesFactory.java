@@ -17,6 +17,9 @@ import io.github.fourlastor.game.component.AnimatedImageComponent;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
 import io.github.fourlastor.game.component.MovingPlatformComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
+import io.github.fourlastor.game.level.platform.PlatformSpeed;
+import io.github.fourlastor.game.level.platform.PlatformType;
+import io.github.fourlastor.game.level.platform.PlatformWidth;
 import io.github.fourlastor.game.ui.AnimatedImage;
 import io.github.fourlastor.game.ui.ParallaxImage;
 import java.util.Random;
@@ -69,7 +72,10 @@ public class EntitiesFactory {
         return entity;
     }
 
-    public Entity ground(float x, float y, PlatformType platformType, PlatformWidth platformWidth) {
+    public Entity ground(float x, float y) {
+        PlatformWidth platformWidth = platformWidth();
+        PlatformType platformType = platformType();
+        PlatformSpeed platformSpeed = platformSpeed();
         Entity entity = new Entity();
         Vector2 initialPosition = new Vector2(x, y);
         entity.add(new BodyBuilderComponent(world -> {
@@ -87,9 +93,24 @@ public class EntitiesFactory {
                 textureAtlas.findRegion("platforms/platform_" + platformType.tileName + "_w" + platformWidth.width));
         image.setScale(SCALE_XY);
         entity.add(new ActorComponent(image, ActorComponent.Layer.PLATFORM));
-        entity.add(new MovingPlatformComponent(initialPosition.cpy(), random.nextBoolean()));
+        entity.add(new MovingPlatformComponent(initialPosition.cpy(), random.nextBoolean(), platformSpeed.speed));
 
         return entity;
+    }
+
+    private PlatformType platformType() {
+        PlatformType[] values = PlatformType.values();
+        return values[random.nextInt(values.length)];
+    }
+
+    private PlatformWidth platformWidth() {
+        PlatformWidth[] values = PlatformWidth.values();
+        return values[random.nextInt(values.length)];
+    }
+
+    private PlatformSpeed platformSpeed() {
+        PlatformSpeed[] values = PlatformSpeed.values();
+        return values[random.nextInt(values.length)];
     }
 
     public Entity parallaxBackground(Texture texture, float factor, ActorComponent.Layer layer) {

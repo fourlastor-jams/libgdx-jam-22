@@ -1,4 +1,4 @@
-package io.github.fourlastor.game.level.system;
+package io.github.fourlastor.game.level.platform;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
@@ -57,10 +57,7 @@ public class PlatformSystem extends IteratingSystem {
         if (movingPlatform.initialPosition.dst(position) >= 4) {
             movingPlatform.goingLeft = !movingPlatform.goingLeft;
         }
-        if (movingPlatform.goingLeft) {
-            body.setLinearVelocity(-1f, 0f);
-        } else {
-            body.setLinearVelocity(1f, 0f);
-        }
+        float speed = movingPlatform.goingLeft ? -movingPlatform.speed : movingPlatform.speed;
+        body.setLinearVelocity(speed, 0f);
     }
 }
