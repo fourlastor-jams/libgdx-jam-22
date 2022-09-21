@@ -39,12 +39,12 @@ public class LevelScreen extends ScreenAdapter {
             PlatformWidth width;
             PlatformType type = PlatformType.LARGE_GRID;
             if (i > 4) {
-                width = PlatformWidth.NINE;
+                width = PlatformWidth.ONE;
+                type = PlatformType.SMALL_GRID;
             } else if (i > 2) {
                 width = PlatformWidth.FOUR;
             } else {
-                type = PlatformType.SMALL_GRID;
-                width = PlatformWidth.ONE;
+                width = PlatformWidth.NINE;
             }
             engine.addEntity(entitiesFactory.ground(4.5f, 4f * i, type, width));
         }
