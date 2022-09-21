@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import io.github.fourlastor.game.di.GameComponent;
+import io.github.fourlastor.game.intro.IntroScreen;
 import io.github.fourlastor.game.level.LevelScreen;
 import javax.inject.Provider;
 
@@ -11,16 +12,19 @@ public class MyGdxGame extends Game {
 
     private final InputMultiplexer multiplexer;
     private final Provider<LevelScreen> screen;
+    private final Provider<IntroScreen> introScreenProvider;
 
-    public MyGdxGame(InputMultiplexer multiplexer, Provider<LevelScreen> screen) {
+    public MyGdxGame(
+            InputMultiplexer multiplexer, Provider<LevelScreen> screen, Provider<IntroScreen> introScreenProvider) {
         this.multiplexer = multiplexer;
         this.screen = screen;
+        this.introScreenProvider = introScreenProvider;
     }
 
     @Override
     public void create() {
         Gdx.input.setInputProcessor(multiplexer);
-        setScreen(screen.get());
+        setScreen(introScreenProvider.get());
     }
 
     public static MyGdxGame createGame() {

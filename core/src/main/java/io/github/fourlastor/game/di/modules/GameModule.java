@@ -8,10 +8,11 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import dagger.Module;
 import dagger.Provides;
 import io.github.fourlastor.game.MyGdxGame;
+import io.github.fourlastor.game.intro.IntroComponent;
 import io.github.fourlastor.game.level.LevelComponent;
 import javax.inject.Singleton;
 
-@Module(subcomponents = LevelComponent.class)
+@Module(subcomponents = {LevelComponent.class, IntroComponent.class})
 public class GameModule {
 
     private static final String PATH_TEXTURE_ATLAS = "images/included/packed/images.pack.atlas";
@@ -25,6 +26,7 @@ public class GameModule {
         assetManager.load("images/included/background/background_layer_1.png", Texture.class);
         assetManager.load("images/included/background/background_layer_2.png", Texture.class);
         assetManager.load("images/included/background/background_layer_3.png", Texture.class);
+        //        assetManager.load("audio/music/398937__mypantsfelldown__metal-footsteps.wav", Music.class);
         assetManager.finishLoading();
         return assetManager;
     }
@@ -49,7 +51,11 @@ public class GameModule {
 
     @Provides
     @Singleton
-    public MyGdxGame game(InputMultiplexer multiplexer, LevelComponent.Builder builder) {
-        return new MyGdxGame(multiplexer, builder.build().levelScreen());
+    public MyGdxGame game(
+            InputMultiplexer multiplexer, LevelComponent.Builder levelBuilder, IntroComponent.Builder introBuilder) {
+        return new MyGdxGame(
+                multiplexer,
+                levelBuilder.build().levelScreen(),
+                introBuilder.build().introScreen());
     }
 }
