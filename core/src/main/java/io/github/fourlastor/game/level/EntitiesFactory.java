@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -54,7 +55,9 @@ public class EntitiesFactory {
             Body body = world.createBody(bodyDef);
             PolygonShape shape = new PolygonShape();
             shape.setAsBox(0.25f, 0.5f);
-            body.createFixture(shape, 0.0f).setUserData(UserData.PLAYER);
+            Fixture fixture = body.createFixture(shape, 0.0f);
+            fixture.setFriction(100f);
+            fixture.setUserData(UserData.PLAYER);
             shape.dispose();
             return body;
         }));
