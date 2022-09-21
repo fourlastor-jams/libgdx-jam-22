@@ -14,9 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import io.github.fourlastor.game.component.ActorComponent;
 import io.github.fourlastor.game.component.AnimatedImageComponent;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
+import io.github.fourlastor.game.component.MovingPlatformComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
 import io.github.fourlastor.game.ui.AnimatedImage;
 import io.github.fourlastor.game.ui.ParallaxImage;
+import java.util.Random;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -27,13 +29,16 @@ public class EntitiesFactory {
     private static final float SCALE_XY = 1f / 32f;
     private final Animation<TextureRegion> fallingAnimation;
     private final TextureAtlas textureAtlas;
+    private final Random random;
 
     @Inject
     public EntitiesFactory(
             @Named(PlayerAnimationsFactory.ANIMATION_FALLING) Animation<TextureRegion> fallingAnimation,
-            TextureAtlas textureAtlas) {
+            TextureAtlas textureAtlas,
+            Random random) {
         this.fallingAnimation = fallingAnimation;
         this.textureAtlas = textureAtlas;
+        this.random = random;
     }
 
     public Entity player() {
@@ -63,9 +68,11 @@ public class EntitiesFactory {
 
     public Entity ground(float x, float y, PlatformType platformType, PlatformWidth platformWidth) {
         Entity entity = new Entity();
+        Vector2 initialPosition = new Vector2(x, y);
         entity.add(new BodyBuilderComponent(world -> {
             BodyDef bodyDef = new BodyDef();
-            bodyDef.position.set(new Vector2(x, y));
+            bodyDef.type = BodyDef.BodyType.KinematicBody;
+            bodyDef.position.set(initialPosition);
             Body body = world.createBody(bodyDef);
             PolygonShape shape = new PolygonShape();
             shape.setAsBox(platformWidth.width / 2f, 0.25f);
@@ -77,6 +84,7 @@ public class EntitiesFactory {
                 textureAtlas.findRegion("platforms/platform_" + platformType.tileName + "_w" + platformWidth.width));
         image.setScale(SCALE_XY);
         entity.add(new ActorComponent(image, ActorComponent.Layer.PLATFORM));
+        entity.add(new MovingPlatformComponent(initialPosition.cpy(), random.nextBoolean()));
 
         return entity;
     }
