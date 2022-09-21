@@ -58,7 +58,7 @@ public class EntitiesFactory {
             shape.dispose();
             return body;
         }));
-        image.setY(-0.75f);
+        image.setPosition(-0.5f, -0.75f);
         Group group = new Group();
         group.addActor(image);
         entity.add(new ActorComponent(group, ActorComponent.Layer.CHARACTER));
