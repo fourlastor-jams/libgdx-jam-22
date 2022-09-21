@@ -17,6 +17,7 @@ import io.github.fourlastor.game.component.AnimatedImageComponent;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
 import io.github.fourlastor.game.component.MovingPlatformComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
+import io.github.fourlastor.game.di.ScreenScoped;
 import io.github.fourlastor.game.level.platform.PlatformSpeed;
 import io.github.fourlastor.game.level.platform.PlatformType;
 import io.github.fourlastor.game.level.platform.PlatformWidth;
@@ -27,6 +28,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /** Factory to create various entities: player, buildings, enemies.. */
+@ScreenScoped
 public class EntitiesFactory {
 
     private static final float CHARACTER_SCALE_XY = 1f / 40f;
@@ -72,10 +74,29 @@ public class EntitiesFactory {
         return entity;
     }
 
-    public Entity ground(float x, float y) {
+    private int platformsCount = 0;
+
+    public Entity ground() {
+        int count = platformsCount;
+        platformsCount += 1;
+        if (count == 0) {
+            return makeGround(PlatformWidth.NINE, PlatformType.SMALL_GRID, PlatformSpeed.IMMOBILE, 4.5f, 0f);
+        }
         PlatformWidth platformWidth = platformWidth();
-        PlatformType platformType = platformType();
+        PlatformType platformType;
+        if (platformWidth == PlatformWidth.ONE) {
+            platformType = PlatformType.SMALL_GRID;
+        } else {
+            platformType = platformType();
+        }
         PlatformSpeed platformSpeed = platformSpeed();
+        float x = random.nextFloat(2f, 6f);
+        float y = 4f * count;
+        return makeGround(platformWidth, platformType, platformSpeed, x, y);
+    }
+
+    private Entity makeGround(
+            PlatformWidth platformWidth, PlatformType platformType, PlatformSpeed platformSpeed, float x, float y) {
         Entity entity = new Entity();
         Vector2 initialPosition = new Vector2(x, y);
         entity.add(new BodyBuilderComponent(world -> {

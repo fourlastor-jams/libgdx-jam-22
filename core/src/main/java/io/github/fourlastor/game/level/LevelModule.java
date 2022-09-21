@@ -13,6 +13,7 @@ import io.github.fourlastor.game.di.ScreenScoped;
 import io.github.fourlastor.game.level.input.PlayerInputSystem;
 import io.github.fourlastor.game.level.physics.PhysicsDebugSystem;
 import io.github.fourlastor.game.level.physics.PhysicsSystem;
+import io.github.fourlastor.game.level.platform.PlatformSpawnSystem;
 import io.github.fourlastor.game.level.platform.PlatformSystem;
 import io.github.fourlastor.game.level.system.ActorFollowBodySystem;
 import io.github.fourlastor.game.level.system.CameraMovementSystem;
@@ -32,8 +33,10 @@ public class LevelModule {
             StageSystem stageSystem,
             ClearScreenSystem clearScreenSystem,
             PhysicsDebugSystem physicsDebugSystem,
-            PlatformSystem platformSystem) {
+            PlatformSystem platformSystem,
+            PlatformSpawnSystem platformSpawnSystem) {
         Engine engine = new Engine();
+        engine.addSystem(platformSpawnSystem);
         engine.addSystem(platformSystem);
         engine.addSystem(playerInputSystem);
         engine.addSystem(physicsSystem);

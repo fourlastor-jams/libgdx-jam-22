@@ -7,8 +7,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import io.github.fourlastor.game.component.ActorComponent.Layer;
 import io.github.fourlastor.game.di.ScreenScoped;
-import io.github.fourlastor.game.level.platform.PlatformType;
-import io.github.fourlastor.game.level.platform.PlatformWidth;
 import javax.inject.Inject;
 
 @ScreenScoped
@@ -38,17 +36,7 @@ public class LevelScreen extends ScreenAdapter {
                 1f,
                 Layer.FG_PARALLAX));
         for (int i = 0; i < 6; i++) {
-            PlatformWidth width;
-            PlatformType type = PlatformType.LARGE_GRID;
-            if (i > 4) {
-                width = PlatformWidth.ONE;
-                type = PlatformType.SMALL_GRID;
-            } else if (i > 2) {
-                width = PlatformWidth.FOUR;
-            } else {
-                width = PlatformWidth.NINE;
-            }
-            engine.addEntity(entitiesFactory.ground(4.5f, 4f * i));
+            engine.addEntity(entitiesFactory.ground());
         }
         engine.addEntity(entitiesFactory.player());
     }
