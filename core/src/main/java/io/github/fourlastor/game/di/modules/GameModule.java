@@ -22,10 +22,24 @@ public class GameModule {
     public AssetManager assetManager() {
         AssetManager assetManager = new AssetManager();
         assetManager.load(PATH_TEXTURE_ATLAS, TextureAtlas.class);
+
         assetManager.load("images/included/background/background_layer_0.png", Texture.class);
         assetManager.load("images/included/background/background_layer_1.png", Texture.class);
         assetManager.load("images/included/background/background_layer_2.png", Texture.class);
         assetManager.load("images/included/background/background_layer_3.png", Texture.class);
+
+        assetManager.load("images/included/intro/dragon_queen.png", Texture.class);
+        assetManager.load("images/included/intro/earth_ground.png", Texture.class);
+        assetManager.load("images/included/intro/earth_space.png", Texture.class);
+        assetManager.load("images/included/intro/missiles_and_explosion_1.png", Texture.class);
+        assetManager.load("images/included/intro/missiles_and_explosion_2.png", Texture.class);
+        assetManager.load("images/included/intro/missiles_and_explosion_3.png", Texture.class);
+        assetManager.load("images/included/intro/silo_and_skeleton.png", Texture.class);
+        assetManager.load("images/included/intro/sky_and_mountains.png", Texture.class);
+        assetManager.load("images/included/intro/sky_dragon.png", Texture.class);
+        assetManager.load("images/included/intro/space.png", Texture.class);
+        assetManager.load("images/included/intro/zebra_king.png", Texture.class);
+
         //        assetManager.load("audio/music/398937__mypantsfelldown__metal-footsteps.wav", Music.class);
         assetManager.finishLoading();
         return assetManager;
