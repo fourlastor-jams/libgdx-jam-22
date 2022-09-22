@@ -2,8 +2,6 @@ package io.github.fourlastor.game.level;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import io.github.fourlastor.game.component.ActorComponent.Layer;
 import io.github.fourlastor.game.di.ScreenScoped;
@@ -16,25 +14,13 @@ public class LevelScreen extends ScreenAdapter {
     private final Viewport viewport;
 
     @Inject
-    public LevelScreen(Engine engine, Viewport viewport, EntitiesFactory entitiesFactory, AssetManager assetManager) {
+    public LevelScreen(Engine engine, Viewport viewport, EntitiesFactory entitiesFactory) {
         this.engine = engine;
         this.viewport = viewport;
-        engine.addEntity(entitiesFactory.parallaxBackground(
-                assetManager.get("images/included/background/background_layer_0.png", Texture.class),
-                0.125f,
-                Layer.BG_PARALLAX));
-        engine.addEntity(entitiesFactory.parallaxBackground(
-                assetManager.get("images/included/background/background_layer_1.png", Texture.class),
-                0.25f,
-                Layer.BG_PARALLAX));
-        engine.addEntity(entitiesFactory.parallaxBackground(
-                assetManager.get("images/included/background/background_layer_2.png", Texture.class),
-                0.5f,
-                Layer.FG_PARALLAX));
-        engine.addEntity(entitiesFactory.parallaxBackground(
-                assetManager.get("images/included/background/background_layer_3.png", Texture.class),
-                1f,
-                Layer.FG_PARALLAX));
+        engine.addEntity(entitiesFactory.parallaxBackground(0.125f, Layer.BG_PARALLAX, 0));
+        engine.addEntity(entitiesFactory.parallaxBackground(0.25f, Layer.BG_PARALLAX, 1));
+        engine.addEntity(entitiesFactory.parallaxBackground(0.5f, Layer.FG_PARALLAX, 2));
+        engine.addEntity(entitiesFactory.parallaxBackground(1f, Layer.FG_PARALLAX, 3));
         for (int i = 0; i < 6; i++) {
             engine.addEntity(entitiesFactory.ground());
         }
