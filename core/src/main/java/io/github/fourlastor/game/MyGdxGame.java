@@ -11,20 +11,24 @@ import javax.inject.Provider;
 public class MyGdxGame extends Game {
 
     private final InputMultiplexer multiplexer;
-    private final Provider<LevelScreen> screen;
+    private final Provider<LevelScreen> levelScreenProvider;
+
+    @SuppressWarnings({"FieldCanBeLocal", "unused"}) // TODO: add screen switching
     private final Provider<IntroScreen> introScreenProvider;
 
     public MyGdxGame(
-            InputMultiplexer multiplexer, Provider<LevelScreen> screen, Provider<IntroScreen> introScreenProvider) {
+            InputMultiplexer multiplexer,
+            Provider<LevelScreen> levelScreenProvider,
+            Provider<IntroScreen> introScreenProvider) {
         this.multiplexer = multiplexer;
-        this.screen = screen;
+        this.levelScreenProvider = levelScreenProvider;
         this.introScreenProvider = introScreenProvider;
     }
 
     @Override
     public void create() {
         Gdx.input.setInputProcessor(multiplexer);
-        setScreen(introScreenProvider.get());
+        setScreen(levelScreenProvider.get());
     }
 
     public static MyGdxGame createGame() {
