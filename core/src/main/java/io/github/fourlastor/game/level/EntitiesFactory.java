@@ -17,6 +17,7 @@ import io.github.fourlastor.game.component.BodyBuilderComponent;
 import io.github.fourlastor.game.component.MovingPlatformComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
 import io.github.fourlastor.game.di.ScreenScoped;
+import io.github.fourlastor.game.level.platform.PlatformSpec;
 import io.github.fourlastor.game.level.platform.PlatformSpeed;
 import io.github.fourlastor.game.level.platform.PlatformType;
 import io.github.fourlastor.game.level.platform.PlatformWidth;
@@ -79,7 +80,8 @@ public class EntitiesFactory {
         int count = platformsCount;
         platformsCount += 1;
         if (count == 0) {
-            return makeGround(PlatformWidth.NINE, PlatformType.SMALL_GRID, PlatformSpeed.IMMOBILE, 4.5f, 0f);
+            return makeGround(
+                    new PlatformSpec(PlatformWidth.NINE, PlatformType.SMALL_GRID, PlatformSpeed.IMMOBILE, 4.5f, 0f));
         }
         PlatformWidth platformWidth = platformWidth();
         PlatformType platformType;
@@ -91,29 +93,29 @@ public class EntitiesFactory {
         PlatformSpeed platformSpeed = platformSpeed();
         float x = random.nextFloat() * 4f + 2f;
         float y = 4f * count;
-        return makeGround(platformWidth, platformType, platformSpeed, x, y);
+        return makeGround(new PlatformSpec(platformWidth, platformType, platformSpeed, x, y));
     }
 
-    private Entity makeGround(
-            PlatformWidth platformWidth, PlatformType platformType, PlatformSpeed platformSpeed, float x, float y) {
+    private Entity makeGround(PlatformSpec spec) {
+
         Entity entity = new Entity();
-        Vector2 initialPosition = new Vector2(x, y);
+        Vector2 initialPosition = new Vector2(spec.x, spec.y);
         entity.add(new BodyBuilderComponent(world -> {
             BodyDef bodyDef = new BodyDef();
             bodyDef.type = BodyDef.BodyType.KinematicBody;
             bodyDef.position.set(initialPosition);
             Body body = world.createBody(bodyDef);
             PolygonShape shape = new PolygonShape();
-            shape.setAsBox(platformWidth.width / 2f, 0.25f);
+            shape.setAsBox(spec.width.width / 2f, 0.25f);
             body.createFixture(shape, 0.0f).setUserData(UserData.PLATFORM);
             shape.dispose();
             return body;
         }));
         Image image = new Image(
-                textureAtlas.findRegion("platforms/platform_" + platformType.tileName + "_w" + platformWidth.width));
+                textureAtlas.findRegion("platforms/platform_" + spec.type.tileName + "_w" + spec.width.width));
         image.setScale(SCALE_XY);
         entity.add(new ActorComponent(image, ActorComponent.Layer.PLATFORM));
-        entity.add(new MovingPlatformComponent(initialPosition.cpy(), random.nextBoolean(), platformSpeed.speed));
+        entity.add(new MovingPlatformComponent(initialPosition.cpy(), random.nextBoolean(), spec.speed.speed));
 
         return entity;
     }
