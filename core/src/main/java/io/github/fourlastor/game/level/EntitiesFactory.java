@@ -18,9 +18,6 @@ import io.github.fourlastor.game.component.MovingPlatformComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
 import io.github.fourlastor.game.di.ScreenScoped;
 import io.github.fourlastor.game.level.platform.PlatformSpec;
-import io.github.fourlastor.game.level.platform.PlatformSpeed;
-import io.github.fourlastor.game.level.platform.PlatformType;
-import io.github.fourlastor.game.level.platform.PlatformWidth;
 import io.github.fourlastor.game.ui.AnimatedImage;
 import io.github.fourlastor.game.ui.ParallaxImage;
 import java.util.Random;
@@ -80,20 +77,20 @@ public class EntitiesFactory {
         int count = platformsCount;
         platformsCount += 1;
         if (count == 0) {
-            return makeGround(
-                    new PlatformSpec(PlatformWidth.NINE, PlatformType.SMALL_GRID, PlatformSpeed.IMMOBILE, 4.5f, 0f));
+            return makeGround(new PlatformSpec(
+                    PlatformSpec.Width.NINE, PlatformSpec.Type.SMALL_GRID, PlatformSpec.Speed.IMMOBILE, 4.5f, 0f));
         }
-        PlatformWidth platformWidth = platformWidth();
-        PlatformType platformType;
-        if (platformWidth == PlatformWidth.ONE) {
-            platformType = PlatformType.SMALL_GRID;
+        PlatformSpec.Width width = platformWidth();
+        PlatformSpec.Type type;
+        if (width == PlatformSpec.Width.ONE) {
+            type = PlatformSpec.Type.SMALL_GRID;
         } else {
-            platformType = platformType();
+            type = platformType();
         }
-        PlatformSpeed platformSpeed = platformSpeed();
+        PlatformSpec.Speed speed = platformSpeed();
         float x = random.nextFloat() * 4f + 2f;
         float y = 4f * count;
-        return makeGround(new PlatformSpec(platformWidth, platformType, platformSpeed, x, y));
+        return makeGround(new PlatformSpec(width, type, speed, x, y));
     }
 
     private Entity makeGround(PlatformSpec spec) {
@@ -120,18 +117,18 @@ public class EntitiesFactory {
         return entity;
     }
 
-    private PlatformType platformType() {
-        PlatformType[] values = PlatformType.values();
+    private PlatformSpec.Type platformType() {
+        PlatformSpec.Type[] values = PlatformSpec.Type.values();
         return values[random.nextInt(values.length)];
     }
 
-    private PlatformWidth platformWidth() {
-        PlatformWidth[] values = PlatformWidth.values();
+    private PlatformSpec.Width platformWidth() {
+        PlatformSpec.Width[] values = PlatformSpec.Width.values();
         return values[random.nextInt(values.length)];
     }
 
-    private PlatformSpeed platformSpeed() {
-        PlatformSpeed[] values = PlatformSpeed.values();
+    private PlatformSpec.Speed platformSpeed() {
+        PlatformSpec.Speed[] values = PlatformSpec.Speed.values();
         return values[random.nextInt(values.length)];
     }
 
