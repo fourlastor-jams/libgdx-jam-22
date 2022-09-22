@@ -1,20 +1,20 @@
 package io.github.fourlastor.game.ui;
 
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class ParallaxImage extends Actor {
 
-    private final Texture texture;
+    private final TextureRegion texture;
     private final float factor;
 
     private float currentDelta = 0f;
 
-    public ParallaxImage(float factor, Texture texture) {
+    public ParallaxImage(float factor, TextureRegion texture) {
         super();
-        setBounds(0f, 0f, texture.getWidth(), texture.getHeight());
+        setBounds(0f, 0f, texture.getRegionWidth(), texture.getRegionHeight());
         setPosition(0f, 0f);
         this.factor = factor;
         this.texture = texture;
