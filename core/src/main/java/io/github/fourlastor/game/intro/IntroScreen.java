@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -46,6 +48,12 @@ public class IntroScreen extends ScreenAdapter {
 
     private TypingLabel subtitles;
 
+    private Sound missilesSound;
+    private Sound atomicBombsSound;
+    private Sound voiceSound;
+    private Music musicMusic;
+    private Music ambianceMusic;
+
     @Inject
     public IntroScreen(InputMultiplexer inputMultiplexer, TextureAtlas atlas, AssetManager assetManager) {
         this.inputMultiplexer = inputMultiplexer;
@@ -54,7 +62,127 @@ public class IntroScreen extends ScreenAdapter {
         Viewport viewport = new ScreenViewport();
         stage = new Stage(viewport);
 
+        subtitlesSetup();
+        imageSetup();
+        audioSetup();
 
+        earth_space.addAction(Actions.sequence(
+                actI(),
+                actII()
+        ));
+    }
+
+    @Override
+    public void render(float delta) {
+        stage.act(delta);
+        stage.draw();
+    }
+
+    private Action actI() {
+        return Actions.sequence(
+                Actions.fadeIn(2f),
+                Actions.delay(2f),
+                Actions.run(() -> {
+                    missiles_and_explosion_1.addAction(Actions.fadeIn(1f));
+                    subtitles.restart();
+                    subtitles.setText("The war of the floating cities...");
+                    missilesSound.play(.25f);
+                    voiceSound.play();
+                }),
+                Actions.delay(.1f),
+                Actions.run(() -> zebra_king.addAction(Actions.fadeIn(6f))),
+                Actions.delay(.3f),
+                Actions.run(() -> dragon_queen.addAction(Actions.fadeIn(6f))),
+                Actions.delay(3f),
+                Actions.run(() -> {
+                    missiles_and_explosion_1.addAction(Actions.fadeOut(1f));
+                    missiles_and_explosion_2.addAction(Actions.fadeIn(1f));
+                    subtitles.restart();
+                    subtitles.setText("left this world in ruins...");
+                }),
+                Actions.delay(2f),
+                Actions.run(() -> {
+                    missiles_and_explosion_2.addAction(Actions.fadeOut(1f));
+                    missiles_and_explosion_3.addAction(Actions.fadeIn(1f));
+                }),
+                Actions.delay(.2f),
+                Actions.run(() -> {
+                    atomicBombsSound.play();
+
+                }),
+                Actions.delay(4f),
+                Actions.run(() -> {
+                    zebra_king.addAction(Actions.sequence(
+                            Actions.fadeOut(.75f),
+                            Actions.run(() -> zebra_king.setVisible(false)))
+                    );
+                    dragon_queen.addAction(Actions.sequence(
+                            Actions.fadeOut(1f),
+                            Actions.run(() -> dragon_queen.setVisible(false)))
+                    );
+                    missiles_and_explosion_3.addAction(Actions.sequence(
+                            Actions.fadeOut(1f),
+                            Actions.run(() -> missiles_and_explosion_3.setVisible(false)))
+                    );
+                    earth_space.addAction(Actions.sequence(
+                            Actions.fadeOut(1f),
+                            Actions.run(() -> earth_space.setVisible(false)))
+                    );
+                    space.addAction(Actions.sequence(
+                            Actions.fadeOut(1f),
+                            Actions.run(() -> space.setVisible(false)))
+                    );
+                    subtitles.addAction(Actions.fadeOut(1f));
+                })
+        );
+    }
+
+
+    private Action actII() {
+        return Actions.sequence(
+                Actions.run(() -> {
+                    ambianceMusic.setVolume(.5f);
+                    ambianceMusic.play();
+                    sky_and_mountains.addAction(Actions.fadeIn(2));
+                    earth_ground.addAction(Actions.fadeIn(2));
+                    silo_and_skeleton.addAction(Actions.fadeIn(2));
+                    sky_dragon.addAction(Actions.sequence(
+                            Actions.fadeIn(0),
+                            Actions.moveTo(-Gdx.graphics.getWidth() * .6f, -Gdx.graphics.getHeight() * .1f, 0),
+                            Actions.moveTo(Gdx.graphics.getWidth() * 2, Gdx.graphics.getHeight() * .4f, 30)
+                    ));
+                    lyze.setPosition(Gdx.graphics.getWidth() * .05f, 0);
+                    lyze.addAction(Actions.sequence(
+                            Actions.fadeIn(0f),
+                            Actions.moveTo(-Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * .1f, 30f)
+                    ));
+                    subtitles.addAction(Actions.fadeIn(1f));
+                    subtitles.setColor(new Color(0.039f, 0.039f, 0.043f, 1f));
+                    subtitles.restart();
+                    subtitles.setText("but from the destruction...");
+                }),
+                Actions.delay(3f),
+                Actions.run(() -> {
+                    subtitles.restart();
+                    subtitles.setText("well, life always finds a way");
+                }),
+                Actions.delay(4f),
+                Actions.run(() -> {
+                    subtitles.restart();
+                    subtitles.setText("(except for the zebras, they were all exterminated)");
+                }),
+                Actions.delay(2f),
+                Actions.run(() -> subtitles.addAction(Actions.fadeOut(3f))),
+                Actions.delay(2f),
+                Actions.run(() -> black_screen.addAction(Actions.fadeIn(1f))),
+                Actions.delay(3f),
+                Actions.run(() -> {
+                    System.out.println("TODO: change this line to go to another screen"); // TODO:
+                })
+        );
+    }
+
+    private void subtitlesSetup() {
         Label.LabelStyle label32Style = new Label.LabelStyle();
         BitmapFont myFont = new BitmapFont(Gdx.files.internal("fonts/font-32.fnt"));
         label32Style.font = myFont;
@@ -68,7 +196,9 @@ public class IntroScreen extends ScreenAdapter {
         subtitles.getColor().a = 0;
         subtitles.addAction(Actions.fadeIn(1f));
         subtitles.setColor(new Color(1f, 1f, 0.949f, 1f));
+    }
 
+    private void imageSetup() {
         dragon_queen = new Image(assetManager.get("images/included/intro/dragon_queen.png", Texture.class));
         earth_ground = new Image(assetManager.get("images/included/intro/earth_ground.png", Texture.class));
         earth_space = new Image(assetManager.get("images/included/intro/earth_space.png", Texture.class));
@@ -124,106 +254,16 @@ public class IntroScreen extends ScreenAdapter {
         missiles_and_explosion_3.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         zebra_king.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         black_screen.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-        earth_space.addAction(Actions.sequence(
-                actI(),
-                actII()
-        ));
-
-        //        Music music = assetManager.get("audio/music/398937__mypantsfelldown__metal-footsteps.wav",
-        // Music.class);
-
     }
 
-    @Override
-    public void render(float delta) {
-        stage.act(delta);
-        stage.draw();
-    }
+    private void audioSetup() {
+        missilesSound = assetManager.get("audio/sounds/190469__alxy__rapid-missile-launch.wav", Sound.class);
+        atomicBombsSound = assetManager.get("audio/sounds/379352__hard3eat__atomic-bomb.wav", Sound.class);
+        voiceSound = assetManager.get("audio/sounds/sandra_intro.wav", Sound.class);
 
-    private Action actI() {
-        return Actions.sequence(
-                Actions.fadeIn(2f),
-                Actions.delay(1f),
-                Actions.run(() -> {
-                    missiles_and_explosion_1.addAction(Actions.fadeIn(1f));
-                    subtitles.restart();
-                    subtitles.setText("The war of the floating cities...");
-                }),
-                Actions.delay(.1f),
-                Actions.run(() -> zebra_king.addAction(Actions.fadeIn(6f))),
-                Actions.delay(.3f),
-                Actions.run(() -> dragon_queen.addAction(Actions.fadeIn(6f))),
-                Actions.delay(3f),
-                Actions.run(() -> {
-                    missiles_and_explosion_1.addAction(Actions.fadeOut(1f));
-                    missiles_and_explosion_2.addAction(Actions.fadeIn(1f));
-                    subtitles.restart();
-                    subtitles.setText("left this world in ruins...");
-                }),
-                Actions.delay(2f),
-                Actions.run(() -> {
-                    missiles_and_explosion_2.addAction(Actions.fadeOut(1f));
-                    missiles_and_explosion_3.addAction(Actions.fadeIn(1f));
-                }),
-                Actions.delay(2f),
-                Actions.run(() -> {
-                    zebra_king.addAction(Actions.sequence(
-                            Actions.fadeOut(1f),
-                            Actions.run(() -> zebra_king.setVisible(false)))
-                    );
-                    dragon_queen.addAction(Actions.sequence(
-                            Actions.fadeOut(1f),
-                            Actions.run(() -> dragon_queen.setVisible(false)))
-                    );
-                    missiles_and_explosion_3.addAction(Actions.sequence(
-                            Actions.fadeOut(1f),
-                            Actions.run(() -> missiles_and_explosion_3.setVisible(false)))
-                    );
-                    earth_space.addAction(Actions.sequence(
-                            Actions.fadeOut(1f),
-                            Actions.run(() -> earth_space.setVisible(false)))
-                    );
-                    space.addAction(Actions.sequence(
-                            Actions.fadeOut(1f),
-                            Actions.run(() -> space.setVisible(false)))
-                    );
-                    subtitles.addAction(Actions.fadeOut(1f));
-                })
-        );
-    }
-
-
-    private Action actII() {
-        return Actions.sequence(
-                Actions.run(() -> {
-                    sky_and_mountains.addAction(Actions.fadeIn(2));
-                    earth_ground.addAction(Actions.fadeIn(2));
-                    silo_and_skeleton.addAction(Actions.fadeIn(2));
-                    sky_dragon.addAction(Actions.sequence(
-                            Actions.fadeIn(0),
-                            Actions.moveTo(-Gdx.graphics.getWidth() * .6f, -Gdx.graphics.getHeight() * .1f, 0),
-                            Actions.moveTo(Gdx.graphics.getWidth() * 2, Gdx.graphics.getHeight() * .4f, 30)
-                    ));
-                    lyze.setPosition(Gdx.graphics.getWidth() * .05f, 0);
-                    lyze.addAction(Actions.sequence(
-                            Actions.fadeIn(0f),
-                            Actions.moveTo(-Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * .1f, 30f)
-                    ));
-                    subtitles.addAction(Actions.fadeIn(1f));
-                    subtitles.setColor(new Color(0.039f, 0.039f, 0.043f, 1f));
-                    subtitles.restart();
-                    subtitles.setText("but from the destruction...");
-                }),
-                Actions.delay(3f),
-                Actions.run(() -> {
-                    subtitles.restart();
-                    subtitles.setText("well, life always finds a way");
-                }),
-                Actions.delay(2f),
-                Actions.run(() -> subtitles.addAction(Actions.fadeOut(1f))),
-                Actions.delay(2f),
-                Actions.run(() -> black_screen.addAction(Actions.fadeIn(1f)))
-        );
+        musicMusic = assetManager.get("audio/music/428674__phantastonia__cinematic-vio2.wav", Music.class);
+        ambianceMusic = assetManager.get("audio/music/608308__aidangig__radiation-ambience-effect.wav", Music.class);
+        musicMusic.setVolume(.25f);
+        musicMusic.play();
     }
 }

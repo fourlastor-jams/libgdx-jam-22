@@ -3,6 +3,8 @@ package io.github.fourlastor.game.di.modules;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import dagger.Module;
@@ -43,6 +45,13 @@ public class GameModule {
         assetManager.load("images/included/intro/zebra_king.png", Texture.class);
         assetManager.load("images/included/intro/lyze.png", Texture.class);
         assetManager.load("images/included/intro/black_screen.png", Texture.class);
+
+        assetManager.load("audio/sounds/190469__alxy__rapid-missile-launch.wav", Sound.class);
+        assetManager.load("audio/sounds/379352__hard3eat__atomic-bomb.wav", Sound.class);
+        assetManager.load("audio/sounds/sandra_intro.wav", Sound.class);
+
+        assetManager.load("audio/music/428674__phantastonia__cinematic-vio2.wav", Music.class);
+        assetManager.load("audio/music/608308__aidangig__radiation-ambience-effect.wav", Music.class);
 
         //        assetManager.load("audio/music/398937__mypantsfelldown__metal-footsteps.wav", Music.class);
         assetManager.finishLoading();
