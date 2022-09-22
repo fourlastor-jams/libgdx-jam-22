@@ -8,7 +8,7 @@ targetCompatibility = 1.8
 
 sourceSets.main.resources.srcDirs = ["../assets"]
 
-project.ext.mainClassName = "no.sandramoen.commanderqueen.DesktopLauncher"
+project.ext.mainClassName = "io.github.fourlastor.game.DesktopLauncher"
 project.ext.assetsDir = new File("../assets")
 
 spotless {

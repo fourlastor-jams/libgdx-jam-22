@@ -1,8 +1,7 @@
-package no.sandramoen.commanderqueen;
+package io.github.fourlastor.game;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import io.github.fourlastor.game.MyGdxGame;
 import java.awt.Dimension;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument

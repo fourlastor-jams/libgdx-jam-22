@@ -6,8 +6,17 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class ActorComponent implements Component {
 
     public final Actor actor;
+    public final Layer layer;
 
-    public ActorComponent(Actor actor) {
+    public ActorComponent(Actor actor, Layer layer) {
         this.actor = actor;
+        this.layer = layer;
+    }
+
+    public enum Layer {
+        BG_PARALLAX,
+        PLATFORM,
+        CHARACTER,
+        FG_PARALLAX
     }
 }
