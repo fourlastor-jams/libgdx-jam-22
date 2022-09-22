@@ -49,10 +49,20 @@ public class PlatformSystem extends IteratingSystem {
         float halfScreen = camera.viewportWidth / 2;
         float left = camera.position.x - halfScreen;
         float right = camera.position.x + halfScreen;
-        if (movingPlatform.initialPosition.dst(position) >= 4 || position.x < left || position.x > right) {
+        if (movingPlatform.initialPosition.dst(position) >= 4
+                || leftAndOutside(position, left, movingPlatform.goingLeft)
+                || rightAndOutside(position, right, movingPlatform.goingLeft)) {
             movingPlatform.goingLeft = !movingPlatform.goingLeft;
         }
         float speed = movingPlatform.goingLeft ? -movingPlatform.speed : movingPlatform.speed;
         body.setLinearVelocity(speed, 0f);
+    }
+
+    private static boolean rightAndOutside(Vector2 position, float right, boolean goingLeft) {
+        return !goingLeft && position.x > right;
+    }
+
+    private boolean leftAndOutside(Vector2 position, float left, boolean goingLeft) {
+        return goingLeft && position.x < left;
     }
 }
