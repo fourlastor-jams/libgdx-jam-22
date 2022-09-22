@@ -1,7 +1,6 @@
 package io.github.fourlastor.game.level;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -81,10 +80,10 @@ public class EntitiesFactory {
         return entity;
     }
 
-    public Entity parallaxBackground(Texture texture, float factor, ActorComponent.Layer layer) {
+    public Entity parallaxBackground(float factor, ActorComponent.Layer layer, int backgroundIndex) {
         Entity entity = new Entity();
-        texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-        ParallaxImage image = new ParallaxImage(factor, texture);
+        TextureRegion region = textureAtlas.findRegion("background/background_layer", backgroundIndex);
+        ParallaxImage image = new ParallaxImage(factor, region);
         image.setScale(SCALE_XY);
         entity.add(new ActorComponent(image, layer));
         return entity;
