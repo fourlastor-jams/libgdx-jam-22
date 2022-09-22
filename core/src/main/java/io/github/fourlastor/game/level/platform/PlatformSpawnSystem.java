@@ -19,15 +19,21 @@ public class PlatformSpawnSystem extends IteratingSystem {
 
     private final Camera camera;
     private final ComponentMapper<BodyComponent> bodies;
-    private Engine engine;
     private final EntitiesFactory factory;
+    private final PlatformFactory platformFactory;
+    private Engine engine;
 
     @Inject
-    public PlatformSpawnSystem(Camera camera, ComponentMapper<BodyComponent> bodies, EntitiesFactory factory) {
+    public PlatformSpawnSystem(
+            Camera camera,
+            ComponentMapper<BodyComponent> bodies,
+            EntitiesFactory factory,
+            PlatformFactory platformFactory) {
         super(FAMILY);
         this.camera = camera;
         this.bodies = bodies;
         this.factory = factory;
+        this.platformFactory = platformFactory;
     }
 
     @Override
@@ -49,7 +55,7 @@ public class PlatformSpawnSystem extends IteratingSystem {
         // Remove platforms that are under the camera and out of view
         if (position.y < camera.position.y - camera.viewportHeight / 2) {
             engine.removeEntity(entity);
-            engine.addEntity(factory.ground());
+            engine.addEntity(factory.makePlatform(platformFactory.nextPlatform()));
         }
     }
 }

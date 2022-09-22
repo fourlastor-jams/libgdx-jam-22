@@ -20,7 +20,6 @@ import io.github.fourlastor.game.di.ScreenScoped;
 import io.github.fourlastor.game.level.platform.PlatformSpec;
 import io.github.fourlastor.game.ui.AnimatedImage;
 import io.github.fourlastor.game.ui.ParallaxImage;
-import java.util.Random;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -32,16 +31,13 @@ public class EntitiesFactory {
     private static final float SCALE_XY = 1f / 32f;
     private final Animation<TextureRegion> fallingAnimation;
     private final TextureAtlas textureAtlas;
-    private final Random random;
 
     @Inject
     public EntitiesFactory(
             @Named(PlayerAnimationsFactory.ANIMATION_FALLING) Animation<TextureRegion> fallingAnimation,
-            TextureAtlas textureAtlas,
-            Random random) {
+            TextureAtlas textureAtlas) {
         this.fallingAnimation = fallingAnimation;
         this.textureAtlas = textureAtlas;
-        this.random = random;
     }
 
     public Entity player() {
@@ -71,29 +67,7 @@ public class EntitiesFactory {
         return entity;
     }
 
-    private int platformsCount = 0;
-
-    public Entity ground() {
-        int count = platformsCount;
-        platformsCount += 1;
-        if (count == 0) {
-            return makeGround(new PlatformSpec(
-                    PlatformSpec.Width.NINE, PlatformSpec.Type.SMALL_GRID, PlatformSpec.Speed.IMMOBILE, 4.5f, 0f));
-        }
-        PlatformSpec.Width width = platformWidth();
-        PlatformSpec.Type type;
-        if (width == PlatformSpec.Width.ONE) {
-            type = PlatformSpec.Type.SMALL_GRID;
-        } else {
-            type = platformType();
-        }
-        PlatformSpec.Speed speed = platformSpeed();
-        float x = random.nextFloat() * 4f + 2f;
-        float y = 4f * count;
-        return makeGround(new PlatformSpec(width, type, speed, x, y));
-    }
-
-    private Entity makeGround(PlatformSpec spec) {
+    public Entity makePlatform(PlatformSpec spec) {
 
         Entity entity = new Entity();
         Vector2 initialPosition = new Vector2(spec.x, spec.y);
@@ -112,24 +86,9 @@ public class EntitiesFactory {
                 textureAtlas.findRegion("platforms/platform_" + spec.type.tileName + "_w" + spec.width.width));
         image.setScale(SCALE_XY);
         entity.add(new ActorComponent(image, ActorComponent.Layer.PLATFORM));
-        entity.add(new MovingPlatformComponent(initialPosition.cpy(), random.nextBoolean(), spec.speed.speed));
+        entity.add(new MovingPlatformComponent(initialPosition.cpy(), spec.goingLeft, spec.speed.speed));
 
         return entity;
-    }
-
-    private PlatformSpec.Type platformType() {
-        PlatformSpec.Type[] values = PlatformSpec.Type.values();
-        return values[random.nextInt(values.length)];
-    }
-
-    private PlatformSpec.Width platformWidth() {
-        PlatformSpec.Width[] values = PlatformSpec.Width.values();
-        return values[random.nextInt(values.length)];
-    }
-
-    private PlatformSpec.Speed platformSpeed() {
-        PlatformSpec.Speed[] values = PlatformSpec.Speed.values();
-        return values[random.nextInt(values.length)];
     }
 
     public Entity parallaxBackground(float factor, ActorComponent.Layer layer, int backgroundIndex) {

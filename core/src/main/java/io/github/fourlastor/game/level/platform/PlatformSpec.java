@@ -7,13 +7,15 @@ public class PlatformSpec {
     public final Speed speed;
     public final float x;
     public final float y;
+    public final boolean goingLeft;
 
-    public PlatformSpec(Width width, Type type, Speed speed, float x, float y) {
+    public PlatformSpec(Width width, Type type, Speed speed, float x, float y, boolean goingLeft) {
         this.width = width;
         this.type = type;
         this.speed = speed;
         this.x = x;
         this.y = y;
+        this.goingLeft = goingLeft;
     }
 
     public enum Speed {
