@@ -27,11 +27,6 @@ public class GameModule {
 
         assetManager.load("images/included/whitePixel.png", Texture.class);
 
-        assetManager.load("images/included/background/background_layer_0.png", Texture.class);
-        assetManager.load("images/included/background/background_layer_1.png", Texture.class);
-        assetManager.load("images/included/background/background_layer_2.png", Texture.class);
-        assetManager.load("images/included/background/background_layer_3.png", Texture.class);
-
         assetManager.load("images/included/intro/dragon_queen.png", Texture.class);
         assetManager.load("images/included/intro/earth_ground.png", Texture.class);
         assetManager.load("images/included/intro/earth_space.png", Texture.class);
