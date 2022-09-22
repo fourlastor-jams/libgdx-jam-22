@@ -7,8 +7,11 @@ import javax.inject.Inject;
 @ScreenScoped
 public class PlatformFactory {
 
+    public static final int SAFE_GROUND_THRESHOLD = 15;
     private final Random random;
     private int platformsCount = 0;
+    private int platformsSinceSafeGround = 0;
+    private PlatformSpec lastSpec;
 
     @Inject
     public PlatformFactory(Random random) {
@@ -16,8 +19,23 @@ public class PlatformFactory {
     }
 
     public PlatformSpec nextPlatform() {
-        int index = nextPlatformIndex();
-        if (index == 0) {
+        lastSpec = generateNextPlatform(nextPlatformIndex(), lastSpec);
+        if (lastSpec.speed == PlatformSpec.Speed.IMMOBILE && lastSpec.width == PlatformSpec.Width.NINE) {
+            platformsSinceSafeGround = 0;
+        } else {
+            platformsSinceSafeGround += 1;
+        }
+        return lastSpec;
+    }
+
+    private int nextPlatformIndex() {
+        int index = platformsCount;
+        platformsCount += 1;
+        return index;
+    }
+
+    public PlatformSpec generateNextPlatform(int index, PlatformSpec lastSpec) {
+        if (shouldBeSafeGround(index) || lastSpec == null) {
             return safeGround(index);
         }
         PlatformSpec.Width width = randomWidth();
@@ -27,10 +45,14 @@ public class PlatformFactory {
         } else {
             type = randomType();
         }
-        PlatformSpec.Speed speed = randomSpeed();
+        PlatformSpec.Speed speed = randomSpeed(lastSpec);
         float x = random.nextFloat() * 4f + 2f;
-        float y = 4f * index;
+        float y = platformY(index);
         return new PlatformSpec(width, type, speed, x, y, randomGoingLeft());
+    }
+
+    private boolean shouldBeSafeGround(int index) {
+        return index == 0 || platformsSinceSafeGround >= SAFE_GROUND_THRESHOLD;
     }
 
     private PlatformSpec safeGround(int index) {
@@ -57,18 +79,15 @@ public class PlatformFactory {
         return values[random.nextInt(values.length)];
     }
 
-    private PlatformSpec.Speed randomSpeed() {
+    private PlatformSpec.Speed randomSpeed(PlatformSpec lastSpec) {
+        if (lastSpec.speed == PlatformSpec.Speed.IMMOBILE) {
+            return random.nextBoolean() ? PlatformSpec.Speed.FAST : PlatformSpec.Speed.MEDIUM;
+        }
         PlatformSpec.Speed[] values = PlatformSpec.Speed.values();
         return values[random.nextInt(values.length)];
     }
 
     private float platformY(int index) {
         return 4f * index;
-    }
-
-    private int nextPlatformIndex() {
-        int index = platformsCount;
-        platformsCount += 1;
-        return index;
     }
 }
