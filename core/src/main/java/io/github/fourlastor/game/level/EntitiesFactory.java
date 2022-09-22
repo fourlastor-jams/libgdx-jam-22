@@ -83,7 +83,6 @@ public class EntitiesFactory {
 
     public Entity parallaxBackground(Texture texture, float factor, ActorComponent.Layer layer) {
         Entity entity = new Entity();
-        texture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         ParallaxImage image = new ParallaxImage(factor, texture);
         image.setScale(SCALE_XY);
         entity.add(new ActorComponent(image, layer));
