@@ -61,24 +61,26 @@ public class IntroScreen extends ScreenAdapter {
         this.assetManager = assetManager;
         Viewport viewport = new ScreenViewport();
         stage = new Stage(viewport);
+    }
 
+    @Override
+    public void show() {
         subtitlesSetup();
         imageSetup();
         audioSetup();
 
         earth_space.addAction(Actions.sequence(actI(), actII()));
-    }
-
-    @Override
-    public void show() {
-        super.show();
         inputMultiplexer.addProcessor(processor);
     }
 
     @Override
     public void hide() {
         inputMultiplexer.removeProcessor(processor);
-        super.hide();
+        musicMusic.stop();
+        ambianceMusic.stop();
+        voiceSound.stop();
+        atomicBombsSound.stop();
+        missilesSound.stop();
     }
 
     private final InputProcessor processor = new InputAdapter() {
