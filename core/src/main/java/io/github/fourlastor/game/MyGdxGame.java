@@ -9,6 +9,7 @@ import io.github.fourlastor.game.gameover.GameOverComponent;
 import io.github.fourlastor.game.intro.IntroComponent;
 import io.github.fourlastor.game.level.LevelComponent;
 import io.github.fourlastor.game.route.Router;
+import io.github.fourlastor.game.route.RouterModule;
 
 public class MyGdxGame extends Game implements Router {
 
@@ -57,7 +58,8 @@ public class MyGdxGame extends Game implements Router {
 
     @Override
     public void goToLevel() {
-        pendingScreen = levelScreenFactory.build().screen().create(this);
+        pendingScreen =
+                levelScreenFactory.router(new RouterModule(this)).build().screen();
     }
 
     @Override
