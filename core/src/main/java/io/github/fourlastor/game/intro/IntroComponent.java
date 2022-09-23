@@ -4,7 +4,7 @@ import dagger.Subcomponent;
 import io.github.fourlastor.game.di.ScreenScoped;
 
 @ScreenScoped
-@Subcomponent(modules = {IntroModule.class})
+@Subcomponent
 public interface IntroComponent {
 
     @ScreenScoped
