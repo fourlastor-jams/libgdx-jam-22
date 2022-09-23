@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -69,9 +70,9 @@ public class IntroScreen extends ScreenAdapter {
 
     @Override
     public void show() {
-        subtitlesSetup();
         imageSetup();
         audioSetup();
+        subtitlesSetup();
 
         earth_space.addAction(Actions.sequence(actI(), actII()));
         inputMultiplexer.addProcessor(processor);
@@ -211,6 +212,10 @@ public class IntroScreen extends ScreenAdapter {
         subtitles.getColor().a = 0;
         subtitles.addAction(Actions.fadeIn(1f));
         subtitles.setColor(new Color(1f, 1f, 0.949f, 1f));
+        Table table = new Table();
+        table.setFillParent(true);
+        table.add(subtitles).growX().expandY().bottom().padBottom(Gdx.graphics.getHeight() * .05f);
+        stage.addActor(table);
     }
 
     private void imageSetup() {
@@ -244,7 +249,6 @@ public class IntroScreen extends ScreenAdapter {
         stage.addActor(lyze);
         stage.addActor(zebra_king);
         stage.addActor(black_screen);
-        stage.addActor(subtitles);
 
         dragon_queen.getColor().a = 0;
         earth_ground.getColor().a = 0;
