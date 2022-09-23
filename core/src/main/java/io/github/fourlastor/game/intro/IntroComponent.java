@@ -8,7 +8,7 @@ import io.github.fourlastor.game.di.ScreenScoped;
 public interface IntroComponent {
 
     @ScreenScoped
-    IntroScreen.Factory introScreen();
+    IntroScreen.Factory screen();
 
     @Subcomponent.Builder
     interface Builder {
