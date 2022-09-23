@@ -13,7 +13,7 @@ import javax.inject.Inject;
 /**
  * Moves platforms down when the player goes up
  */
-public class MovePlatformsDownSystem extends IteratingSystem {
+public class CameraMovementSystem extends IteratingSystem {
 
     private static final Family FAMILY_PLAYER =
             Family.all(PlayerComponent.class, BodyComponent.class).get();
@@ -21,7 +21,7 @@ public class MovePlatformsDownSystem extends IteratingSystem {
     private final ComponentMapper<BodyComponent> bodies;
 
     @Inject
-    public MovePlatformsDownSystem(Camera camera, ComponentMapper<BodyComponent> bodies) {
+    public CameraMovementSystem(Camera camera, ComponentMapper<BodyComponent> bodies) {
         super(FAMILY_PLAYER);
         this.camera = camera;
         this.bodies = bodies;

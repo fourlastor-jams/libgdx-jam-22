@@ -12,6 +12,7 @@ import dagger.Provides;
 import io.github.fourlastor.game.MyGdxGame;
 import io.github.fourlastor.game.intro.IntroComponent;
 import io.github.fourlastor.game.level.LevelComponent;
+import java.util.Random;
 import javax.inject.Singleton;
 
 @Module(subcomponents = {LevelComponent.class, IntroComponent.class})
@@ -79,5 +80,10 @@ public class GameModule {
                 multiplexer,
                 levelBuilder.build().levelScreen(),
                 introBuilder.build().introScreen());
+    }
+
+    @Provides
+    public Random random() {
+        return new Random();
     }
 }
