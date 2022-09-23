@@ -1,7 +1,6 @@
 package io.github.fourlastor.game.di.modules;
 
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -65,12 +64,6 @@ public class GameModule {
     @Singleton
     public TextureAtlas textureAtlas(AssetManager assetManager) {
         return assetManager.get(PATH_TEXTURE_ATLAS, TextureAtlas.class);
-    }
-
-    @Provides
-    @Singleton
-    public MessageManager messageManager() {
-        return MessageManager.getInstance();
     }
 
     @Provides

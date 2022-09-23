@@ -2,7 +2,7 @@ package io.github.fourlastor.game.level;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.ai.msg.MessageManager;
+import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -26,7 +26,7 @@ public class LevelScreen extends ScreenAdapter implements Telegraph {
             Viewport viewport,
             EntitiesFactory entitiesFactory,
             PlatformFactory platformFactory,
-            MessageManager messageManager) {
+            MessageDispatcher messageDispatcher) {
         this.router = router;
         this.engine = engine;
         this.viewport = viewport;
@@ -39,7 +39,7 @@ public class LevelScreen extends ScreenAdapter implements Telegraph {
         }
         engine.addEntity(entitiesFactory.player());
 
-        messageManager.addListener(this, Message.GAME_OVER.ordinal());
+        messageDispatcher.addListener(this, Message.GAME_OVER.ordinal());
     }
 
     @Override
