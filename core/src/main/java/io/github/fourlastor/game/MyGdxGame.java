@@ -3,26 +3,28 @@ package io.github.fourlastor.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.Screen;
 import io.github.fourlastor.game.di.GameComponent;
-import io.github.fourlastor.game.gameover.GameOverScreen;
-import io.github.fourlastor.game.intro.IntroScreen;
-import io.github.fourlastor.game.level.LevelScreen;
+import io.github.fourlastor.game.gameover.GameOverComponent;
+import io.github.fourlastor.game.intro.IntroComponent;
+import io.github.fourlastor.game.level.LevelComponent;
 import io.github.fourlastor.game.route.Router;
 
 public class MyGdxGame extends Game implements Router {
 
     private final InputMultiplexer multiplexer;
 
-    private final LevelScreen.Factory levelScreenFactory;
+    private final LevelComponent.Builder levelScreenFactory;
+    private final IntroComponent.Builder introScreenFactory;
+    private final GameOverComponent.Builder gameOverFactory;
 
-    private final IntroScreen.Factory introScreenFactory;
-    private final GameOverScreen.Factory gameOverFactory;
+    private Screen pendingScreen = null;
 
     public MyGdxGame(
             InputMultiplexer multiplexer,
-            LevelScreen.Factory levelScreenFactory,
-            IntroScreen.Factory introScreenFactory,
-            GameOverScreen.Factory gameOverFactory) {
+            LevelComponent.Builder levelScreenFactory,
+            IntroComponent.Builder introScreenFactory,
+            GameOverComponent.Builder gameOverFactory) {
         this.multiplexer = multiplexer;
         this.levelScreenFactory = levelScreenFactory;
         this.introScreenFactory = introScreenFactory;
@@ -32,7 +34,16 @@ public class MyGdxGame extends Game implements Router {
     @Override
     public void create() {
         Gdx.input.setInputProcessor(multiplexer);
-        goToLevel();
+        goToIntro();
+    }
+
+    @Override
+    public void render() {
+        if (pendingScreen != null) {
+            setScreen(pendingScreen);
+            pendingScreen = null;
+        }
+        super.render();
     }
 
     public static MyGdxGame createGame() {
@@ -41,16 +52,16 @@ public class MyGdxGame extends Game implements Router {
 
     @Override
     public void goToIntro() {
-        setScreen(introScreenFactory.create(this));
+        pendingScreen = introScreenFactory.build().screen().create(this);
     }
 
     @Override
     public void goToLevel() {
-        setScreen(levelScreenFactory.create(this));
+        pendingScreen = levelScreenFactory.build().screen().create(this);
     }
 
     @Override
     public void goToGameOver() {
-        setScreen(gameOverFactory.create(this));
+        pendingScreen = gameOverFactory.build().screen().create(this);
     }
 }

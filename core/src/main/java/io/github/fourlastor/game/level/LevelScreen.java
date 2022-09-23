@@ -53,6 +53,12 @@ public class LevelScreen extends ScreenAdapter implements Telegraph {
     }
 
     @Override
+    public void hide() {
+        engine.removeAllEntities();
+        engine.removeAllSystems();
+    }
+
+    @Override
     public boolean handleMessage(Telegram msg) {
         if (msg.message == Message.GAME_OVER.ordinal()) {
             router.goToGameOver();

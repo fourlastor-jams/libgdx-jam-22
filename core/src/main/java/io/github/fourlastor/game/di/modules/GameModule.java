@@ -73,11 +73,7 @@ public class GameModule {
             LevelComponent.Builder levelBuilder,
             IntroComponent.Builder introBuilder,
             GameOverComponent.Builder gameOverBuilder) {
-        return new MyGdxGame(
-                multiplexer,
-                levelBuilder.build().screen(),
-                introBuilder.build().screen(),
-                gameOverBuilder.build().screen());
+        return new MyGdxGame(multiplexer, levelBuilder, introBuilder, gameOverBuilder);
     }
 
     @Provides
