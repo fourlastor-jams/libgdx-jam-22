@@ -1,7 +1,9 @@
 package io.github.fourlastor.game.intro;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
@@ -9,7 +11,6 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -19,16 +20,17 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.github.tommyettinger.textra.TypingLabel;
-import io.github.fourlastor.game.di.ScreenScoped;
-import javax.inject.Inject;
+import dagger.assisted.Assisted;
+import dagger.assisted.AssistedFactory;
+import dagger.assisted.AssistedInject;
+import io.github.fourlastor.game.route.Router;
 
-@ScreenScoped
 public class IntroScreen extends ScreenAdapter {
 
+    private final Router router;
     private final InputMultiplexer inputMultiplexer;
-    private final TextureAtlas atlas;
     private final AssetManager assetManager;
-    private Stage stage;
+    private final Stage stage;
 
     private Image dragon_queen;
     private Image earth_ground;
@@ -52,10 +54,10 @@ public class IntroScreen extends ScreenAdapter {
     private Music musicMusic;
     private Music ambianceMusic;
 
-    @Inject
-    public IntroScreen(InputMultiplexer inputMultiplexer, TextureAtlas atlas, AssetManager assetManager) {
+    @AssistedInject
+    public IntroScreen(@Assisted Router router, InputMultiplexer inputMultiplexer, AssetManager assetManager) {
+        this.router = router;
         this.inputMultiplexer = inputMultiplexer;
-        this.atlas = atlas;
         this.assetManager = assetManager;
         Viewport viewport = new ScreenViewport();
         stage = new Stage(viewport);
@@ -66,6 +68,26 @@ public class IntroScreen extends ScreenAdapter {
 
         earth_space.addAction(Actions.sequence(actI(), actII()));
     }
+
+    @Override
+    public void show() {
+        super.show();
+        inputMultiplexer.addProcessor(processor);
+    }
+
+    @Override
+    public void hide() {
+        inputMultiplexer.removeProcessor(processor);
+        super.hide();
+    }
+
+    private final InputProcessor processor = new InputAdapter() {
+        @Override
+        public boolean keyUp(int keycode) {
+            router.goToLevel();
+            return true;
+        }
+    };
 
     @Override
     public void render(float delta) {
@@ -101,9 +123,7 @@ public class IntroScreen extends ScreenAdapter {
                     missiles_and_explosion_3.addAction(Actions.fadeIn(1f));
                 }),
                 Actions.delay(.2f),
-                Actions.run(() -> {
-                    atomicBombsSound.play();
-                }),
+                Actions.run(() -> atomicBombsSound.play()),
                 Actions.delay(4f),
                 Actions.run(() -> {
                     zebra_king.addAction(
@@ -155,19 +175,16 @@ public class IntroScreen extends ScreenAdapter {
                 Actions.delay(2f),
                 Actions.run(() -> black_screen.addAction(Actions.fadeIn(1f))),
                 Actions.delay(3f),
-                Actions.run(() -> {
-                    System.out.println("TODO: change this line to go to another screen"); // TODO:
-                }));
+                Actions.run(router::goToLevel));
     }
 
     private void subtitlesSetup() {
         Label.LabelStyle label32Style = new Label.LabelStyle();
-        BitmapFont myFont = new BitmapFont(Gdx.files.internal("fonts/font-32.fnt"));
-        label32Style.font = myFont;
+        label32Style.font = new BitmapFont(Gdx.files.internal("fonts/font-32.fnt"));
         label32Style.fontColor = Color.WHITE;
         label32Style.font.setColor(Color.WHITE);
         subtitles = new TypingLabel("(press any key to skip)", label32Style);
-        subtitles.setPosition(Gdx.graphics.getWidth() / 32, Gdx.graphics.getHeight() / 16);
+        subtitles.setPosition(Gdx.graphics.getWidth() / 32f, Gdx.graphics.getHeight() / 16f);
         subtitles.setWidth(Gdx.graphics.getWidth());
         subtitles.setWrap(true);
         subtitles.setAlignment(Align.center);
@@ -246,5 +263,10 @@ public class IntroScreen extends ScreenAdapter {
         ambianceMusic = assetManager.get("audio/music/608308__aidangig__radiation-ambience-effect.wav", Music.class);
         musicMusic.setVolume(.25f);
         musicMusic.play();
+    }
+
+    @AssistedFactory
+    public interface Factory {
+        IntroScreen create(Router router);
     }
 }

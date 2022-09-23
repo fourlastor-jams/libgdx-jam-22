@@ -14,10 +14,10 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
+import io.github.fourlastor.game.Message;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
 import io.github.fourlastor.game.component.BodyComponent;
 import io.github.fourlastor.game.level.UserData;
-import io.github.fourlastor.game.level.input.Message;
 import javax.inject.Inject;
 
 public class PhysicsSystem extends IntervalSystem {

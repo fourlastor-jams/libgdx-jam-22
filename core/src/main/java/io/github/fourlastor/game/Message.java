@@ -1,4 +1,4 @@
-package io.github.fourlastor.game.level.input;
+package io.github.fourlastor.game;
 
 public enum Message {
     PLAYER_OFF_GROUND,

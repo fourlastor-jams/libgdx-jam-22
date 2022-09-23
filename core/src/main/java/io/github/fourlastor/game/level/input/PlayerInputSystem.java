@@ -10,6 +10,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ai.msg.MessageManager;
+import io.github.fourlastor.game.Message;
 import io.github.fourlastor.game.component.AnimatedImageComponent;
 import io.github.fourlastor.game.component.BodyComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
