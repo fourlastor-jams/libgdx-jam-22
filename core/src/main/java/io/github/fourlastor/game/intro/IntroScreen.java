@@ -9,6 +9,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Action;
@@ -17,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.github.tommyettinger.textra.TypingLabel;
 import io.github.fourlastor.game.route.Router;
@@ -25,10 +26,12 @@ import javax.inject.Inject;
 
 public class IntroScreen extends ScreenAdapter {
 
+    public static final Color CLEAR_COLOR = Color.valueOf("0a0a0b");
     private final Router router;
     private final InputMultiplexer inputMultiplexer;
     private final AssetManager assetManager;
     private final Stage stage;
+    private final Viewport viewport;
 
     private Image dragon_queen;
     private Image earth_ground;
@@ -57,7 +60,10 @@ public class IntroScreen extends ScreenAdapter {
         this.router = router;
         this.inputMultiplexer = inputMultiplexer;
         this.assetManager = assetManager;
-        Viewport viewport = new ScreenViewport();
+        float screenHeight = Gdx.graphics.getHeight();
+        float screenWidth = screenHeight / 16f * 9f;
+
+        viewport = new FitViewport(screenWidth, screenHeight);
         stage = new Stage(viewport);
     }
 
@@ -69,6 +75,11 @@ public class IntroScreen extends ScreenAdapter {
 
         earth_space.addAction(Actions.sequence(actI(), actII()));
         inputMultiplexer.addProcessor(processor);
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        viewport.update(width, height, true);
     }
 
     @Override
@@ -91,6 +102,8 @@ public class IntroScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(CLEAR_COLOR.r, CLEAR_COLOR.g, CLEAR_COLOR.b, CLEAR_COLOR.a);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         stage.act(delta);
         stage.draw();
     }
@@ -149,12 +162,11 @@ public class IntroScreen extends ScreenAdapter {
                     silo_and_skeleton.addAction(Actions.fadeIn(2));
                     sky_dragon.addAction(Actions.sequence(
                             Actions.fadeIn(0),
-                            Actions.moveTo(-Gdx.graphics.getWidth() * .6f, -Gdx.graphics.getHeight() * .1f, 0),
-                            Actions.moveTo(Gdx.graphics.getWidth() * 2, Gdx.graphics.getHeight() * .4f, 30)));
-                    lyze.setPosition(Gdx.graphics.getWidth() * .05f, 0);
+                            Actions.moveTo(-screenWidth() * .6f, -screenHeight() * .1f, 0),
+                            Actions.moveTo(screenWidth() * 2, screenHeight() * .4f, 30)));
+                    lyze.setPosition(screenWidth() * .05f, 0);
                     lyze.addAction(Actions.sequence(
-                            Actions.fadeIn(0f),
-                            Actions.moveTo(-Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * .1f, 30f)));
+                            Actions.fadeIn(0f), Actions.moveTo(-screenWidth(), screenHeight() * .1f, 30f)));
                     subtitles.addAction(Actions.fadeIn(1f));
                     subtitles.setColor(new Color(0.039f, 0.039f, 0.043f, 1f));
                     subtitles.restart();
@@ -178,14 +190,22 @@ public class IntroScreen extends ScreenAdapter {
                 Actions.run(router::goToLevel));
     }
 
+    private int screenWidth() {
+        return viewport.getScreenWidth();
+    }
+
+    private int screenHeight() {
+        return viewport.getScreenHeight();
+    }
+
     private void subtitlesSetup() {
         Label.LabelStyle label32Style = new Label.LabelStyle();
         label32Style.font = new BitmapFont(Gdx.files.internal("fonts/font-32.fnt"));
         label32Style.fontColor = Color.WHITE;
         label32Style.font.setColor(Color.WHITE);
         subtitles = new TypingLabel("(press any key to skip)", label32Style);
-        subtitles.setPosition(Gdx.graphics.getWidth() / 32f, Gdx.graphics.getHeight() / 16f);
-        subtitles.setWidth(Gdx.graphics.getWidth());
+        subtitles.setPosition(screenWidth() / 32f, screenHeight() / 16f);
+        subtitles.setWidth(screenWidth());
         subtitles.setWrap(true);
         subtitles.setAlignment(Align.center);
         subtitles.getColor().a = 0;
@@ -239,19 +259,19 @@ public class IntroScreen extends ScreenAdapter {
         zebra_king.getColor().a = 0;
         black_screen.getColor().a = 0;
 
-        space.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        dragon_queen.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        earth_space.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        earth_ground.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        silo_and_skeleton.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        sky_dragon.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        lyze.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        sky_and_mountains.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        missiles_and_explosion_1.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        missiles_and_explosion_2.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        missiles_and_explosion_3.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        zebra_king.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        black_screen.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        space.setSize(screenWidth(), screenHeight());
+        dragon_queen.setSize(screenWidth(), screenHeight());
+        earth_space.setSize(screenWidth(), screenHeight());
+        earth_ground.setSize(screenWidth(), screenHeight());
+        silo_and_skeleton.setSize(screenWidth(), screenHeight());
+        sky_dragon.setSize(screenWidth(), screenHeight());
+        lyze.setSize(screenWidth(), screenHeight());
+        sky_and_mountains.setSize(screenWidth(), screenHeight());
+        missiles_and_explosion_1.setSize(screenWidth(), screenHeight());
+        missiles_and_explosion_2.setSize(screenWidth(), screenHeight());
+        missiles_and_explosion_3.setSize(screenWidth(), screenHeight());
+        zebra_king.setSize(screenWidth(), screenHeight());
+        black_screen.setSize(screenWidth(), screenHeight());
     }
 
     private void audioSetup() {
