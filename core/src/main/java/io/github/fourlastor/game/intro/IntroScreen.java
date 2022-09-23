@@ -20,10 +20,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.github.tommyettinger.textra.TypingLabel;
-import dagger.assisted.Assisted;
-import dagger.assisted.AssistedFactory;
-import dagger.assisted.AssistedInject;
 import io.github.fourlastor.game.route.Router;
+import javax.inject.Inject;
 
 public class IntroScreen extends ScreenAdapter {
 
@@ -54,8 +52,8 @@ public class IntroScreen extends ScreenAdapter {
     private Music musicMusic;
     private Music ambianceMusic;
 
-    @AssistedInject
-    public IntroScreen(@Assisted Router router, InputMultiplexer inputMultiplexer, AssetManager assetManager) {
+    @Inject
+    public IntroScreen(Router router, InputMultiplexer inputMultiplexer, AssetManager assetManager) {
         this.router = router;
         this.inputMultiplexer = inputMultiplexer;
         this.assetManager = assetManager;
@@ -265,10 +263,5 @@ public class IntroScreen extends ScreenAdapter {
         ambianceMusic = assetManager.get("audio/music/608308__aidangig__radiation-ambience-effect.wav", Music.class);
         musicMusic.setVolume(.25f);
         musicMusic.play();
-    }
-
-    @AssistedFactory
-    public interface Factory {
-        IntroScreen create(Router router);
     }
 }

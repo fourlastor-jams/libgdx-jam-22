@@ -7,18 +7,16 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import dagger.assisted.Assisted;
-import dagger.assisted.AssistedFactory;
-import dagger.assisted.AssistedInject;
 import io.github.fourlastor.game.route.Router;
+import javax.inject.Inject;
 
 public class GameOverScreen extends ScreenAdapter {
 
     private final Router router;
     private final InputMultiplexer multiplexer;
 
-    @AssistedInject
-    public GameOverScreen(@Assisted Router router, InputMultiplexer multiplexer) {
+    @Inject
+    public GameOverScreen(Router router, InputMultiplexer multiplexer) {
         this.router = router;
         this.multiplexer = multiplexer;
     }
@@ -49,9 +47,4 @@ public class GameOverScreen extends ScreenAdapter {
             return false;
         }
     };
-
-    @AssistedFactory
-    public interface Factory {
-        GameOverScreen create(Router router);
-    }
 }

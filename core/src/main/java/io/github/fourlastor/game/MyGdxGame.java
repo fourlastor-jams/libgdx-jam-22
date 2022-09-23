@@ -53,7 +53,8 @@ public class MyGdxGame extends Game implements Router {
 
     @Override
     public void goToIntro() {
-        pendingScreen = introScreenFactory.build().screen().create(this);
+        pendingScreen =
+                introScreenFactory.router(new RouterModule(this)).build().screen();
     }
 
     @Override
@@ -64,6 +65,6 @@ public class MyGdxGame extends Game implements Router {
 
     @Override
     public void goToGameOver() {
-        pendingScreen = gameOverFactory.build().screen().create(this);
+        pendingScreen = gameOverFactory.router(new RouterModule(this)).build().screen();
     }
 }
