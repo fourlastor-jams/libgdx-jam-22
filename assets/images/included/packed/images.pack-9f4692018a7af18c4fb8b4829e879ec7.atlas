@@ -1,0 +1,604 @@
+
+images.pack.png
+size: 1024, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+LightRay
+  rotate: false
+  xy: 2, 208
+  size: 288, 768
+  orig: 288, 768
+  offset: 0, 0
+  index: -1
+Vignette
+  rotate: false
+  xy: 292, 208
+  size: 288, 768
+  orig: 288, 768
+  offset: 0, 0
+  index: -1
+gameOver!
+  rotate: false
+  xy: 2, 2
+  size: 288, 204
+  orig: 288, 204
+  offset: 0, 0
+  index: -1
+whitePixel
+  rotate: false
+  xy: 582, 975
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+
+images.pack2.png
+size: 1024, 32
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+platforms/platform_0_w1
+  rotate: false
+  xy: 842, 2
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: -1
+platforms/platform_0_w4
+  rotate: false
+  xy: 582, 2
+  size: 128, 16
+  orig: 128, 16
+  offset: 0, 0
+  index: -1
+platforms/platform_0_w9
+  rotate: false
+  xy: 2, 2
+  size: 288, 16
+  orig: 288, 16
+  offset: 0, 0
+  index: -1
+platforms/platform_1_w1
+  rotate: false
+  xy: 876, 2
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: -1
+platforms/platform_1_w4
+  rotate: false
+  xy: 712, 2
+  size: 128, 16
+  orig: 128, 16
+  offset: 0, 0
+  index: -1
+platforms/platform_1_w9
+  rotate: false
+  xy: 292, 2
+  size: 288, 16
+  orig: 288, 16
+  offset: 0, 0
+  index: -1
+
+images.pack3.png
+size: 64, 64
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+enemies/sawblade
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+
+images.pack4.png
+size: 256, 32
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+enemies/wigglingFish/wigglingFish
+  rotate: false
+  xy: 2, 2
+  size: 53, 27
+  orig: 53, 27
+  offset: 0, 0
+  index: 1
+enemies/wigglingFish/wigglingFish
+  rotate: false
+  xy: 57, 2
+  size: 53, 27
+  orig: 53, 27
+  offset: 0, 0
+  index: 2
+enemies/wigglingFish/wigglingFish
+  rotate: false
+  xy: 112, 2
+  size: 53, 27
+  orig: 53, 27
+  offset: 0, 0
+  index: 3
+enemies/wigglingFish/wigglingFish
+  rotate: false
+  xy: 167, 2
+  size: 53, 27
+  orig: 53, 27
+  offset: 0, 0
+  index: 4
+
+images.pack5.png
+size: 1024, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+background/background_layer
+  rotate: false
+  xy: 2, 2
+  size: 288, 768
+  orig: 288, 768
+  offset: 0, 0
+  index: 0
+background/background_layer
+  rotate: false
+  xy: 292, 2
+  size: 288, 768
+  orig: 288, 768
+  offset: 0, 0
+  index: 1
+background/background_layer
+  rotate: false
+  xy: 582, 2
+  size: 288, 768
+  orig: 288, 768
+  offset: 0, 0
+  index: 2
+
+images.pack6.png
+size: 512, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+background/background_layer
+  rotate: false
+  xy: 2, 2
+  size: 288, 768
+  orig: 288, 768
+  offset: 0, 0
+  index: 3
+
+images.pack7.png
+size: 512, 64
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+player/Falling/Falling
+  rotate: false
+  xy: 2, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 1
+player/Falling/Falling
+  rotate: false
+  xy: 44, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 2
+player/Falling/Falling
+  rotate: false
+  xy: 86, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 3
+player/Falling/Falling
+  rotate: false
+  xy: 128, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 4
+player/Falling/Falling
+  rotate: false
+  xy: 170, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 5
+player/Falling/Falling
+  rotate: false
+  xy: 212, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 6
+player/Falling/Falling
+  rotate: false
+  xy: 254, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 7
+player/Falling/Falling
+  rotate: false
+  xy: 296, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 8
+
+images.pack8.png
+size: 256, 64
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+player/ChargeJump/ChargeJump
+  rotate: false
+  xy: 2, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 1
+player/ChargeJump/ChargeJump
+  rotate: false
+  xy: 44, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 2
+player/ChargeJump/ChargeJump
+  rotate: false
+  xy: 86, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 3
+player/ChargeJump/ChargeJump
+  rotate: false
+  xy: 128, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 4
+player/ChargeJump/ChargeJump
+  rotate: false
+  xy: 170, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 5
+player/ChargeJump/ChargeJump
+  rotate: false
+  xy: 212, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 6
+
+images.pack9.png
+size: 512, 64
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+player/Jumping/Jumping
+  rotate: false
+  xy: 2, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 1
+player/Jumping/Jumping
+  rotate: false
+  xy: 44, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 2
+player/Jumping/Jumping
+  rotate: false
+  xy: 86, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 3
+player/Jumping/Jumping
+  rotate: false
+  xy: 128, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 4
+player/Jumping/Jumping
+  rotate: false
+  xy: 170, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 5
+player/Jumping/Jumping
+  rotate: false
+  xy: 212, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 6
+player/Jumping/Jumping
+  rotate: false
+  xy: 254, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 7
+player/Jumping/Jumping
+  rotate: false
+  xy: 296, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 8
+
+images.pack10.png
+size: 128, 64
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+player/PhaseThrough/PhaseThrough
+  rotate: false
+  xy: 2, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 1
+player/PhaseThrough/PhaseThrough
+  rotate: false
+  xy: 44, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 2
+
+images.pack11.png
+size: 1024, 64
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+player/OnGround/OnGround
+  rotate: false
+  xy: 2, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 1
+player/OnGround/OnGround
+  rotate: false
+  xy: 44, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 2
+player/OnGround/OnGround
+  rotate: false
+  xy: 86, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 3
+player/OnGround/OnGround
+  rotate: false
+  xy: 128, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 4
+player/OnGround/OnGround
+  rotate: false
+  xy: 170, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 5
+player/OnGround/OnGround
+  rotate: false
+  xy: 212, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 6
+player/OnGround/OnGround
+  rotate: false
+  xy: 254, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 7
+player/OnGround/OnGround
+  rotate: false
+  xy: 296, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 8
+player/OnGround/OnGround
+  rotate: false
+  xy: 338, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 9
+player/OnGround/OnGround
+  rotate: false
+  xy: 380, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 10
+player/OnGround/OnGround
+  rotate: false
+  xy: 422, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 11
+player/OnGround/OnGround
+  rotate: false
+  xy: 464, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 12
+player/OnGround/OnGround
+  rotate: false
+  xy: 506, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 13
+player/OnGround/OnGround
+  rotate: false
+  xy: 548, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 14
+player/OnGround/OnGround
+  rotate: false
+  xy: 590, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 15
+player/OnGround/OnGround
+  rotate: false
+  xy: 632, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 16
+player/OnGround/OnGround
+  rotate: false
+  xy: 674, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 17
+player/OnGround/OnGround
+  rotate: false
+  xy: 716, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 18
+player/OnGround/OnGround
+  rotate: false
+  xy: 758, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 19
+player/OnGround/OnGround
+  rotate: false
+  xy: 800, 2
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 20
+
+images.pack12.png
+size: 1024, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+intro/black_screen
+  rotate: false
+  xy: 2, 582
+  size: 162, 288
+  orig: 162, 288
+  offset: 0, 0
+  index: -1
+intro/dragon_queen
+  rotate: false
+  xy: 2, 292
+  size: 162, 288
+  orig: 162, 288
+  offset: 0, 0
+  index: -1
+intro/earth_ground
+  rotate: false
+  xy: 166, 582
+  size: 162, 288
+  orig: 162, 288
+  offset: 0, 0
+  index: -1
+intro/earth_space
+  rotate: false
+  xy: 2, 2
+  size: 162, 288
+  orig: 162, 288
+  offset: 0, 0
+  index: -1
+intro/lyze
+  rotate: false
+  xy: 166, 292
+  size: 162, 288
+  orig: 162, 288
+  offset: 0, 0
+  index: -1
+intro/missiles_and_explosion
+  rotate: false
+  xy: 330, 582
+  size: 162, 288
+  orig: 162, 288
+  offset: 0, 0
+  index: 1
+intro/missiles_and_explosion
+  rotate: false
+  xy: 166, 2
+  size: 162, 288
+  orig: 162, 288
+  offset: 0, 0
+  index: 2
+intro/missiles_and_explosion
+  rotate: false
+  xy: 330, 292
+  size: 162, 288
+  orig: 162, 288
+  offset: 0, 0
+  index: 3
+intro/silo_and_skeleton
+  rotate: false
+  xy: 494, 582
+  size: 162, 288
+  orig: 162, 288
+  offset: 0, 0
+  index: -1
+intro/sky_and_mountains
+  rotate: false
+  xy: 330, 2
+  size: 162, 288
+  orig: 162, 288
+  offset: 0, 0
+  index: -1
+intro/sky_dragon
+  rotate: false
+  xy: 494, 292
+  size: 162, 288
+  orig: 162, 288
+  offset: 0, 0
+  index: -1
+intro/space
+  rotate: false
+  xy: 658, 582
+  size: 162, 288
+  orig: 162, 288
+  offset: 0, 0
+  index: -1
+intro/zebra_king
+  rotate: false
+  xy: 494, 2
+  size: 162, 288
+  orig: 162, 288
+  offset: 0, 0
+  index: -1
