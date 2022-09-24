@@ -1,4 +1,4 @@
-package io.github.fourlastor.game.level;
+package io.github.fourlastor.game.level.di;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
@@ -34,7 +34,8 @@ public class LevelModule {
             ActorFollowBodySystem actorFollowBodySystem,
             StageSystem stageSystem,
             ClearScreenSystem clearScreenSystem,
-            PhysicsDebugSystem physicsDebugSystem,
+            @SuppressWarnings("unused") // debug only
+                    PhysicsDebugSystem physicsDebugSystem,
             PlatformSystem platformSystem,
             PlatformSpawnSystem platformSpawnSystem,
             GameOverSystem gameOverSystem) {
@@ -72,8 +73,15 @@ public class LevelModule {
 
     @Provides
     @ScreenScoped
-    public World world() {
-        return new World(new Vector2(0f, -10f), true);
+    @Gravity
+    public Vector2 gravity() {
+        return new Vector2(0f, -10f);
+    }
+
+    @Provides
+    @ScreenScoped
+    public World world(@Gravity Vector2 gravity) {
+        return new World(gravity, true);
     }
 
     @Provides

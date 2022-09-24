@@ -7,7 +7,7 @@ import com.badlogic.gdx.Screen;
 import io.github.fourlastor.game.di.GameComponent;
 import io.github.fourlastor.game.gameover.GameOverComponent;
 import io.github.fourlastor.game.intro.IntroComponent;
-import io.github.fourlastor.game.level.LevelComponent;
+import io.github.fourlastor.game.level.di.LevelComponent;
 import io.github.fourlastor.game.route.Router;
 import io.github.fourlastor.game.route.RouterModule;
 
