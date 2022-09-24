@@ -14,7 +14,7 @@ import io.github.fourlastor.game.di.ScreenScoped;
 import io.github.fourlastor.game.level.input.PlayerInputSystem;
 import io.github.fourlastor.game.level.physics.PhysicsDebugSystem;
 import io.github.fourlastor.game.level.physics.PhysicsSystem;
-import io.github.fourlastor.game.level.platform.PlatformSpawnSystem;
+import io.github.fourlastor.game.level.platform.ChunkSpawnSystem;
 import io.github.fourlastor.game.level.platform.PlatformSystem;
 import io.github.fourlastor.game.level.system.ActorFollowBodySystem;
 import io.github.fourlastor.game.level.system.CameraMovementSystem;
@@ -37,10 +37,10 @@ public class LevelModule {
             @SuppressWarnings("unused") // debug only
                     PhysicsDebugSystem physicsDebugSystem,
             PlatformSystem platformSystem,
-            PlatformSpawnSystem platformSpawnSystem,
+            ChunkSpawnSystem chunkSpawnSystem,
             GameOverSystem gameOverSystem) {
         Engine engine = new Engine();
-        //        engine.addSystem(platformSpawnSystem);
+        engine.addSystem(chunkSpawnSystem);
         engine.addSystem(platformSystem);
         engine.addSystem(playerInputSystem);
         engine.addSystem(physicsSystem);

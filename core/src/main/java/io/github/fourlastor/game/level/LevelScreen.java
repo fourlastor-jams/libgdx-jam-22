@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import io.github.fourlastor.game.component.ActorComponent.Layer;
-import io.github.fourlastor.game.level.definitions.LevelDefinitions;
 import io.github.fourlastor.game.level.platform.ChunkFactory;
 import javax.inject.Inject;
 
@@ -15,20 +14,13 @@ public class LevelScreen extends ScreenAdapter {
     private final Viewport viewport;
     private final EntitiesFactory entitiesFactory;
 
-    private final LevelDefinitions map;
     private final ChunkFactory chunkFactory;
 
     @Inject
-    public LevelScreen(
-            Engine engine,
-            Viewport viewport,
-            EntitiesFactory entitiesFactory,
-            LevelDefinitions map,
-            ChunkFactory chunkFactory) {
+    public LevelScreen(Engine engine, Viewport viewport, EntitiesFactory entitiesFactory, ChunkFactory chunkFactory) {
         this.engine = engine;
         this.viewport = viewport;
         this.entitiesFactory = entitiesFactory;
-        this.map = map;
         this.chunkFactory = chunkFactory;
     }
 
@@ -49,8 +41,8 @@ public class LevelScreen extends ScreenAdapter {
         engine.addEntity(entitiesFactory.parallaxBackground(0.5f, Layer.FG_PARALLAX, 2));
         engine.addEntity(entitiesFactory.parallaxBackground(1f, Layer.FG_PARALLAX, 3));
 
-        for (int i = 0; i < (map.chunks.size() + 1); i++) {
-            for (Entity entity : chunkFactory.chunk(i)) {
+        for (int i = 0; i < 5; i++) {
+            for (Entity entity : chunkFactory.generate()) {
                 engine.addEntity(entity);
             }
         }

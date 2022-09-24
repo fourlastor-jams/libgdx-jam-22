@@ -14,7 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import io.github.fourlastor.game.component.ActorComponent;
 import io.github.fourlastor.game.component.AnimatedImageComponent;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
-import io.github.fourlastor.game.component.MovingPlatformComponent;
+import io.github.fourlastor.game.component.ChunkComponent;
+import io.github.fourlastor.game.component.ChunkRemovalComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
 import io.github.fourlastor.game.di.ScreenScoped;
 import io.github.fourlastor.game.level.definitions.Platform;
@@ -68,23 +69,11 @@ public class EntitiesFactory {
         return entity;
     }
 
-    public Entity platform(Platform platform, float dY) {
+    public Entity platform(Platform platform, float dY, float top) {
         Entity entity = new Entity();
         entity.add(platformBuilder(platform.position.cpy().add(0f, dY), platform.width));
         entity.add(platformActor(platform.type, platform.width));
-        return entity;
-    }
-
-    public Entity makePlatform(PlatformSpec spec) {
-        Entity entity = new Entity();
-        Vector2 initialPosition = new Vector2(spec.x, spec.y);
-        entity.add(platformBuilder(initialPosition, spec.width));
-        Image image = new Image(
-                textureAtlas.findRegion("platforms/platform_" + spec.type.tileName + "_w" + spec.width.width));
-        image.setScale(SCALE_XY);
-        entity.add(platformActor(spec.type, spec.width));
-        entity.add(new MovingPlatformComponent(initialPosition.cpy(), spec.goingLeft, spec.speed.speed));
-
+        entity.add(new ChunkComponent(top));
         return entity;
     }
 
@@ -114,6 +103,12 @@ public class EntitiesFactory {
         ParallaxImage image = new ParallaxImage(factor, region);
         image.setScale(SCALE_XY);
         entity.add(new ActorComponent(image, layer));
+        return entity;
+    }
+
+    public Entity chunkRemoval(float newTop) {
+        Entity entity = new Entity();
+        entity.add(new ChunkRemovalComponent(newTop));
         return entity;
     }
 }

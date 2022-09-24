@@ -8,6 +8,7 @@ import io.github.fourlastor.game.level.definitions.LevelDefinitions;
 import io.github.fourlastor.game.level.definitions.Platform;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.inject.Inject;
 
 @ScreenScoped
@@ -15,37 +16,48 @@ public class ChunkFactory {
 
     private final LevelDefinitions definitions;
     private final EntitiesFactory factory;
+    private final Random random;
 
     private float dY = 0f;
+    private int bottomIndex = 0;
 
     @Inject
-    public ChunkFactory(LevelDefinitions definitions, EntitiesFactory factory) {
+    public ChunkFactory(LevelDefinitions definitions, EntitiesFactory factory, Random random) {
         this.definitions = definitions;
         this.factory = factory;
+        this.random = random;
+    }
+
+    public List<Entity> generate() {
+        List<Entity> entities = chunk(bottomIndex);
+        bottomIndex += 1;
+        return entities;
     }
 
     public List<Entity> chunk(int index) {
         if (index == 0) {
             return addInitial();
         } else {
-            return addNext(index - 1);
+            return addNext(random.nextInt(definitions.chunks.size()));
         }
     }
 
     private List<Entity> addInitial() {
-        return addPlatform(definitions.initial);
+        return addPlatforms(definitions.initial);
     }
 
     private List<Entity> addNext(int index) {
-        return addPlatform(definitions.chunks.get(index));
+        return addPlatforms(definitions.chunks.get(index));
     }
 
-    private List<Entity> addPlatform(Chunk chunk) {
-        List<Entity> entities = new ArrayList<>(chunk.platforms.size());
+    private List<Entity> addPlatforms(Chunk chunk) {
+        List<Entity> entities = new ArrayList<>(chunk.platforms.size() + 1);
+        float newTop = dY + chunk.size.y;
         for (Platform platform : chunk.platforms) {
-            entities.add(factory.platform(platform, dY));
+            entities.add(factory.platform(platform, dY, newTop));
         }
-        dY += chunk.size.y;
+        entities.add(factory.chunkRemoval(newTop));
+        dY = newTop;
         return entities;
     }
 }
