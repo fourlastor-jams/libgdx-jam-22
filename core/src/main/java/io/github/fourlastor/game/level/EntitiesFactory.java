@@ -16,12 +16,16 @@ import io.github.fourlastor.game.component.AnimatedImageComponent;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
 import io.github.fourlastor.game.component.ChunkComponent;
 import io.github.fourlastor.game.component.ChunkRemovalComponent;
+import io.github.fourlastor.game.component.MovingComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
 import io.github.fourlastor.game.di.ScreenScoped;
+import io.github.fourlastor.game.level.definitions.MovingPlatform;
 import io.github.fourlastor.game.level.definitions.Platform;
 import io.github.fourlastor.game.level.platform.PlatformSpec;
 import io.github.fourlastor.game.ui.AnimatedImage;
 import io.github.fourlastor.game.ui.ParallaxImage;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -69,11 +73,22 @@ public class EntitiesFactory {
         return entity;
     }
 
+    private void movingPlatform(Entity entity, MovingPlatform platform, float dY) {
+        List<Vector2> path = new ArrayList<>(platform.path.size());
+        for (Vector2 point : platform.path) {
+            path.add(point.cpy().add(0, dY));
+        }
+        entity.add(new MovingComponent(path, platform.speed.speed));
+    }
+
     public Entity platform(Platform platform, float dY, float top) {
         Entity entity = new Entity();
         entity.add(platformBuilder(platform.position.cpy().add(0f, dY), platform.width));
         entity.add(platformActor(platform.type, platform.width));
         entity.add(new ChunkComponent(top));
+        if (platform instanceof MovingPlatform) {
+            movingPlatform(entity, (MovingPlatform) platform, dY);
+        }
         return entity;
     }
 
