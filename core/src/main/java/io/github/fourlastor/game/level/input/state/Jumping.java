@@ -33,6 +33,7 @@ public class Jumping extends InputState {
 
     @Override
     public void enter(Entity entity) {
+        super.enter(entity);
         Body body = bodies.get(entity).body;
         body.setLinearVelocity(0f, 10f);
     }
