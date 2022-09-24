@@ -1,21 +1,16 @@
-package io.github.fourlastor.game.level.platform;
+package io.github.fourlastor.game.level.platform.definitions;
 
-public class PlatformSpec {
+import com.badlogic.gdx.math.Vector2;
 
-    public final Width width;
+public class Platform {
+    public final Vector2 position;
     public final Type type;
-    public final Speed speed;
-    public final float x;
-    public final float y;
-    public final boolean goingLeft;
+    public final Width width;
 
-    public PlatformSpec(Width width, Type type, Speed speed, float x, float y, boolean goingLeft) {
-        this.width = width;
+    public Platform(Vector2 position, Type type, Width width) {
+        this.position = position;
         this.type = type;
-        this.speed = speed;
-        this.x = x;
-        this.y = y;
-        this.goingLeft = goingLeft;
+        this.width = width;
     }
 
     public enum Speed {

@@ -14,12 +14,12 @@ import io.github.fourlastor.game.di.ScreenScoped;
 import io.github.fourlastor.game.level.input.PlayerInputSystem;
 import io.github.fourlastor.game.level.physics.PhysicsDebugSystem;
 import io.github.fourlastor.game.level.physics.PhysicsSystem;
-import io.github.fourlastor.game.level.platform.PlatformSpawnSystem;
-import io.github.fourlastor.game.level.platform.PlatformSystem;
+import io.github.fourlastor.game.level.platform.ChunkSpawnSystem;
 import io.github.fourlastor.game.level.system.ActorFollowBodySystem;
 import io.github.fourlastor.game.level.system.CameraMovementSystem;
 import io.github.fourlastor.game.level.system.ClearScreenSystem;
 import io.github.fourlastor.game.level.system.GameOverSystem;
+import io.github.fourlastor.game.level.system.MovingSystem;
 import io.github.fourlastor.game.level.system.StageSystem;
 
 @Module
@@ -36,12 +36,12 @@ public class LevelModule {
             ClearScreenSystem clearScreenSystem,
             @SuppressWarnings("unused") // debug only
                     PhysicsDebugSystem physicsDebugSystem,
-            PlatformSystem platformSystem,
-            PlatformSpawnSystem platformSpawnSystem,
-            GameOverSystem gameOverSystem) {
+            ChunkSpawnSystem chunkSpawnSystem,
+            GameOverSystem gameOverSystem,
+            MovingSystem movingSystem) {
         Engine engine = new Engine();
-        engine.addSystem(platformSpawnSystem);
-        engine.addSystem(platformSystem);
+        engine.addSystem(chunkSpawnSystem);
+        engine.addSystem(movingSystem);
         engine.addSystem(playerInputSystem);
         engine.addSystem(physicsSystem);
         engine.addSystem(cameraMovementSystem);
@@ -49,7 +49,7 @@ public class LevelModule {
         engine.addSystem(clearScreenSystem);
         engine.addSystem(stageSystem);
         engine.addSystem(gameOverSystem);
-        //        engine.addSystem(physicsDebugSystem);
+        engine.addSystem(physicsDebugSystem);
         return engine;
     }
 

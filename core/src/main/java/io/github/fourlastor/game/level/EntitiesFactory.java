@@ -14,12 +14,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import io.github.fourlastor.game.component.ActorComponent;
 import io.github.fourlastor.game.component.AnimatedImageComponent;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
-import io.github.fourlastor.game.component.MovingPlatformComponent;
+import io.github.fourlastor.game.component.ChunkComponent;
+import io.github.fourlastor.game.component.ChunkRemovalComponent;
+import io.github.fourlastor.game.component.MovingComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
 import io.github.fourlastor.game.di.ScreenScoped;
-import io.github.fourlastor.game.level.platform.PlatformSpec;
+import io.github.fourlastor.game.level.platform.definitions.MovingPlatform;
+import io.github.fourlastor.game.level.platform.definitions.Platform;
 import io.github.fourlastor.game.ui.AnimatedImage;
 import io.github.fourlastor.game.ui.ParallaxImage;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -67,28 +72,43 @@ public class EntitiesFactory {
         return entity;
     }
 
-    public Entity makePlatform(PlatformSpec spec) {
+    private void movingPlatform(Entity entity, MovingPlatform platform, float dY) {
+        List<Vector2> path = new ArrayList<>(platform.path.size());
+        for (Vector2 point : platform.path) {
+            path.add(point.cpy().add(0, dY));
+        }
+        entity.add(new MovingComponent(path, platform.speed.speed));
+    }
 
+    public Entity platform(Platform platform, float dY, float top) {
         Entity entity = new Entity();
-        Vector2 initialPosition = new Vector2(spec.x, spec.y);
-        entity.add(new BodyBuilderComponent(world -> {
+        entity.add(platformBuilder(platform.position.cpy().add(0f, dY), platform.width));
+        entity.add(platformActor(platform.type, platform.width));
+        entity.add(new ChunkComponent(top));
+        if (platform instanceof MovingPlatform) {
+            movingPlatform(entity, (MovingPlatform) platform, dY);
+        }
+        return entity;
+    }
+
+    private ActorComponent platformActor(Platform.Type type, Platform.Width width) {
+        Image image = new Image(textureAtlas.findRegion("platforms/platform_" + type.tileName + "_w" + width.width));
+        image.setScale(SCALE_XY);
+        return new ActorComponent(image, ActorComponent.Layer.PLATFORM);
+    }
+
+    private BodyBuilderComponent platformBuilder(Vector2 position, Platform.Width width) {
+        return new BodyBuilderComponent(world -> {
             BodyDef bodyDef = new BodyDef();
             bodyDef.type = BodyDef.BodyType.KinematicBody;
-            bodyDef.position.set(initialPosition);
+            bodyDef.position.set(position);
             Body body = world.createBody(bodyDef);
             PolygonShape shape = new PolygonShape();
-            shape.setAsBox(spec.width.width / 2f, 0.25f);
+            shape.setAsBox(width.width / 2f, 0.25f);
             body.createFixture(shape, 0.0f).setUserData(UserData.PLATFORM);
             shape.dispose();
             return body;
-        }));
-        Image image = new Image(
-                textureAtlas.findRegion("platforms/platform_" + spec.type.tileName + "_w" + spec.width.width));
-        image.setScale(SCALE_XY);
-        entity.add(new ActorComponent(image, ActorComponent.Layer.PLATFORM));
-        entity.add(new MovingPlatformComponent(initialPosition.cpy(), spec.goingLeft, spec.speed.speed));
-
-        return entity;
+        });
     }
 
     public Entity parallaxBackground(float factor, ActorComponent.Layer layer, int backgroundIndex) {
@@ -97,6 +117,12 @@ public class EntitiesFactory {
         ParallaxImage image = new ParallaxImage(factor, region);
         image.setScale(SCALE_XY);
         entity.add(new ActorComponent(image, layer));
+        return entity;
+    }
+
+    public Entity chunkRemoval(float newTop) {
+        Entity entity = new Entity();
+        entity.add(new ChunkRemovalComponent(newTop));
         return entity;
     }
 }
