@@ -16,7 +16,7 @@ import javax.inject.Named;
 
 public class Jumping extends InputState {
 
-    private static final float MAX_JUMP_HEIGHT = 16f;
+    private static final float MAX_JUMP_HEIGHT = 6f;
     private final Animation<TextureRegion> animation;
     private final float gravity;
 
