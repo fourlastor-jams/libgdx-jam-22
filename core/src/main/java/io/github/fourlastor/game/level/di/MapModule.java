@@ -77,7 +77,7 @@ public class MapModule {
             float[] grid = getGrid(entity);
             float[] pivot = pivot(entity);
             PlatformSpec.Speed speed = speed(entity);
-            List<Vector2> path = path(entity);
+            List<Vector2> path = path(entity, size, pivot);
             if (speed == null || path.isEmpty()) {
                 platforms.add(new Platform(getPosition(size, grid, pivot), PlatformSpec.Type.SMALL_GRID, width));
             } else {
@@ -88,7 +88,7 @@ public class MapModule {
         return platforms;
     }
 
-    private List<Vector2> path(JsonValue entity) {
+    private List<Vector2> path(JsonValue entity, GridPoint2 size, float[] pivot) {
         JsonValue fieldInstances = entity.get("fieldInstances");
         for (int j = 0; j < fieldInstances.size; j++) {
             JsonValue field = fieldInstances.get(j);
@@ -97,7 +97,8 @@ public class MapModule {
                 List<Vector2> path = new ArrayList<>(value.size);
                 for (int i = 0; i < value.size; i++) {
                     JsonValue point = value.get(i);
-                    path.add(new Vector2(point.getFloat("cx"), point.getFloat("cy")));
+                    path.add(new Vector2(
+                            size.x - point.getFloat("cx") - pivot[0], size.y - point.getFloat("cy") - pivot[1]));
                 }
                 return path;
             }
@@ -128,7 +129,7 @@ public class MapModule {
     }
 
     private Vector2 getPosition(GridPoint2 size, float[] grid, float[] pivot) {
-        return new Vector2(size.x - (grid[0] + pivot[0]), size.y - (grid[1] + pivot[1]));
+        return new Vector2(size.x - grid[0] - pivot[0], size.y - grid[1] - pivot[1]);
     }
 
     private float[] pivot(JsonValue entity) {
