@@ -10,7 +10,6 @@ import io.github.fourlastor.game.component.BodyComponent;
 import io.github.fourlastor.game.component.ChunkComponent;
 import io.github.fourlastor.game.component.ChunkRemovalComponent;
 import io.github.fourlastor.game.component.MovingComponent;
-import io.github.fourlastor.game.component.MovingPlatformComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
 import javax.inject.Singleton;
 
@@ -45,12 +44,6 @@ public class EcsModule {
     @Singleton
     public ComponentMapper<PlayerComponent> playerComponent() {
         return ComponentMapper.getFor(PlayerComponent.class);
-    }
-
-    @Provides
-    @Singleton
-    public ComponentMapper<MovingPlatformComponent> movingPlatformComponent() {
-        return ComponentMapper.getFor(MovingPlatformComponent.class);
     }
 
     @Provides

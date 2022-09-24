@@ -8,11 +8,10 @@ import com.badlogic.gdx.utils.JsonValue;
 import dagger.Module;
 import dagger.Provides;
 import io.github.fourlastor.game.di.ScreenScoped;
-import io.github.fourlastor.game.level.definitions.Chunk;
-import io.github.fourlastor.game.level.definitions.LevelDefinitions;
-import io.github.fourlastor.game.level.definitions.MovingPlatform;
-import io.github.fourlastor.game.level.definitions.Platform;
-import io.github.fourlastor.game.level.platform.PlatformSpec;
+import io.github.fourlastor.game.level.platform.definitions.Chunk;
+import io.github.fourlastor.game.level.platform.definitions.LevelDefinitions;
+import io.github.fourlastor.game.level.platform.definitions.MovingPlatform;
+import io.github.fourlastor.game.level.platform.definitions.Platform;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -72,17 +71,17 @@ public class MapModule {
             if (!identifier.startsWith("Platform")) {
                 continue;
             }
-            PlatformSpec.Width width = width(identifier);
+            Platform.Width width = width(identifier);
 
             float[] grid = getGrid(entity);
             float[] pivot = pivot(entity);
-            PlatformSpec.Speed speed = speed(entity);
+            Platform.Speed speed = speed(entity);
             List<Vector2> path = path(entity, size, pivot);
             if (speed == null || path.isEmpty()) {
-                platforms.add(new Platform(getPosition(size, grid, pivot), PlatformSpec.Type.SMALL_GRID, width));
+                platforms.add(new Platform(getPosition(size, grid, pivot), Platform.Type.SMALL_GRID, width));
             } else {
                 platforms.add(new MovingPlatform(
-                        getPosition(size, grid, pivot), PlatformSpec.Type.SMALL_GRID, width, speed, path));
+                        getPosition(size, grid, pivot), Platform.Type.SMALL_GRID, width, speed, path));
             }
         }
         return platforms;
@@ -107,18 +106,18 @@ public class MapModule {
         return Collections.emptyList();
     }
 
-    private PlatformSpec.Speed speed(JsonValue entity) {
+    private Platform.Speed speed(JsonValue entity) {
         JsonValue fieldInstances = entity.get("fieldInstances");
         for (int j = 0; j < fieldInstances.size; j++) {
             JsonValue field = fieldInstances.get(j);
             if (field.getString("__identifier").equals("Speed")) {
                 String value = field.getString("__value");
                 if ("Slow".equals(value)) {
-                    return PlatformSpec.Speed.SLOW;
+                    return Platform.Speed.SLOW;
                 } else if ("Normal".equals(value)) {
-                    return PlatformSpec.Speed.MEDIUM;
+                    return Platform.Speed.MEDIUM;
                 } else if ("Fast".equals(value)) {
-                    return PlatformSpec.Speed.FAST;
+                    return Platform.Speed.FAST;
                 } else {
                     return null;
                 }
@@ -140,14 +139,14 @@ public class MapModule {
         return entity.get("__grid").asFloatArray();
     }
 
-    private PlatformSpec.Width width(String identifier) {
-        PlatformSpec.Width width;
+    private Platform.Width width(String identifier) {
+        Platform.Width width;
         if (identifier.endsWith("9")) {
-            width = PlatformSpec.Width.NINE;
+            width = Platform.Width.NINE;
         } else if (identifier.endsWith("4")) {
-            width = PlatformSpec.Width.FOUR;
+            width = Platform.Width.FOUR;
         } else {
-            width = PlatformSpec.Width.ONE;
+            width = Platform.Width.ONE;
         }
         return width;
     }

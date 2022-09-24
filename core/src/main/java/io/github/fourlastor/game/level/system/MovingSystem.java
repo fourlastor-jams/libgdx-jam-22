@@ -16,19 +16,19 @@ public class MovingSystem extends IteratingSystem {
             Family.all(MovingComponent.class, BodyComponent.class).get();
 
     private final ComponentMapper<BodyComponent> bodies;
-    private final ComponentMapper<MovingComponent> movings;
+    private final ComponentMapper<MovingComponent> movables;
     private final Vector2 velocity = new Vector2();
 
     @Inject
-    public MovingSystem(ComponentMapper<BodyComponent> bodies, ComponentMapper<MovingComponent> movings) {
+    public MovingSystem(ComponentMapper<BodyComponent> bodies, ComponentMapper<MovingComponent> movables) {
         super(FAMILY);
         this.bodies = bodies;
-        this.movings = movings;
+        this.movables = movables;
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        MovingComponent movingComponent = movings.get(entity);
+        MovingComponent movingComponent = movables.get(entity);
         Body body = bodies.get(entity).body;
         Vector2 position = body.getPosition();
         List<Vector2> path = movingComponent.path;

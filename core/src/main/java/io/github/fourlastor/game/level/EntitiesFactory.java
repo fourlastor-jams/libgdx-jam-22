@@ -19,9 +19,8 @@ import io.github.fourlastor.game.component.ChunkRemovalComponent;
 import io.github.fourlastor.game.component.MovingComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
 import io.github.fourlastor.game.di.ScreenScoped;
-import io.github.fourlastor.game.level.definitions.MovingPlatform;
-import io.github.fourlastor.game.level.definitions.Platform;
-import io.github.fourlastor.game.level.platform.PlatformSpec;
+import io.github.fourlastor.game.level.platform.definitions.MovingPlatform;
+import io.github.fourlastor.game.level.platform.definitions.Platform;
 import io.github.fourlastor.game.ui.AnimatedImage;
 import io.github.fourlastor.game.ui.ParallaxImage;
 import java.util.ArrayList;
@@ -92,13 +91,13 @@ public class EntitiesFactory {
         return entity;
     }
 
-    private ActorComponent platformActor(PlatformSpec.Type type, PlatformSpec.Width width) {
+    private ActorComponent platformActor(Platform.Type type, Platform.Width width) {
         Image image = new Image(textureAtlas.findRegion("platforms/platform_" + type.tileName + "_w" + width.width));
         image.setScale(SCALE_XY);
         return new ActorComponent(image, ActorComponent.Layer.PLATFORM);
     }
 
-    private BodyBuilderComponent platformBuilder(Vector2 position, PlatformSpec.Width width) {
+    private BodyBuilderComponent platformBuilder(Vector2 position, Platform.Width width) {
         return new BodyBuilderComponent(world -> {
             BodyDef bodyDef = new BodyDef();
             bodyDef.type = BodyDef.BodyType.KinematicBody;
