@@ -1,5 +1,6 @@
 package io.github.fourlastor.game.gameover;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -13,7 +14,10 @@ public class GameOverModule {
     @Provides
     @ScreenScoped
     public Viewport viewport() {
-        return new FitViewport(9f, 16f);
+        float screenHeight = Gdx.graphics.getHeight();
+        float screenWidth = screenHeight / 16f * 9f;
+
+        return new FitViewport(screenWidth, screenHeight);
     }
 
     @Provides
