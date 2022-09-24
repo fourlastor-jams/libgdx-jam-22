@@ -63,34 +63,6 @@
 		}
 	], "entities": [
 		{
-			"identifier": "Player",
-			"uid": 1,
-			"tags": [],
-			"width": 40,
-			"height": 40,
-			"resizableX": false,
-			"resizableY": false,
-			"keepAspectRatio": false,
-			"tileOpacity": 1,
-			"fillOpacity": 0.08,
-			"lineOpacity": 0,
-			"hollow": false,
-			"color": "#94D9B3",
-			"renderMode": "Tile",
-			"showName": true,
-			"tilesetId": 5,
-			"tileId": 0,
-			"tileRenderMode": "FitInside",
-			"tileRect": { "tilesetUid": 5, "x": 0, "y": 0, "w": 40, "h": 40 },
-			"nineSliceBorders": [],
-			"maxCount": 0,
-			"limitScope": "PerLevel",
-			"limitBehavior": "MoveLastOne",
-			"pivotX": 0.5,
-			"pivotY": 0.5,
-			"fieldDefs": []
-		},
-		{
 			"identifier": "Platform_1",
 			"uid": 6,
 			"tags": [],
@@ -460,25 +432,6 @@
 				"opaqueTiles": "000000000000000000000000000000000000000000000000000000000000",
 				"averageColors": "da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98cdccadcc0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000bdccbdcc"
 			}
-		},
-		{
-			"__cWid": 1,
-			"__cHei": 1,
-			"identifier": "Player",
-			"uid": 5,
-			"relPath": "../images/included/player/OnGround/OnGround_1.png",
-			"embedAtlas": null,
-			"pxWid": 40,
-			"pxHei": 40,
-			"tileGridSize": 40,
-			"spacing": 0,
-			"padding": 0,
-			"tags": [],
-			"tagsSourceEnumUid": null,
-			"enumTags": [],
-			"customData": [],
-			"savedSelections": [],
-			"cachedPixelData": { "opaqueTiles": "0", "averageColors": "5aca" }
 		}
 	], "enums": [{ "identifier": "Speed", "uid": 22, "values": [
 		{ "id": "Slow", "tileId": null, "color": 16097697, "__tileSrcRect": null },
@@ -601,7 +554,7 @@
 						},
 						{
 							"__identifier": "Platform_9",
-							"__grid": [4,2],
+							"__grid": [4,1],
 							"__pivot": [0.5,1],
 							"__tags": [],
 							"__tile": { "tilesetUid": 4, "x": 160, "y": 0, "w": 288, "h": 16 },
@@ -610,7 +563,7 @@
 							"width": 288,
 							"height": 16,
 							"defUid": 8,
-							"px": [144,96],
+							"px": [144,64],
 							"fieldInstances": [
 								{ "__identifier": "Path", "__value": [], "__type": "Array<Point>", "__tile": null, "defUid": 17, "realEditorValues": [] },
 								{ "__identifier": "Speed", "__value": null, "__type": "LocalEnum.Speed", "__tile": null, "defUid": 25, "realEditorValues": [] }
@@ -861,6 +814,23 @@
 									"id": "V_String",
 									"params": ["Medium"]
 								}] }
+							]
+						},
+						{
+							"__identifier": "Platform_9",
+							"__grid": [4,0],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 160, "y": 0, "w": 288, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "89095ad0-2a00-11ed-b997-2f97a81c891a",
+							"width": 288,
+							"height": 16,
+							"defUid": 8,
+							"px": [144,32],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [], "__type": "Array<Point>", "__tile": null, "defUid": 17, "realEditorValues": [] },
+								{ "__identifier": "Speed", "__value": null, "__type": "LocalEnum.Speed", "__tile": null, "defUid": 25, "realEditorValues": [] }
 							]
 						}
 					]
