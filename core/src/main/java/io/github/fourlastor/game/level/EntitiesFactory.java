@@ -17,6 +17,7 @@ import io.github.fourlastor.game.component.BodyBuilderComponent;
 import io.github.fourlastor.game.component.MovingPlatformComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
 import io.github.fourlastor.game.di.ScreenScoped;
+import io.github.fourlastor.game.level.definitions.Platform;
 import io.github.fourlastor.game.level.platform.PlatformSpec;
 import io.github.fourlastor.game.ui.AnimatedImage;
 import io.github.fourlastor.game.ui.ParallaxImage;
@@ -67,28 +68,44 @@ public class EntitiesFactory {
         return entity;
     }
 
-    public Entity makePlatform(PlatformSpec spec) {
+    public Entity platform(Platform platform, float dY) {
+        Entity entity = new Entity();
+        entity.add(platformBuilder(platform.position.cpy().add(0f, dY), platform.width));
+        entity.add(platformActor(platform.type, platform.width));
+        return entity;
+    }
 
+    public Entity makePlatform(PlatformSpec spec) {
         Entity entity = new Entity();
         Vector2 initialPosition = new Vector2(spec.x, spec.y);
-        entity.add(new BodyBuilderComponent(world -> {
-            BodyDef bodyDef = new BodyDef();
-            bodyDef.type = BodyDef.BodyType.KinematicBody;
-            bodyDef.position.set(initialPosition);
-            Body body = world.createBody(bodyDef);
-            PolygonShape shape = new PolygonShape();
-            shape.setAsBox(spec.width.width / 2f, 0.25f);
-            body.createFixture(shape, 0.0f).setUserData(UserData.PLATFORM);
-            shape.dispose();
-            return body;
-        }));
+        entity.add(platformBuilder(initialPosition, spec.width));
         Image image = new Image(
                 textureAtlas.findRegion("platforms/platform_" + spec.type.tileName + "_w" + spec.width.width));
         image.setScale(SCALE_XY);
-        entity.add(new ActorComponent(image, ActorComponent.Layer.PLATFORM));
+        entity.add(platformActor(spec.type, spec.width));
         entity.add(new MovingPlatformComponent(initialPosition.cpy(), spec.goingLeft, spec.speed.speed));
 
         return entity;
+    }
+
+    private ActorComponent platformActor(PlatformSpec.Type type, PlatformSpec.Width width) {
+        Image image = new Image(textureAtlas.findRegion("platforms/platform_" + type.tileName + "_w" + width.width));
+        image.setScale(SCALE_XY);
+        return new ActorComponent(image, ActorComponent.Layer.PLATFORM);
+    }
+
+    private BodyBuilderComponent platformBuilder(Vector2 position, PlatformSpec.Width width) {
+        return new BodyBuilderComponent(world -> {
+            BodyDef bodyDef = new BodyDef();
+            bodyDef.type = BodyDef.BodyType.KinematicBody;
+            bodyDef.position.set(position);
+            Body body = world.createBody(bodyDef);
+            PolygonShape shape = new PolygonShape();
+            shape.setAsBox(width.width / 2f, 0.25f);
+            body.createFixture(shape, 0.0f).setUserData(UserData.PLATFORM);
+            shape.dispose();
+            return body;
+        });
     }
 
     public Entity parallaxBackground(float factor, ActorComponent.Layer layer, int backgroundIndex) {

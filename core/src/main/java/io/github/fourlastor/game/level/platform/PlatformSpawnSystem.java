@@ -20,7 +20,7 @@ public class PlatformSpawnSystem extends IteratingSystem {
     private final Camera camera;
     private final ComponentMapper<BodyComponent> bodies;
     private final EntitiesFactory factory;
-    private final PlatformFactory platformFactory;
+    private final OldPlatformFactory platformFactory;
     private Engine engine;
 
     @Inject
@@ -28,7 +28,7 @@ public class PlatformSpawnSystem extends IteratingSystem {
             Camera camera,
             ComponentMapper<BodyComponent> bodies,
             EntitiesFactory factory,
-            PlatformFactory platformFactory) {
+            OldPlatformFactory platformFactory) {
         super(FAMILY);
         this.camera = camera;
         this.bodies = bodies;

@@ -5,7 +5,7 @@ import java.util.Random;
 import javax.inject.Inject;
 
 @ScreenScoped
-public class PlatformFactory {
+public class OldPlatformFactory {
 
     public static final int SAFE_GROUND_THRESHOLD = 15;
     private final Random random;
@@ -14,7 +14,7 @@ public class PlatformFactory {
     private PlatformSpec lastSpec;
 
     @Inject
-    public PlatformFactory(Random random) {
+    public OldPlatformFactory(Random random) {
         this.random = random;
     }
 

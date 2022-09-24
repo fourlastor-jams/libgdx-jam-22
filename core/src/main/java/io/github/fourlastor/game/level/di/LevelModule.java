@@ -40,7 +40,7 @@ public class LevelModule {
             PlatformSpawnSystem platformSpawnSystem,
             GameOverSystem gameOverSystem) {
         Engine engine = new Engine();
-        engine.addSystem(platformSpawnSystem);
+        //        engine.addSystem(platformSpawnSystem);
         engine.addSystem(platformSystem);
         engine.addSystem(playerInputSystem);
         engine.addSystem(physicsSystem);
