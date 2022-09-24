@@ -11,7 +11,7 @@ import dagger.Provides;
 import io.github.fourlastor.game.MyGdxGame;
 import io.github.fourlastor.game.gameover.GameOverComponent;
 import io.github.fourlastor.game.intro.IntroComponent;
-import io.github.fourlastor.game.level.LevelComponent;
+import io.github.fourlastor.game.level.di.LevelComponent;
 import java.util.Random;
 import javax.inject.Singleton;
 

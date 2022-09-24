@@ -2,6 +2,7 @@ package io.github.fourlastor.game.level.input.state;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -29,6 +30,25 @@ public class ChargeJump extends InputState {
     @Override
     protected Animation<TextureRegion> animation() {
         return animation;
+    }
+
+    @Override
+    public void enter(Entity entity) {
+        super.enter(entity);
+        players.get(entity).charge = 0f;
+    }
+
+    @Override
+    public void update(Entity entity) {
+        super.update(entity);
+        players.get(entity).charge += Gdx.graphics.getDeltaTime();
+    }
+
+    @Override
+    public void exit(Entity entity) {
+        super.exit(entity);
+        PlayerComponent player = players.get(entity);
+        player.charge = Math.min(1f, player.charge);
     }
 
     @Override

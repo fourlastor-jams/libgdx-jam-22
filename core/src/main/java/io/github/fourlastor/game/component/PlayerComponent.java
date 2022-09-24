@@ -14,6 +14,7 @@ public class PlayerComponent implements Component {
     public final Falling falling;
     public final Jumping jumping;
     public final ChargeJump chargeJump;
+    public float charge = 0f;
 
     public PlayerComponent(
             InputStateMachine stateMachine,
