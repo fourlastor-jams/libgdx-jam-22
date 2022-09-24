@@ -114,7 +114,7 @@ public class MapModule {
                 String value = field.getString("__value");
                 if ("Slow".equals(value)) {
                     return Platform.Speed.SLOW;
-                } else if ("Normal".equals(value)) {
+                } else if ("Medium".equals(value)) {
                     return Platform.Speed.MEDIUM;
                 } else if ("Fast".equals(value)) {
                     return Platform.Speed.FAST;
