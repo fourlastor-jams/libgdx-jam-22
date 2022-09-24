@@ -1,6 +1,7 @@
 package io.github.fourlastor.game.level;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -18,6 +19,7 @@ import io.github.fourlastor.game.level.platform.PlatformSystem;
 import io.github.fourlastor.game.level.system.ActorFollowBodySystem;
 import io.github.fourlastor.game.level.system.CameraMovementSystem;
 import io.github.fourlastor.game.level.system.ClearScreenSystem;
+import io.github.fourlastor.game.level.system.GameOverSystem;
 import io.github.fourlastor.game.level.system.StageSystem;
 
 @Module
@@ -34,7 +36,8 @@ public class LevelModule {
             ClearScreenSystem clearScreenSystem,
             PhysicsDebugSystem physicsDebugSystem,
             PlatformSystem platformSystem,
-            PlatformSpawnSystem platformSpawnSystem) {
+            PlatformSpawnSystem platformSpawnSystem,
+            GameOverSystem gameOverSystem) {
         Engine engine = new Engine();
         engine.addSystem(platformSpawnSystem);
         engine.addSystem(platformSystem);
@@ -44,6 +47,7 @@ public class LevelModule {
         engine.addSystem(actorFollowBodySystem);
         engine.addSystem(clearScreenSystem);
         engine.addSystem(stageSystem);
+        engine.addSystem(gameOverSystem);
         //        engine.addSystem(physicsDebugSystem);
         return engine;
     }
@@ -70,5 +74,11 @@ public class LevelModule {
     @ScreenScoped
     public World world() {
         return new World(new Vector2(0f, -10f), true);
+    }
+
+    @Provides
+    @ScreenScoped
+    public MessageDispatcher messageDispatcher() {
+        return new MessageDispatcher();
     }
 }

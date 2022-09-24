@@ -6,7 +6,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalSystem;
-import com.badlogic.gdx.ai.msg.MessageManager;
+import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -16,8 +16,8 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
 import io.github.fourlastor.game.component.BodyComponent;
+import io.github.fourlastor.game.level.Message;
 import io.github.fourlastor.game.level.UserData;
-import io.github.fourlastor.game.level.input.Message;
 import javax.inject.Inject;
 
 public class PhysicsSystem extends IntervalSystem {
@@ -30,7 +30,7 @@ public class PhysicsSystem extends IntervalSystem {
     private final World world;
     private final ComponentMapper<BodyBuilderComponent> bodyBuilders;
     private final ComponentMapper<BodyComponent> bodies;
-    private final MessageManager messageManager;
+    private final MessageDispatcher messageDispatcher;
     private final Factory factory;
     private final Cleaner cleaner;
 
@@ -39,12 +39,12 @@ public class PhysicsSystem extends IntervalSystem {
             World world,
             ComponentMapper<BodyBuilderComponent> bodyBuilders,
             ComponentMapper<BodyComponent> bodies,
-            MessageManager messageManager) {
+            MessageDispatcher messageDispatcher) {
         super(STEP);
         this.world = world;
         this.bodyBuilders = bodyBuilders;
         this.bodies = bodies;
-        this.messageManager = messageManager;
+        this.messageDispatcher = messageDispatcher;
         factory = new Factory();
         cleaner = new Cleaner();
     }
@@ -68,7 +68,9 @@ public class PhysicsSystem extends IntervalSystem {
         world.setContactListener(null);
     }
 
-    /** Creates a body in the world every time a body builder is added. */
+    /**
+     * Creates a body in the world every time a body builder is added.
+     */
     public class Factory implements EntityListener {
 
         @Override
@@ -85,7 +87,9 @@ public class PhysicsSystem extends IntervalSystem {
         }
     }
 
-    /** Cleans up a body which has been removed from the engine. */
+    /**
+     * Cleans up a body which has been removed from the engine.
+     */
     public class Cleaner implements EntityListener {
 
         @Override
@@ -117,7 +121,7 @@ public class PhysicsSystem extends IntervalSystem {
             if (shouldNotCollide) {
                 contact.setEnabled(false);
             } else {
-                messageManager.dispatchMessage(Message.PLAYER_ON_GROUND.ordinal());
+                messageDispatcher.dispatchMessage(Message.PLAYER_ON_GROUND.ordinal());
             }
         }
 

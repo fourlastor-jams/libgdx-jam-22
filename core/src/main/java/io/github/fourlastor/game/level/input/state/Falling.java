@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import io.github.fourlastor.game.component.AnimatedImageComponent;
 import io.github.fourlastor.game.component.BodyComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
+import io.github.fourlastor.game.level.Message;
 import io.github.fourlastor.game.level.PlayerAnimationsFactory;
-import io.github.fourlastor.game.level.input.Message;
 import javax.inject.Inject;
 import javax.inject.Named;
 

@@ -1,7 +1,6 @@
 package io.github.fourlastor.game.di.modules;
 
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -10,12 +9,13 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import dagger.Module;
 import dagger.Provides;
 import io.github.fourlastor.game.MyGdxGame;
+import io.github.fourlastor.game.gameover.GameOverComponent;
 import io.github.fourlastor.game.intro.IntroComponent;
 import io.github.fourlastor.game.level.LevelComponent;
 import java.util.Random;
 import javax.inject.Singleton;
 
-@Module(subcomponents = {LevelComponent.class, IntroComponent.class})
+@Module
 public class GameModule {
 
     private static final String PATH_TEXTURE_ATLAS = "images/included/packed/images.pack.atlas";
@@ -68,18 +68,12 @@ public class GameModule {
 
     @Provides
     @Singleton
-    public MessageManager messageManager() {
-        return MessageManager.getInstance();
-    }
-
-    @Provides
-    @Singleton
     public MyGdxGame game(
-            InputMultiplexer multiplexer, LevelComponent.Builder levelBuilder, IntroComponent.Builder introBuilder) {
-        return new MyGdxGame(
-                multiplexer,
-                levelBuilder.build().levelScreen(),
-                introBuilder.build().introScreen());
+            InputMultiplexer multiplexer,
+            LevelComponent.Builder levelBuilder,
+            IntroComponent.Builder introBuilder,
+            GameOverComponent.Builder gameOverBuilder) {
+        return new MyGdxGame(multiplexer, levelBuilder, introBuilder, gameOverBuilder);
     }
 
     @Provides

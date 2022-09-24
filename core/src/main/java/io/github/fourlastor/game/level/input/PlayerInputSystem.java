@@ -9,11 +9,12 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.ai.msg.MessageManager;
+import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import io.github.fourlastor.game.component.AnimatedImageComponent;
 import io.github.fourlastor.game.component.BodyComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
+import io.github.fourlastor.game.level.Message;
 import io.github.fourlastor.game.level.input.state.ChargeJump;
 import io.github.fourlastor.game.level.input.state.Falling;
 import io.github.fourlastor.game.level.input.state.Jumping;
@@ -72,7 +73,7 @@ public class PlayerInputSystem extends IteratingSystem {
         private final Provider<Jumping> jumpingProvider;
         private final Provider<ChargeJump> chargeJumpProvider;
         private final InputStateMachine.Factory stateMachineFactory;
-        private final MessageManager messageManager;
+        private final MessageDispatcher messageDispatcher;
 
         @Inject
         public PlayerSetup(
@@ -81,13 +82,13 @@ public class PlayerInputSystem extends IteratingSystem {
                 Provider<Jumping> jumpingProvider,
                 Provider<ChargeJump> chargeJumpProvider,
                 InputStateMachine.Factory stateMachineFactory,
-                MessageManager messageManager) {
+                MessageDispatcher messageDispatcher) {
             this.onGroundProvider = onGroundProvider;
             this.fallingProvider = fallingProvider;
             this.jumpingProvider = jumpingProvider;
             this.chargeJumpProvider = chargeJumpProvider;
             this.stateMachineFactory = stateMachineFactory;
-            this.messageManager = messageManager;
+            this.messageDispatcher = messageDispatcher;
         }
 
         @Override
@@ -102,7 +103,7 @@ public class PlayerInputSystem extends IteratingSystem {
             entity.add(new PlayerComponent(stateMachine, onGround, falling, jumping, chargeJump));
             stateMachine.getCurrentState().enter(entity);
             for (Message value : Message.values()) {
-                messageManager.addListener(stateMachine, value.ordinal());
+                messageDispatcher.addListener(stateMachine, value.ordinal());
             }
         }
 
