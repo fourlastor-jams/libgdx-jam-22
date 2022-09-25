@@ -16,6 +16,7 @@ public class ActorComponent implements Component {
     public enum Layer {
         BG_PARALLAX,
         PLATFORM,
+        SAW_BLADE,
         CHARACTER,
         FG_PARALLAX
     }

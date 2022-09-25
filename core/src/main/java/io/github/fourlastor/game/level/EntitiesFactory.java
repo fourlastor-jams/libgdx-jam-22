@@ -21,6 +21,7 @@ import io.github.fourlastor.game.component.PlayerRequestComponent;
 import io.github.fourlastor.game.di.ScreenScoped;
 import io.github.fourlastor.game.level.blueprint.definitions.MovingPlatform;
 import io.github.fourlastor.game.level.blueprint.definitions.Platform;
+import io.github.fourlastor.game.level.blueprint.definitions.SawBlade;
 import io.github.fourlastor.game.ui.AnimatedImage;
 import io.github.fourlastor.game.ui.ParallaxImage;
 import java.util.ArrayList;
@@ -125,6 +126,33 @@ public class EntitiesFactory {
     public Entity chunkRemoval(float newTop) {
         Entity entity = new Entity();
         entity.add(new ChunkRemovalComponent(newTop));
+        return entity;
+    }
+
+    public Entity sawBlade(SawBlade sawBlade, float dY, float top) {
+        Entity entity = new Entity();
+        Vector2 initialPosition = sawBlade.position.cpy().add(0f, dY);
+        entity.add(new BodyBuilderComponent(world -> {
+            BodyDef bodyDef = new BodyDef();
+            bodyDef.type = BodyDef.BodyType.KinematicBody;
+            bodyDef.position.set(initialPosition);
+            Body body = world.createBody(bodyDef);
+            PolygonShape shape = new PolygonShape();
+            shape.setAsBox(0.5f, 0.5f);
+            body.createFixture(shape, 0.0f).setUserData(UserData.SAWBLADE);
+            shape.dispose();
+            return body;
+        }));
+        Image image = new Image(textureAtlas.findRegion("enemies/sawblade"));
+        image.setScale(SCALE_XY);
+        entity.add(new ActorComponent(image, ActorComponent.Layer.SAW_BLADE));
+        entity.add(new ChunkComponent(top));
+        List<Vector2> path = new ArrayList<>(sawBlade.path.size() + 1);
+        path.add(initialPosition);
+        for (Vector2 point : sawBlade.path) {
+            path.add(point.cpy().add(0, dY));
+        }
+        entity.add(new MovingComponent(path, sawBlade.speed.speed));
         return entity;
     }
 }
