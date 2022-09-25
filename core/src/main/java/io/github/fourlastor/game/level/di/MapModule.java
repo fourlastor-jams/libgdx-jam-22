@@ -13,6 +13,7 @@ import io.github.fourlastor.game.level.blueprint.definitions.LevelDefinitions;
 import io.github.fourlastor.game.level.blueprint.definitions.MovementSpeed;
 import io.github.fourlastor.game.level.blueprint.definitions.MovingPlatform;
 import io.github.fourlastor.game.level.blueprint.definitions.Platform;
+import io.github.fourlastor.game.level.blueprint.definitions.SawBlade;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -56,7 +57,24 @@ public class MapModule {
 
     private Chunk chunk(JsonValue level) {
         GridPoint2 size = size(level);
-        return new Chunk(size, staticPlatforms(level, size));
+        return new Chunk(size, staticPlatforms(level, size), sawBlades(level, size));
+    }
+
+    private List<SawBlade> sawBlades(JsonValue level, GridPoint2 size) {
+        JsonValue entities = entities(level);
+        List<SawBlade> sawBlades = new ArrayList<>();
+        for (int i = 0; i < entities.size; i++) {
+            JsonValue entity = entities.get(i);
+            if (!identifier(entity).equals("Sawblade")) {
+                continue;
+            }
+            float[] grid = getGrid(entity);
+            float[] pivot = pivot(entity);
+            MovementSpeed speed = speed(entity);
+            List<Vector2> path = path(entity, size, pivot);
+            sawBlades.add(new SawBlade(getPosition(size, grid, pivot), speed, path));
+        }
+        return sawBlades;
     }
 
     private GridPoint2 size(JsonValue level) {
@@ -64,11 +82,11 @@ public class MapModule {
     }
 
     private List<Platform> staticPlatforms(JsonValue level, GridPoint2 size) {
-        JsonValue entities = level.get("layerInstances").get(0).get("entityInstances");
+        JsonValue entities = entities(level);
         ArrayList<Platform> platforms = new ArrayList<>();
         for (int i = 0; i < entities.size; i++) {
             JsonValue entity = entities.get(i);
-            String identifier = entity.getString("__identifier");
+            String identifier = identifier(entity);
             if (!identifier.startsWith("Platform")) {
                 continue;
             }
@@ -88,11 +106,19 @@ public class MapModule {
         return platforms;
     }
 
+    private String identifier(JsonValue entity) {
+        return entity.getString("__identifier");
+    }
+
+    private JsonValue entities(JsonValue level) {
+        return level.get("layerInstances").get(0).get("entityInstances");
+    }
+
     private List<Vector2> path(JsonValue entity, GridPoint2 size, float[] pivot) {
         JsonValue fieldInstances = entity.get("fieldInstances");
         for (int j = 0; j < fieldInstances.size; j++) {
             JsonValue field = fieldInstances.get(j);
-            if (field.getString("__identifier").equals("Path")) {
+            if (identifier(field).equals("Path")) {
                 JsonValue value = field.get("__value");
                 List<Vector2> path = new ArrayList<>(value.size);
                 for (int i = 0; i < value.size; i++) {
@@ -111,7 +137,7 @@ public class MapModule {
         JsonValue fieldInstances = entity.get("fieldInstances");
         for (int j = 0; j < fieldInstances.size; j++) {
             JsonValue field = fieldInstances.get(j);
-            if (field.getString("__identifier").equals("Speed")) {
+            if (identifier(field).equals("Speed")) {
                 String value = field.getString("__value");
                 if ("Slow".equals(value)) {
                     return MovementSpeed.SLOW;
