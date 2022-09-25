@@ -82,7 +82,7 @@ public class EntitiesFactory {
         for (Vector2 point : platform.path) {
             path.add(point.cpy().add(0, dY));
         }
-        entity.add(new MovingComponent(path, platform.speed.speed));
+        entity.add(new MovingComponent(path, platform.speed.speed()));
     }
 
     public Entity platform(Platform platform, float dY, float top) {

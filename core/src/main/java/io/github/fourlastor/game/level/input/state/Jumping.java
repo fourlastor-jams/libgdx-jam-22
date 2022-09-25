@@ -16,7 +16,8 @@ import javax.inject.Named;
 
 public class Jumping extends InputState {
 
-    private static final float MAX_JUMP_HEIGHT = 6f;
+    private static final float MAX_JUMP_HEIGHT = 7f;
+    public static final float MIN_JUMP_HEIGHT = 2.5f;
     private final Animation<TextureRegion> animation;
     private final float gravity;
 
@@ -41,8 +42,9 @@ public class Jumping extends InputState {
     public void enter(Entity entity) {
         super.enter(entity);
         Body body = bodies.get(entity).body;
-        float charge = Math.max(0.15f, players.get(entity).charge);
-        float velocity = (float) Math.sqrt(2f * MAX_JUMP_HEIGHT * gravity * charge);
+        float charge = players.get(entity).charge;
+        float targetHeight = Math.max(MIN_JUMP_HEIGHT, MAX_JUMP_HEIGHT * charge);
+        float velocity = (float) Math.sqrt(2f * targetHeight * gravity);
         body.setLinearVelocity(0f, velocity);
     }
 
