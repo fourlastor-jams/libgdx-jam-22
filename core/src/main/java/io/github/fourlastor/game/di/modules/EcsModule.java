@@ -11,6 +11,7 @@ import io.github.fourlastor.game.component.ChunkComponent;
 import io.github.fourlastor.game.component.ChunkRemovalComponent;
 import io.github.fourlastor.game.component.MovingComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
+import io.github.fourlastor.game.component.SoundComponent;
 import javax.inject.Singleton;
 
 @Module
@@ -62,5 +63,11 @@ public class EcsModule {
     @Singleton
     public ComponentMapper<MovingComponent> movingComponent() {
         return ComponentMapper.getFor(MovingComponent.class);
+    }
+
+    @Provides
+    @Singleton
+    public ComponentMapper<SoundComponent> soundComponent() {
+        return ComponentMapper.getFor(SoundComponent.class);
     }
 }
