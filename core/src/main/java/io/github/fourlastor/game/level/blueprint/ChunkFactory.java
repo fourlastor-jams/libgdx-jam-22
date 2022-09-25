@@ -1,11 +1,12 @@
-package io.github.fourlastor.game.level.platform;
+package io.github.fourlastor.game.level.blueprint;
 
 import com.badlogic.ashley.core.Entity;
 import io.github.fourlastor.game.di.ScreenScoped;
 import io.github.fourlastor.game.level.EntitiesFactory;
-import io.github.fourlastor.game.level.platform.definitions.Chunk;
-import io.github.fourlastor.game.level.platform.definitions.LevelDefinitions;
-import io.github.fourlastor.game.level.platform.definitions.Platform;
+import io.github.fourlastor.game.level.blueprint.definitions.Chunk;
+import io.github.fourlastor.game.level.blueprint.definitions.LevelDefinitions;
+import io.github.fourlastor.game.level.blueprint.definitions.Platform;
+import io.github.fourlastor.game.level.blueprint.definitions.SawBlade;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -43,18 +44,21 @@ public class ChunkFactory {
     }
 
     private List<Entity> addInitial() {
-        return addPlatforms(definitions.initial);
+        return addEntities(definitions.initial);
     }
 
     private List<Entity> addNext(int index) {
-        return addPlatforms(definitions.chunks.get(index));
+        return addEntities(definitions.chunks.get(index));
     }
 
-    private List<Entity> addPlatforms(Chunk chunk) {
-        List<Entity> entities = new ArrayList<>(chunk.platforms.size() + 1);
+    private List<Entity> addEntities(Chunk chunk) {
+        List<Entity> entities = new ArrayList<>(chunk.platforms.size() + chunk.sawBlades.size() + 1);
         float newTop = dY + chunk.size.y;
         for (Platform platform : chunk.platforms) {
             entities.add(factory.platform(platform, dY, newTop));
+        }
+        for (SawBlade sawBlade : chunk.sawBlades) {
+            entities.add(factory.sawBlade(sawBlade, dY, newTop));
         }
         entities.add(factory.chunkRemoval(newTop));
         dY = newTop;

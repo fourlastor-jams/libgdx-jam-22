@@ -3,9 +3,10 @@ package io.github.fourlastor.game.level;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import io.github.fourlastor.game.component.ActorComponent.Layer;
-import io.github.fourlastor.game.level.platform.ChunkFactory;
+import io.github.fourlastor.game.level.blueprint.ChunkFactory;
 import javax.inject.Inject;
 
 public class LevelScreen extends ScreenAdapter {
@@ -15,13 +16,16 @@ public class LevelScreen extends ScreenAdapter {
     private final EntitiesFactory entitiesFactory;
 
     private final ChunkFactory chunkFactory;
+    private final World world;
 
     @Inject
-    public LevelScreen(Engine engine, Viewport viewport, EntitiesFactory entitiesFactory, ChunkFactory chunkFactory) {
+    public LevelScreen(
+            Engine engine, Viewport viewport, EntitiesFactory entitiesFactory, ChunkFactory chunkFactory, World world) {
         this.engine = engine;
         this.viewport = viewport;
         this.entitiesFactory = entitiesFactory;
         this.chunkFactory = chunkFactory;
+        this.world = world;
     }
 
     @Override
@@ -53,5 +57,11 @@ public class LevelScreen extends ScreenAdapter {
     public void hide() {
         engine.removeAllEntities();
         engine.removeAllSystems();
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        world.dispose();
     }
 }

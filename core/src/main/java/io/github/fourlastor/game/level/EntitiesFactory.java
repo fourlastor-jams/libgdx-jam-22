@@ -7,9 +7,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RotateByAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import io.github.fourlastor.game.component.ActorComponent;
 import io.github.fourlastor.game.component.AnimatedImageComponent;
@@ -19,8 +22,9 @@ import io.github.fourlastor.game.component.ChunkRemovalComponent;
 import io.github.fourlastor.game.component.MovingComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
 import io.github.fourlastor.game.di.ScreenScoped;
-import io.github.fourlastor.game.level.platform.definitions.MovingPlatform;
-import io.github.fourlastor.game.level.platform.definitions.Platform;
+import io.github.fourlastor.game.level.blueprint.definitions.MovingPlatform;
+import io.github.fourlastor.game.level.blueprint.definitions.Platform;
+import io.github.fourlastor.game.level.blueprint.definitions.SawBlade;
 import io.github.fourlastor.game.ui.AnimatedImage;
 import io.github.fourlastor.game.ui.ParallaxImage;
 import java.util.ArrayList;
@@ -54,17 +58,17 @@ public class EntitiesFactory {
         entity.add(new BodyBuilderComponent(world -> {
             BodyDef bodyDef = new BodyDef();
             bodyDef.type = BodyDef.BodyType.DynamicBody;
-            bodyDef.position.set(new Vector2(4.5f, 1f));
+            bodyDef.position.set(new Vector2(4.5f, 1.5f));
             Body body = world.createBody(bodyDef);
             PolygonShape shape = new PolygonShape();
-            shape.setAsBox(0.25f, 0.5f);
+            shape.setAsBox(0.25f, 0.25f);
             Fixture fixture = body.createFixture(shape, 0.0f);
             fixture.setFriction(100f);
             fixture.setUserData(UserData.PLAYER);
             shape.dispose();
             return body;
         }));
-        image.setPosition(-0.5f, -0.75f);
+        image.setPosition(-0.5f, -0.5f);
         Group group = new Group();
         group.addActor(image);
         entity.add(new ActorComponent(group, ActorComponent.Layer.CHARACTER));
@@ -72,8 +76,9 @@ public class EntitiesFactory {
         return entity;
     }
 
-    private void movingPlatform(Entity entity, MovingPlatform platform, float dY) {
-        List<Vector2> path = new ArrayList<>(platform.path.size());
+    private void movingPlatform(Entity entity, MovingPlatform platform, float dY, Vector2 initialPosition) {
+        List<Vector2> path = new ArrayList<>(platform.path.size() + 1);
+        path.add(initialPosition);
         for (Vector2 point : platform.path) {
             path.add(point.cpy().add(0, dY));
         }
@@ -82,11 +87,12 @@ public class EntitiesFactory {
 
     public Entity platform(Platform platform, float dY, float top) {
         Entity entity = new Entity();
-        entity.add(platformBuilder(platform.position.cpy().add(0f, dY), platform.width));
+        Vector2 initialPosition = platform.position.cpy().add(0f, dY);
+        entity.add(platformBuilder(initialPosition, platform.width));
         entity.add(platformActor(platform.type, platform.width));
         entity.add(new ChunkComponent(top));
         if (platform instanceof MovingPlatform) {
-            movingPlatform(entity, (MovingPlatform) platform, dY);
+            movingPlatform(entity, (MovingPlatform) platform, dY, initialPosition);
         }
         return entity;
     }
@@ -123,6 +129,41 @@ public class EntitiesFactory {
     public Entity chunkRemoval(float newTop) {
         Entity entity = new Entity();
         entity.add(new ChunkRemovalComponent(newTop));
+        return entity;
+    }
+
+    public Entity sawBlade(SawBlade sawBlade, float dY, float top) {
+        Entity entity = new Entity();
+        Vector2 initialPosition = sawBlade.position.cpy().add(0f, dY);
+        entity.add(new BodyBuilderComponent(world -> {
+            BodyDef bodyDef = new BodyDef();
+            bodyDef.type = BodyDef.BodyType.KinematicBody;
+            bodyDef.position.set(initialPosition);
+            Body body = world.createBody(bodyDef);
+            CircleShape shape = new CircleShape();
+            shape.setRadius(0.5f);
+            body.createFixture(shape, 0.0f).setUserData(UserData.SAWBLADE);
+            shape.dispose();
+            return body;
+        }));
+        Image image = new Image(textureAtlas.findRegion("enemies/sawblade"));
+        image.setScale(SCALE_XY);
+        image.setOrigin(0.5f, 0.5f);
+        image.setPosition(-1f, -1f);
+        RotateByAction rotate = new RotateByAction();
+        rotate.setAmount(360);
+        rotate.setDuration(1f);
+        Group group = new Group();
+        group.addActor(image);
+        group.addAction(Actions.forever(rotate));
+        entity.add(new ActorComponent(group, ActorComponent.Layer.SAW_BLADE));
+        entity.add(new ChunkComponent(top));
+        List<Vector2> path = new ArrayList<>(sawBlade.path.size() + 1);
+        path.add(initialPosition);
+        for (Vector2 point : sawBlade.path) {
+            path.add(point.cpy().add(0, dY));
+        }
+        entity.add(new MovingComponent(path, sawBlade.speed.speed));
         return entity;
     }
 }

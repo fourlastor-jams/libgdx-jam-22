@@ -1,4 +1,4 @@
-package io.github.fourlastor.game.level.platform.definitions;
+package io.github.fourlastor.game.level.blueprint.definitions;
 
 import java.util.List;
 
