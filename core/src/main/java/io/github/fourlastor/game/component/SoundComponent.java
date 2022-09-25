@@ -14,11 +14,9 @@ public class SoundComponent implements Component {
 
     public void play(float volume) {
         if (id == -1) {
-            id = sound.loop(volume);
-        } else {
-            sound.setVolume(id, volume);
-            sound.resume(id);
+            id = sound.loop();
         }
+        sound.setVolume(id, volume);
     }
 
     public void stop() {
