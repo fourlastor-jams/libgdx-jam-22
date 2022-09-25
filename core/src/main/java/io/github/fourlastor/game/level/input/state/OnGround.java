@@ -32,14 +32,6 @@ public class OnGround extends InputState {
     }
 
     @Override
-    public void update(Entity entity) {
-        if (bodies.get(entity).body.getLinearVelocity().y < 0) {
-            PlayerComponent player = players.get(entity);
-            player.stateMachine.changeState(player.falling);
-        }
-    }
-
-    @Override
     public boolean keyDown(Entity entity, int keycode) {
         if (keycode == Input.Keys.SPACE) {
             PlayerComponent player = players.get(entity);
