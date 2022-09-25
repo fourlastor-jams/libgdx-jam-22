@@ -45,6 +45,7 @@ public class GameModule {
         assetManager.load("audio/sounds/190469__alxy__rapid-missile-launch.wav", Sound.class);
         assetManager.load("audio/sounds/379352__hard3eat__atomic-bomb.wav", Sound.class);
         assetManager.load("audio/sounds/sandra_intro.wav", Sound.class);
+        assetManager.load("audio/sounds/sawblade.ogg", Sound.class);
 
         assetManager.load("audio/music/428674__phantastonia__cinematic-vio2.wav", Music.class);
         assetManager.load("audio/music/608308__aidangig__radiation-ambience-effect.wav", Music.class);

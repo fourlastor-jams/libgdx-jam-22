@@ -1,6 +1,8 @@
 package io.github.fourlastor.game.level;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -21,6 +23,7 @@ import io.github.fourlastor.game.component.ChunkComponent;
 import io.github.fourlastor.game.component.ChunkRemovalComponent;
 import io.github.fourlastor.game.component.MovingComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
+import io.github.fourlastor.game.component.SoundComponent;
 import io.github.fourlastor.game.di.ScreenScoped;
 import io.github.fourlastor.game.level.blueprint.definitions.MovingPlatform;
 import io.github.fourlastor.game.level.blueprint.definitions.Platform;
@@ -40,13 +43,16 @@ public class EntitiesFactory {
     private static final float SCALE_XY = 1f / 32f;
     private final Animation<TextureRegion> fallingAnimation;
     private final TextureAtlas textureAtlas;
+    private final Sound sawBladeSound;
 
     @Inject
     public EntitiesFactory(
             @Named(PlayerAnimationsFactory.ANIMATION_FALLING) Animation<TextureRegion> fallingAnimation,
-            TextureAtlas textureAtlas) {
+            TextureAtlas textureAtlas,
+            AssetManager assetManager) {
         this.fallingAnimation = fallingAnimation;
         this.textureAtlas = textureAtlas;
+        sawBladeSound = assetManager.get("audio/sounds/sawblade.ogg", Sound.class);
     }
 
     public Entity player() {
@@ -158,6 +164,7 @@ public class EntitiesFactory {
         group.addAction(Actions.forever(rotate));
         entity.add(new ActorComponent(group, ActorComponent.Layer.SAW_BLADE));
         entity.add(new ChunkComponent(top));
+        entity.add(new SoundComponent(sawBladeSound));
         List<Vector2> path = new ArrayList<>(sawBlade.path.size() + 1);
         path.add(initialPosition);
         for (Vector2 point : sawBlade.path) {
