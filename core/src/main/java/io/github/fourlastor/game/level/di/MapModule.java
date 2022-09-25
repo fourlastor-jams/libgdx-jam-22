@@ -78,7 +78,7 @@ public class MapModule {
     }
 
     private GridPoint2 size(JsonValue level) {
-        return new GridPoint2(level.getInt("pxWid") / 32, level.getInt("pxWid") / 32);
+        return new GridPoint2(level.getInt("pxWid") / 32, level.getInt("pxHei") / 32);
     }
 
     private List<Platform> staticPlatforms(JsonValue level, GridPoint2 size) {
