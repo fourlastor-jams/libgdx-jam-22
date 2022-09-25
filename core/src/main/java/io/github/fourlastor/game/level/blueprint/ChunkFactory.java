@@ -1,11 +1,11 @@
-package io.github.fourlastor.game.level.platform;
+package io.github.fourlastor.game.level.blueprint;
 
 import com.badlogic.ashley.core.Entity;
 import io.github.fourlastor.game.di.ScreenScoped;
 import io.github.fourlastor.game.level.EntitiesFactory;
-import io.github.fourlastor.game.level.platform.definitions.Chunk;
-import io.github.fourlastor.game.level.platform.definitions.LevelDefinitions;
-import io.github.fourlastor.game.level.platform.definitions.Platform;
+import io.github.fourlastor.game.level.blueprint.definitions.Chunk;
+import io.github.fourlastor.game.level.blueprint.definitions.LevelDefinitions;
+import io.github.fourlastor.game.level.blueprint.definitions.Platform;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

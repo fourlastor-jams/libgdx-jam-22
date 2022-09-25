@@ -1,4 +1,4 @@
-package io.github.fourlastor.game.level.platform.definitions;
+package io.github.fourlastor.game.level.blueprint.definitions;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -14,7 +14,6 @@ public class Platform {
     }
 
     public enum Speed {
-        IMMOBILE(0f),
         SLOW(0.5f),
         MEDIUM(1f),
         FAST(1.5f);

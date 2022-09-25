@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import io.github.fourlastor.game.component.ActorComponent.Layer;
-import io.github.fourlastor.game.level.platform.ChunkFactory;
+import io.github.fourlastor.game.level.blueprint.ChunkFactory;
 import javax.inject.Inject;
 
 public class LevelScreen extends ScreenAdapter {

@@ -1,4 +1,4 @@
-package io.github.fourlastor.game.level.platform.definitions;
+package io.github.fourlastor.game.level.blueprint.definitions;
 
 import com.badlogic.gdx.math.GridPoint2;
 import java.util.List;
