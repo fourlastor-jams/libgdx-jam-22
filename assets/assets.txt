@@ -9,7 +9,7 @@ i:fonts/font-36.png:fonts/font-36-7dd4c4db8f699c23ecb1fa6192a58463.png:10440:ima
 t:fonts/font-38.fnt:fonts/font-38-065671348c8c2cbf3afdfd4107182866.fnt:10999:application/unknown:1
 i:fonts/font-32.png:fonts/font-32-fedd390d507531f1eea2d004f38a8028.png:6335:image/png:1
 d:map:map:0:application/unknown:1
-b:map/map.ldtk:map/map-648b835ea02216862feef50b572655ad.ldtk:46778:application/unknown:1
+b:map/map.ldtk:map/map-e7e2be1a695588d8631e4b87ee881ba7.ldtk:46770:application/unknown:1
 i:map/spritesheet.png:map/spritesheet-add9ff0944940f03a3bdd076403f07d9.png:1188:image/png:1
 d:images:images:0:application/unknown:1
 d:images/included:images/included:0:application/unknown:1
