@@ -70,7 +70,7 @@ public class MapModule {
             }
             float[] grid = getGrid(entity);
             float[] pivot = pivot(entity);
-            MovementSpeed speed = speed(entity);
+            SawBlade.Speed speed = sawBladeSpeed(entity);
             List<Vector2> path = path(entity, size, pivot);
             sawBlades.add(new SawBlade(getPosition(size, grid, pivot), speed, path));
         }
@@ -94,7 +94,7 @@ public class MapModule {
 
             float[] grid = getGrid(entity);
             float[] pivot = pivot(entity);
-            MovementSpeed speed = speed(entity);
+            MovingPlatform.Speed speed = platformSpeed(entity);
             List<Vector2> path = path(entity, size, pivot);
             if (speed == null || path.isEmpty()) {
                 platforms.add(new Platform(getPosition(size, grid, pivot), Platform.Type.SMALL_GRID, width));
@@ -133,18 +133,26 @@ public class MapModule {
         return Collections.emptyList();
     }
 
-    private MovementSpeed speed(JsonValue entity) {
+    private MovingPlatform.Speed platformSpeed(JsonValue entity) {
+        return speed(entity, MovingPlatform.Speed.SLOW, MovingPlatform.Speed.MEDIUM, MovingPlatform.Speed.FAST);
+    }
+
+    private SawBlade.Speed sawBladeSpeed(JsonValue entity) {
+        return speed(entity, SawBlade.Speed.SLOW, SawBlade.Speed.MEDIUM, SawBlade.Speed.FAST);
+    }
+
+    private <T extends MovementSpeed> T speed(JsonValue entity, T slow, T medium, T fast) {
         JsonValue fieldInstances = entity.get("fieldInstances");
         for (int j = 0; j < fieldInstances.size; j++) {
             JsonValue field = fieldInstances.get(j);
             if (identifier(field).equals("Speed")) {
                 String value = field.getString("__value");
                 if ("Slow".equals(value)) {
-                    return MovementSpeed.SLOW;
+                    return slow;
                 } else if ("Medium".equals(value)) {
-                    return MovementSpeed.MEDIUM;
+                    return medium;
                 } else if ("Fast".equals(value)) {
-                    return MovementSpeed.FAST;
+                    return fast;
                 } else {
                     return null;
                 }
