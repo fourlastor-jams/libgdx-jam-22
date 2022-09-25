@@ -134,10 +134,21 @@ public class PhysicsSystem extends IntervalSystem {
         public void preSolve(Contact contact, Manifold oldManifold) {
             Fixture fixtureA = contact.getFixtureA();
             Fixture fixtureB = contact.getFixtureB();
-            if (UserData.PLAYER == fixtureA.getUserData() && UserData.PLATFORM == fixtureB.getUserData()) {
-                checkCollision(contact, fixtureA, fixtureB);
-            } else if (UserData.PLATFORM == fixtureA.getUserData() && UserData.PLAYER == fixtureB.getUserData()) {
-                checkCollision(contact, fixtureB, fixtureA);
+            Fixture playerFixture;
+            Fixture otherFixture;
+            if (UserData.PLAYER == fixtureA.getUserData()) {
+                playerFixture = fixtureA;
+                otherFixture = fixtureB;
+            } else if (UserData.PLAYER == fixtureB.getUserData()) {
+                playerFixture = fixtureB;
+                otherFixture = fixtureA;
+            } else {
+                return;
+            }
+            if (UserData.PLATFORM == otherFixture.getUserData()) {
+                checkCollision(contact, playerFixture, otherFixture);
+            } else if (UserData.SAWBLADE == otherFixture.getUserData()) {
+                messageDispatcher.dispatchMessage(Message.GAME_OVER.ordinal());
             }
         }
 
