@@ -1,0 +1,1546 @@
+{
+	"__header__": {
+		"fileType": "LDtk Project JSON",
+		"app": "LDtk",
+		"doc": "https://ldtk.io/json",
+		"schema": "https://ldtk.io/files/JSON_SCHEMA.json",
+		"appAuthor": "Sebastien 'deepnight' Benard",
+		"appVersion": "1.1.3",
+		"url": "https://ldtk.io"
+	},
+	"jsonVersion": "1.1.3",
+	"appBuildId": 458364,
+	"nextUid": 33,
+	"identifierStyle": "Capitalize",
+	"worldLayout": "Free",
+	"worldGridWidth": 256,
+	"worldGridHeight": 256,
+	"defaultLevelWidth": 256,
+	"defaultLevelHeight": 256,
+	"defaultPivotX": 0,
+	"defaultPivotY": 0,
+	"defaultGridSize": 32,
+	"bgColor": "#40465B",
+	"defaultLevelBgColor": "#696A79",
+	"minifyJson": false,
+	"externalLevels": false,
+	"exportTiled": false,
+	"simplifiedExport": false,
+	"imageExportMode": "None",
+	"pngFilePattern": null,
+	"backupOnSave": false,
+	"backupLimit": 10,
+	"levelNamePattern": "Level_%idx",
+	"tutorialDesc": null,
+	"flags": [],
+	"defs": { "layers": [
+		{
+			"__type": "Entities",
+			"identifier": "Entities",
+			"type": "Entities",
+			"uid": 10,
+			"gridSize": 32,
+			"guideGridWid": 0,
+			"guideGridHei": 0,
+			"displayOpacity": 1,
+			"inactiveOpacity": 0.6,
+			"hideInList": false,
+			"hideFieldsWhenInactive": true,
+			"pxOffsetX": 0,
+			"pxOffsetY": 0,
+			"parallaxFactorX": 0,
+			"parallaxFactorY": 0,
+			"parallaxScaling": true,
+			"requiredTags": [],
+			"excludedTags": [],
+			"intGridValues": [],
+			"autoTilesetDefUid": null,
+			"autoRuleGroups": [],
+			"autoSourceLayerDefUid": null,
+			"tilesetDefUid": null,
+			"tilePivotX": 0,
+			"tilePivotY": 0
+		}
+	], "entities": [
+		{
+			"identifier": "Platform_1",
+			"uid": 6,
+			"tags": [],
+			"width": 32,
+			"height": 16,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 0.08,
+			"lineOpacity": 0,
+			"hollow": false,
+			"color": "#94D9B3",
+			"renderMode": "Tile",
+			"showName": true,
+			"tilesetId": 4,
+			"tileId": 0,
+			"tileRenderMode": "FitInside",
+			"tileRect": { "tilesetUid": 4, "x": 0, "y": 0, "w": 32, "h": 16 },
+			"nineSliceBorders": [],
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0.5,
+			"pivotY": 1,
+			"fieldDefs": [
+				{
+					"identifier": "Path",
+					"__type": "Array<Point>",
+					"uid": 19,
+					"type": "F_Point",
+					"isArray": true,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "PointPath",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefTags": [],
+					"tilesetUid": null
+				},
+				{
+					"identifier": "Speed",
+					"__type": "LocalEnum.Speed",
+					"uid": 23,
+					"type": "F_Enum(22)",
+					"isArray": false,
+					"canBeNull": true,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "NameAndValue",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
+		},
+		{
+			"identifier": "Platform_4",
+			"uid": 7,
+			"tags": [],
+			"width": 128,
+			"height": 16,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 0.08,
+			"lineOpacity": 0,
+			"hollow": false,
+			"color": "#94D9B3",
+			"renderMode": "Tile",
+			"showName": true,
+			"tilesetId": 4,
+			"tileId": 2,
+			"tileRenderMode": "FitInside",
+			"tileRect": { "tilesetUid": 4, "x": 32, "y": 0, "w": 128, "h": 16 },
+			"nineSliceBorders": [],
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0.5,
+			"pivotY": 1,
+			"fieldDefs": [
+				{
+					"identifier": "Path",
+					"__type": "Array<Point>",
+					"uid": 18,
+					"type": "F_Point",
+					"isArray": true,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "PointPath",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefTags": [],
+					"tilesetUid": null
+				},
+				{
+					"identifier": "Speed",
+					"__type": "LocalEnum.Speed",
+					"uid": 24,
+					"type": "F_Enum(22)",
+					"isArray": false,
+					"canBeNull": true,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "NameAndValue",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
+		},
+		{
+			"identifier": "Platform_9",
+			"uid": 8,
+			"tags": [],
+			"width": 288,
+			"height": 16,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 0.08,
+			"lineOpacity": 0,
+			"hollow": false,
+			"color": "#94D9B3",
+			"renderMode": "Tile",
+			"showName": true,
+			"tilesetId": 4,
+			"tileId": 10,
+			"tileRenderMode": "FitInside",
+			"tileRect": { "tilesetUid": 4, "x": 160, "y": 0, "w": 288, "h": 16 },
+			"nineSliceBorders": [],
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0.5,
+			"pivotY": 1,
+			"fieldDefs": [
+				{
+					"identifier": "Path",
+					"__type": "Array<Point>",
+					"uid": 17,
+					"type": "F_Point",
+					"isArray": true,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "PointPath",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefTags": [],
+					"tilesetUid": null
+				},
+				{
+					"identifier": "Speed",
+					"__type": "LocalEnum.Speed",
+					"uid": 25,
+					"type": "F_Enum(22)",
+					"isArray": false,
+					"canBeNull": true,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "NameAndValue",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
+		},
+		{
+			"identifier": "Sawblade",
+			"uid": 9,
+			"tags": [],
+			"width": 32,
+			"height": 32,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 0.08,
+			"lineOpacity": 0,
+			"hollow": false,
+			"color": "#94D9B3",
+			"renderMode": "Tile",
+			"showName": true,
+			"tilesetId": 4,
+			"tileId": 28,
+			"tileRenderMode": "FitInside",
+			"tileRect": { "tilesetUid": 4, "x": 448, "y": 0, "w": 32, "h": 32 },
+			"nineSliceBorders": [],
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0.5,
+			"pivotY": 0.5,
+			"fieldDefs": [
+				{
+					"identifier": "Path",
+					"__type": "Array<Point>",
+					"uid": 20,
+					"type": "F_Point",
+					"isArray": true,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "PointPath",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefTags": [],
+					"tilesetUid": null
+				},
+				{
+					"identifier": "Speed",
+					"__type": "LocalEnum.Speed",
+					"uid": 26,
+					"type": "F_Enum(22)",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "NameAndValue",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
+		}
+	], "tilesets": [
+		{
+			"__cWid": 30,
+			"__cHei": 2,
+			"identifier": "Tiles",
+			"uid": 4,
+			"relPath": "spritesheet.png",
+			"embedAtlas": null,
+			"pxWid": 480,
+			"pxHei": 32,
+			"tileGridSize": 16,
+			"spacing": 0,
+			"padding": 0,
+			"tags": [],
+			"tagsSourceEnumUid": null,
+			"enumTags": [],
+			"customData": [],
+			"savedSelections": [],
+			"cachedPixelData": {
+				"opaqueTiles": "000000000000000000000000000000000000000000000000000000000000",
+				"averageColors": "da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98da98cdccadcc0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000bdccbdcc"
+			}
+		}
+	], "enums": [{ "identifier": "Speed", "uid": 22, "values": [
+		{ "id": "Slow", "tileId": null, "color": 16097697, "__tileSrcRect": null },
+		{ "id": "Medium", "tileId": null, "color": 15455601, "__tileSrcRect": null },
+		{ "id": "Fast", "tileId": null, "color": 7863872, "__tileSrcRect": null }
+	], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }], "externalEnums": [], "levelFields": [] },
+	"levels": [
+		{
+			"identifier": "Level_0",
+			"iid": "95f18791-2a00-11ed-8b14-9fd5fdfb7f74",
+			"uid": 0,
+			"worldX": 0,
+			"worldY": -32,
+			"worldDepth": 0,
+			"pxWid": 288,
+			"pxHei": 288,
+			"__bgColor": "#696A79",
+			"bgColor": null,
+			"useAutoIdentifier": true,
+			"bgRelPath": null,
+			"bgPos": null,
+			"bgPivotX": 0.5,
+			"bgPivotY": 0.5,
+			"__smartColor": "#ADADB5",
+			"__bgPos": null,
+			"externalRelPath": null,
+			"fieldInstances": [],
+			"layerInstances": [
+				{
+					"__identifier": "Entities",
+					"__type": "Entities",
+					"__cWid": 9,
+					"__cHei": 9,
+					"__gridSize": 32,
+					"__opacity": 1,
+					"__pxTotalOffsetX": 0,
+					"__pxTotalOffsetY": 0,
+					"__tilesetDefUid": null,
+					"__tilesetRelPath": null,
+					"iid": "d9be4a70-2a00-11ed-8b14-7d31cc12f218",
+					"levelId": 0,
+					"layerDefUid": 10,
+					"pxOffsetX": 0,
+					"pxOffsetY": 0,
+					"visible": true,
+					"optionalRules": [],
+					"intGridCsv": [],
+					"autoLayerTiles": [],
+					"seed": 2301933,
+					"overrideTilesetUid": null,
+					"gridTiles": [],
+					"entityInstances": [
+						{
+							"__identifier": "Platform_9",
+							"__grid": [4,8],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 160, "y": 0, "w": 288, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "31bf2140-2a00-11ed-8b14-b753475d6cbd",
+							"width": 288,
+							"height": 16,
+							"defUid": 8,
+							"px": [144,288],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [], "__type": "Array<Point>", "__tile": null, "defUid": 17, "realEditorValues": [] },
+								{ "__identifier": "Speed", "__value": null, "__type": "LocalEnum.Speed", "__tile": null, "defUid": 25, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "Platform_9",
+							"__grid": [4,6],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 160, "y": 0, "w": 288, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "2ca293d0-2a00-11ed-8b14-0d986761e229",
+							"width": 288,
+							"height": 16,
+							"defUid": 8,
+							"px": [144,224],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [], "__type": "Array<Point>", "__tile": null, "defUid": 17, "realEditorValues": [] },
+								{ "__identifier": "Speed", "__value": null, "__type": "LocalEnum.Speed", "__tile": null, "defUid": 25, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "Platform_9",
+							"__grid": [4,4],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 160, "y": 0, "w": 288, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "37438650-2a00-11ed-8b14-5dd340fbc62c",
+							"width": 288,
+							"height": 16,
+							"defUid": 8,
+							"px": [144,160],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [], "__type": "Array<Point>", "__tile": null, "defUid": 17, "realEditorValues": [] },
+								{ "__identifier": "Speed", "__value": null, "__type": "LocalEnum.Speed", "__tile": null, "defUid": 25, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "Platform_9",
+							"__grid": [4,1],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 160, "y": 0, "w": 288, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "3ab888d0-2a00-11ed-8b14-f99e6aafd711",
+							"width": 288,
+							"height": 16,
+							"defUid": 8,
+							"px": [144,64],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [], "__type": "Array<Point>", "__tile": null, "defUid": 17, "realEditorValues": [] },
+								{ "__identifier": "Speed", "__value": null, "__type": "LocalEnum.Speed", "__tile": null, "defUid": 25, "realEditorValues": [] }
+							]
+						}
+					]
+				}
+			],
+			"__neighbours": [ { "levelIid": "408fbe40-2a00-11ed-8b14-a74394a17ca1", "levelUid": 21, "dir": "n" }, { "levelIid": "40b56a70-2a00-11ed-92ec-396080913955", "levelUid": 30, "dir": "e" } ]
+		},
+		{
+			"identifier": "Level_1",
+			"iid": "408fbe40-2a00-11ed-8b14-a74394a17ca1",
+			"uid": 21,
+			"worldX": 0,
+			"worldY": -320,
+			"worldDepth": 0,
+			"pxWid": 288,
+			"pxHei": 288,
+			"__bgColor": "#696A79",
+			"bgColor": null,
+			"useAutoIdentifier": true,
+			"bgRelPath": null,
+			"bgPos": null,
+			"bgPivotX": 0.5,
+			"bgPivotY": 0.5,
+			"__smartColor": "#ADADB5",
+			"__bgPos": null,
+			"externalRelPath": null,
+			"fieldInstances": [],
+			"layerInstances": [
+				{
+					"__identifier": "Entities",
+					"__type": "Entities",
+					"__cWid": 9,
+					"__cHei": 9,
+					"__gridSize": 32,
+					"__opacity": 1,
+					"__pxTotalOffsetX": 0,
+					"__pxTotalOffsetY": 0,
+					"__tilesetDefUid": null,
+					"__tilesetRelPath": null,
+					"iid": "408fe550-2a00-11ed-8b14-d575f83c5315",
+					"levelId": 21,
+					"layerDefUid": 10,
+					"pxOffsetX": 0,
+					"pxOffsetY": 0,
+					"visible": true,
+					"optionalRules": [],
+					"intGridCsv": [],
+					"autoLayerTiles": [],
+					"seed": 6454088,
+					"overrideTilesetUid": null,
+					"gridTiles": [],
+					"entityInstances": [
+						{
+							"__identifier": "Platform_9",
+							"__grid": [4,7],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 160, "y": 0, "w": 288, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "4d5fc5c0-2a00-11ed-8b14-bd45ad96084c",
+							"width": 288,
+							"height": 16,
+							"defUid": 8,
+							"px": [144,256],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [], "__type": "Array<Point>", "__tile": null, "defUid": 17, "realEditorValues": [] },
+								{ "__identifier": "Speed", "__value": null, "__type": "LocalEnum.Speed", "__tile": null, "defUid": 25, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "Platform_4",
+							"__grid": [4,5],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 32, "y": 0, "w": 128, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "9834e080-2a00-11ed-8b14-715b582877fc",
+							"width": 128,
+							"height": 16,
+							"defUid": 7,
+							"px": [144,192],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [ { "cx": 0, "cy": 5 }, { "cx": 8, "cy": 5 } ], "__type": "Array<Point>", "__tile": null, "defUid": 18, "realEditorValues": [ {
+									"id": "V_String",
+									"params": ["0,5"]
+								}, {
+									"id": "V_String",
+									"params": ["8,5"]
+								} ] },
+								{ "__identifier": "Speed", "__value": "Medium", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Medium"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Platform_4",
+							"__grid": [4,2],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 32, "y": 0, "w": 128, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "a34a8dd0-2a00-11ed-8b14-fdba60cf3978",
+							"width": 128,
+							"height": 16,
+							"defUid": 7,
+							"px": [144,96],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [ { "cx": 8, "cy": 2 }, { "cx": 0, "cy": 2 } ], "__type": "Array<Point>", "__tile": null, "defUid": 18, "realEditorValues": [ {
+									"id": "V_String",
+									"params": ["8,2"]
+								}, {
+									"id": "V_String",
+									"params": ["0,2"]
+								} ] },
+								{ "__identifier": "Speed", "__value": "Medium", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Medium"]
+								}] }
+							]
+						}
+					]
+				}
+			],
+			"__neighbours": [
+				{ "levelIid": "95f18791-2a00-11ed-8b14-9fd5fdfb7f74", "levelUid": 0, "dir": "s" },
+				{ "levelIid": "b03a2b40-2a00-11ed-8b14-47d6f86f8c90", "levelUid": 27, "dir": "n" },
+				{ "levelIid": "65b7c020-2a00-11ed-92ec-154b390ca7ab", "levelUid": 31, "dir": "e" }
+			]
+		},
+		{
+			"identifier": "Level_2",
+			"iid": "b03a2b40-2a00-11ed-8b14-47d6f86f8c90",
+			"uid": 27,
+			"worldX": 0,
+			"worldY": -608,
+			"worldDepth": 0,
+			"pxWid": 288,
+			"pxHei": 288,
+			"__bgColor": "#696A79",
+			"bgColor": null,
+			"useAutoIdentifier": true,
+			"bgRelPath": null,
+			"bgPos": null,
+			"bgPivotX": 0.5,
+			"bgPivotY": 0.5,
+			"__smartColor": "#ADADB5",
+			"__bgPos": null,
+			"externalRelPath": null,
+			"fieldInstances": [],
+			"layerInstances": [
+				{
+					"__identifier": "Entities",
+					"__type": "Entities",
+					"__cWid": 9,
+					"__cHei": 9,
+					"__gridSize": 32,
+					"__opacity": 1,
+					"__pxTotalOffsetX": 0,
+					"__pxTotalOffsetY": 0,
+					"__tilesetDefUid": null,
+					"__tilesetRelPath": null,
+					"iid": "b03a5250-2a00-11ed-8b14-19f9d5d22902",
+					"levelId": 27,
+					"layerDefUid": 10,
+					"pxOffsetX": 0,
+					"pxOffsetY": 0,
+					"visible": true,
+					"optionalRules": [],
+					"intGridCsv": [],
+					"autoLayerTiles": [],
+					"seed": 1959292,
+					"overrideTilesetUid": null,
+					"gridTiles": [],
+					"entityInstances": [
+						{
+							"__identifier": "Platform_4",
+							"__grid": [0,7],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 32, "y": 0, "w": 128, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "bbedc640-2a00-11ed-8b14-8df70e11c32f",
+							"width": 128,
+							"height": 16,
+							"defUid": 7,
+							"px": [16,256],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 8, "cy": 7 }], "__type": "Array<Point>", "__tile": null, "defUid": 18, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["8,7"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Slow", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Slow"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Platform_4",
+							"__grid": [8,5],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 32, "y": 0, "w": 128, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "bd0f89f0-2a00-11ed-8b14-37d587790df7",
+							"width": 128,
+							"height": 16,
+							"defUid": 7,
+							"px": [272,192],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 0, "cy": 5 }], "__type": "Array<Point>", "__tile": null, "defUid": 18, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["0,5"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Fast", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Fast"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Platform_1",
+							"__grid": [0,3],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 0, "y": 0, "w": 32, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "bfe984f0-2a00-11ed-8b14-e568dc7ac20c",
+							"width": 32,
+							"height": 16,
+							"defUid": 6,
+							"px": [16,128],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 7, "cy": 3 }], "__type": "Array<Point>", "__tile": null, "defUid": 19, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["7,3"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Medium", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 23, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Medium"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Platform_9",
+							"__grid": [4,0],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 160, "y": 0, "w": 288, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "89095ad0-2a00-11ed-b997-2f97a81c891a",
+							"width": 288,
+							"height": 16,
+							"defUid": 8,
+							"px": [144,32],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [], "__type": "Array<Point>", "__tile": null, "defUid": 17, "realEditorValues": [] },
+								{ "__identifier": "Speed", "__value": null, "__type": "LocalEnum.Speed", "__tile": null, "defUid": 25, "realEditorValues": [] }
+							]
+						}
+					]
+				}
+			],
+			"__neighbours": [
+				{ "levelIid": "408fbe40-2a00-11ed-8b14-a74394a17ca1", "levelUid": 21, "dir": "s" },
+				{ "levelIid": "29e5d3d0-2a00-11ed-985d-559d2d9e18a9", "levelUid": 28, "dir": "n" },
+				{ "levelIid": "f6da4aa0-2a00-11ed-92ec-d1965ca19acf", "levelUid": 32, "dir": "e" }
+			]
+		},
+		{
+			"identifier": "Level_3",
+			"iid": "29e5d3d0-2a00-11ed-985d-559d2d9e18a9",
+			"uid": 28,
+			"worldX": 0,
+			"worldY": -960,
+			"worldDepth": 0,
+			"pxWid": 288,
+			"pxHei": 352,
+			"__bgColor": "#696A79",
+			"bgColor": null,
+			"useAutoIdentifier": true,
+			"bgRelPath": null,
+			"bgPos": null,
+			"bgPivotX": 0.5,
+			"bgPivotY": 0.5,
+			"__smartColor": "#ADADB5",
+			"__bgPos": null,
+			"externalRelPath": null,
+			"fieldInstances": [],
+			"layerInstances": [
+				{
+					"__identifier": "Entities",
+					"__type": "Entities",
+					"__cWid": 9,
+					"__cHei": 11,
+					"__gridSize": 32,
+					"__opacity": 1,
+					"__pxTotalOffsetX": 0,
+					"__pxTotalOffsetY": 0,
+					"__tilesetDefUid": null,
+					"__tilesetRelPath": null,
+					"iid": "29e5fae0-2a00-11ed-985d-514f493e6c0f",
+					"levelId": 28,
+					"layerDefUid": 10,
+					"pxOffsetX": 0,
+					"pxOffsetY": 0,
+					"visible": true,
+					"optionalRules": [],
+					"intGridCsv": [],
+					"autoLayerTiles": [],
+					"seed": 3925435,
+					"overrideTilesetUid": null,
+					"gridTiles": [],
+					"entityInstances": [
+						{
+							"__identifier": "Sawblade",
+							"__grid": [1,7],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 448, "y": 0, "w": 32, "h": 32 },
+							"__smartColor": "#94D9B3",
+							"iid": "3a188e50-2a00-11ed-985d-cdd0ac09c825",
+							"width": 32,
+							"height": 32,
+							"defUid": 9,
+							"px": [48,240],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 7, "cy": 7 }], "__type": "Array<Point>", "__tile": null, "defUid": 20, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["7,7"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Medium", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 26, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Medium"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Platform_9",
+							"__grid": [4,0],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 160, "y": 0, "w": 288, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "51b30950-2a00-11ed-985d-6f6a67ef5911",
+							"width": 288,
+							"height": 16,
+							"defUid": 8,
+							"px": [144,32],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [], "__type": "Array<Point>", "__tile": null, "defUid": 17, "realEditorValues": [] },
+								{ "__identifier": "Speed", "__value": null, "__type": "LocalEnum.Speed", "__tile": null, "defUid": 25, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "Platform_4",
+							"__grid": [4,9],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 32, "y": 0, "w": 128, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "56d63100-2a00-11ed-985d-c9856befdc60",
+							"width": 128,
+							"height": 16,
+							"defUid": 7,
+							"px": [144,320],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 4, "cy": 1 }], "__type": "Array<Point>", "__tile": null, "defUid": 18, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["4,1"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Slow", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Slow"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Sawblade",
+							"__grid": [7,2],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 448, "y": 0, "w": 32, "h": 32 },
+							"__smartColor": "#94D9B3",
+							"iid": "656e2740-2a00-11ed-985d-b3ee778d8c0d",
+							"width": 32,
+							"height": 32,
+							"defUid": 9,
+							"px": [240,80],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 0, "cy": 2 }], "__type": "Array<Point>", "__tile": null, "defUid": 20, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["0,2"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Fast", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 26, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Fast"]
+								}] }
+							]
+						}
+					]
+				}
+			],
+			"__neighbours": [
+				{ "levelIid": "b03a2b40-2a00-11ed-8b14-47d6f86f8c90", "levelUid": 27, "dir": "s" },
+				{ "levelIid": "751a87d0-2a00-11ed-ab91-fd6ce092a953", "levelUid": 29, "dir": "n" },
+				{ "levelIid": "f6da4aa0-2a00-11ed-92ec-d1965ca19acf", "levelUid": 32, "dir": "e" }
+			]
+		},
+		{
+			"identifier": "Level_4",
+			"iid": "751a87d0-2a00-11ed-ab91-fd6ce092a953",
+			"uid": 29,
+			"worldX": 0,
+			"worldY": -1312,
+			"worldDepth": 0,
+			"pxWid": 288,
+			"pxHei": 352,
+			"__bgColor": "#696A79",
+			"bgColor": null,
+			"useAutoIdentifier": true,
+			"bgRelPath": null,
+			"bgPos": null,
+			"bgPivotX": 0.5,
+			"bgPivotY": 0.5,
+			"__smartColor": "#ADADB5",
+			"__bgPos": null,
+			"externalRelPath": null,
+			"fieldInstances": [],
+			"layerInstances": [
+				{
+					"__identifier": "Entities",
+					"__type": "Entities",
+					"__cWid": 9,
+					"__cHei": 11,
+					"__gridSize": 32,
+					"__opacity": 1,
+					"__pxTotalOffsetX": 0,
+					"__pxTotalOffsetY": 0,
+					"__tilesetDefUid": null,
+					"__tilesetRelPath": null,
+					"iid": "751aaee0-2a00-11ed-ab91-9103ab46bd97",
+					"levelId": 29,
+					"layerDefUid": 10,
+					"pxOffsetX": 0,
+					"pxOffsetY": 0,
+					"visible": true,
+					"optionalRules": [],
+					"intGridCsv": [],
+					"autoLayerTiles": [],
+					"seed": 3608156,
+					"overrideTilesetUid": null,
+					"gridTiles": [],
+					"entityInstances": [
+						{
+							"__identifier": "Platform_9",
+							"__grid": [4,9],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 160, "y": 0, "w": 288, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "88258fa0-2a00-11ed-ab91-97888b1bf4e6",
+							"width": 288,
+							"height": 16,
+							"defUid": 8,
+							"px": [144,320],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [], "__type": "Array<Point>", "__tile": null, "defUid": 17, "realEditorValues": [] },
+								{ "__identifier": "Speed", "__value": null, "__type": "LocalEnum.Speed", "__tile": null, "defUid": 25, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "Platform_4",
+							"__grid": [7,8],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 32, "y": 0, "w": 128, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "8b282140-2a00-11ed-ab91-037500411989",
+							"width": 128,
+							"height": 16,
+							"defUid": 7,
+							"px": [240,288],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 0, "cy": 8 }], "__type": "Array<Point>", "__tile": null, "defUid": 18, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["0,8"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Fast", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Fast"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Platform_1",
+							"__grid": [2,6],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 0, "y": 0, "w": 32, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "97c61c40-2a00-11ed-ab91-55b2c96ffe21",
+							"width": 32,
+							"height": 16,
+							"defUid": 6,
+							"px": [80,224],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 2, "cy": 1 }], "__type": "Array<Point>", "__tile": null, "defUid": 19, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["2,1"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Medium", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 23, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Medium"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Sawblade",
+							"__grid": [7,2],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 448, "y": 0, "w": 32, "h": 32 },
+							"__smartColor": "#94D9B3",
+							"iid": "9b2ea630-2a00-11ed-ab91-57fd6c529699",
+							"width": 32,
+							"height": 32,
+							"defUid": 9,
+							"px": [240,80],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 0, "cy": 2 }], "__type": "Array<Point>", "__tile": null, "defUid": 20, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["0,2"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Fast", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 26, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Fast"]
+								}] }
+							]
+						}
+					]
+				}
+			],
+			"__neighbours": [{ "levelIid": "29e5d3d0-2a00-11ed-985d-559d2d9e18a9", "levelUid": 28, "dir": "s" }]
+		},
+		{
+			"identifier": "Level_5",
+			"iid": "40b56a70-2a00-11ed-92ec-396080913955",
+			"uid": 30,
+			"worldX": 288,
+			"worldY": -32,
+			"worldDepth": 0,
+			"pxWid": 288,
+			"pxHei": 288,
+			"__bgColor": "#696A79",
+			"bgColor": null,
+			"useAutoIdentifier": true,
+			"bgRelPath": null,
+			"bgPos": null,
+			"bgPivotX": 0.5,
+			"bgPivotY": 0.5,
+			"__smartColor": "#ADADB5",
+			"__bgPos": null,
+			"externalRelPath": null,
+			"fieldInstances": [],
+			"layerInstances": [
+				{
+					"__identifier": "Entities",
+					"__type": "Entities",
+					"__cWid": 9,
+					"__cHei": 9,
+					"__gridSize": 32,
+					"__opacity": 1,
+					"__pxTotalOffsetX": 0,
+					"__pxTotalOffsetY": 0,
+					"__tilesetDefUid": null,
+					"__tilesetRelPath": null,
+					"iid": "40b59180-2a00-11ed-92ec-45bbcc51fe79",
+					"levelId": 30,
+					"layerDefUid": 10,
+					"pxOffsetX": 0,
+					"pxOffsetY": 0,
+					"visible": true,
+					"optionalRules": [],
+					"intGridCsv": [],
+					"autoLayerTiles": [],
+					"seed": 7731315,
+					"overrideTilesetUid": null,
+					"gridTiles": [],
+					"entityInstances": [
+						{
+							"__identifier": "Platform_4",
+							"__grid": [2,5],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 32, "y": 0, "w": 128, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "4938fb30-2a00-11ed-92ec-8164ea4d5513",
+							"width": 128,
+							"height": 16,
+							"defUid": 7,
+							"px": [80,192],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 8, "cy": 5 }], "__type": "Array<Point>", "__tile": null, "defUid": 18, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["8,5"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Fast", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Fast"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Platform_4",
+							"__grid": [6,7],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 32, "y": 0, "w": 128, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "4ad51f00-2a00-11ed-92ec-23cd81977522",
+							"width": 128,
+							"height": 16,
+							"defUid": 7,
+							"px": [208,256],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 0, "cy": 7 }], "__type": "Array<Point>", "__tile": null, "defUid": 18, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["0,7"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Medium", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Medium"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Platform_4",
+							"__grid": [6,3],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 32, "y": 0, "w": 128, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "4bdd8e50-2a00-11ed-92ec-a74e78182165",
+							"width": 128,
+							"height": 16,
+							"defUid": 7,
+							"px": [208,128],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 0, "cy": 3 }], "__type": "Array<Point>", "__tile": null, "defUid": 18, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["0,3"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Slow", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Slow"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Platform_4",
+							"__grid": [2,0],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 32, "y": 0, "w": 128, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "4d980f90-2a00-11ed-92ec-85f21bf32060",
+							"width": 128,
+							"height": 16,
+							"defUid": 7,
+							"px": [80,32],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 8, "cy": 0 }], "__type": "Array<Point>", "__tile": null, "defUid": 18, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["8,0"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Medium", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Medium"]
+								}] }
+							]
+						}
+					]
+				}
+			],
+			"__neighbours": [ { "levelIid": "95f18791-2a00-11ed-8b14-9fd5fdfb7f74", "levelUid": 0, "dir": "w" }, { "levelIid": "65b7c020-2a00-11ed-92ec-154b390ca7ab", "levelUid": 31, "dir": "n" } ]
+		},
+		{
+			"identifier": "Level_6",
+			"iid": "65b7c020-2a00-11ed-92ec-154b390ca7ab",
+			"uid": 31,
+			"worldX": 288,
+			"worldY": -320,
+			"worldDepth": 0,
+			"pxWid": 288,
+			"pxHei": 288,
+			"__bgColor": "#696A79",
+			"bgColor": null,
+			"useAutoIdentifier": true,
+			"bgRelPath": null,
+			"bgPos": null,
+			"bgPivotX": 0.5,
+			"bgPivotY": 0.5,
+			"__smartColor": "#ADADB5",
+			"__bgPos": null,
+			"externalRelPath": null,
+			"fieldInstances": [],
+			"layerInstances": [
+				{
+					"__identifier": "Entities",
+					"__type": "Entities",
+					"__cWid": 9,
+					"__cHei": 9,
+					"__gridSize": 32,
+					"__opacity": 1,
+					"__pxTotalOffsetX": 0,
+					"__pxTotalOffsetY": 0,
+					"__tilesetDefUid": null,
+					"__tilesetRelPath": null,
+					"iid": "65b7e730-2a00-11ed-92ec-db8f8e09f566",
+					"levelId": 31,
+					"layerDefUid": 10,
+					"pxOffsetX": 0,
+					"pxOffsetY": 0,
+					"visible": true,
+					"optionalRules": [],
+					"intGridCsv": [],
+					"autoLayerTiles": [],
+					"seed": 230235,
+					"overrideTilesetUid": null,
+					"gridTiles": [],
+					"entityInstances": [
+						{
+							"__identifier": "Platform_4",
+							"__grid": [4,5],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 32, "y": 0, "w": 128, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "6f049450-2a00-11ed-92ec-29655502f10b",
+							"width": 128,
+							"height": 16,
+							"defUid": 7,
+							"px": [144,192],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 4, "cy": 1 }], "__type": "Array<Point>", "__tile": null, "defUid": 18, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["4,1"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Slow", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Slow"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Platform_1",
+							"__grid": [7,7],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 0, "y": 0, "w": 32, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "85f513b0-2a00-11ed-92ec-35c785b21200",
+							"width": 32,
+							"height": 16,
+							"defUid": 6,
+							"px": [240,256],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [ { "cx": 0, "cy": 7 }, { "cx": 0, "cy": 0 }, { "cx": 7, "cy": 0 } ], "__type": "Array<Point>", "__tile": null, "defUid": 19, "realEditorValues": [ {
+									"id": "V_String",
+									"params": ["0,7"]
+								}, {
+									"id": "V_String",
+									"params": ["0,0"]
+								}, {
+									"id": "V_String",
+									"params": ["7,0"]
+								} ] },
+								{ "__identifier": "Speed", "__value": "Medium", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 23, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Medium"]
+								}] }
+							]
+						}
+					]
+				}
+			],
+			"__neighbours": [
+				{ "levelIid": "408fbe40-2a00-11ed-8b14-a74394a17ca1", "levelUid": 21, "dir": "w" },
+				{ "levelIid": "40b56a70-2a00-11ed-92ec-396080913955", "levelUid": 30, "dir": "s" },
+				{ "levelIid": "f6da4aa0-2a00-11ed-92ec-d1965ca19acf", "levelUid": 32, "dir": "n" }
+			]
+		},
+		{
+			"identifier": "Level_7",
+			"iid": "f6da4aa0-2a00-11ed-92ec-d1965ca19acf",
+			"uid": 32,
+			"worldX": 288,
+			"worldY": -960,
+			"worldDepth": 0,
+			"pxWid": 288,
+			"pxHei": 640,
+			"__bgColor": "#696A79",
+			"bgColor": null,
+			"useAutoIdentifier": true,
+			"bgRelPath": null,
+			"bgPos": null,
+			"bgPivotX": 0.5,
+			"bgPivotY": 0.5,
+			"__smartColor": "#ADADB5",
+			"__bgPos": null,
+			"externalRelPath": null,
+			"fieldInstances": [],
+			"layerInstances": [
+				{
+					"__identifier": "Entities",
+					"__type": "Entities",
+					"__cWid": 9,
+					"__cHei": 20,
+					"__gridSize": 32,
+					"__opacity": 1,
+					"__pxTotalOffsetX": 0,
+					"__pxTotalOffsetY": 0,
+					"__tilesetDefUid": null,
+					"__tilesetRelPath": null,
+					"iid": "f6da98c0-2a00-11ed-92ec-fbb43d8b0d96",
+					"levelId": 32,
+					"layerDefUid": 10,
+					"pxOffsetX": 0,
+					"pxOffsetY": 0,
+					"visible": true,
+					"optionalRules": [],
+					"intGridCsv": [],
+					"autoLayerTiles": [],
+					"seed": 1466790,
+					"overrideTilesetUid": null,
+					"gridTiles": [],
+					"entityInstances": [
+						{
+							"__identifier": "Platform_4",
+							"__grid": [6,16],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 32, "y": 0, "w": 128, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "f7d3ece0-2a00-11ed-92ec-bfc4035d3509",
+							"width": 128,
+							"height": 16,
+							"defUid": 7,
+							"px": [208,544],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 0, "cy": 16 }], "__type": "Array<Point>", "__tile": null, "defUid": 18, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["0,16"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Slow", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Slow"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Platform_9",
+							"__grid": [4,18],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 160, "y": 0, "w": 288, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "0a251a90-2a00-11ed-92ec-5110ac4df26f",
+							"width": 288,
+							"height": 16,
+							"defUid": 8,
+							"px": [144,608],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [], "__type": "Array<Point>", "__tile": null, "defUid": 17, "realEditorValues": [] },
+								{ "__identifier": "Speed", "__value": null, "__type": "LocalEnum.Speed", "__tile": null, "defUid": 25, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "Platform_4",
+							"__grid": [4,14],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 32, "y": 0, "w": 128, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "1575d510-2a00-11ed-92ec-934868966388",
+							"width": 128,
+							"height": 16,
+							"defUid": 7,
+							"px": [144,480],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 4, "cy": 8 }], "__type": "Array<Point>", "__tile": null, "defUid": 18, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["4,8"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Medium", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Medium"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Platform_4",
+							"__grid": [4,1],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 32, "y": 0, "w": 128, "h": 16 },
+							"__smartColor": "#94D9B3",
+							"iid": "2a750bc0-2a00-11ed-92ec-9f889859c8d4",
+							"width": 128,
+							"height": 16,
+							"defUid": 7,
+							"px": [144,64],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [{ "cx": 4, "cy": 7 }], "__type": "Array<Point>", "__tile": null, "defUid": 18, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["4,7"]
+								}] },
+								{ "__identifier": "Speed", "__value": "Medium", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Medium"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Sawblade",
+							"__grid": [1,12],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 448, "y": 0, "w": 32, "h": 32 },
+							"__smartColor": "#94D9B3",
+							"iid": "3b9f1e90-2a00-11ed-92ec-a3d4b2bfed28",
+							"width": 32,
+							"height": 32,
+							"defUid": 9,
+							"px": [48,400],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__value": [
+									{ "cx": 7, "cy": 12 },
+									{ "cx": 7, "cy": 9 },
+									{ "cx": 1, "cy": 9 },
+									{ "cx": 1, "cy": 6 },
+									{ "cx": 7, "cy": 6 },
+									{ "cx": 7, "cy": 3 },
+									{ "cx": 1, "cy": 3 }
+								], "__type": "Array<Point>", "__tile": null, "defUid": 20, "realEditorValues": [
+									{
+										"id": "V_String",
+										"params": ["7,12"]
+									},
+									{
+										"id": "V_String",
+										"params": ["7,9"]
+									},
+									{
+										"id": "V_String",
+										"params": ["1,9"]
+									},
+									{
+										"id": "V_String",
+										"params": ["1,6"]
+									},
+									{
+										"id": "V_String",
+										"params": ["7,6"]
+									},
+									{
+										"id": "V_String",
+										"params": ["7,3"]
+									},
+									{
+										"id": "V_String",
+										"params": ["1,3"]
+									}
+								] },
+								{ "__identifier": "Speed", "__value": "Slow", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 26, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Slow"]
+								}] }
+							]
+						}
+					]
+				}
+			],
+			"__neighbours": [
+				{ "levelIid": "b03a2b40-2a00-11ed-8b14-47d6f86f8c90", "levelUid": 27, "dir": "w" },
+				{ "levelIid": "29e5d3d0-2a00-11ed-985d-559d2d9e18a9", "levelUid": 28, "dir": "w" },
+				{ "levelIid": "65b7c020-2a00-11ed-92ec-154b390ca7ab", "levelUid": 31, "dir": "s" }
+			]
+		}
+	],
+	"worlds": []
+}
