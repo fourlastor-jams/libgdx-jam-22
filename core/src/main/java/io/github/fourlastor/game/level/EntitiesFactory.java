@@ -54,17 +54,17 @@ public class EntitiesFactory {
         entity.add(new BodyBuilderComponent(world -> {
             BodyDef bodyDef = new BodyDef();
             bodyDef.type = BodyDef.BodyType.DynamicBody;
-            bodyDef.position.set(new Vector2(4.5f, 1f));
+            bodyDef.position.set(new Vector2(4.5f, 1.5f));
             Body body = world.createBody(bodyDef);
             PolygonShape shape = new PolygonShape();
-            shape.setAsBox(0.25f, 0.5f);
+            shape.setAsBox(0.25f, 0.25f);
             Fixture fixture = body.createFixture(shape, 0.0f);
             fixture.setFriction(100f);
             fixture.setUserData(UserData.PLAYER);
             shape.dispose();
             return body;
         }));
-        image.setPosition(-0.5f, -0.75f);
+        image.setPosition(-0.5f, -0.5f);
         Group group = new Group();
         group.addActor(image);
         entity.add(new ActorComponent(group, ActorComponent.Layer.CHARACTER));

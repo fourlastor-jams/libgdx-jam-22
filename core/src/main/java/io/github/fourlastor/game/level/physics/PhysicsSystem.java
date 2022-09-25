@@ -115,7 +115,7 @@ public class PhysicsSystem extends IntervalSystem {
         private void checkCollision(Contact contact, Fixture playerFixture, Fixture platformFixture) {
             Body playerBody = playerFixture.getBody();
             Body platformBody = platformFixture.getBody();
-            float playerBottom = playerBody.getPosition().y - 0.5f;
+            float playerBottom = playerBody.getPosition().y - 0.25f;
             double platformTop = platformBody.getPosition().y + 0.2;
             boolean shouldNotCollide = playerBottom < platformTop;
             if (shouldNotCollide) {
