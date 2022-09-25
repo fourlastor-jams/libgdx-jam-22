@@ -13,18 +13,6 @@ public class Platform {
         this.width = width;
     }
 
-    public enum Speed {
-        SLOW(0.5f),
-        MEDIUM(1f),
-        FAST(1.5f);
-
-        public final float speed;
-
-        Speed(float speed) {
-            this.speed = speed;
-        }
-    }
-
     public enum Type {
         LARGE_GRID("0"),
         SMALL_GRID("1");

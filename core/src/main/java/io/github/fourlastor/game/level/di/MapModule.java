@@ -10,6 +10,7 @@ import dagger.Provides;
 import io.github.fourlastor.game.di.ScreenScoped;
 import io.github.fourlastor.game.level.blueprint.definitions.Chunk;
 import io.github.fourlastor.game.level.blueprint.definitions.LevelDefinitions;
+import io.github.fourlastor.game.level.blueprint.definitions.MovementSpeed;
 import io.github.fourlastor.game.level.blueprint.definitions.MovingPlatform;
 import io.github.fourlastor.game.level.blueprint.definitions.Platform;
 import java.util.ArrayList;
@@ -75,7 +76,7 @@ public class MapModule {
 
             float[] grid = getGrid(entity);
             float[] pivot = pivot(entity);
-            Platform.Speed speed = speed(entity);
+            MovementSpeed speed = speed(entity);
             List<Vector2> path = path(entity, size, pivot);
             if (speed == null || path.isEmpty()) {
                 platforms.add(new Platform(getPosition(size, grid, pivot), Platform.Type.SMALL_GRID, width));
@@ -106,18 +107,18 @@ public class MapModule {
         return Collections.emptyList();
     }
 
-    private Platform.Speed speed(JsonValue entity) {
+    private MovementSpeed speed(JsonValue entity) {
         JsonValue fieldInstances = entity.get("fieldInstances");
         for (int j = 0; j < fieldInstances.size; j++) {
             JsonValue field = fieldInstances.get(j);
             if (field.getString("__identifier").equals("Speed")) {
                 String value = field.getString("__value");
                 if ("Slow".equals(value)) {
-                    return Platform.Speed.SLOW;
+                    return MovementSpeed.SLOW;
                 } else if ("Medium".equals(value)) {
-                    return Platform.Speed.MEDIUM;
+                    return MovementSpeed.MEDIUM;
                 } else if ("Fast".equals(value)) {
-                    return Platform.Speed.FAST;
+                    return MovementSpeed.FAST;
                 } else {
                     return null;
                 }
