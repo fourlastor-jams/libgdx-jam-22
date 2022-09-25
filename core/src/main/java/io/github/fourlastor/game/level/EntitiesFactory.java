@@ -72,8 +72,9 @@ public class EntitiesFactory {
         return entity;
     }
 
-    private void movingPlatform(Entity entity, MovingPlatform platform, float dY) {
-        List<Vector2> path = new ArrayList<>(platform.path.size());
+    private void movingPlatform(Entity entity, MovingPlatform platform, float dY, Vector2 initialPosition) {
+        List<Vector2> path = new ArrayList<>(platform.path.size() + 1);
+        path.add(initialPosition);
         for (Vector2 point : platform.path) {
             path.add(point.cpy().add(0, dY));
         }
@@ -82,11 +83,12 @@ public class EntitiesFactory {
 
     public Entity platform(Platform platform, float dY, float top) {
         Entity entity = new Entity();
-        entity.add(platformBuilder(platform.position.cpy().add(0f, dY), platform.width));
+        Vector2 initialPosition = platform.position.cpy().add(0f, dY);
+        entity.add(platformBuilder(initialPosition, platform.width));
         entity.add(platformActor(platform.type, platform.width));
         entity.add(new ChunkComponent(top));
         if (platform instanceof MovingPlatform) {
-            movingPlatform(entity, (MovingPlatform) platform, dY);
+            movingPlatform(entity, (MovingPlatform) platform, dY, initialPosition);
         }
         return entity;
     }
