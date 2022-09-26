@@ -55,7 +55,7 @@ public class EntitiesFactory {
         this.fallingAnimation = fallingAnimation;
         this.textureAtlas = textureAtlas;
         sawBladeSound = assetManager.get("audio/sounds/sawblade.ogg", Sound.class);
-        fishSound = assetManager.get("audio/sounds/sawblade.ogg", Sound.class);
+        fishSound = assetManager.get("audio/sounds/fish.mp3", Sound.class);
         fishAnimation = new Animation<>(
                 0.1f, textureAtlas.findRegions("enemies/wigglingFish/wigglingFish"), Animation.PlayMode.LOOP);
     }

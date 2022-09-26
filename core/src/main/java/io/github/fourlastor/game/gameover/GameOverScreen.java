@@ -39,7 +39,12 @@ public class GameOverScreen extends ScreenAdapter {
 
     @Inject
     public GameOverScreen(
-            Router router, InputMultiplexer multiplexer, Stage stage, TextureAtlas atlas, Viewport viewport, AssetManager assetManager) {
+            Router router,
+            InputMultiplexer multiplexer,
+            Stage stage,
+            TextureAtlas atlas,
+            Viewport viewport,
+            AssetManager assetManager) {
         this.router = router;
         this.multiplexer = multiplexer;
         this.stage = stage;
@@ -68,7 +73,8 @@ public class GameOverScreen extends ScreenAdapter {
         chargeJumpSound.stop();
         Music levelMusic = assetManager.get("audio/music/511887__lusmog__postapocalypse-theme-loop.mp3", Music.class);
         levelMusic.stop();
-        Sound sound = assetManager.get("audio/sounds/553418__eminyildirim__cinematic-boom-impact-hit-2021.wav", Sound.class);
+        Sound sound =
+                assetManager.get("audio/sounds/553418__eminyildirim__cinematic-boom-impact-hit-2021.wav", Sound.class);
         sound.play();
     }
 

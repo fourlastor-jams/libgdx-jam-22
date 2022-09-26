@@ -10,17 +10,13 @@ import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-
 import dagger.Module;
 import dagger.Provides;
 import io.github.fourlastor.game.MyGdxGame;
 import io.github.fourlastor.game.gameover.GameOverComponent;
 import io.github.fourlastor.game.intro.IntroComponent;
 import io.github.fourlastor.game.level.di.LevelComponent;
-
 import java.util.Random;
-
 import javax.inject.Singleton;
 
 @Module
@@ -58,14 +54,13 @@ public class GameModule {
         assetManager.load("audio/sounds/sawblade.ogg", Sound.class);
         assetManager.load("audio/sounds/553418__eminyildirim__cinematic-boom-impact-hit-2021.wav", Sound.class);
         assetManager.load("audio/sounds/chargeJump.wav", Sound.class);
-        for (int i = 0; i <= 4; i++)
-            assetManager.load("audio/sounds/jumping/jump_" + i + ".wav", Sound.class);
-        for (int i = 0; i <= 4; i++)
-            assetManager.load("audio/sounds/onGround/onGround_" + i + ".wav", Sound.class);
+        for (int i = 0; i <= 4; i++) assetManager.load("audio/sounds/jumping/jump_" + i + ".wav", Sound.class);
+        for (int i = 0; i <= 4; i++) assetManager.load("audio/sounds/onGround/onGround_" + i + ".wav", Sound.class);
         assetManager.load("audio/sounds/Blip_Select11.wav", Sound.class);
         assetManager.load("audio/sounds/grateSound.wav", Sound.class);
         assetManager.load("audio/sounds/445109__breviceps__mud-splat.wav", Sound.class);
         assetManager.load("audio/sounds/446115__justinvoke__wet-splat.wav", Sound.class);
+        assetManager.load("audio/sounds/fish.mp3", Sound.class);
 
         assetManager.load("audio/music/428674__phantastonia__cinematic-vio2.wav", Music.class);
         assetManager.load("audio/music/608308__aidangig__radiation-ambience-effect.wav", Music.class);
@@ -75,7 +70,8 @@ public class GameModule {
         assetManager.finishLoading();
 
         if (Gdx.app.getType() != Application.ApplicationType.Android) {
-            Cursor customCursor = Gdx.graphics.newCursor(new Pixmap(Gdx.files.internal("images/included/cursor.png")), 0, 0);
+            Cursor customCursor =
+                    Gdx.graphics.newCursor(new Pixmap(Gdx.files.internal("images/included/cursor.png")), 0, 0);
             Gdx.graphics.setCursor(customCursor);
         }
 

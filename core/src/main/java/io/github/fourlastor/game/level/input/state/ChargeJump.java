@@ -20,7 +20,6 @@ public class ChargeJump extends InputState {
     private final Animation<TextureRegion> animation;
     private Sound sound;
 
-
     @Inject
     public ChargeJump(
             ComponentMapper<PlayerComponent> players,

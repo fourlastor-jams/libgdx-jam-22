@@ -2,7 +2,6 @@ package io.github.fourlastor.game.level;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
@@ -11,14 +10,10 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.Viewport;
-
-import io.github.fourlastor.game.component.ActorComponent;
 import io.github.fourlastor.game.component.ActorComponent.Layer;
 import io.github.fourlastor.game.level.blueprint.ChunkFactory;
-
 import javax.inject.Inject;
 
 public class LevelScreen extends ScreenAdapter {
@@ -35,7 +30,12 @@ public class LevelScreen extends ScreenAdapter {
 
     @Inject
     public LevelScreen(
-            Engine engine, Viewport viewport, EntitiesFactory entitiesFactory, ChunkFactory chunkFactory, World world, AssetManager assetManager) {
+            Engine engine,
+            Viewport viewport,
+            EntitiesFactory entitiesFactory,
+            ChunkFactory chunkFactory,
+            World world,
+            AssetManager assetManager) {
         this.engine = engine;
         this.viewport = viewport;
         this.entitiesFactory = entitiesFactory;
@@ -104,12 +104,7 @@ public class LevelScreen extends ScreenAdapter {
         tutorialImage.setScale(.032f);
         tutorialImage.setPosition(1.4f, 7.5f);
         tutorialImage.addAction(Actions.sequence(
-                Actions.fadeOut(0),
-                Actions.delay(3f),
-                Actions.fadeIn(1f),
-                Actions.delay(3f),
-                Actions.fadeOut(1f)
-        ));
+                Actions.fadeOut(0), Actions.delay(3f), Actions.fadeIn(1f), Actions.delay(3f), Actions.fadeOut(1f)));
         stage.addActor(tutorialImage);
     }
 }
