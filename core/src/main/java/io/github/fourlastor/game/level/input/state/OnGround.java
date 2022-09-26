@@ -40,4 +40,11 @@ public class OnGround extends InputState {
         }
         return super.keyDown(entity, keycode);
     }
+
+    @Override
+    public boolean touchDown(Entity entity, int screenX, int screenY, int pointer, int button) {
+        PlayerComponent player = players.get(entity);
+        player.stateMachine.changeState(player.chargeJump);
+        return true;
+    }
 }

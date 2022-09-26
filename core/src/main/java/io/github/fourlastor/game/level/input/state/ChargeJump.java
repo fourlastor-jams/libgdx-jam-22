@@ -61,4 +61,11 @@ public class ChargeJump extends InputState {
 
         return false;
     }
+
+    @Override
+    public boolean touchUp(Entity entity, int screenX, int screenY, int pointer, int button) {
+        PlayerComponent player = players.get(entity);
+        player.stateMachine.changeState(player.jumping);
+        return true;
+    }
 }

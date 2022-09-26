@@ -132,5 +132,25 @@ public class PlayerInputSystem extends IteratingSystem {
             }
             return false;
         }
+
+        @Override
+        public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+            for (Entity entity : getEntities()) {
+                if (players.get(entity).stateMachine.touchDown(entity, screenX, screenY, pointer, button)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+            for (Entity entity : getEntities()) {
+                if (players.get(entity).stateMachine.touchUp(entity, screenX, screenY, pointer, button)) {
+                    return true;
+                }
+            }
+            return false;
+        }
     };
 }
