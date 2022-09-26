@@ -6,6 +6,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import io.github.fourlastor.game.component.ActorComponent.Layer;
 import io.github.fourlastor.game.level.blueprint.ChunkFactory;
+import io.github.fourlastor.game.ui.FixedImage;
 import javax.inject.Inject;
 
 public class LevelScreen extends ScreenAdapter {
@@ -35,7 +37,8 @@ public class LevelScreen extends ScreenAdapter {
             EntitiesFactory entitiesFactory,
             ChunkFactory chunkFactory,
             World world,
-            AssetManager assetManager) {
+            AssetManager assetManager,
+            TextureAtlas atlas) {
         this.engine = engine;
         this.viewport = viewport;
         this.entitiesFactory = entitiesFactory;
@@ -47,7 +50,7 @@ public class LevelScreen extends ScreenAdapter {
         Music ambientMusic = setUpMusic(assetManager, "ambiance_mix.wav");
         ambientMusic.setPosition(MathUtils.random(0, 3 * 60));
 
-        addTutorialImage(assetManager);
+        addOverlays(assetManager, atlas);
     }
 
     @Override
@@ -99,12 +102,17 @@ public class LevelScreen extends ScreenAdapter {
         return temp;
     }
 
-    private void addTutorialImage(AssetManager assetManager) {
+    private void addOverlays(AssetManager assetManager, TextureAtlas atlas) {
         Image tutorialImage = new Image(assetManager.get("images/included/hold to jump higher.png", Texture.class));
         tutorialImage.setScale(.032f);
         tutorialImage.setPosition(1.4f, 7.5f);
         tutorialImage.addAction(Actions.sequence(
                 Actions.fadeOut(0), Actions.delay(3f), Actions.fadeIn(1f), Actions.delay(3f), Actions.fadeOut(1f)));
         stage.addActor(tutorialImage);
+        TextureAtlas.AtlasRegion vignette = atlas.findRegion("Vignette");
+        FixedImage vignetteImage = new FixedImage(vignette);
+        vignetteImage.getColor().a = 0.5f;
+        vignetteImage.setScale(1 / 32f, 1 / 48f);
+        stage.addActor(vignetteImage);
     }
 }
