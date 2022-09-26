@@ -51,7 +51,7 @@ public class Jumping extends InputState {
         float charge = players.get(entity).charge;
         float targetHeight = Math.max(MIN_JUMP_HEIGHT, MAX_JUMP_HEIGHT * charge);
         float velocity = (float) Math.sqrt(2f * targetHeight * gravity);
-        body.setLinearVelocity(0f, velocity);
+        body.setLinearVelocity(body.getLinearVelocity().x / 2f, velocity);
 
         playRandomSound(assetManager);
     }
