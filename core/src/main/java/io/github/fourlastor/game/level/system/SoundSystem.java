@@ -58,7 +58,7 @@ public class SoundSystem extends IteratingSystem {
             Vector2 soundPosition = bodies.get(entity).body.getPosition();
             SoundComponent sound = sounds.get(entity);
             float dst = playerPosition.dst(soundPosition);
-            float volume = 0.4f / (dst * dst);
+            float volume = .9f / (dst * dst);
             sound.play(volume);
         }
     }
