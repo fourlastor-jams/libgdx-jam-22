@@ -6,13 +6,15 @@ import java.awt.Dimension;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
-    private static final float PERCENT_OF_SCREEN_SIZE = 0.8f;
+    private static final float PERCENT_OF_SCREEN_SIZE = 0.7f;
 
     public static void main(String[] arg) {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setForegroundFPS(60);
-        config.setTitle("Post Apocalyptic");
+        config.setTitle("Slime in a Silo");
         setWindowedMode(config);
+        config.setWindowIcon("images/included/icon_32x32.png");
+        config.setWindowIcon("images/included/icon_16x16.png");
         new Lwjgl3Application(MyGdxGame.createGame(), config);
     }
 
