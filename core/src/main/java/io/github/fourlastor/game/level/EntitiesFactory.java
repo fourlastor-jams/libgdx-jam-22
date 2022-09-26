@@ -42,8 +42,10 @@ public class EntitiesFactory {
     private static final float CHARACTER_SCALE_XY = 1f / 40f;
     private static final float SCALE_XY = 1f / 32f;
     private final Animation<TextureRegion> fallingAnimation;
+    private final Animation<TextureRegion> fishAnimation;
     private final TextureAtlas textureAtlas;
     private final Sound sawBladeSound;
+    private final Sound fishSound;
 
     @Inject
     public EntitiesFactory(
@@ -53,6 +55,9 @@ public class EntitiesFactory {
         this.fallingAnimation = fallingAnimation;
         this.textureAtlas = textureAtlas;
         sawBladeSound = assetManager.get("audio/sounds/sawblade.ogg", Sound.class);
+        fishSound = assetManager.get("audio/sounds/sawblade.ogg", Sound.class);
+        fishAnimation = new Animation<>(
+                0.1f, textureAtlas.findRegions("enemies/wigglingFish/wigglingFish"), Animation.PlayMode.LOOP);
     }
 
     public Entity player() {
@@ -162,7 +167,7 @@ public class EntitiesFactory {
         Group group = new Group();
         group.addActor(image);
         group.addAction(Actions.forever(rotate));
-        entity.add(new ActorComponent(group, ActorComponent.Layer.SAW_BLADE));
+        entity.add(new ActorComponent(group, ActorComponent.Layer.ENEMIES));
         entity.add(new ChunkComponent(top));
         entity.add(new SoundComponent(sawBladeSound));
         List<Vector2> path = new ArrayList<>(sawBlade.path.size() + 1);
@@ -171,6 +176,29 @@ public class EntitiesFactory {
             path.add(point.cpy().add(0, dY));
         }
         entity.add(new MovingComponent(path, sawBlade.speed.speed));
+        return entity;
+    }
+
+    public Entity fish(Vector2 initialPosition) {
+        Entity entity = new Entity();
+        entity.add(new SoundComponent(fishSound));
+        AnimatedImage image = new AnimatedImage(fishAnimation);
+        image.setScale(CHARACTER_SCALE_XY);
+        entity.add(new AnimatedImageComponent(image));
+        entity.add(new ActorComponent(image, ActorComponent.Layer.ENEMIES));
+        entity.add(new BodyBuilderComponent(world -> {
+            BodyDef bodyDef = new BodyDef();
+            bodyDef.type = BodyDef.BodyType.DynamicBody;
+            bodyDef.position.set(initialPosition);
+            Body body = world.createBody(bodyDef);
+            CircleShape shape = new CircleShape();
+            shape.setRadius(0.1f);
+            Fixture fixture = body.createFixture(shape, 0.0f);
+            fixture.setFriction(0f);
+            fixture.setRestitution(0.4f);
+            shape.dispose();
+            return body;
+        }));
         return entity;
     }
 }
