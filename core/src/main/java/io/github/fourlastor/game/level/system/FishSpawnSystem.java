@@ -43,7 +43,7 @@ public class FishSpawnSystem extends IntervalSystem {
 
     @Override
     protected void updateInterval() {
-        if (true || random.nextBoolean()) {
+        if (random.nextBoolean()) {
             float y = camera.position.y + viewport.getWorldHeight() / 2 + FISH_HEIGHT;
             float x = MathUtils.random(0f, viewport.getWorldWidth());
             Vector2 position = new Vector2(x, y);
