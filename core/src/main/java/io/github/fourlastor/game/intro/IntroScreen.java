@@ -99,6 +99,12 @@ public class IntroScreen extends ScreenAdapter {
             router.goToLevel();
             return true;
         }
+
+        @Override
+        public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+            router.goToLevel();
+            return true;
+        }
     };
 
     @Override
