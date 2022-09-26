@@ -74,6 +74,7 @@ public class EntitiesFactory {
             shape.setAsBox(0.25f, 0.25f);
             Fixture fixture = body.createFixture(shape, 0.0f);
             fixture.setFriction(100f);
+            fixture.setRestitution(0.15f);
             fixture.setUserData(UserData.PLAYER);
             shape.dispose();
             return body;
