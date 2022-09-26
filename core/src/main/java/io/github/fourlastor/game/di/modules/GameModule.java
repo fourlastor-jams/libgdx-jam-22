@@ -51,7 +51,6 @@ public class GameModule {
         assetManager.load("images/included/intro/black_screen.png", Texture.class);
         assetManager.load("images/included/intro/black_screen.png", Texture.class);
         assetManager.load("images/included/hold to jump higher.png", Texture.class);
-        assetManager.load("images/included/intro_slimegirl.png", Texture.class);
 
         assetManager.load("audio/sounds/190469__alxy__rapid-missile-launch.wav", Sound.class);
         assetManager.load("audio/sounds/379352__hard3eat__atomic-bomb.wav", Sound.class);
