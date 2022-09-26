@@ -8,16 +8,13 @@ import com.badlogic.ashley.systems.IntervalIteratingSystem;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.physics.box2d.Body;
 import io.github.fourlastor.game.component.BodyComponent;
-import io.github.fourlastor.game.component.ChunkComponent;
-import io.github.fourlastor.game.component.ChunkRemovalComponent;
 import io.github.fourlastor.game.component.PlayerComponent;
 import javax.inject.Inject;
 
 public class GarbageCollectionSystem extends IntervalIteratingSystem {
 
-    private static final Family FAMILY = Family.all(BodyComponent.class)
-            .exclude(ChunkRemovalComponent.class, ChunkComponent.class, PlayerComponent.class)
-            .get();
+    private static final Family FAMILY =
+            Family.all(BodyComponent.class).exclude(PlayerComponent.class).get();
     private final Camera camera;
     private Engine engine;
 

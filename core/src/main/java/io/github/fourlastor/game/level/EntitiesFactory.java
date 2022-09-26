@@ -19,7 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import io.github.fourlastor.game.component.ActorComponent;
 import io.github.fourlastor.game.component.AnimatedImageComponent;
 import io.github.fourlastor.game.component.BodyBuilderComponent;
-import io.github.fourlastor.game.component.ChunkComponent;
 import io.github.fourlastor.game.component.ChunkRemovalComponent;
 import io.github.fourlastor.game.component.MovingComponent;
 import io.github.fourlastor.game.component.PlayerRequestComponent;
@@ -101,7 +100,6 @@ public class EntitiesFactory {
         Vector2 initialPosition = platform.position.cpy().add(0f, dY);
         entity.add(platformBuilder(initialPosition, platform.width));
         entity.add(platformActor(platform.type, platform.width));
-        entity.add(new ChunkComponent(top));
         if (platform instanceof MovingPlatform) {
             movingPlatform(entity, (MovingPlatform) platform, dY, initialPosition);
         }
@@ -168,7 +166,6 @@ public class EntitiesFactory {
         group.addActor(image);
         group.addAction(Actions.forever(rotate));
         entity.add(new ActorComponent(group, ActorComponent.Layer.ENEMIES));
-        entity.add(new ChunkComponent(top));
         entity.add(new SoundComponent(sawBladeSound));
         List<Vector2> path = new ArrayList<>(sawBlade.path.size() + 1);
         path.add(initialPosition);
