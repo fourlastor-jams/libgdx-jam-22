@@ -11,8 +11,10 @@ public class DesktopLauncher {
     public static void main(String[] arg) {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setForegroundFPS(60);
-        config.setTitle("Post Apocalyptic");
+        config.setTitle("Slime in a Silo");
         setWindowedMode(config);
+        config.setWindowIcon("images/included/icon_32x32.png");
+        config.setWindowIcon("images/included/icon_16x16.png");
         new Lwjgl3Application(MyGdxGame.createGame(), config);
     }
 

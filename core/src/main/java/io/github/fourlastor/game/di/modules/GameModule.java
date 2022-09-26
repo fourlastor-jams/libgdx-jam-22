@@ -1,11 +1,16 @@
 package io.github.fourlastor.game.di.modules;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Cursor;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import dagger.Module;
 import dagger.Provides;
@@ -44,6 +49,9 @@ public class GameModule {
         assetManager.load("images/included/intro/zebra_king.png", Texture.class);
         assetManager.load("images/included/intro/lyze.png", Texture.class);
         assetManager.load("images/included/intro/black_screen.png", Texture.class);
+        assetManager.load("images/included/intro/black_screen.png", Texture.class);
+        assetManager.load("images/included/hold to jump higher.png", Texture.class);
+        assetManager.load("images/included/intro_slimegirl.png", Texture.class);
 
         assetManager.load("audio/sounds/190469__alxy__rapid-missile-launch.wav", Sound.class);
         assetManager.load("audio/sounds/379352__hard3eat__atomic-bomb.wav", Sound.class);
@@ -66,6 +74,12 @@ public class GameModule {
         assetManager.load("audio/music/ambiance_mix.wav", Music.class);
 
         assetManager.finishLoading();
+
+        if (Gdx.app.getType() != Application.ApplicationType.Android) {
+            Cursor customCursor = Gdx.graphics.newCursor(new Pixmap(Gdx.files.internal("images/included/cursor.png")), 0, 0);
+            Gdx.graphics.setCursor(customCursor);
+        }
+
         return assetManager;
     }
 

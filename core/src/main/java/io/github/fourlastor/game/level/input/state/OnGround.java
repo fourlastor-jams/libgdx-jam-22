@@ -65,4 +65,10 @@ public class OnGround extends InputState {
         Sound splatSound = assetManager.get("audio/sounds/445109__breviceps__mud-splat.wav", Sound.class);
         splatSound.play(.3f, MathUtils.random(.7f, 1.3f), 0);
     }
+
+    public boolean touchDown(Entity entity, int screenX, int screenY, int pointer, int button) {
+        PlayerComponent player = players.get(entity);
+        player.stateMachine.changeState(player.chargeJump);
+        return true;
+    }
 }
