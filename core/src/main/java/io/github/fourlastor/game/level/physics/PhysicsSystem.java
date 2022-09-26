@@ -7,6 +7,8 @@ import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalSystem;
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -33,18 +35,21 @@ public class PhysicsSystem extends IntervalSystem {
     private final MessageDispatcher messageDispatcher;
     private final Factory factory;
     private final Cleaner cleaner;
+    private AssetManager assetManager;
 
     @Inject
     public PhysicsSystem(
             World world,
             ComponentMapper<BodyBuilderComponent> bodyBuilders,
             ComponentMapper<BodyComponent> bodies,
-            MessageDispatcher messageDispatcher) {
+            MessageDispatcher messageDispatcher,
+            AssetManager assetManager) {
         super(STEP);
         this.world = world;
         this.bodyBuilders = bodyBuilders;
         this.bodies = bodies;
         this.messageDispatcher = messageDispatcher;
+        this.assetManager = assetManager;
         factory = new Factory();
         cleaner = new Cleaner();
     }
@@ -148,6 +153,8 @@ public class PhysicsSystem extends IntervalSystem {
             if (UserData.PLATFORM == otherFixture.getUserData()) {
                 checkCollision(contact, playerFixture, otherFixture);
             } else if (UserData.SAWBLADE == otherFixture.getUserData()) {
+                Sound sound = assetManager.get("audio/sounds/446115__justinvoke__wet-splat.wav");
+                sound.play();
                 messageDispatcher.dispatchMessage(Message.GAME_OVER.ordinal());
             }
         }

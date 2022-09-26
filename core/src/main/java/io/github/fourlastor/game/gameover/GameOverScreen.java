@@ -6,6 +6,9 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -32,10 +35,11 @@ public class GameOverScreen extends ScreenAdapter {
     private final Viewport viewport;
     private final Image gameOverImage;
     private final TypingLabel infoText;
+    private Sound clickSound;
 
     @Inject
     public GameOverScreen(
-            Router router, InputMultiplexer multiplexer, Stage stage, TextureAtlas atlas, Viewport viewport) {
+            Router router, InputMultiplexer multiplexer, Stage stage, TextureAtlas atlas, Viewport viewport, AssetManager assetManager) {
         this.router = router;
         this.multiplexer = multiplexer;
         this.stage = stage;
@@ -58,6 +62,14 @@ public class GameOverScreen extends ScreenAdapter {
         table.add(infoText).growX().expandY().bottom().padBottom(0.2f);
         stage.addActor(table);
         stage.addActor(gameOverImage);
+
+        clickSound = assetManager.get("audio/sounds/Blip_Select11.wav", Sound.class);
+        Sound chargeJumpSound = assetManager.get("audio/sounds/chargeJump.wav", Sound.class);
+        chargeJumpSound.stop();
+        Music levelMusic = assetManager.get("audio/music/511887__lusmog__postapocalypse-theme-loop.mp3", Music.class);
+        levelMusic.stop();
+        Sound sound = assetManager.get("audio/sounds/553418__eminyildirim__cinematic-boom-impact-hit-2021.wav", Sound.class);
+        sound.play();
     }
 
     @Override
@@ -104,6 +116,7 @@ public class GameOverScreen extends ScreenAdapter {
         @Override
         public boolean keyUp(int keycode) {
             if (keycode == Input.Keys.R) {
+                clickSound.play(.25f);
                 router.goToLevel();
                 return true;
             }

@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import io.github.fourlastor.game.component.AnimatedImageComponent;
@@ -16,15 +18,20 @@ import javax.inject.Named;
 public class ChargeJump extends InputState {
 
     private final Animation<TextureRegion> animation;
+    private Sound sound;
+
 
     @Inject
     public ChargeJump(
             ComponentMapper<PlayerComponent> players,
             ComponentMapper<BodyComponent> bodies,
             ComponentMapper<AnimatedImageComponent> images,
-            @Named(PlayerAnimationsFactory.ANIMATION_CHARGE_JUMP) Animation<TextureRegion> animation) {
+            @Named(PlayerAnimationsFactory.ANIMATION_CHARGE_JUMP) Animation<TextureRegion> animation,
+            AssetManager assetManager) {
         super(players, bodies, images);
         this.animation = animation;
+
+        sound = assetManager.get("audio/sounds/chargeJump.wav", Sound.class);
     }
 
     @Override
@@ -36,6 +43,7 @@ public class ChargeJump extends InputState {
     public void enter(Entity entity) {
         super.enter(entity);
         players.get(entity).charge = 0f;
+        sound.play(.5f);
     }
 
     @Override
@@ -49,6 +57,7 @@ public class ChargeJump extends InputState {
         super.exit(entity);
         PlayerComponent player = players.get(entity);
         player.charge = Math.min(1f, player.charge);
+        sound.stop();
     }
 
     @Override

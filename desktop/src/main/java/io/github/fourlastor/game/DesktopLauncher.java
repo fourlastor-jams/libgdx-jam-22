@@ -6,7 +6,7 @@ import java.awt.Dimension;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
-    private static final float PERCENT_OF_SCREEN_SIZE = 0.8f;
+    private static final float PERCENT_OF_SCREEN_SIZE = 0.7f;
 
     public static void main(String[] arg) {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();

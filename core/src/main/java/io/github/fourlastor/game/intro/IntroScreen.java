@@ -53,6 +53,7 @@ public class IntroScreen extends ScreenAdapter {
     private Sound missilesSound;
     private Sound atomicBombsSound;
     private Sound voiceSound;
+    private Sound clickSound;
     private Music musicMusic;
     private Music ambianceMusic;
 
@@ -96,6 +97,7 @@ public class IntroScreen extends ScreenAdapter {
     private final InputProcessor processor = new InputAdapter() {
         @Override
         public boolean keyUp(int keycode) {
+            clickSound.play(.25f);
             router.goToLevel();
             return true;
         }
@@ -282,6 +284,7 @@ public class IntroScreen extends ScreenAdapter {
         missilesSound = assetManager.get("audio/sounds/190469__alxy__rapid-missile-launch.wav", Sound.class);
         atomicBombsSound = assetManager.get("audio/sounds/379352__hard3eat__atomic-bomb.wav", Sound.class);
         voiceSound = assetManager.get("audio/sounds/sandra_intro.wav", Sound.class);
+        clickSound = assetManager.get("audio/sounds/Blip_Select11.wav", Sound.class);
 
         musicMusic = assetManager.get("audio/music/428674__phantastonia__cinematic-vio2.wav", Music.class);
         ambianceMusic = assetManager.get("audio/music/608308__aidangig__radiation-ambience-effect.wav", Music.class);
