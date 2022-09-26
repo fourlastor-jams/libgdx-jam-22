@@ -1423,9 +1423,9 @@
 									"id": "V_String",
 									"params": ["0,16"]
 								}] },
-								{ "__identifier": "Speed", "__value": "Slow", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
+								{ "__identifier": "Speed", "__value": "Medium", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["Slow"]
+									"params": ["Medium"]
 								}] }
 							]
 						},
@@ -1463,9 +1463,9 @@
 									"id": "V_String",
 									"params": ["4,8"]
 								}] },
-								{ "__identifier": "Speed", "__value": "Slow", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
+								{ "__identifier": "Speed", "__value": "Medium", "__type": "LocalEnum.Speed", "__tile": null, "defUid": 24, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["Slow"]
+									"params": ["Medium"]
 								}] }
 							]
 						},
