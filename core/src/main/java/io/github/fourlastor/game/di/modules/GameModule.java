@@ -1,13 +1,9 @@
 package io.github.fourlastor.game.di.modules;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Cursor;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import dagger.Module;
@@ -68,12 +64,6 @@ public class GameModule {
         assetManager.load("audio/music/ambiance_mix.wav", Music.class);
 
         assetManager.finishLoading();
-
-        if (Gdx.app.getType() != Application.ApplicationType.Android) {
-            Cursor customCursor =
-                    Gdx.graphics.newCursor(new Pixmap(Gdx.files.internal("images/included/cursor.png")), 0, 0);
-            Gdx.graphics.setCursor(customCursor);
-        }
 
         return assetManager;
     }
