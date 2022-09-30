@@ -18,7 +18,9 @@ import io.github.fourlastor.game.level.physics.PhysicsSystem;
 import io.github.fourlastor.game.level.system.ActorFollowBodySystem;
 import io.github.fourlastor.game.level.system.CameraMovementSystem;
 import io.github.fourlastor.game.level.system.ClearScreenSystem;
+import io.github.fourlastor.game.level.system.FishSpawnSystem;
 import io.github.fourlastor.game.level.system.GameOverSystem;
+import io.github.fourlastor.game.level.system.GarbageCollectionSystem;
 import io.github.fourlastor.game.level.system.MovingSystem;
 import io.github.fourlastor.game.level.system.SoundSystem;
 import io.github.fourlastor.game.level.system.StageSystem;
@@ -40,9 +42,12 @@ public class LevelModule {
             ChunkSpawnSystem chunkSpawnSystem,
             GameOverSystem gameOverSystem,
             MovingSystem movingSystem,
-            SoundSystem soundSystem) {
+            SoundSystem soundSystem,
+            FishSpawnSystem fishSpawnSystem,
+            GarbageCollectionSystem garbageCollectionSystem) {
         Engine engine = new Engine();
         engine.addSystem(chunkSpawnSystem);
+        engine.addSystem(fishSpawnSystem);
         engine.addSystem(movingSystem);
         engine.addSystem(playerInputSystem);
         engine.addSystem(physicsSystem);
@@ -52,6 +57,7 @@ public class LevelModule {
         engine.addSystem(clearScreenSystem);
         engine.addSystem(stageSystem);
         engine.addSystem(gameOverSystem);
+        engine.addSystem(garbageCollectionSystem);
         //        engine.addSystem(physicsDebugSystem);
         return engine;
     }
