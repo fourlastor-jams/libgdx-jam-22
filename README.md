@@ -1,4 +1,6 @@
-# Libgdx jam #22
+# Slime in a Silo
+
+A collaboration between [Sandra Moen](https://sandramoen.no/) and [Daniele Conti](https://github.com/fourlastor).
 
 A weeklong game jam held by the LibGDX community.
 [Play it](https://sandramoen.itch.io/slime-in-a-silo) now.
