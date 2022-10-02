@@ -95,7 +95,7 @@ public class IntroScreen extends ScreenAdapter {
     }
 
     private final InputProcessor processor = new InputAdapter() {
-        @Override
+        /*@Override
         public boolean keyUp(int keycode) {
             clickSound.play(.25f);
             router.goToLevel();
@@ -106,7 +106,7 @@ public class IntroScreen extends ScreenAdapter {
         public boolean touchUp(int screenX, int screenY, int pointer, int button) {
             router.goToLevel();
             return true;
-        }
+        }*/
     };
 
     @Override
