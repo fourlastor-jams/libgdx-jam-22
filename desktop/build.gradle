@@ -34,6 +34,7 @@ task dist(type: Jar) {
 dependencies {
     implementation project(":core")
     api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
+    api "com.badlogicgames.gdx:gdx-lwjgl3-glfw-awt-macos:$gdxVersion"
     api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
     api "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
     api "com.badlogicgames.gdx-controllers:gdx-controllers-desktop:$gdxControllersVersion"
