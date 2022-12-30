@@ -18,11 +18,13 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
           cache: 'gradle'
+      - name: Set up butler
+        uses: jdno/setup-butler@v1
       - name: Build
         uses: gradle/gradle-build-action@v2
         with:
           arguments: --no-daemon html:dist
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: html/build/dist
+        run: butler push html/build/dist sandramoen/slime-in-a-silo:html
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
