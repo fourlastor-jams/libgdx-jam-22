@@ -27,7 +27,7 @@ public class PhysicsSystem extends IntervalSystem {
     private static final Family FAMILY_BUILDER =
             Family.all(BodyBuilderComponent.class).get();
     private static final Family FAMILY_BODY = Family.all(BodyComponent.class).get();
-    private static final float STEP = 1f / 16f;
+    private static final float STEP = 1f / 60f;
 
     private final World world;
     private final ComponentMapper<BodyBuilderComponent> bodyBuilders;
